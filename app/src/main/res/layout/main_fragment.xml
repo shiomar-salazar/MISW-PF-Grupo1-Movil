@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.MainFragment">
+
+    <TextView
+        android:id="@+id/Welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/logo"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:layout_marginBottom="20dip"
+        android:text="@string/bienvenido"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="200dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo"
+        android:layout_above="@id/input_username" />
+
+
+    <EditText
+        android:id="@+id/input_username"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint = "@string/username"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:backgroundTint="@color/lightGrey"
+        android:focusable = "true"
+        android:layout_marginTop = "25dp"
+        android:layout_centerInParent="true" />
+
+    <EditText
+        android:id="@+id/input_password"
+        android:layout_width = "match_parent"
+        android:textColorHint="@color/white"
+        android:backgroundTint="@color/lightGrey"
+        android:layout_height = "wrap_content"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/white"
+        android:layout_marginEnd="20dp"
+        android:hint = "@string/password"
+        android:focusable = "true"
+        android:layout_below="@id/input_username"
+        android:layout_marginTop = "15dp" />
+
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop = "20dp"
+        android:backgroundTint="@color/teal_200"
+        android:text="@string/iniciar_sesion"
+        android:layout_below="@id/input_password"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/registro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/lightGrey"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:text="@string/registrarse"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/recuperar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/registro"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="@string/password_recovery"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:textSize="15sp"
+        android:textColor="@color/lightGrey" />
+
+
+</RelativeLayout >

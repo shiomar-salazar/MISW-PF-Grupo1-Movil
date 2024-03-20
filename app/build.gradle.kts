@@ -57,9 +57,6 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    val navversion = "2.7.7"
-
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -76,6 +73,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    val navversion = "2.7.7"
     implementation("androidx.navigation:navigation-fragment-ktx:$navversion")
     implementation("androidx.navigation:navigation-ui-ktx:$navversion")
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$navversion")
