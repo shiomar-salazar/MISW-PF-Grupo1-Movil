@@ -6,7 +6,10 @@
     <string name="password">Contraseña</string>
     <string name="registrarse">Registrarse</string>
     <string name="password_recovery">Recuperar Contraseña</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_validation_error_min_pass_length">La contraseña debe tener al menos 8 caracteres</string>
+    <string name="text_validation_error_max_pass_length">La contraseña debe tener mazimo 64 caracteres</string>
+    <string name="text_validation_success">Todo bien</string>
+    <string name="text_validation_error_empty_field">El campo no debe estar vacio</string>
 
 </resources>

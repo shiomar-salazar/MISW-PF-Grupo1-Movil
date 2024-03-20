@@ -7,36 +7,102 @@ import android.view.ViewGroup
 import android.widget.Toast
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
+import com.sportapp_grupo1.databinding.MainFragmentBinding
+import com.sportapp_grupo1.validator.EmptyValidator
+import com.sportapp_grupo1.validator.PasswordValidator
+import com.sportapp_grupo1.validator.base.BaseValidator
+import com.sportapp_grupo1.viewmodels.MainViewModel
 
 class MainFragment : Fragment() {
+
+    private var _binding: MainFragmentBinding? = null
+    private lateinit var viewModel: MainViewModel
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view: View = inflater.inflate(
-            R.layout.main_fragment,
-            container, false
-        )
-
-        val button1 = view.findViewById<View>(R.id.recuperar) as Button
-        button1.setOnClickListener {
-            Toast.makeText(activity, "Not implemented yet", Toast.LENGTH_SHORT).show()
-        }
-
-        val button2 = view.findViewById<View>(R.id.registro) as Button
-        button2.setOnClickListener {
-            Toast.makeText(activity, "Registro solo posible en la Plataforma Web", Toast.LENGTH_SHORT).show()
-        }
-
-        val button = view.findViewById<View>(R.id.login_button) as Button
-        button.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_home2)
-        }
-
-        return view
+        _binding = MainFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.recuperar.setOnClickListener {
+            showMessage("Not implemented yet.")
+        }
+
+        binding.registro.setOnClickListener {
+            showMessage("Registro solo posible en la Plataforma Web.")
+        }
+
+        binding.loginButton.setOnClickListener {
+            val username = binding.inputUsername.text.toString()
+            val password = binding.inputPassword.text.toString()
+
+            val usernameEmptyValidation = EmptyValidator(username).validate()
+            binding.inputUsername.error =  if (!usernameEmptyValidation.isSuccess)
+                getString(usernameEmptyValidation.message) else null
+
+            val passwordValidations = BaseValidator.validate(
+                EmptyValidator(password), PasswordValidator(password)
+            )
+            binding.inputPassword.error =
+                if (!passwordValidations.isSuccess) getString(passwordValidations.message) else null
+
+            if (binding.inputUsername.error == null && binding.inputPassword.error == null ){
+                showMessage("Inicio de Sesion Exitoso.")
+                viewModel.login(username,password)
+                // Navegar a Home
+                findNavController().navigate(R.id.action_mainFragment_to_home2)
+            }
+
+        }
+
+
+    }
+    private fun onNetworkError() {
+        if (!viewModel.isNetworkErrorShown.value!!) {
+            Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
+            viewModel.onNetworkErrorShown()
+        }
+    }
+
+    private fun showMessage(s: String) {
+        Toast.makeText(activity, s, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val activity = requireNotNull(this.activity) {
+            "You can only access the viewModel after onActivityCreated()"
+        }
+        viewModel = ViewModelProvider(
+            this,
+            MainViewModel.Factory(activity.application)
+        )[MainViewModel::class.java]
+        viewModel.token.observe(viewLifecycleOwner) {
+            it.apply {
+
+            }
+        }
+        viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->
+            if (isNetworkError) onNetworkError()
+        }
+    }
+
+
+
 }
