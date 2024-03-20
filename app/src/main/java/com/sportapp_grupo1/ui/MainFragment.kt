@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
 import com.sportapp_grupo1.databinding.MainFragmentBinding
+import com.sportapp_grupo1.validator.EmailValidator
 import com.sportapp_grupo1.validator.EmptyValidator
 import com.sportapp_grupo1.validator.PasswordValidator
 import com.sportapp_grupo1.validator.base.BaseValidator
@@ -47,9 +48,11 @@ class MainFragment : Fragment() {
             val username = binding.inputUsername.text.toString()
             val password = binding.inputPassword.text.toString()
 
-            val usernameEmptyValidation = EmptyValidator(username).validate()
-            binding.inputUsername.error =  if (!usernameEmptyValidation.isSuccess)
-                getString(usernameEmptyValidation.message) else null
+            val usernameValidations = BaseValidator.validate(
+                EmptyValidator(username), EmailValidator(username)
+            )
+            binding.inputUsername.error =
+                if (!usernameValidations.isSuccess) getString(usernameValidations.message) else null
 
             val passwordValidations = BaseValidator.validate(
                 EmptyValidator(password), PasswordValidator(password)
@@ -62,6 +65,8 @@ class MainFragment : Fragment() {
                 viewModel.login(username,password)
                 // Navegar a Home
                 findNavController().navigate(R.id.action_mainFragment_to_home2)
+            } else {
+                showMessage("Inicio de Sesion Fallido.")
             }
 
         }
