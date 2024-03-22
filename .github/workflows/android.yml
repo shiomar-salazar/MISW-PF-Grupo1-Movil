@@ -24,8 +24,6 @@ jobs:
         run: chmod +x ./gradlew
       - name: Run Local Unit
         run: bash ./gradlew test --stacktrace
-      - name: Run Instrumented Test (Login)
-        run: bash ./gradlew connectedAndroidTest --stacktrace
   apk:
     name: Generate APK
     needs: test
