@@ -42,15 +42,14 @@ jobs:
         run: ./gradlew assembleDebug 
       - name: Build Android Test APK
         run: ./gradlew assembleAndroidTest
-      - name: Login to Google Cloud
-        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      - name: GCP Auth
+        uses: 'google-github-actions/auth@v2'
         with:
-          version: '270.0.0'
-          service_account_key: ${{ secrets.GCLOUD_AUTH }}
-
+          credentials_json: '${{ secrets.GCLOUD_AUTH }}'
+      - name: Login to Google Cloud
+        uses: google-github-actions/setup-gcloud@v2.1.0
       - name: Set current project
         run: gcloud config set project ${{ secrets.FIREBASE_PROJECT_ID }}
-
       - name: Run Instrumentation Tests in Firebase Test Lab
         run: gcloud firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk --device model=Pixel2,version=28,locale=pl,orientation=portrait
   apk:
