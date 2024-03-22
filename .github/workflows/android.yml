@@ -24,8 +24,8 @@ jobs:
         run: chmod +x ./gradlew
       - name: Run Local Unit
         run: bash ./gradlew test
-  instrumented:
-    name: Run Instrumentation Test
+  test-apks:
+    name: Build Instrumented Test Apks
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -43,7 +43,11 @@ jobs:
       - name: Build Android Test APK
         run: ./gradlew assembleAndroidTest
 
-
+  instrumented:
+    name: Instrumented Test Excecution
+    needs: test-apks
+    runs-on: ubuntu-latest
+    steps:
       - name: Setup python
         uses: actions/setup-python@v4
         with:
@@ -53,8 +57,7 @@ jobs:
       - name: GCP Auth
         uses: 'google-github-actions/auth@v2'
         with:
-          project_id: proyecto2-grupo1
-          workload_identity_provider: projects/767637866549/locations/global/workloadIdentityPools/github/providers/my-repo
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
       - name: Login to Google Cloud
         uses: google-github-actions/setup-gcloud@v2.1.0
       - name: Set current project
