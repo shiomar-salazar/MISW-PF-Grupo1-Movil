@@ -24,7 +24,7 @@ jobs:
         run: chmod +x ./gradlew
       - name: Run Local Unit
         run: bash ./gradlew test
-  test-apks:
+  instrumented:
     name: Build Instrumented Test Apks
     runs-on: ubuntu-latest
     steps:
@@ -42,14 +42,6 @@ jobs:
         run: ./gradlew assembleDebug 
       - name: Build Android Test APK
         run: ./gradlew assembleAndroidTest
-
-  instrumented:
-    name: Instrumented Test Excecution
-    needs: test-apks
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
       - name: Setup python
         uses: actions/setup-python@v4
         with:
@@ -64,11 +56,8 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2.1.0
       - name: Set current project
         run: gcloud config set project proyecto2-grupo1
-      - name: 'Use gcloud CLI'
-        run: 'gcloud info'
       - name: Run Instrumentation Tests in Firebase Test Lab
         run: gcloud firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-
 
   apk:
     name: Generate APK
