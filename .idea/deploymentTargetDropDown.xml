@@ -2,6 +2,9 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="Firebase_Testing">
+        <State />
+      </entry>
       <entry key="LoginTest">
         <State />
       </entry>
