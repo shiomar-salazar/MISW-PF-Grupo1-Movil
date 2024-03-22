@@ -44,13 +44,13 @@ jobs:
       - name: Run tests
         uses: emulator-wtf/run-tests@v0.9.9
         with:
-          api-token: ${{ secrets.GITHUB_TOKEN }}
+          api-token: ${{ secrets.EW_API_TOKEN }}
           app: app/build/outputs/apk/debug/app-debug.apk
           test: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
           outputs-dir: build/test-results
   apk:
     name: Generate APK
-    needs: instrumented
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
