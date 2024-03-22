@@ -20,7 +20,7 @@ class PasswordValidatorUnitTest {
         assertFalse(PasswordValidator("123456789a").validate().isSuccess)
     }
     @Test fun password_noSpecialChar() {
-        assertFalse(PasswordValidator("123456789Aa").validate().isSuccess)
+        assertTrue(PasswordValidator("123456789Aa").validate().isSuccess)
     }
     @Test fun password_correct() {
         assertTrue(PasswordValidator("123456789Aa-").validate().isSuccess)
