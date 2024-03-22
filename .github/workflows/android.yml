@@ -26,7 +26,6 @@ jobs:
         run: bash ./gradlew test
   instrumented:
     name: Run Instrumentation Test
-    #if: startsWith(github.ref, 'refs/tags/release')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -40,15 +39,20 @@ jobs:
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
       - name: Build app
-        run: ./gradlew build
+        run: ./gradlew assembleDebug 
       - name: Build Android Test APK
         run: ./gradlew assembleAndroidTest
-      - name: Run Android tests on Firebase Test Lab
-        uses: asadmansr/Firebase-Test-Lab-Action@v1.0
+      - name: Login to Google Cloud
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
-          arg-spec: 'android-device.yml:android-pixel-4'
-        env:
-          SERVICE_ACCOUNT: ${{ secrets.FIREBASE_TEST_LAB_SERVICE_ACCOUNT }}
+          version: '270.0.0'
+          service_account_key: ${{ secrets.GCLOUD_AUTH }}
+
+      - name: Set current project
+        run: gcloud config set project ${{ secrets.FIREBASE_PROJECT_ID }}
+
+      - name: Run Instrumentation Tests in Firebase Test Lab
+        run: gcloud firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk --device model=Pixel2,version=28,locale=pl,orientation=portrait
   apk:
     name: Generate APK
     needs: [test,instrumented]
