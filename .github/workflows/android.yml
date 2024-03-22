@@ -24,9 +24,33 @@ jobs:
         run: chmod +x ./gradlew
       - name: Run Local Unit
         run: bash ./gradlew test
+  instrumented:
+    name: Instrumentation Test
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu' # See 'Supported distributions' for available options
+          java-version: '17'
+          cache: 'gradle'
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+      - name: Build app
+        run: ./gradlew assembleDebug assembleAndroidTest
+      - name: Run tests
+        uses: emulator-wtf/run-tests@v0
+        with:
+          api-token: ${{ secrets.GITHUB_TOKEN }}
+          app: app/build/outputs/apk/debug/app-debug.apk
+          test: app/build/outputs/apk/androidTest/app-debug-androidTest.apk
+          outputs-dir: build/test-results
   apk:
     name: Generate APK
-    needs: test
+    needs: instrumented
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -47,7 +71,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: apk
-          path: app/build/outputs/apk/debug/app-debug.apk 
+          path: app/build/outputs/apk/debug/app-debug.apk      
   release:
     name: Release APK
     needs: apk
