@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
 import com.sportapp_grupo1.databinding.PlanentrenamientoCrearFragmentBinding
 import com.sportapp_grupo1.models.PlanEntrenamiento
+import com.sportapp_grupo1.validator.EmptyValidator
+import com.sportapp_grupo1.validator.base.BaseValidator
 import com.sportapp_grupo1.viewmodels.PlanEntrenamientoCreateViewModel
 
 class PlanEntrenamientoCreate : Fragment() {
@@ -44,6 +46,31 @@ class PlanEntrenamientoCreate : Fragment() {
             val sabado = binding.sabado.editText?.text.toString()
             val domingo = binding.domingo.editText?.text.toString()
             val semanas = binding.semanas.editText?.text.toString()
+
+            val lunesValidator = BaseValidator.validate(EmptyValidator(lunes))
+            binding.lunes.error =
+                if (!lunesValidator.isSuccess) getString(lunesValidator.message) else null
+            val martesValidator = BaseValidator.validate(EmptyValidator(lunes))
+            binding.martes.error =
+                if (!martesValidator.isSuccess) getString(martesValidator.message) else null
+            val miercolesValidator = BaseValidator.validate(EmptyValidator(lunes))
+            binding.miercoles.error =
+                if (!miercolesValidator.isSuccess) getString(miercolesValidator.message) else null
+            val juevesValidator = BaseValidator.validate(EmptyValidator(lunes))
+            binding.jueves.error =
+                if (!juevesValidator.isSuccess) getString(juevesValidator.message) else null
+            val viernesValidator = BaseValidator.validate(EmptyValidator(lunes))
+            binding.viernes.error =
+                if (!viernesValidator.isSuccess) getString(viernesValidator.message) else null
+            val sabadoValidator = BaseValidator.validate(EmptyValidator(lunes))
+            binding.sabado.error =
+                if (!sabadoValidator.isSuccess) getString(sabadoValidator.message) else null
+            val domingoValidator = BaseValidator.validate(EmptyValidator(lunes))
+            binding.domingo.error =
+                if (!domingoValidator.isSuccess) getString(domingoValidator.message) else null
+            val semanasValidator = BaseValidator.validate(EmptyValidator(lunes))
+            binding.semanas.error =
+                if (!semanasValidator.isSuccess) getString(semanasValidator.message) else null
 
             val argsArray: ArrayList<String> = arrayListOf(lunes, martes, miercoles, jueves, viernes, sabado, domingo, semanas)
             if (this.formIsValid(argsArray)) {
