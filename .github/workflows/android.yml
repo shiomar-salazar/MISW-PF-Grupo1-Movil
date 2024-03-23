@@ -100,4 +100,5 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "apk/app-debug.apk"
-          tag: SportApp-Grupo1 v${{ github.run_id }}
+          #tag: "SportApp-Grupo1 v${{ github.run_id }}"
+          tag: "SportApp-Grupo1 v1.0.0"
