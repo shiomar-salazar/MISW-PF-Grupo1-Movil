@@ -24,7 +24,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/lunes"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/LoginTextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/title"
@@ -34,6 +34,7 @@
             android:textColorHint="@color/lightGrey"
             android:backgroundTint="@color/lightGrey"
             app:suffixText="@string/sufix_entrenamiento"
+            app:suffixTextColor="@color/lightGrey"
             android:hint="@string/lunes">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -45,7 +46,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/martes"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/LoginTextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/lunes"
@@ -53,6 +54,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             app:suffixText="@string/sufix_entrenamiento"
+            app:suffixTextColor="@color/lightGrey"
             android:textColorHint="@color/lightGrey"
             android:hint="@string/martes">
 
@@ -65,7 +67,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/miercoles"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/LoginTextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/martes"
@@ -74,6 +76,7 @@
             android:layout_marginEnd="10dp"
             android:textColorHint="@color/lightGrey"
             app:suffixText="@string/sufix_entrenamiento"
+            app:suffixTextColor="@color/lightGrey"
             android:hint="@string/miercoles">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -85,7 +88,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/jueves"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/LoginTextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/miercoles"
@@ -94,6 +97,7 @@
             android:layout_marginEnd="10dp"
             android:textColorHint="@color/lightGrey"
             app:suffixText="@string/sufix_entrenamiento"
+            app:suffixTextColor="@color/lightGrey"
             android:hint="@string/jueves">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -105,7 +109,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/viernes"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/LoginTextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/jueves"
@@ -114,6 +118,7 @@
             android:layout_marginEnd="10dp"
             android:textColorHint="@color/lightGrey"
             app:suffixText="@string/sufix_entrenamiento"
+            app:suffixTextColor="@color/lightGrey"
             android:hint="@string/viernes">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -125,7 +130,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/sabado"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/LoginTextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/viernes"
@@ -134,6 +139,7 @@
             android:layout_marginEnd="10dp"
             android:textColorHint="@color/lightGrey"
             app:suffixText="@string/sufix_entrenamiento"
+            app:suffixTextColor="@color/lightGrey"
             android:hint="@string/sabado">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -145,7 +151,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/domingo"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/LoginTextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/sabado"
@@ -154,6 +160,7 @@
             android:layout_marginEnd="10dp"
             android:textColorHint="@color/lightGrey"
             app:suffixText="@string/sufix_entrenamiento"
+            app:suffixTextColor="@color/lightGrey"
             android:hint="@string/domingo">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -165,7 +172,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/semanas"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/LoginTextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/domingo"
