@@ -91,7 +91,7 @@ jobs:
       repository-projects: write
     name: Release APK
     needs: apk
-    #if: startsWith(github.ref_name, 'release')
+    if: startsWith(github.ref_name, 'release')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -103,5 +103,6 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
+          name: SportApp - Grupo 1 - Sprint1
           tag_name: Sprint1
           files: apk/app-debug.apk
