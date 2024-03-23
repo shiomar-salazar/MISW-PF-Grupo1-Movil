@@ -16,5 +16,16 @@
     <string name="text_validation_success">Todo bien</string>
     <string name="text_validation_error_empty_field">El campo no debe estar vacio</string>
     <string name="text_validation_error_email">El usuario debe ser un correo valido</string>
+    <string name="crear_plan_de_entrenamiento">Crear Plan de Entrenamiento</string>
+    <string name="lunes">Lunes</string>
+    <string name="crear_nuevo_plan">Crear nuevo Plan</string>
+    <string name="numero_de_semanas">Numero de Semanas</string>
+    <string name="domingo">Domingo</string>
+    <string name="sabado">Sabado</string>
+    <string name="viernes">Viernes</string>
+    <string name="jueves">Jueves</string>
+    <string name="miercoles">Miercoles</string>
+    <string name="martes">Martes</string>
+    <string name="cancelar">Cancelar</string>
 
 </resources>
