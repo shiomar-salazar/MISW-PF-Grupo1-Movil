@@ -60,7 +60,7 @@ class MainFragment : Fragment() {
                 if (!passwordValidations.isSuccess) getString(passwordValidations.message) else null
 
             //Test-Only
-            findNavController().navigate(R.id.action_mainFragment_to_home2)
+            //findNavController().navigate(R.id.action_mainFragment_to_home2)
 
             if (binding.inputUsername.error == null && binding.inputPassword.error == null ){
                 showMessage("Inicio de Sesion Exitoso.")

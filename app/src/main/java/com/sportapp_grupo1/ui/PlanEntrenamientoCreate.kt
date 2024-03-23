@@ -38,14 +38,14 @@ class PlanEntrenamientoCreate : Fragment() {
         }
 
         binding.crear.setOnClickListener {
-            val lunes = binding.lunes.editText?.text.toString()
-            val martes = binding.martes.editText?.text.toString()
-            val miercoles = binding.miercoles.editText?.text.toString()
-            val jueves = binding.jueves.editText?.text.toString()
-            val viernes = binding.viernes.editText?.text.toString()
-            val sabado = binding.sabado.editText?.text.toString()
-            val domingo = binding.domingo.editText?.text.toString()
-            val semanas = binding.semanas.editText?.text.toString()
+            val lunes = binding.lunesText.text.toString()
+            val martes = binding.martesText.text.toString()
+            val miercoles = binding.miercolesText.text.toString()
+            val jueves = binding.juevesText.text.toString()
+            val viernes = binding.viernesText.text.toString()
+            val sabado = binding.sabadoText.text.toString()
+            val domingo = binding.domingoText.text.toString()
+            val semanas = binding.semanaText.text.toString()
 
             val lunesValidator = BaseValidator.validate(EmptyValidator(lunes))
             binding.lunes.error =
