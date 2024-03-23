@@ -27,5 +27,6 @@
     <string name="miercoles">Miercoles</string>
     <string name="martes">Martes</string>
     <string name="cancelar">Cancelar</string>
+    <string name="sufix_entrenamiento"> km</string>
 
 </resources>

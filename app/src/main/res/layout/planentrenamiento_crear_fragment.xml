@@ -8,7 +8,7 @@
     tools:context=".ui.PlanEntrenamientoCreate">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="wrap_content" >
 
         <TextView
             android:id="@+id/title"
@@ -33,10 +33,13 @@
             android:layout_marginEnd="10dp"
             android:textColorHint="@color/lightGrey"
             android:backgroundTint="@color/lightGrey"
+            app:suffixText="@string/sufix_entrenamiento"
             android:hint="@string/lunes">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
+                android:textColor="@color/lightGrey"
+                android:inputType="number"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -49,11 +52,14 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
+            app:suffixText="@string/sufix_entrenamiento"
             android:textColorHint="@color/lightGrey"
             android:hint="@string/martes">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
+                android:textColor="@color/lightGrey"
+                android:inputType="number"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,10 +73,13 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             android:textColorHint="@color/lightGrey"
+            app:suffixText="@string/sufix_entrenamiento"
             android:hint="@string/miercoles">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
+                android:textColor="@color/lightGrey"
+                android:inputType="number"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,10 +93,13 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             android:textColorHint="@color/lightGrey"
+            app:suffixText="@string/sufix_entrenamiento"
             android:hint="@string/jueves">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
+                android:textColor="@color/lightGrey"
+                android:inputType="number"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -101,10 +113,13 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             android:textColorHint="@color/lightGrey"
+            app:suffixText="@string/sufix_entrenamiento"
             android:hint="@string/viernes">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
+                android:textColor="@color/lightGrey"
+                android:inputType="number"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -118,10 +133,13 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             android:textColorHint="@color/lightGrey"
+            app:suffixText="@string/sufix_entrenamiento"
             android:hint="@string/sabado">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
+                android:textColor="@color/lightGrey"
+                android:inputType="number"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -135,10 +153,13 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             android:textColorHint="@color/lightGrey"
+            app:suffixText="@string/sufix_entrenamiento"
             android:hint="@string/domingo">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
+                android:textColor="@color/lightGrey"
+                android:inputType="number"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -156,6 +177,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
+                android:textColor="@color/lightGrey"
+                android:inputType="number"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
