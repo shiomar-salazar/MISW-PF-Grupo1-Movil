@@ -17,5 +17,17 @@
     <fragment
         android:id="@+id/home2"
         android:name="com.sportapp_grupo1.ui.Home"
-         tools:layout="@layout/fragment_home" />
+         tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_home2_to_entrenamiento_crear_fragment"
+            app:destination="@id/planentrenamiento_crear_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/planentrenamiento_crear_fragment"
+        android:name="com.sportapp_grupo1.ui.PlanEntrenamientoCreate"
+        tools:layout="@layout/planentrenamiento_crear_fragment" >
+        <action
+            android:id="@+id/action_planentrenamiento_crear_fragment_to_home2"
+            app:destination="@id/home2" />
+    </fragment>
 </navigation>

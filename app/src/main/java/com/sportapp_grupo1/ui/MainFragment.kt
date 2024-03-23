@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -59,6 +58,9 @@ class MainFragment : Fragment() {
             )
             binding.inputPassword.error =
                 if (!passwordValidations.isSuccess) getString(passwordValidations.message) else null
+
+            //Test-Only
+            //findNavController().navigate(R.id.action_mainFragment_to_home2)
 
             if (binding.inputUsername.error == null && binding.inputPassword.error == null ){
                 showMessage("Inicio de Sesion Exitoso.")

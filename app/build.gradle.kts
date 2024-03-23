@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.gms.google-services")
+    id ("androidx.navigation.safeargs")
+    id ("kotlin-android")
+    id ("kotlin-parcelize")
 }
 
 android {
@@ -16,6 +19,11 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        testOptions {
+            execution = "ANDROIDX_TEST_ORCHESTRATOR"
+        }
+
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -70,7 +78,6 @@ dependencies {
     implementation(libs.androidx.junit.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
@@ -86,4 +93,9 @@ dependencies {
     implementation (libs.androidx.lifecycle.livedata.ktx)
     implementation (libs.androidx.lifecycle.viewmodel.ktx)
     implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
+    androidTestImplementation ("androidx.test:runner:1.5.2")
+    androidTestUtil ("androidx.test:orchestrator:1.4.2")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
+    implementation ("androidx.test.espresso:espresso-core:3.5.1")
+    implementation ("androidx.test.espresso:espresso-contrib:3.5.1")
 }

@@ -5,22 +5,22 @@ import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.hasErrorText
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
+import com.sportapp_grupo1.R
 import com.sportapp_grupo1.ui.MainActivity
 import org.hamcrest.CoreMatchers
 import org.hamcrest.core.AllOf
+import org.hamcrest.core.AllOf.allOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.hamcrest.core.AllOf.allOf
-import com.sportapp_grupo1.R
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.hasErrorText
 
 
 @LargeTest
@@ -31,7 +31,6 @@ class LoginTest {
     @JvmField
     var activityRule: ActivityScenarioRule<MainActivity> =
         ActivityScenarioRule(MainActivity::class.java)
-
 
     //Constante que define el tiempo de espera para que se carguen los datos retornados por el adapter
     val delayService = Integer.toUnsignedLong(5000)
