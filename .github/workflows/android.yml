@@ -92,13 +92,18 @@ jobs:
     #if: startsWith(github.ref, 'refs/tags/release')
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v1
       - name: Download APK from build
         uses: actions/download-artifact@v1
         with:
           name: apk 
-      - name: Create Release 
-        uses: ncipollo/release-action@v1
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          artifacts: "apk/app-debug.apk"
-          #tag: "SportApp-Grupo1 v${{ github.run_id }}"
-          tag: "SportApp-Grupo1 v1.0.0"
+          tag_name: ${{ github.ref }}
+          release_name: Release SportApp - Grupo 1 ${{ github.ref }}
+          draft: false
+          prerelease: false
