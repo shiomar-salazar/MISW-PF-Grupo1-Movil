@@ -15,42 +15,84 @@ Espacio de trabajo de la Aplicacion Movil del Equipo 1 de las Materias de MISW45
 ```
 MISW-PF-Grupo1-Movil
 ├─ .git
+├─ .github
+│  └─ workflows
+│     └─ android.yml
 ├─ .gitignore
 ├─ .idea
 │  ├─ .name
+│  ├─ androidTestResultsUserPreferences.xml
+│  ├─ appInsightsSettings.xml
 │  ├─ compiler.xml
 │  ├─ deploymentTargetDropDown.xml
 │  ├─ gradle.xml
+│  ├─ inspectionProfiles
+│  │  └─ Project_Default.xml
 │  ├─ kotlinc.xml
 │  ├─ migrations.xml
 │  ├─ misc.xml
+│  ├─ modules
+│  │  └─ app
 │  └─ vcs.xml
 ├─ app
 │  ├─ .gitignore
+│  ├─ google-services.json
 │  ├─ proguard-rules.pro
 │  └─ src
 │     ├─ androidTest
 │     │  └─ java
 │     │     └─ com
 │     │        └─ sportapp_grupo1
-│     │           └─ ExampleInstrumentedTest.kt
+│     │           ├─ ExampleInstrumentedTest.kt
+│     │           ├─ test
+│     │           │  └─ LoginTest.kt
+│     │           └─ utils
+│     │              └─ CustomAssertions.kt
 │     ├─ main
 │     │  ├─ AndroidManifest.xml
 │     │  ├─ java
 │     │  │  └─ com
 │     │  │     └─ sportapp_grupo1
-│     │  │        ├─ MainActivity.kt
-│     │  │        └─ ui
-│     │  │           └─ theme
-│     │  │              ├─ Color.kt
-│     │  │              ├─ Theme.kt
-│     │  │              └─ Type.kt
+│     │  │        ├─ models
+│     │  │        │  ├─ Alimentacion.kt
+│     │  │        │  ├─ Entrenamiento.kt
+│     │  │        │  ├─ PlanAlimentacion.kt
+│     │  │        │  ├─ PlanEntrenamiento.kt
+│     │  │        │  └─ User.kt
+│     │  │        ├─ network
+│     │  │        │  ├─ CacheManager.kt
+│     │  │        │  └─ NetworkServiceAdapter.kt
+│     │  │        ├─ repositories
+│     │  │        │  └─ LoginRepository.kt
+│     │  │        ├─ ui
+│     │  │        │  ├─ adapters
+│     │  │        │  ├─ Home.kt
+│     │  │        │  ├─ MainActivity.kt
+│     │  │        │  ├─ MainFragment.kt
+│     │  │        │  └─ theme
+│     │  │        │     ├─ Color.kt
+│     │  │        │     ├─ Theme.kt
+│     │  │        │     └─ Type.kt
+│     │  │        ├─ validator
+│     │  │        │  ├─ base
+│     │  │        │  │  ├─ BaseValidator.kt
+│     │  │        │  │  ├─ IValidator.kt
+│     │  │        │  │  └─ ValidateResult.kt
+│     │  │        │  ├─ EmailValidator.kt
+│     │  │        │  ├─ EmptyValidator.kt
+│     │  │        │  └─ PasswordValidator.kt
+│     │  │        └─ viewmodels
+│     │  │           └─ MainViewModel.kt
 │     │  └─ res
 │     │     ├─ drawable
+│     │     │  ├─ background.jpg
 │     │     │  ├─ ic_launcher_background.xml
-│     │     │  └─ ic_launcher_foreground.xml
-│     │     ├─ img
-│     │     │  └─ background.jpg
+│     │     │  ├─ ic_launcher_foreground.xml
+│     │     │  └─ logo.jpg
+│     │     ├─ layout
+│     │     │  ├─ fragment_home.xml
+│     │     │  ├─ main_activity.xml
+│     │     │  └─ main_fragment.xml
 │     │     ├─ mipmap-anydpi-v26
 │     │     │  ├─ ic_launcher.xml
 │     │     │  └─ ic_launcher_round.xml
@@ -69,18 +111,28 @@ MISW-PF-Grupo1-Movil
 │     │     ├─ mipmap-xxxhdpi
 │     │     │  ├─ ic_launcher.webp
 │     │     │  └─ ic_launcher_round.webp
+│     │     ├─ navigation
+│     │     │  └─ nav_graph.xml
 │     │     ├─ values
 │     │     │  ├─ colors.xml
 │     │     │  ├─ strings.xml
 │     │     │  └─ themes.xml
 │     │     └─ xml
 │     │        ├─ backup_rules.xml
-│     │        └─ data_extraction_rules.xml
+│     │        ├─ data_extraction_rules.xml
+│     │        └─ network_security_config.xml
 │     └─ test
 │        └─ java
+│           ├─ android
+│           │  ├─ text
+│           │  │  └─ TextUtils.java
+│           │  └─ util
+│           │     └─ Patterns.java
 │           └─ com
 │              └─ sportapp_grupo1
-│                 └─ ExampleUnitTest.kt
+│                 ├─ ExampleUnitTest.kt
+│                 ├─ PasswordValidatorUnitTest.kt
+│                 └─ UsernameValidatorUnitTest.kt
 ├─ gradle
 │  ├─ libs.versions.toml
 │  └─ wrapper
