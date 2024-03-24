@@ -8,6 +8,7 @@
     <string name="password_recovery">Recuperar Contraseña</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_validation_error_min_pass_length">La contraseña debe tener al menos 8 caracteres</string>
+    <string name="text_validation_error_min_calories">Las calorias objetivo deben ser al menos 500</string>
     <string name="text_validation_error_blank_space">La contraseña no debe tener espacios en blanco</string>
     <string name="text_validation_error_uppercase">La contraseña necesita al menos una mayuscula</string>
     <string name="text_validation_error_lowercase">La contraseña necesita al menos una minuscula</string>
@@ -28,5 +29,7 @@
     <string name="martes">Martes</string>
     <string name="cancelar">Cancelar</string>
     <string name="sufix_entrenamiento"> km</string>
+    <string name="crear_plan_de_alimentacion">Crear Plan de Alimentacion</string>
+    <string name="sufix_alimentacion"> kcal</string>
 
 </resources>

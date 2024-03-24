@@ -42,7 +42,7 @@ class Home : Fragment() {
             showMessage("Not implemented yet.")
         }
         binding.planAlimentacion.setOnClickListener {
-            showMessage("Not implemented yet.")
+            findNavController().navigate(R.id.action_home2_to_planAlimentacionCreate)
         }
 
         binding.planEntrenamiento.setOnClickListener {

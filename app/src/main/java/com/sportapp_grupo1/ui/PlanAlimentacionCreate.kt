@@ -10,23 +10,24 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
-import com.sportapp_grupo1.databinding.PlanentrenamientoCrearFragmentBinding
-import com.sportapp_grupo1.models.PlanEntrenamiento
+import com.sportapp_grupo1.databinding.PlanAlimentacionCreateFragmentBinding
+import com.sportapp_grupo1.models.PlanAlimentacion
 import com.sportapp_grupo1.validator.EmptyValidator
+import com.sportapp_grupo1.validator.PlanAlimentacionValidator
 import com.sportapp_grupo1.validator.base.BaseValidator
-import com.sportapp_grupo1.viewmodels.PlanEntrenamientoCreateViewModel
+import com.sportapp_grupo1.viewmodels.PlanAlimentacionViewModel
 
-class PlanEntrenamientoCreate : Fragment() {
+class PlanAlimentacionCreate : Fragment() {
 
-    private var _binding: PlanentrenamientoCrearFragmentBinding? = null
-    private lateinit var viewModel: PlanEntrenamientoCreateViewModel
+    private var _binding: PlanAlimentacionCreateFragmentBinding? = null
+    private lateinit var viewModel: PlanAlimentacionViewModel
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = PlanentrenamientoCrearFragmentBinding.inflate(inflater, container, false)
+        _binding = PlanAlimentacionCreateFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -47,34 +48,35 @@ class PlanEntrenamientoCreate : Fragment() {
             val domingo = binding.domingoText.text.toString()
             val semanas = binding.semanaText.text.toString()
 
-            val lunesValidator = BaseValidator.validate(EmptyValidator(lunes))
+            val lunesValidator = BaseValidator.validate(EmptyValidator(lunes), PlanAlimentacionValidator(lunes))
             binding.lunes.error =
                 if (!lunesValidator.isSuccess) getString(lunesValidator.message) else null
-            val martesValidator = BaseValidator.validate(EmptyValidator(lunes))
+            val martesValidator = BaseValidator.validate(EmptyValidator(martes), PlanAlimentacionValidator(martes))
             binding.martes.error =
                 if (!martesValidator.isSuccess) getString(martesValidator.message) else null
-            val miercolesValidator = BaseValidator.validate(EmptyValidator(lunes))
+            val miercolesValidator = BaseValidator.validate(EmptyValidator(miercoles), PlanAlimentacionValidator(miercoles))
             binding.miercoles.error =
                 if (!miercolesValidator.isSuccess) getString(miercolesValidator.message) else null
-            val juevesValidator = BaseValidator.validate(EmptyValidator(lunes))
+            val juevesValidator = BaseValidator.validate(EmptyValidator(jueves), PlanAlimentacionValidator(jueves))
             binding.jueves.error =
                 if (!juevesValidator.isSuccess) getString(juevesValidator.message) else null
-            val viernesValidator = BaseValidator.validate(EmptyValidator(lunes))
+            val viernesValidator = BaseValidator.validate(EmptyValidator(viernes), PlanAlimentacionValidator(viernes))
             binding.viernes.error =
                 if (!viernesValidator.isSuccess) getString(viernesValidator.message) else null
-            val sabadoValidator = BaseValidator.validate(EmptyValidator(lunes))
+            val sabadoValidator = BaseValidator.validate(EmptyValidator(sabado), PlanAlimentacionValidator(sabado))
             binding.sabado.error =
                 if (!sabadoValidator.isSuccess) getString(sabadoValidator.message) else null
-            val domingoValidator = BaseValidator.validate(EmptyValidator(lunes))
+            val domingoValidator = BaseValidator.validate(EmptyValidator(domingo), PlanAlimentacionValidator(domingo))
             binding.domingo.error =
                 if (!domingoValidator.isSuccess) getString(domingoValidator.message) else null
-            val semanasValidator = BaseValidator.validate(EmptyValidator(lunes))
+            val semanasValidator = BaseValidator.validate(EmptyValidator(semanas))
             binding.semanas.error =
                 if (!semanasValidator.isSuccess) getString(semanasValidator.message) else null
 
-            val argsArray: ArrayList<String> = arrayListOf(lunes, martes, miercoles, jueves, viernes, sabado, domingo, semanas)
-            if (this.formIsValid(argsArray)) {
-                val newPlan = PlanEntrenamiento (
+            if (semanasValidator.isSuccess && domingoValidator.isSuccess && sabadoValidator.isSuccess
+                    && viernesValidator.isSuccess && juevesValidator.isSuccess && miercolesValidator.isSuccess
+                    && martesValidator.isSuccess && lunesValidator.isSuccess) {
+                val newPlan = PlanAlimentacion (
                     lunes = lunes,
                     martes = martes,
                     miercoles = miercoles,
@@ -84,11 +86,11 @@ class PlanEntrenamientoCreate : Fragment() {
                     domingo = domingo,
                     numero_semanas = semanas
                 )
-                if (viewModel.addNewPlanEntrenamiento(newPlan)) {
-                    showMessage("El nuevo Plan de Entrenamiento se registró correctamente.")
+                if (viewModel.addNewPlanAlimentacion(newPlan)) {
+                    showMessage("El nuevo Plan Alimentacion se registró correctamente.")
                     navigateToHome()
                 } else {
-                    showMessage("Ocurrió un error en el registro del nuevo Plan de Entrenamiento.")
+                    showMessage("Ocurrió un error en el registro de nuevo Plan de  Alimentacion.")
                 }
             } else {
                 showMessage("Todos los campos deben ser diligenciados, por favor corrija e intente de nuevo.")
@@ -98,7 +100,7 @@ class PlanEntrenamientoCreate : Fragment() {
     }
 
     private fun navigateToHome() {
-        findNavController().navigate(R.id.action_planentrenamiento_crear_fragment_to_home2)
+        findNavController().navigate(R.id.action_planAlimentacionCreate_to_home2)
     }
 
     private fun onNetworkError() {
@@ -133,9 +135,9 @@ class PlanEntrenamientoCreate : Fragment() {
         }
         viewModel = ViewModelProvider(
             this,
-            PlanEntrenamientoCreateViewModel.Factory(activity.application)
-        )[PlanEntrenamientoCreateViewModel::class.java]
-        viewModel.planEntrenamiento.observe(viewLifecycleOwner) {
+            PlanAlimentacionViewModel.Factory(activity.application)
+        )[PlanAlimentacionViewModel::class.java]
+        viewModel.planAplimentacion.observe(viewLifecycleOwner) {
             it.apply {
 
             }
@@ -144,7 +146,5 @@ class PlanEntrenamientoCreate : Fragment() {
             if (isNetworkError) onNetworkError()
         }
     }
-
-
 
 }

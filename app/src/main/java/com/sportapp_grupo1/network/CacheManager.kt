@@ -1,6 +1,7 @@
 package com.sportapp_grupo1.network
 
 import android.content.Context
+import com.sportapp_grupo1.models.PlanAlimentacion
 import com.sportapp_grupo1.models.PlanEntrenamiento
 
 class CacheManager(context: Context) {
@@ -9,6 +10,8 @@ class CacheManager(context: Context) {
         private var token: String = ""
         private var planEntrenamiento: HashMap<Int, PlanEntrenamiento> = hashMapOf()
         private var planesEntrenamiento: List<PlanEntrenamiento> = mutableListOf()
+        private var planAlimentacion: HashMap<Int, PlanAlimentacion> = hashMapOf()
+        private var planesAlimentacion: List<PlanAlimentacion> = mutableListOf()
 
 
         var instance: CacheManager? = null
@@ -33,6 +36,13 @@ class CacheManager(context: Context) {
             planEntrenamiento[planId] = new
         }
         planesEntrenamiento = planesEntrenamiento.plus(new)
+    }
+
+    fun addPlanAlimentacion(planId: Int, new:PlanAlimentacion){
+        if (!planAlimentacion.containsKey(planId)) {
+            planAlimentacion[planId] = new
+        }
+        planesAlimentacion = planesAlimentacion.plus(new)
     }
 
 }
