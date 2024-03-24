@@ -10,23 +10,23 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
-import com.sportapp_grupo1.databinding.PlanentrenamientoCrearFragmentBinding
-import com.sportapp_grupo1.models.PlanEntrenamiento
+import com.sportapp_grupo1.databinding.PlanAlimentacionCreateFragmentBinding
+import com.sportapp_grupo1.models.PlanAlimentacion
 import com.sportapp_grupo1.validator.EmptyValidator
 import com.sportapp_grupo1.validator.base.BaseValidator
-import com.sportapp_grupo1.viewmodels.PlanEntrenamientoCreateViewModel
+import com.sportapp_grupo1.viewmodels.PlanAlimentacionViewModel
 
-class PlanEntrenamientoCreate : Fragment() {
+class PlanAlimentacionCreate : Fragment() {
 
-    private var _binding: PlanentrenamientoCrearFragmentBinding? = null
-    private lateinit var viewModel: PlanEntrenamientoCreateViewModel
+    private var _binding: PlanAlimentacionCreateFragmentBinding? = null
+    private lateinit var viewModel: PlanAlimentacionViewModel
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = PlanentrenamientoCrearFragmentBinding.inflate(inflater, container, false)
+        _binding = PlanAlimentacionCreateFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -74,7 +74,7 @@ class PlanEntrenamientoCreate : Fragment() {
 
             val argsArray: ArrayList<String> = arrayListOf(lunes, martes, miercoles, jueves, viernes, sabado, domingo, semanas)
             if (this.formIsValid(argsArray)) {
-                val newPlan = PlanEntrenamiento (
+                val newPlan = PlanAlimentacion (
                     lunes = lunes,
                     martes = martes,
                     miercoles = miercoles,
@@ -84,11 +84,11 @@ class PlanEntrenamientoCreate : Fragment() {
                     domingo = domingo,
                     numero_semanas = semanas
                 )
-                if (viewModel.addNewPlanEntrenamiento(newPlan)) {
-                    showMessage("El nuevo Plan de Entrenamiento se registró correctamente.")
+                if (viewModel.addNewPlanAlimentacion(newPlan)) {
+                    showMessage("El nuevo Plan Alimentacion se registró correctamente.")
                     navigateToHome()
                 } else {
-                    showMessage("Ocurrió un error en el registro del nuevo Plan de Entrenamiento.")
+                    showMessage("Ocurrió un error en el registro de nuevo Plan de  Alimentacion.")
                 }
             } else {
                 showMessage("Todos los campos deben ser diligenciados, por favor corrija e intente de nuevo.")
@@ -98,7 +98,7 @@ class PlanEntrenamientoCreate : Fragment() {
     }
 
     private fun navigateToHome() {
-        findNavController().navigate(R.id.action_planentrenamiento_crear_fragment_to_home2)
+        findNavController().navigate(R.id.action_planAlimentacionCreate_to_home2)
     }
 
     private fun onNetworkError() {
@@ -133,9 +133,9 @@ class PlanEntrenamientoCreate : Fragment() {
         }
         viewModel = ViewModelProvider(
             this,
-            PlanEntrenamientoCreateViewModel.Factory(activity.application)
-        )[PlanEntrenamientoCreateViewModel::class.java]
-        viewModel.planEntrenamiento.observe(viewLifecycleOwner) {
+            PlanAlimentacionViewModel.Factory(activity.application)
+        )[PlanAlimentacionViewModel::class.java]
+        viewModel.planAplimentacion.observe(viewLifecycleOwner) {
             it.apply {
 
             }
@@ -144,7 +144,5 @@ class PlanEntrenamientoCreate : Fragment() {
             if (isNetworkError) onNetworkError()
         }
     }
-
-
 
 }

@@ -28,5 +28,7 @@
     <string name="martes">Martes</string>
     <string name="cancelar">Cancelar</string>
     <string name="sufix_entrenamiento"> km</string>
+    <string name="crear_plan_de_alimentacion">Crear Plan de Alimentacion</string>
+    <string name="sufix_alimentacion"> kcal</string>
 
 </resources>

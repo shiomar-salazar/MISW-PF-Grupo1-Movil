@@ -3,6 +3,7 @@ package com.sportapp_grupo1.network
 import android.content.Context
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
+import com.sportapp_grupo1.models.PlanAlimentacion
 import com.sportapp_grupo1.models.PlanEntrenamiento
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -62,6 +63,52 @@ class NetworkServiceAdapter constructor(context: Context) {
 
         val planCreated = PlanEntrenamiento (
             planEntrenamientoID = 1,
+            lunes = new.lunes,
+            martes = new.martes,
+            miercoles = new.miercoles,
+            jueves = new.jueves,
+            viernes = new.viernes,
+            sabado = new.sabado,
+            domingo = new.domingo,
+            numero_semanas = new.numero_semanas
+        )
+        cont.resume(planCreated)
+
+    }
+
+    suspend fun addPlanAlimentacion(new: PlanAlimentacion) = suspendCoroutine { cont ->
+        /*requestQueue.add(
+            postRequest(
+                "albums",
+                JSONObject(
+                    """{"name":"${album.name}",
+                    |"cover":"${album.cover}",
+                    |"releaseDate":"${album.releaseDate}",
+                    |"description":"${album.description}",
+                    |"genre":"${album.genre}",
+                    |"recordLabel":"${album.recordLabel}"}""".trimMargin()
+                ),
+                { response ->
+                     val planCreated = PlanAlimentacion (
+                        planAlimentacionID = response.optInt("albumId"),
+                        lunes = response.optInt("lunes"),
+                        martes = response.optInt("martes"),
+                        miercoles = response.optInt("miercoles"),
+                        jueves = response.optInt("jueves"),
+                        viernes = response.optInt("viernes"),
+                        sabado = response.optInt("sabado"),
+                        domingo = response.optInt("domingo"),
+                        numero_semanas = response.optInt("numero_semanas")
+                    )
+                    cont.resume(planCreated)
+                },
+                {
+                    cont.resumeWithException(it)
+                })
+        )*/
+
+        val planCreated = PlanAlimentacion (
+            planAlimentacionID = 1,
             lunes = new.lunes,
             martes = new.martes,
             miercoles = new.miercoles,
