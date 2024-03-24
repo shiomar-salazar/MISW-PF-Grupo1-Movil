@@ -101,7 +101,7 @@ class PlanAlimentacionCreateTest {
      * Esta Prueba tiene la intencion de los casos de validacion negativa
      */
     @Test
-    fun negativeTestFailedPlanEntrenamientoCreate(){
+    fun negativeTestFailedPlanAlimentacionCreate(){
         /* Primero navegamos a la pantalla correcta */
         navigateToTestScreen()
 
@@ -151,7 +151,7 @@ class PlanAlimentacionCreateTest {
      * Esta Prueba tiene la intencion de Comprobar que el Login es exitoso
      */
     @Test
-    fun positiveTestSuccesfullPlanEntrenamientoCreate(){
+    fun positiveTestSuccesfullPlanAlimentacionCreate(){
         /* Primero navegamos a la pantalla correcta */
         navigateToTestScreen()
         setTextViewByValue(R.id.lunes_text,"1800")
@@ -166,7 +166,7 @@ class PlanAlimentacionCreateTest {
         SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
-                ViewMatchers.withId(R.id.plan_entrenamiento),
+                ViewMatchers.withId(R.id.plan_alimentacion),
                 ViewMatchers.isDisplayed()
             )
         )
