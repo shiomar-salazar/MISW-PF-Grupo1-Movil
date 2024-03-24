@@ -36,7 +36,6 @@
     <fragment
         android:id="@+id/planAlimentacionCreate"
         android:name="com.sportapp_grupo1.ui.PlanAlimentacionCreate"
-        android:label="plan_alimentacion_create_fragment"
         tools:layout="@layout/plan_alimentacion_create_fragment" >
         <action
             android:id="@+id/action_planAlimentacionCreate_to_home2"
