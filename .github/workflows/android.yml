@@ -116,5 +116,5 @@ jobs:
       - name: Set current project
         run: gcloud config set project proyecto2-grupo1
       - name: Run Robo Tests in Firebase Test Lab
-        run: gcloud firebase test android run --type robo --app apk/app-debug.apk --robo-directives {input_username=s.salazarc@uniandes.edu.co, input_password=123456789156Aa-} 
+        run: gcloud firebase test android run --type robo --app apk/app-debug.apk --robo-directives text:input_username=s.salazarc@uniandes.edu.co, text:input_password=123456789156Aa-
         
