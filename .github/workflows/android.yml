@@ -116,5 +116,5 @@ jobs:
       - name: Set current project
         run: gcloud config set project proyecto2-grupo1
       - name: Run Robo Tests in Firebase Test Lab
-        run: gcloud firebase test android run --type robo --app apk/app-debug.apk 
+        run: gcloud firebase test android run excelsior_args.yaml:robo-test
         
