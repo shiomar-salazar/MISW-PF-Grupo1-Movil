@@ -46,6 +46,7 @@ class PlanEntrenamientoCreate : Fragment() {
             val sabado = binding.sabadoText.text.toString()
             val domingo = binding.domingoText.text.toString()
             val semanas = binding.semanaText.text.toString()
+            val actividad = binding.actividadSpinner.selectedItem.toString().trim()
 
             val lunesValidator = BaseValidator.validate(EmptyValidator(lunes))
             binding.lunes.error =
@@ -75,6 +76,7 @@ class PlanEntrenamientoCreate : Fragment() {
             val argsArray: ArrayList<String> = arrayListOf(lunes, martes, miercoles, jueves, viernes, sabado, domingo, semanas)
             if (this.formIsValid(argsArray)) {
                 val newPlan = PlanEntrenamiento (
+                    actividad = actividad,
                     lunes = lunes,
                     martes = martes,
                     miercoles = miercoles,

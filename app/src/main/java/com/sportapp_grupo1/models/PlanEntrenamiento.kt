@@ -2,6 +2,7 @@ package com.sportapp_grupo1.models
 
 data class PlanEntrenamiento(
     val planEntrenamientoID:Int = 0,
+    val actividad: String,
     val lunes: String,
     val martes: String,
     val miercoles: String,

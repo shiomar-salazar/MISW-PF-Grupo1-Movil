@@ -44,7 +44,8 @@ class NetworkServiceAdapter constructor(context: Context) {
                 ),
                 { response ->
                      val planCreated = PlanEntrenamiento (
-                        planEntrenamientoID = response.optInt("albumId"),
+                        planEntrenamientoID = response.optInt("planId"),
+                        actividad = response.optInt("actividad"),
                         lunes = response.optInt("lunes"),
                         martes = response.optInt("martes"),
                         miercoles = response.optInt("miercoles"),
@@ -63,6 +64,7 @@ class NetworkServiceAdapter constructor(context: Context) {
 
         val planCreated = PlanEntrenamiento (
             planEntrenamientoID = 1,
+            actividad = new.actividad,
             lunes = new.lunes,
             martes = new.martes,
             miercoles = new.miercoles,
@@ -90,7 +92,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                 ),
                 { response ->
                      val planCreated = PlanAlimentacion (
-                        planAlimentacionID = response.optInt("albumId"),
+                        planAlimentacionID = response.optInt("planId"),
                         lunes = response.optInt("lunes"),
                         martes = response.optInt("martes"),
                         miercoles = response.optInt("miercoles"),
