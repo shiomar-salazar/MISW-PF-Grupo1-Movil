@@ -31,5 +31,10 @@
     <string name="sufix_entrenamiento"> km</string>
     <string name="crear_plan_de_alimentacion">Crear Plan de Alimentacion</string>
     <string name="sufix_alimentacion"> kcal</string>
+    <string name="actividad">Actividad</string>
+    <string-array name="Deportes">
+        <item>Atletismo</item>
+        <item>Ciclismo</item>
+    </string-array>
 
 </resources>
