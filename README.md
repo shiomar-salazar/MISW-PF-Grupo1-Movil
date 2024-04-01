@@ -1,13 +1,42 @@
 # SportApp Plataforma Movil
 Espacio de trabajo de la Aplicacion Movil del Equipo 1 de las Materias de MISW4501-2024-11 y MISW4502-2024-12
 
-### Pasos para Contruccion Manual de la Aplicacion
+### Integrantes:
+
+|   Nombre                         |   Correo                      | Codigo    | 
+|----------------------------------|-------------------------------|-----------|
+| Jhon Fredy Guzmán Caicedo        | jf.guzmanc1@uniandes.edu.co   | 202216872 |
+| Haiber Humberto Galindo Sanchez  | h.galindos@uniandes.edu.co    | 202216850 |
+| Jorge M. Carrillo                | jm.carrillo@uniandes.edu.co   | 200426097 |
+| Shiomar Alberto Salazar Castillo | s.salazarc@uniandes.edu.co    | 202213359 |
+
+### Flujo de Trabajo
+Para este repositorio se utilizara un proceso de GitFlow Modificado, en donde se tendran 3  tipos de ramas:
+
+* Rama main: Rama principal en donde vivira el codigo mas actualizado de la Aplicacion Movil de SportApp, la cual esta protegida para que solo mediante un Pull Request Validado se pueda meter nuevo codigo.
+* Ramas ``` hotfix_``` en donde estan los cambios menores o correcciones realizadas despues de hacer merge de una las ramas de Historias de Usuario.
+* Ramas de ```HU-M``` Ramas para el desarrollo de las Historias de Usuario planeadas.
+
+En el siguiente diagrama se puede observar este Flujo de Trabajo:
 
 
-### Pasos para la Ejecucion de Pruebas Automatizadas de la Aplicacion
 
+### Flujo de Integracion y Despliegue Continuo:
+Para este reppsitorio se tiene implementado un sistema de CI/CD basado en GitHub, Github Actions y GCP Firebase, consistendo de las siguientes caracteristicas:
 
-### Pasos para la Contruccion Automatica de la App (CI/CD)
+* La integracion Continua arranca cada que exista un nuevo Pull Request a la rama main.
+* La integracion Continua ejecuta en paralelo las pruebas unitarias y las pruebas de Instrumentacion en GCP Firebase.
+* Si las Pruebas son exitosas se procede a la construccion del paquete APK de la aplicacion Movil.
+* Si la creacion del paquete APK es exitoso se procede a subir ese APK como Artefacto de GitHub Actions haciendolo disponible para su descarga e Instalaccion Manual.
+* Si este proceso de hacer disponible el Paquete APK es exitoso, se considera concluido el proceso de Integracion Continua y el Pull Request esta listo para hacer merge.
+* Si la Rama origen del Pull Request inicia con ```Relese``` es porque esta destinada para hacer Release de Fin de Sprint.
+* Si el Pull Request es de ```Release``` se inicia el proceso de Despliegue Continuo.
+* El Despliegue Continuo ejecuta la Pruebas Exploratorias de la Aplicacion usando la herramienta de Robo ofrecida por GCP Firebase.
+* Si las Pruebas Exploratorias son exitosas se procede a descarga la Aplicacion anteriormente guardada (del proceso de Integracion Continua) e incluir esta APK dentro de los artefactos de uun nuevo Release que se realiza.
+* Si el proceso de creacion de Release en GitHub es exitoso se termina el proceso de Despliegue Continuo.
+
+En el siguiente Diagrama se puede observar el flujo descrito anteriormente:
+
 
 
 ### Estructura del Proyecto
@@ -34,6 +63,8 @@ MISW-PF-Grupo1-Movil
 │  ├─ modules
 │  │  └─ app
 │  └─ vcs.xml
+├─ .vscode
+│  └─ settings.json
 ├─ app
 │  ├─ .gitignore
 │  ├─ google-services.json
@@ -44,10 +75,10 @@ MISW-PF-Grupo1-Movil
 │     │     └─ com
 │     │        └─ sportapp_grupo1
 │     │           ├─ ExampleInstrumentedTest.kt
-│     │           ├─ test
-│     │           │  └─ LoginTest.kt
-│     │           └─ utils
-│     │              └─ CustomAssertions.kt
+│     │           └─ test
+│     │              ├─ LoginTest.kt
+│     │              ├─ PlanAlimentacionCreateTest.kt
+│     │              └─ PlanEntrenamientoCreateTest.kt
 │     ├─ main
 │     │  ├─ AndroidManifest.xml
 │     │  ├─ java
@@ -63,12 +94,16 @@ MISW-PF-Grupo1-Movil
 │     │  │        │  ├─ CacheManager.kt
 │     │  │        │  └─ NetworkServiceAdapter.kt
 │     │  │        ├─ repositories
-│     │  │        │  └─ LoginRepository.kt
+│     │  │        │  ├─ LoginRepository.kt
+│     │  │        │  ├─ PlanAlimentacionRepository.kt
+│     │  │        │  └─ PlanEntrenamientoRepository.kt
 │     │  │        ├─ ui
 │     │  │        │  ├─ adapters
 │     │  │        │  ├─ Home.kt
 │     │  │        │  ├─ MainActivity.kt
 │     │  │        │  ├─ MainFragment.kt
+│     │  │        │  ├─ PlanAlimentacionCreate.kt
+│     │  │        │  ├─ PlanEntrenamientoCreate.kt
 │     │  │        │  └─ theme
 │     │  │        │     ├─ Color.kt
 │     │  │        │     ├─ Theme.kt
@@ -80,19 +115,28 @@ MISW-PF-Grupo1-Movil
 │     │  │        │  │  └─ ValidateResult.kt
 │     │  │        │  ├─ EmailValidator.kt
 │     │  │        │  ├─ EmptyValidator.kt
-│     │  │        │  └─ PasswordValidator.kt
+│     │  │        │  ├─ PasswordValidator.kt
+│     │  │        │  └─ PlanAlimentacionValidator.kt
 │     │  │        └─ viewmodels
-│     │  │           └─ MainViewModel.kt
+│     │  │           ├─ HomeViewModel.kt
+│     │  │           ├─ MainViewModel.kt
+│     │  │           ├─ PlanAlimentacionViewModel.kt
+│     │  │           └─ PlanEntrenamientoCreateViewModel.kt
 │     │  └─ res
+│     │     ├─ color
+│     │     │  └─ text_input_box_stroke.xml
 │     │     ├─ drawable
 │     │     │  ├─ background.jpg
 │     │     │  ├─ ic_launcher_background.xml
 │     │     │  ├─ ic_launcher_foreground.xml
 │     │     │  └─ logo.jpg
 │     │     ├─ layout
-│     │     │  ├─ fragment_home.xml
+│     │     │  ├─ home_fragment.xml
 │     │     │  ├─ main_activity.xml
-│     │     │  └─ main_fragment.xml
+│     │     │  ├─ main_fragment.xml
+│     │     │  ├─ planentrenamiento_crear_fragment.xml
+│     │     │  └─ plan_alimentacion_create_fragment.xml
+│     │     ├─ layout-v28
 │     │     ├─ mipmap-anydpi-v26
 │     │     │  ├─ ic_launcher.xml
 │     │     │  └─ ic_launcher_round.xml
@@ -113,6 +157,7 @@ MISW-PF-Grupo1-Movil
 │     │     │  └─ ic_launcher_round.webp
 │     │     ├─ navigation
 │     │     │  └─ nav_graph.xml
+│     │     ├─ utils
 │     │     ├─ values
 │     │     │  ├─ colors.xml
 │     │     │  ├─ strings.xml
@@ -130,6 +175,7 @@ MISW-PF-Grupo1-Movil
 │           │     └─ Patterns.java
 │           └─ com
 │              └─ sportapp_grupo1
+│                 ├─ CaloriesValidatorUnitTest.kt
 │                 ├─ ExampleUnitTest.kt
 │                 ├─ PasswordValidatorUnitTest.kt
 │                 └─ UsernameValidatorUnitTest.kt
@@ -141,6 +187,7 @@ MISW-PF-Grupo1-Movil
 ├─ gradle.properties
 ├─ gradlew
 ├─ gradlew.bat
-└─ README.md
+├─ README.md
+└─ robo-test.yaml
 
 ```
