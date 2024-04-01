@@ -26,100 +26,99 @@ jobs:
         with:
           name: unit-tests-results
           path: app/build/reports/tests/testDebugUnitTest/index.html
-  # instrumented:
-  #   name: Build Instrumented Test Apks
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v1
-  #     - name: Setup JDK
-  #       uses: actions/setup-java@v3
-  #       with:
-  #         distribution: 'zulu'
-  #         java-version: '17'
-  #         cache: 'gradle'
-  #     - name: Change wrapper permissions
-  #       run: chmod +x ./gradlew
-  #     - name: Build app
-  #       run: ./gradlew assembleDebug 
-  #     - name: Build Android Test APK
-  #       run: ./gradlew assembleAndroidTest
-  #     - name: Setup python
-  #       uses: actions/setup-python@v4
-  #       with:
-  #         python-version: '3.9'
-  #     - name: Export gcloud related env variable
-  #       run: export CLOUDSDK_PYTHON="/usr/bin/python3"
-  #     - name: GCP Auth
-  #       uses: 'google-github-actions/auth@v2'
-  #       with:
-  #         credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
-  #     - name: SetUp GCP Cloud SDK
-  #       uses: google-github-actions/setup-gcloud@v2.1.0
-  #     - name: Set current project
-  #       run: gcloud config set project proyecto2-grupo1
-  #     - name: Run Instrumentation Tests in Firebase Test Lab
-  #       run: gcloud firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk --use-orchestrator
-  # apk:
-  #   name: Generate APK
-  #   needs: [test,instrumented]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v1
-  #     - name: Setup JDK
-  #       uses: actions/setup-java@v3
-  #       with:
-  #         distribution: 'zulu'
-  #         java-version: '17'
-  #         cache: 'gradle'
-  #     - name: Change wrapper permissions
-  #       run: chmod +x ./gradlew
-  #     - name: Build Project
-  #       run: bash ./gradlew build 
-  #     - name: Create APK Release
-  #       run: bash ./gradlew assemble
-  #     - name: Upload APK
-  #       uses: actions/upload-artifact@v1
-  #       with:
-  #         name: apk
-  #         path: app/build/outputs/apk/debug/app-debug.apk      
-  # release:
-  #   permissions:
-  #     contents: write
-  #     pull-requests: write
-  #     repository-projects: write
-  #   name: Release APK
-  #   needs: apk
-  #   if: startsWith(github.ref_name, 'release')
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v1
-  #     - name: Download APK from build
-  #       uses: actions/download-artifact@v1
-  #       with:
-  #         name: apk 
-  #     - name: Setup python
-  #       uses: actions/setup-python@v4
-  #       with:
-  #         python-version: '3.9'
-  #     - name: Export gcloud related env variable
-  #       run: export CLOUDSDK_PYTHON="/usr/bin/python3"
-  #     - name: GCP Auth
-  #       uses: 'google-github-actions/auth@v2'
-  #       with:
-  #         credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
-  #     - name: SetUp GCP Cloud SDK
-  #       uses: google-github-actions/setup-gcloud@v2.1.0
-  #     - name: Set current project
-  #       run: gcloud config set project proyecto2-grupo1
-  #     - name: Run Robo Tests in Firebase Test Lab
-  #       run: gcloud firebase test android run robo-test.yaml:robo-test
-  #     - name: Create Release
-  #       uses: softprops/action-gh-release@v2
-  #       with:
-  #         name: SportApp - Grupo 1 - Sprint1
-  #         tag_name: Sprint1
-  #         files: apk/app-debug.apk
-        
+  instrumented:
+    name: Build Instrumented Test Apks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          cache: 'gradle'
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+      - name: Build app
+        run: ./gradlew assembleDebug 
+      - name: Build Android Test APK
+        run: ./gradlew assembleAndroidTest
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Export gcloud related env variable
+        run: export CLOUDSDK_PYTHON="/usr/bin/python3"
+      - name: GCP Auth
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+      - name: SetUp GCP Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2.1.0
+      - name: Set current project
+        run: gcloud config set project proyecto2-grupo1
+      - name: Run Instrumentation Tests in Firebase Test Lab
+        run: gcloud firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk --use-orchestrator
+  apk:
+    name: Generate APK
+    needs: [test,instrumented]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          cache: 'gradle'
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+      - name: Build Project
+        run: bash ./gradlew build 
+      - name: Create APK Release
+        run: bash ./gradlew assemble
+      - name: Upload APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: apk
+          path: app/build/outputs/apk/debug/app-debug.apk      
+  release:
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
+    name: Release APK
+    needs: apk
+    if: startsWith(github.ref_name, 'release')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Download APK from build
+        uses: actions/download-artifact@v1
+        with:
+          name: apk 
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Export gcloud related env variable
+        run: export CLOUDSDK_PYTHON="/usr/bin/python3"
+      - name: GCP Auth
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+      - name: SetUp GCP Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2.1.0
+      - name: Set current project
+        run: gcloud config set project proyecto2-grupo1
+      - name: Run Robo Tests in Firebase Test Lab
+        run: gcloud firebase test android run robo-test.yaml:robo-test
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: SportApp - Grupo 1 - Sprint1
+          tag_name: Sprint1
+          files: apk/app-debug.apk
