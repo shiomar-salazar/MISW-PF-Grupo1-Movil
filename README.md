@@ -13,18 +13,18 @@ Espacio de trabajo de la Aplicacion Movil del Equipo 1 de las Materias de MISW45
 ### Flujo de Trabajo
 Para este repositorio se utilizara un proceso de GitFlow Modificado, en donde se tendran 3  tipos de ramas:
 
-* Rama main: Rama principal en donde vivira el codigo mas actualizado de la Aplicacion Movil de SportApp, la cual esta protegida para que solo mediante un Pull Request Validado se pueda meter nuevo codigo.
+* Rama ```main```: Rama principal en donde vivira el codigo mas actualizado de la Aplicacion Movil de SportApp, la cual esta protegida para que solo mediante un Pull Request Validado se pueda meter nuevo codigo.
 * Ramas ``` hotfix_``` en donde estan los cambios menores o correcciones realizadas despues de hacer merge de una las ramas de Historias de Usuario.
 * Ramas de ```HU-M``` Ramas para el desarrollo de las Historias de Usuario planeadas.
 
 En el siguiente diagrama se puede observar este Flujo de Trabajo:
 
-
+![FlujoTrabajo_Movil](https://github.com/shiomar-salazar/MISW-PF-Grupo1-Movil/assets/111320185/f6505f8f-2835-4306-be84-0fe2806e23e1)
 
 ### Flujo de Integracion y Despliegue Continuo:
 Para este reppsitorio se tiene implementado un sistema de CI/CD basado en GitHub, Github Actions y GCP Firebase, consistendo de las siguientes caracteristicas:
 
-* La integracion Continua arranca cada que exista un nuevo Pull Request a la rama main.
+* La integracion Continua arranca cada que exista un nuevo Pull Request a la rama ```main```.
 * La integracion Continua ejecuta en paralelo las pruebas unitarias y las pruebas de Instrumentacion en GCP Firebase.
 * Si las Pruebas son exitosas se procede a la construccion del paquete APK de la aplicacion Movil.
 * Si la creacion del paquete APK es exitoso se procede a subir ese APK como Artefacto de GitHub Actions haciendolo disponible para su descarga e Instalaccion Manual.
@@ -37,6 +37,7 @@ Para este reppsitorio se tiene implementado un sistema de CI/CD basado en GitHub
 
 En el siguiente Diagrama se puede observar el flujo descrito anteriormente:
 
+![FlujoCICD_Movil](https://github.com/shiomar-salazar/MISW-PF-Grupo1-Movil/assets/111320185/38aaf833-1663-49d0-8994-e051e1b633a7)
 
 
 ### Estructura del Proyecto
