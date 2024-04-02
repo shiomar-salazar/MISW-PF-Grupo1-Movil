@@ -21,6 +21,11 @@ jobs:
         run: chmod +x ./gradlew
       - name: Run Local Unit
         run: bash ./gradlew test
+      - name: Unit tests results
+        uses: actions/upload-artifact@v2
+        with:
+          name: unit-tests-results
+          path: app/build/reports/tests/testDebugUnitTest
   instrumented:
     name: Build Instrumented Test Apks
     runs-on: ubuntu-latest
@@ -95,12 +100,6 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: apk 
-      - name: Create Release
-        uses: softprops/action-gh-release@v2
-        with:
-          name: SportApp - Grupo 1 - Sprint1
-          tag_name: Sprint1
-          files: apk/app-debug.apk
       - name: Setup python
         uses: actions/setup-python@v4
         with:
@@ -117,4 +116,9 @@ jobs:
         run: gcloud config set project proyecto2-grupo1
       - name: Run Robo Tests in Firebase Test Lab
         run: gcloud firebase test android run robo-test.yaml:robo-test
-        
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: SportApp - Grupo 1 - Sprint1
+          tag_name: Sprint1
+          files: apk/app-debug.apk

@@ -5,6 +5,14 @@ plugins {
     id ("androidx.navigation.safeargs")
     id ("kotlin-android")
     id ("kotlin-parcelize")
+    id("jacoco")
+}
+apply{
+    from("../jacoco.gradle")
+}
+
+jacoco {
+    toolVersion = "0.8.8"
 }
 
 android {
@@ -22,6 +30,10 @@ android {
 
         testOptions {
             execution = "ANDROIDX_TEST_ORCHESTRATOR"
+            unitTests {
+                isIncludeAndroidResources = true
+                unitTests.isReturnDefaultValues = true
+            }
         }
 
         vectorDrawables {
@@ -31,11 +43,18 @@ android {
 
     buildTypes {
         release {
+            enableAndroidTestCoverage = true
+            enableUnitTestCoverage = true
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        debug {
+            isMinifyEnabled = false
+            enableAndroidTestCoverage = true
+            enableUnitTestCoverage = true
         }
     }
     compileOptions {
