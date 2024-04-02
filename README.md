@@ -39,6 +39,51 @@ En el siguiente Diagrama se puede observar el flujo descrito anteriormente:
 
 ![FlujoCICD_Movil](https://github.com/shiomar-salazar/MISW-PF-Grupo1-Movil/assets/111320185/38aaf833-1663-49d0-8994-e051e1b633a7)
 
+### Generacion de APK de manera local
+Para esta plataforma se puede generar la APK sin la necesidad de tener Android Studio instalado, mediante el uso de la linea de comandos, para esto se deben seguir los siguientes pasos:
+
+1. Clonar el repositorio.
+2. Abrir una terminal desde la carpeta raiz del proyecto.
+3. Ejecutar el siguiente comando: 
+```
+./gradlew build --stacktrace
+```
+4. La aplicacion en formato APK se generara en el siguiente directorio :```.../app/build/outputs/apk/release```
+
+### Ejecucion de Pruebas Unitarias de manera local
+Para esta plataforma se pueden ejecutar las pruebas unitarias sin necesidad de tener Android Studio instalado, mediante el uso de la linea de comandos, para esto se deben seguir los siguientes pasos:
+
+1. Clonar el repositorio.
+2. Abrir una terminal desde la carpeta raiz del proyecto.
+3. Ejecutar el siguiente comando: 
+```
+./gradlew test --stacktrace
+```
+4. Revisar el reporte que se genera en el siguiguiente directorio :```.../app/build/reports/tests/testDebugUnitTest/index.html```
+
+### Ejecucion de Pruebas de Integracion (Instrumentacion) de manera local
+Para esta plataforma se pueden ejecutar las pruebas de integracion (llamadas en Android pruebas de Instrumentacion) sin necesidad de tener Android Studio instalado, mediante el uso de la linea de comandos, para esto se deben seguir los siguientes pasos:
+
+1. Clonar el repositorio.
+2. Abrir una terminal desde la carpeta raiz del proyecto.
+3. Conectar un dispositivo Android con modo desarrollador y las opciones de USB-Debug activadas. [ver mas](https://chromium.googlesource.com/chromium/src.git/+/65.0.3283.0/docs/android_test_instructions.md#physical-device-setup)
+4. Ejecutar el siguiente comando: 
+```
+./gradlew connectedDebugAndroidTest --stacktrace
+```
+5. Revisar el reporte que se genera en el siguiguiente directorio :```.../app/build/reports/androidTests/connected/debug/index.html```
+
+### Reporte de Cobertura de Codigo
+Para esta plataforma (y por limitacion actuales de Android Studio que necesita las pruebas de Instrumentacion para generar los reportes de coverage), los reportes de cobertura de la pruebas se debe correr de manera manual, es por esto se debe seguir los siguientes pasos apra la generacion de dicho reporte:
+
+1. Clonar el repositorio.
+2. Abrir una terminal desde la carpeta raiz del proyecto.
+3. Ejecutar el siguiente comando: 
+```
+./gradlew testDebugUnitTest connectedDebugAndroidTest testDebugUnitTestCoverage createDebugCoverageReport --stacktrace
+```
+4. Revisar el reporte que se genera en el siguiguiente directorio: ```.../app/build/reports/coverage/androidTest/debug/connected/index.html```
+
 
 ### Estructura del Proyecto
 
