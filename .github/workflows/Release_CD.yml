@@ -2,7 +2,8 @@ name: SportApp-Grupo1 - Movil - Release - CD
 
 on:
   workflow_run:
-    workflows: ["SportApp-Grupo1 - Movil - Pull Request - CI"]
+    workflows: 
+      - SportApp-Grupo1 - Movil - Pull Request - CI
     types:
       - completed
 
@@ -47,18 +48,21 @@ jobs:
       #   run: gcloud firebase test android run .github/workflows/gcp_android_test_config.yaml:instrumentation-test
       # - name: Run Robo Tests in Firebase Test Lab
       #   run: gcloud firebase test android run .github/workflows/gcp_android_test_config.yaml:robo-test
-      # - name: Download artifacts from PR Pipeline
-      #   uses: actions/download-artifact@v4.1.4
-      #   with:
-      #     name: build-outputs
-      # - name: Create APK Release
-      #   run: bash ./gradlew assemble   
-      # - name: Create Release
-      #   uses: softprops/action-gh-release@v2.0.4
-      #   with:
-      #     name: SportApp - Grupo 1 - Sprint1
-      #     tag_name: Sprint1
-      #     files: |
-      #       app/build/outputs/apk/release/app-release-unsigned.apk
-      #       build-outputs/build-outputs
+
+      - name: Download artifacts from PR Pipeline
+        uses: dawidd6/action-download-artifact@v3
+        with:
+          workflow: PR_CI.yml
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v2.0.4
+        with:
+          name: SportApp - Grupo 1 - Sprint1
+          tag_name: Sprint1
+          files: |
+            apks
+            coverage_results
+            instrumentation-test-results
+            unit-test-results
+            
             
