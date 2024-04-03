@@ -54,7 +54,7 @@ jobs:
           mkdir unit-test
           mkdir instrumentation-test
           mv -v app/build/reports/coverage/androidTest/debug/connected/* app/reports/coverage/
-          mv -v app/build/reports/coverage/androidTest/debug/connected/* app/reports/instrumentation-test/
+          mv -v app/build/reports/androidTest/connected/debug/* app/reports/instrumentation-test/
           mv -v app/build/reports/tests/testDebugUnitTest/* app/reports/unit-test/
 
       - name: Upload build artifacts
