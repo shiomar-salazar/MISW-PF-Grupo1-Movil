@@ -47,20 +47,16 @@ jobs:
 
       - name: Clean Up report Folders
         run: |
-          cd app
-          mkdir reports
-          cd reports
-          mkdir coverage
-          mkdir unit-test
-          mkdir instrumentation-test
-          mv -v app/build/reports/coverage/androidTest/debug/connected/* app/reports/coverage/
-          mv -v app/build/reports/androidTest/connected/debug/* app/reports/instrumentation-test/
-          mv -v app/build/reports/tests/testDebugUnitTest/* app/reports/unit-test/
-
+          mv home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/coverage/androidTest/debug/connected home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/coverage/androidTest/debug/coverage
+          mv home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/androidTests/connected/debug mv home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/androidTests/connected/instrumentation-test
+          mv home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/tests/testDebugUnitTest home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/tests/unit-test
+          
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4.3.1
         with:
           name: build-outputs
           path: |
             app/build/outputs/apk
-            app/reports
+            app/build/reports/tests/unit-test
+            app/build/reports/androidTests/connected/instrumentation-test
+            app/build/reports/coverage/androidTest/debug/coverage
