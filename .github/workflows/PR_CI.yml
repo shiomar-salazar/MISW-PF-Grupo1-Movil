@@ -47,9 +47,9 @@ jobs:
 
       - name: Clean Up report Folders
         run: |
-          mv home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/coverage/androidTest/debug/connected home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/coverage/androidTest/debug/coverage
-          mv home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/androidTests/connected/debug mv home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/androidTests/connected/instrumentation-test
-          mv home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/tests/testDebugUnitTest home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/tests/unit-test
+          mv /home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/coverage/androidTest/debug/connected /home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/coverage/androidTest/debug/coverage
+          mv /home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/androidTests/connected/debug /home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/androidTests/connected/instrumentation-test
+          mv /home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/tests/testDebugUnitTest /home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/tests/unit-test
           
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4.3.1
