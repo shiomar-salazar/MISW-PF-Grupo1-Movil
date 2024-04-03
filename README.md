@@ -40,6 +40,7 @@ Para este reppsitorio se tiene implementado un sistema de CI/CD basado en GitHub
 
 En el siguiente Diagrama se puede observar el flujo descrito anteriormente:
 
+![FlujoCICD_Movil](https://github.com/shiomar-salazar/MISW-PF-Grupo1-Movil/assets/111320185/3d28dd87-46b7-4e83-a16f-e30e7a1df014)
 
 ### Generacion de APK de manera local
 Para esta plataforma se puede generar la APK sin la necesidad de tener Android Studio instalado, mediante el uso de la linea de comandos, para esto se deben seguir los siguientes pasos:
