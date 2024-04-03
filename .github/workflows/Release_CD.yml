@@ -1,8 +1,10 @@
 name: SportApp-Grupo1 - Movil - Release - CD
 
 on:
-  pull_request:
-      branches: [ "main" ]
+  workflow_run:
+    workflows: ["SportApp-Grupo1 - Movil - Pull Request - CI"]
+    types:
+      - completed
 
 jobs:
   test-for-relese:

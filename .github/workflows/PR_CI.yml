@@ -43,8 +43,23 @@ jobs:
           disable-animations: true
           script: ./gradlew testDebugUnitTest connectedDebugAndroidTest testDebugUnitTestCoverage createDebugCoverageReport --stacktrace
 
+      - name: Clean Up report Folders
+        run: |
+          cd app
+          mkdir reports
+          cd reports
+          mkdir coverage
+          mkdir unit-test
+          mkdir instrumentation-test
+          mv -v app/build/reports/coverage/androidTest/debug/connected/* app/reports/coverage/
+          mv -v app/build/reports/coverage/androidTest/debug/connected/* app/reports/instrumentation-test/
+          mv -v app/build/reports/tests/testDebugUnitTest/* app/reports/unit-test/
+
+
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4.3.1
         with:
           name: build-outputs
-          path: app/build/outputs
+          path: |
+            app/build/outputs/apk
+            app/reports
