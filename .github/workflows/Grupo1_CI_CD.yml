@@ -1,5 +1,4 @@
-name: SportApp-Grupo1 - Movil - Pull Request - CI
-
+name: SportApp-Grupo1 - Movil - CI/CD
 on:
   pull_request:
       branches: [ "main" ]
@@ -8,7 +7,7 @@ env:
   GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.daemon=false -Dkotlin.incremental=false"
 
 jobs:
-  test-for-merge:
+  steps-for-merge:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -72,7 +71,7 @@ jobs:
           name: coverage_results
           path: app/build/reports/coverage/androidTest/debug/coverage
   test-for-relese:
-    needs: test-for-merge
+    needs: steps-for-merge
     #if: startsWith(github.ref_name, 'release')
     runs-on: ubuntu-latest
     permissions:
@@ -115,6 +114,13 @@ jobs:
 
       - name: Download Artifacts for Release
         uses: actions/download-artifact@v4.1.4
+
+      - name: Zip Artifacts for Release
+        run: |
+          zip -r coverage_results.zip coverage_results/
+          zip -r apks.zip apks/
+          zip -r instrumentation-test-results.zip instrumentation-test-results/
+          zip -r unit-test-results.zip unit-test-results/
       
       - name: Create Release
         uses: softprops/action-gh-release@v2.0.4
@@ -122,7 +128,7 @@ jobs:
           name: SportApp - Grupo 1 - Sprint1
           tag_name: Sprint1
           files: |
-            apks
-            coverage_results
-            instrumentation-test-results
-            unit-test-results
+            apks.zip
+            coverage_results.zip
+            instrumentation-test-results.zip
+            unit-test-results.zip
