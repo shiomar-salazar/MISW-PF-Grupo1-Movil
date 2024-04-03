@@ -1,4 +1,4 @@
-name: SportApp-Grupo1 - Movil - Release - CI/CD
+name: SportApp-Grupo1 - Movil - Release - CD
 
 on:
   pull_request:

@@ -1,4 +1,4 @@
-name:  SportApp-Grupo1 - Movil - Pull Request - CI/CD
+name:  SportApp-Grupo1 - Movil - Pull Request - CI
 
 on:
   pull_request:
@@ -23,10 +23,10 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
           cache: 'gradle'
-
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
       - name: Build project
         run: ./gradlew build --no-daemon
-
       - name: Generate code coverage reports
         uses: ReactiveCircus/android-emulator-runner@v2.30.1
         with:
