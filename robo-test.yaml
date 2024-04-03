@@ -1,8 +1,0 @@
-robo-test:
-  app: apk/app-debug.apk
-  type: robo
-  timeout: 10m
-  robo-directives:
-    "text:input_username": s.salazarc@uniandes.edu.co
-    "text:input_password": 123456789156Aa-
-  
