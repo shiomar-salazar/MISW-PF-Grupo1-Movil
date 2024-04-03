@@ -1,4 +1,4 @@
-name:  SportApp-Grupo1 - Movil - Pull Request - CI
+name: SportApp-Grupo1 - Movil - Pull Request - CI
 
 on:
   pull_request:
@@ -71,3 +71,58 @@ jobs:
         with:
           name: coverage_results
           path: app/build/reports/coverage/androidTest/debug/coverage
+  test-for-relese:
+    needs: test-for-merge
+    #if: startsWith(github.ref_name, 'release')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+      - name: Setup JDK
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          cache: 'gradle'
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+      - name: Build debug app
+        run: ./gradlew assembleDebug 
+      - name: Build Android Test APK
+        run: ./gradlew assembleAndroidTest
+      # - name: Setup python
+      #   uses: actions/setup-python@v5.1.0
+      #   with:
+      #     python-version: '3.9'
+      # - name: Export gcloud related env variable
+      #   run: export CLOUDSDK_PYTHON="/usr/bin/python3"
+      # - name: GCP Auth
+      #   uses: google-github-actions/auth@v2.1.2
+      #   with:
+      #     credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+      # - name: SetUp GCP Cloud SDK
+      #   uses: google-github-actions/setup-gcloud@v2.1.0
+      # - name: Set current project
+      #   run: gcloud config set project proyecto2-grupo1
+      # - name: Run Instrumentation Tests in Firebase Test Lab
+      #   run: gcloud firebase test android run .github/workflows/gcp_android_test_config.yaml:instrumentation-test
+      # - name: Run Robo Tests in Firebase Test Lab
+      #   run: gcloud firebase test android run .github/workflows/gcp_android_test_config.yaml:robo-test
+
+      - name: Download Artifacts for Release
+        uses: actions/download-artifact@v4.1.4
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v2.0.4
+        with:
+          name: SportApp - Grupo 1 - Sprint1
+          tag_name: Sprint1
+          files: |
+            apks
+            coverage_results
+            instrumentation-test-results
+            unit-test-results
