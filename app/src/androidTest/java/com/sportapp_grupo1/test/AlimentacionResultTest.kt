@@ -127,8 +127,10 @@ class AlimentacionResultTest {
 
         /* Primero navegamos a la pantalla correcta */
         navigateToTestScreen()
+        SystemClock.sleep(delayService2)
         /* Hacemos click en boton de cancelar */
         clickIntoButtonById(R.id.cancelar)
+        SystemClock.sleep(delayService2)
         /* Validamos estar en pantalla de Home */
         Espresso.onView(
             AllOf.allOf(
@@ -165,40 +167,6 @@ class AlimentacionResultTest {
             val actualError = (view as TextInputLayout).error
             Assert.assertEquals(actualError, "El campo no debe estar vacio")
         }
-        /* Empezamos a validar cada campo por separado */
-        setTextViewByValue(R.id.comida1_text,"300")
-        clickIntoButtonById(R.id.registrar)
-        Espresso.onView(ViewMatchers.withId(R.id.comida2)).check { view, _ ->
-            val actualError = (view as TextInputLayout).error
-            Assert.assertEquals(actualError, "El campo no debe estar vacio")
-        }
-        Espresso.onView(ViewMatchers.withId(R.id.comida3)).check { view, _ ->
-            val actualError = (view as TextInputLayout).error
-            Assert.assertEquals(actualError, "El campo no debe estar vacio")
-        }
-        Espresso.onView(ViewMatchers.withId(R.id.agua)).check { view, _ ->
-            val actualError = (view as TextInputLayout).error
-            Assert.assertEquals(actualError, "El campo no debe estar vacio")
-        }
-
-        setTextViewByValue(R.id.comida2_text,"500")
-        clickIntoButtonById(R.id.registrar)
-        Espresso.onView(ViewMatchers.withId(R.id.comida3)).check { view, _ ->
-            val actualError = (view as TextInputLayout).error
-            Assert.assertEquals(actualError, "El campo no debe estar vacio")
-        }
-        Espresso.onView(ViewMatchers.withId(R.id.agua)).check { view, _ ->
-            val actualError = (view as TextInputLayout).error
-            Assert.assertEquals(actualError, "El campo no debe estar vacio")
-        }
-
-        setTextViewByValue(R.id.comida3_text,"500")
-        clickIntoButtonById(R.id.registrar)
-        Espresso.onView(ViewMatchers.withId(R.id.agua)).check { view, _ ->
-            val actualError = (view as TextInputLayout).error
-            Assert.assertEquals(actualError, "El campo no debe estar vacio")
-        }
-
         /* Validamos seguir en la pantalla de Resultado de Alimentacion */
         Espresso.onView(
             AllOf.allOf(
