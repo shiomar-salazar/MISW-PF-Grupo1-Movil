@@ -82,7 +82,7 @@ class AlimentacionResult : Fragment() {
     }
 
     private fun navigateToHome() {
-        findNavController().navigate(R.id.action_planAlimentacionCreate_to_home2)
+        findNavController().navigate(R.id.action_alimentacionResult_to_home2)
     }
 
     private fun onNetworkError() {
