@@ -192,7 +192,7 @@ class PlanAlimentacionCreateTest {
     }
 
     /**
-     * Esta Prueba tiene la intencion de Comprobar que el Login es exitoso
+     * Esta Prueba tiene la intencion de Comprobar que la Creacion del plan de Alimentacion es Exitoso
      */
     @Test
     fun positiveTestSuccesfullPlanAlimentacionCreate(){
@@ -208,6 +208,25 @@ class PlanAlimentacionCreateTest {
         setTextViewByValue(R.id.semana_text,"6")
         clickIntoButtonByIdwithScroll(R.id.crear)
         SystemClock.sleep(delayService2)
+        Espresso.onView(
+            AllOf.allOf(
+                ViewMatchers.withId(R.id.plan_alimentacion),
+                ViewMatchers.isDisplayed()
+            )
+        )
+    }
+
+    /**
+     * Esta Prueba tiene la intencion de Comprobar la correcta funcionalidad del Boton de cancelar
+     */
+    @Test
+    fun cancelarBtnPlanAlimentacionCreate(){
+
+        /* Primero navegamos a la pantalla correcta */
+        navigateToTestScreen()
+        /* Hacemos click en boton de cancelar */
+        clickIntoButtonById(R.id.cancelar)
+        /* Validamos estar en pantalla de Home */
         Espresso.onView(
             AllOf.allOf(
                 ViewMatchers.withId(R.id.plan_alimentacion),
