@@ -1,0 +1,134 @@
+name: SportApp-Grupo1 - Movil - CI/CD
+on:
+  pull_request:
+      branches: [ "main" ]
+
+env:
+  GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.daemon=false -Dkotlin.incremental=false"
+
+jobs:
+  steps-for-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v2.1.2
+
+      - name: Setup java 11
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Build project
+        run: ./gradlew build --no-daemon
+
+      - name: Generate code coverage reports
+        uses: ReactiveCircus/android-emulator-runner@v2.30.1
+        with:
+          api-level: 30
+          target: google_apis
+          arch: x86_64
+          disable-animations: true
+          script: ./gradlew testDebugUnitTest connectedDebugAndroidTest testDebugUnitTestCoverage createDebugCoverageReport --stacktrace
+
+      - name: Clean Up report Folders
+        run: |
+          mv /home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/coverage/androidTest/debug/connected /home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/coverage/androidTest/debug/coverage
+          mv /home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/androidTests/connected/debug /home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/androidTests/connected/instrumentation-test
+          mv /home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/tests/testDebugUnitTest /home/runner/work/MISW-PF-Grupo1-Movil/MISW-PF-Grupo1-Movil/app/build/reports/tests/unit-test
+          
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: apks
+          path: app/build/outputs/apk
+      - name: Upload Unit Test Results
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: unit-test-results
+          path: app/build/reports/tests/unit-test
+      - name: Upload Instrumentation Test Results
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: instrumentation-test-results
+          path: app/build/reports/androidTests/connected/instrumentation-test
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: coverage_results
+          path: app/build/reports/coverage/androidTest/debug/coverage
+  test-for-relese:
+    needs: steps-for-merge
+    if: startsWith(github.ref_name, 'release')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+      - name: Setup JDK
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          cache: 'gradle'
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+      - name: Build debug app
+        run: ./gradlew assembleDebug 
+      - name: Build Android Test APK
+        run: ./gradlew assembleAndroidTest
+      - name: Setup python
+        uses: actions/setup-python@v5.1.0
+        with:
+          python-version: '3.9'
+      - name: Export gcloud related env variable
+        run: export CLOUDSDK_PYTHON="/usr/bin/python3"
+      - name: GCP Auth
+        uses: google-github-actions/auth@v2.1.2
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+      - name: SetUp GCP Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2.1.0
+      - name: Set current project
+        run: gcloud config set project proyecto2-grupo1
+      - name: Run Instrumentation Tests in Firebase Test Lab
+        run: gcloud firebase test android run .github/workflows/gcp_android_test_config.yaml:instrumentation-test
+      - name: Run Robo Tests in Firebase Test Lab
+        run: gcloud firebase test android run .github/workflows/gcp_android_test_config.yaml:robo-test
+
+      - name: Download Artifacts for Release
+        uses: actions/download-artifact@v4.1.4
+
+      - name: Zip Artifacts for Release
+        run: |
+          zip -r coverage_results.zip coverage_results/
+          zip -r apks.zip apks/
+          zip -r instrumentation-test-results.zip instrumentation-test-results/
+          zip -r unit-test-results.zip unit-test-results/
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v2.0.4
+        with:
+          name: SportApp - Grupo 1 - Sprint1
+          tag_name: Sprint1
+          files: |
+            apks.zip
+            coverage_results.zip
+            instrumentation-test-results.zip
+            unit-test-results.zip

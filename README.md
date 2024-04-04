@@ -25,19 +25,22 @@ En el siguiente diagrama se puede observar este Flujo de Trabajo:
 Para este reppsitorio se tiene implementado un sistema de CI/CD basado en GitHub, Github Actions y GCP Firebase, consistendo de las siguientes caracteristicas:
 
 * La integracion Continua arranca cada que exista un nuevo Pull Request a la rama ```main```.
-* La integracion Continua ejecuta en paralelo las pruebas unitarias y las pruebas de Instrumentacion en GCP Firebase.
-* Si las Pruebas son exitosas se procede a la construccion del paquete APK de la aplicacion Movil.
-* Si la creacion del paquete APK es exitoso se procede a subir ese APK como Artefacto de GitHub Actions haciendolo disponible para su descarga e Instalaccion Manual.
-* Si este proceso de hacer disponible el Paquete APK es exitoso, se considera concluido el proceso de Integracion Continua y el Pull Request esta listo para hacer merge.
-* Si la Rama origen del Pull Request inicia con ```Relese``` es porque esta destinada para hacer Release de Fin de Sprint.
+* La integracion continua hace un build completo de la aplicacion.
+* Si el build es exitoso procede a realizar todas las pruebas (tanto unitarias como de integracion) sobre un emulador.
+* Si las pruebas son exitosas se generan los reportes (incluidos los de cobertura de codigo y las APK creadas) y se se suben como artefacto a la ejecucion del pipeline.
+* Si este proceso se considera exitoso, se da por concluido el proceso de Integracion Continua y el Pull Request esta listo para hacer merge.
+* Si la Rama origen del Pull Request inicia con ```Relese``` es porque esta destinada para hacer Release de Final de Sprint.
 * Si el Pull Request es de ```Release``` se inicia el proceso de Despliegue Continuo.
-* El Despliegue Continuo ejecuta la Pruebas Exploratorias de la Aplicacion usando la herramienta de Robo ofrecida por GCP Firebase.
-* Si las Pruebas Exploratorias son exitosas se procede a descarga la Aplicacion anteriormente guardada (del proceso de Integracion Continua) e incluir esta APK dentro de los artefactos de uun nuevo Release que se realiza.
+* El Despliegue Continuo ejecuta la Pruebas de Instrumentacion de la Aplicacion usando la herramientas ofrecidas por GCP Firebase.
+* Si las pruebas anteriores son exitosas, el Despliegue Continuo ejecuta la Pruebas Exploratorias de la Aplicacion usando la herramienta de Robo ofrecida por GCP Firebase.
+* Si las Pruebas Exploratorias son exitosas se procede a descarga de los artefactos geenrados por la integracion continua.
+* Se procede a realizar la compilacion de la APK en su version Release.
+* Se procede a Realizar el release de Final de Sprint incluyendo la APK de release y los artefactos y reportes generados por la Integracion Continua.
 * Si el proceso de creacion de Release en GitHub es exitoso se termina el proceso de Despliegue Continuo.
 
 En el siguiente Diagrama se puede observar el flujo descrito anteriormente:
 
-![FlujoCICD_Movil](https://github.com/shiomar-salazar/MISW-PF-Grupo1-Movil/assets/111320185/38aaf833-1663-49d0-8994-e051e1b633a7)
+![FlujoCICD_Movil](https://github.com/shiomar-salazar/MISW-PF-Grupo1-Movil/assets/111320185/3d28dd87-46b7-4e83-a16f-e30e7a1df014)
 
 ### Generacion de APK de manera local
 Para esta plataforma se puede generar la APK sin la necesidad de tener Android Studio instalado, mediante el uso de la linea de comandos, para esto se deben seguir los siguientes pasos:
@@ -48,7 +51,7 @@ Para esta plataforma se puede generar la APK sin la necesidad de tener Android S
 ```
 ./gradlew build --stacktrace
 ```
-4. La aplicacion en formato APK se generara en el siguiente directorio :```.../app/build/outputs/apk/release```
+4. La aplicacion en formato APK se generara en el siguiente directorio: ```.../app/build/outputs/apk/release```
 
 ### Ejecucion de Pruebas Unitarias de manera local
 Para esta plataforma se pueden ejecutar las pruebas unitarias sin necesidad de tener Android Studio instalado, mediante el uso de la linea de comandos, para esto se deben seguir los siguientes pasos:
@@ -59,7 +62,7 @@ Para esta plataforma se pueden ejecutar las pruebas unitarias sin necesidad de t
 ```
 ./gradlew test --stacktrace
 ```
-4. Revisar el reporte que se genera en el siguiguiente directorio :```.../app/build/reports/tests/testDebugUnitTest/index.html```
+4. Revisar el reporte que se genera en el siguiguiente directorio: ```.../app/build/reports/tests/testDebugUnitTest/index.html```
 
 ### Ejecucion de Pruebas de Integracion (Instrumentacion) de manera local
 Para esta plataforma se pueden ejecutar las pruebas de integracion (llamadas en Android pruebas de Instrumentacion) sin necesidad de tener Android Studio instalado, mediante el uso de la linea de comandos, para esto se deben seguir los siguientes pasos:
@@ -71,7 +74,7 @@ Para esta plataforma se pueden ejecutar las pruebas de integracion (llamadas en 
 ```
 ./gradlew connectedDebugAndroidTest --stacktrace
 ```
-5. Revisar el reporte que se genera en el siguiguiente directorio :```.../app/build/reports/androidTests/connected/debug/index.html```
+5. Revisar el reporte que se genera en el siguiguiente directorio: ```.../app/build/reports/androidTests/connected/debug/index.html```
 
 ### Reporte de Cobertura de Codigo
 Para esta plataforma (y por limitacion actuales de Android Studio que necesita las pruebas de Instrumentacion para generar los reportes de coverage), los reportes de cobertura de la pruebas se debe correr de manera manual, es por esto se debe seguir los siguientes pasos apra la generacion de dicho reporte:
