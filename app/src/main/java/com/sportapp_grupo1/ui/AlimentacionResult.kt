@@ -35,6 +35,8 @@ class AlimentacionResult : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        /* TODO: Cambiar para obtener las calorias meta del dia */
+        binding.goal.text = "1500 kcal"
 
         binding.cancelar.setOnClickListener {
             navigateToHome()
