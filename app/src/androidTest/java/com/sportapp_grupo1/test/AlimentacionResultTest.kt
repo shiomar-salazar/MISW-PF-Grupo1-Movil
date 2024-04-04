@@ -127,16 +127,8 @@ class AlimentacionResultTest {
 
         /* Primero navegamos a la pantalla correcta */
         navigateToTestScreen()
-        SystemClock.sleep(delayService2)
         /* Hacemos click en boton de cancelar */
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(R.id.cancelar),
-                ViewMatchers.isDisplayed()
-            )
-        )
-        clickIntoButtonById(R.id.cancelar)
-        SystemClock.sleep(delayService2)
+        clickIntoButtonByIdwithScroll(R.id.cancelar)
         /* Validamos estar en pantalla de Home */
         Espresso.onView(
             AllOf.allOf(
