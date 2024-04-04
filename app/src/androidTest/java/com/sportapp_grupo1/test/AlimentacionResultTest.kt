@@ -109,7 +109,7 @@ class AlimentacionResultTest {
         setTextViewByValue(R.id.comida2_text,"700")
         setTextViewByValue(R.id.comida3_text,"700")
         setTextViewByValue(R.id.agua_text,"1500")
-        clickIntoButtonById(R.id.registrar)
+        clickIntoButtonByIdwithScroll(R.id.registrar)
         SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
@@ -146,7 +146,7 @@ class AlimentacionResultTest {
         /* Primero navegamos a la pantalla correcta */
         navigateToTestScreen()
         /* Hacemos click en boton de registrar */
-        clickIntoButtonById(R.id.registrar)
+        clickIntoButtonByIdwithScroll(R.id.registrar)
 
         /* Validamos respuestas negativas */
         Espresso.onView(ViewMatchers.withId(R.id.comida1)).check { view, _ ->
