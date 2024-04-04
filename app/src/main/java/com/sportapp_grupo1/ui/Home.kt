@@ -30,7 +30,7 @@ class Home : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.alimentacion.setOnClickListener {
-            showMessage("Not implemented yet.")
+            findNavController().navigate((R.id.action_home2_to_alimentacionResult))
         }
         binding.entrenamiento.setOnClickListener {
             showMessage("Not implemented yet.")

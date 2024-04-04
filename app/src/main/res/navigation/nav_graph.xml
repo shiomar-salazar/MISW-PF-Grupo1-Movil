@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_home2_to_planAlimentacionCreate"
             app:destination="@id/planAlimentacionCreate" />
+        <action
+            android:id="@+id/action_home2_to_alimentacionResult"
+            app:destination="@id/alimentacionResult" />
     </fragment>
     <fragment
         android:id="@+id/planentrenamiento_crear_fragment"
@@ -39,6 +42,14 @@
         tools:layout="@layout/plan_alimentacion_create_fragment" >
         <action
             android:id="@+id/action_planAlimentacionCreate_to_home2"
+            app:destination="@id/home2" />
+    </fragment>
+    <fragment
+        android:id="@+id/alimentacionResult"
+        android:name="com.sportapp_grupo1.ui.AlimentacionResult"
+        tools:layout="@layout/alimentacion_result_fragment" >
+        <action
+            android:id="@+id/action_alimentacionResult_to_home2"
             app:destination="@id/home2" />
     </fragment>
 </navigation>

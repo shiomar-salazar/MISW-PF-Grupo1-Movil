@@ -32,6 +32,13 @@
     <string name="crear_plan_de_alimentacion">Crear Plan de Alimentacion</string>
     <string name="sufix_alimentacion"> kcal</string>
     <string name="actividad">Actividad</string>
+    <string name="alimentacion_del_dia">Alimentacion del Dia</string>
+    <string name="comida_1">Comida 1</string>
+    <string name="comida_2">Comida 2</string>
+    <string name="comida_3">Comida 3</string>
+    <string name="agua">Agua</string>
+    <string name="registrar_alimentacion">Registrar Alimentacion</string>
+    <string name="meta">Meta</string>
     <string-array name="Deportes">
         <item>Atletismo</item>
         <item>Ciclismo</item>
