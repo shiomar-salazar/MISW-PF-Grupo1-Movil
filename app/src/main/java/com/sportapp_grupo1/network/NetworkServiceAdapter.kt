@@ -3,6 +3,7 @@ package com.sportapp_grupo1.network
 import android.content.Context
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
+import com.sportapp_grupo1.models.Alimentacion
 import com.sportapp_grupo1.models.PlanAlimentacion
 import com.sportapp_grupo1.models.PlanEntrenamiento
 import kotlin.coroutines.resume
@@ -121,6 +122,44 @@ class NetworkServiceAdapter constructor(context: Context) {
             numero_semanas = new.numero_semanas
         )
         cont.resume(planCreated)
+
+    }
+
+    suspend fun addAlimentacion(new: Alimentacion) = suspendCoroutine { cont ->
+        /*requestQueue.add(
+            postRequest(
+                "albums",
+                JSONObject(
+                    """{"name":"${album.name}",
+                    |"cover":"${album.cover}",
+                    |"releaseDate":"${album.releaseDate}",
+                    |"description":"${album.description}",
+                    |"genre":"${album.genre}",
+                    |"recordLabel":"${album.recordLabel}"}""".trimMargin()
+                ),
+                { response ->
+                     val resultCreated = Alimentacion (
+                        alimentacionID = 1,
+                        calorias1 = new.calorias1,
+                        calorias2 = new.calorias2,
+                        calorias3 = new.calorias3,
+                        ml_agua = new.ml_agua
+                    )
+                    cont.resume(resultCreated)
+                },
+                {
+                    cont.resumeWithException(it)
+                })
+        )*/
+
+        val resultCreated = Alimentacion (
+            alimentacionID = 1,
+            calorias1 = new.calorias1,
+            calorias2 = new.calorias2,
+            calorias3 = new.calorias3,
+            ml_agua = new.ml_agua
+        )
+        cont.resume(resultCreated)
 
     }
 
