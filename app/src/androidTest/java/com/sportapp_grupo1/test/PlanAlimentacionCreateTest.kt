@@ -225,7 +225,7 @@ class PlanAlimentacionCreateTest {
         /* Primero navegamos a la pantalla correcta */
         navigateToTestScreen()
         /* Hacemos click en boton de cancelar */
-        clickIntoButtonById(R.id.cancelar)
+        clickIntoButtonByIdwithScroll(R.id.cancelar)
         /* Validamos estar en pantalla de Home */
         Espresso.onView(
             AllOf.allOf(

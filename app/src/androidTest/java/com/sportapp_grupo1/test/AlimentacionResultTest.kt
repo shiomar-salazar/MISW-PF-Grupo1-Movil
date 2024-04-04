@@ -142,7 +142,7 @@ class AlimentacionResultTest {
      * Esta Prueba tiene la intencion de los casos de validacion negativa
      */
     @Test
-    fun negativeTestFailedPlanAlimentacionCreate() {
+    fun negativeTestFailedAlimentacionResult() {
         /* Primero navegamos a la pantalla correcta */
         navigateToTestScreen()
         /* Hacemos click en boton de registrar */
