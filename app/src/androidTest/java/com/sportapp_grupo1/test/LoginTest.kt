@@ -140,5 +140,19 @@ class LoginTest {
         onView(allOf(withId(R.id.login_button), CoreMatchers.not(isDisplayed())))
     }
 
+    /**
+     * Esta Prueba tiene la intencion de Comprobar los demas botones de la pantalla de Login
+     */
+    @Test
+    fun Login_OtherBtns(){
+        clickIntoButtonById(R.id.recuperar)
+        SystemClock.sleep(delayService)
+        clickIntoButtonById(R.id.registro)
+        //Verificamos que sigamos en la pantalla de Inicio de Sesion
+        onView(allOf(withId(R.id.login_button), isDisplayed()))
+
+    }
+
+
 
 }
