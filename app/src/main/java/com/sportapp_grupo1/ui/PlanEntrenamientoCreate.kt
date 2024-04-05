@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
-import com.sportapp_grupo1.databinding.PlanentrenamientoCrearFragmentBinding
+import com.sportapp_grupo1.databinding.PlanEntrenamientoCrearFragmentBinding
 import com.sportapp_grupo1.models.PlanEntrenamiento
 import com.sportapp_grupo1.validator.EmptyValidator
 import com.sportapp_grupo1.validator.base.BaseValidator
@@ -18,7 +18,7 @@ import com.sportapp_grupo1.viewmodels.PlanEntrenamientoCreateViewModel
 
 class PlanEntrenamientoCreate : Fragment() {
 
-    private var _binding: PlanentrenamientoCrearFragmentBinding? = null
+    private var _binding: PlanEntrenamientoCrearFragmentBinding? = null
     private lateinit var viewModel: PlanEntrenamientoCreateViewModel
     private val binding get() = _binding!!
 
@@ -26,7 +26,7 @@ class PlanEntrenamientoCreate : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = PlanentrenamientoCrearFragmentBinding.inflate(inflater, container, false)
+        _binding = PlanEntrenamientoCrearFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 

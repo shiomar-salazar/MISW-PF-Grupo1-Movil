@@ -4,6 +4,7 @@ import android.content.Context
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
 import com.sportapp_grupo1.models.Alimentacion
+import com.sportapp_grupo1.models.Entrenamiento
 import com.sportapp_grupo1.models.PlanAlimentacion
 import com.sportapp_grupo1.models.PlanEntrenamiento
 import kotlin.coroutines.resume
@@ -158,6 +159,48 @@ class NetworkServiceAdapter constructor(context: Context) {
             calorias2 = new.calorias2,
             calorias3 = new.calorias3,
             ml_agua = new.ml_agua
+        )
+        cont.resume(resultCreated)
+
+    }
+
+    suspend fun addEntrenamiento(new: Entrenamiento) = suspendCoroutine { cont ->
+        /*requestQueue.add(
+            postRequest(
+                "albums",
+                JSONObject(
+                    """{"name":"${album.name}",
+                    |"cover":"${album.cover}",
+                    |"releaseDate":"${album.releaseDate}",
+                    |"description":"${album.description}",
+                    |"genre":"${album.genre}",
+                    |"recordLabel":"${album.recordLabel}"}""".trimMargin()
+                ),
+                { response ->
+                     val resultCreated = Entrenamiento (
+                                        entrenamientoId = 1,
+                                        userId = new.userId,
+                                        actividad = new.actividad,
+                                        distancia = new.distancia,
+                                        tiempo = new.tiempo,
+                                        resultado = new.resultado,
+                                        feedback = new.feedback
+                                    )
+                    cont.resume(resultCreated)
+                },
+                {
+                    cont.resumeWithException(it)
+                })
+        )*/
+
+        val resultCreated = Entrenamiento (
+            entrenamientoId = 1,
+            userId = new.userId,
+            actividad = new.actividad,
+            distancia = new.distancia,
+            tiempo = new.tiempo,
+            resultado = new.resultado,
+            feedback = new.feedback
         )
         cont.resume(resultCreated)
 

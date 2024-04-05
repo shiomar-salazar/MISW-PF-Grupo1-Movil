@@ -1,7 +1,6 @@
 package com.sportapp_grupo1.ui
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -108,15 +107,6 @@ class PlanAlimentacionCreate : Fragment() {
             Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
         }
-    }
-
-    private fun formIsValid(array: ArrayList<String>): Boolean {
-        for (elem in array) {
-            if (TextUtils.isEmpty(elem)) {
-                return false
-            }
-        }
-        return true
     }
 
     private fun showMessage(s: String) {
