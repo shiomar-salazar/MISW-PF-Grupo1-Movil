@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.EntrenamientoMenu">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:textColor="@color/lightGrey"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/goal"
+        android:layout_centerHorizontal="true"
+        android:textSize="25sp"
+        android:layout_marginBottom="20dip"
+        android:text="@string/distancia" />
+
+    <TextView
+        android:id="@+id/goal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/monitoreoBtn"
+        android:gravity="center_horizontal"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/lightGrey"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="90dp"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/monitoreoBtn"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="18dip"
+        android:backgroundTint="@color/ButtonGrey"
+        android:text="@string/monitoreo"
+        android:textAllCaps="false"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/entre_result_btn"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:text="@string/ingresar_resultado"
+        android:layout_below="@id/monitoreoBtn"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/ButtonGrey"
+        android:textAllCaps="false"
+        android:textSize="20sp"  />
+
+</RelativeLayout>

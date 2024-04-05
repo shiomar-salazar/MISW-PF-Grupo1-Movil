@@ -27,11 +27,14 @@
         <action
             android:id="@+id/action_home2_to_alimentacionResult"
             app:destination="@id/alimentacionResult" />
+        <action
+            android:id="@+id/action_home2_to_entrenamiento_Menu"
+            app:destination="@id/entrenamiento_Menu" />
     </fragment>
     <fragment
         android:id="@+id/planentrenamiento_crear_fragment"
         android:name="com.sportapp_grupo1.ui.PlanEntrenamientoCreate"
-        tools:layout="@layout/planentrenamiento_crear_fragment" >
+        tools:layout="@layout/plan_entrenamiento_crear_fragment" >
         <action
             android:id="@+id/action_planentrenamiento_crear_fragment_to_home2"
             app:destination="@id/home2" />
@@ -50,6 +53,22 @@
         tools:layout="@layout/alimentacion_result_fragment" >
         <action
             android:id="@+id/action_alimentacionResult_to_home2"
+            app:destination="@id/home2" />
+    </fragment>
+    <fragment
+        android:id="@+id/entrenamiento_Menu"
+        android:name="com.sportapp_grupo1.ui.EntrenamientoMenu"
+        tools:layout="@layout/entrenamiento__menu_fragment" >
+        <action
+            android:id="@+id/action_entrenamiento_Menu_to_entrenamientoResult"
+            app:destination="@id/entrenamientoResult" />
+    </fragment>
+    <fragment
+        android:id="@+id/entrenamientoResult"
+        android:name="com.sportapp_grupo1.ui.EntrenamientoResult"
+        tools:layout="@layout/entrenamiento_result_fragment" >
+        <action
+            android:id="@+id/action_entrenamientoResult_to_home2"
             app:destination="@id/home2" />
     </fragment>
 </navigation>
