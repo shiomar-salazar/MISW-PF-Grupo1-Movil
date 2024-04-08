@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.sportapp_grupo1.models.User
 import com.sportapp_grupo1.repositories.LoginRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,10 +16,10 @@ import kotlinx.coroutines.withContext
 class MainViewModel(application: Application) : AndroidViewModel(application){
 
     private val _loginRepository = LoginRepository(application)
-    private val _token = MutableLiveData<String>("")
+    private val _usuario = MutableLiveData<User>()
 
-    var token: LiveData<String>
-        get() = _token
+    var usuario: LiveData<User>
+        get() = _usuario
         set(value) {}
 
 

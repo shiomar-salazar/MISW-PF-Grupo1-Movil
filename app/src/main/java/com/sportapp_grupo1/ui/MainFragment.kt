@@ -63,12 +63,15 @@ class MainFragment : Fragment() {
             //findNavController().navigate(R.id.action_mainFragment_to_home2)
 
             if (binding.inputUsername.error == null && binding.inputPassword.error == null ){
-                showMessage("Inicio de Sesion Exitoso.")
-                viewModel.login(username,password)
-                // Navegar a Home
-                findNavController().navigate(R.id.action_mainFragment_to_home2)
+                if(viewModel.login(username,password) ) {
+                    showMessage("Inicio de Sesion Exitoso.")
+                    // Navegar a Home
+                    findNavController().navigate(R.id.action_mainFragment_to_home2)
+                } else {
+                    showMessage("Inicio de Sesion Fallido.")
+                }
             } else {
-                showMessage("Inicio de Sesion Fallido.")
+                showMessage("Todos los campos deben ser diligenciados, por favor corrija e intente de nuevo.")
             }
 
         }
@@ -100,7 +103,7 @@ class MainFragment : Fragment() {
             this,
             MainViewModel.Factory(activity.application)
         )[MainViewModel::class.java]
-        viewModel.token.observe(viewLifecycleOwner) {
+        viewModel.usuario.observe(viewLifecycleOwner) {
             it.apply {
 
             }

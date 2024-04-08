@@ -5,11 +5,12 @@ import com.sportapp_grupo1.models.Alimentacion
 import com.sportapp_grupo1.models.Entrenamiento
 import com.sportapp_grupo1.models.PlanAlimentacion
 import com.sportapp_grupo1.models.PlanEntrenamiento
+import com.sportapp_grupo1.models.User
 
 class CacheManager(context: Context) {
     companion object {
 
-        private var token: String = ""
+        private lateinit var usuario: User
         private var planEntrenamiento: HashMap<Int, PlanEntrenamiento> = hashMapOf()
         private var planesEntrenamiento: List<PlanEntrenamiento> = mutableListOf()
         private var planAlimentacion: HashMap<Int, PlanAlimentacion> = hashMapOf()
@@ -29,12 +30,12 @@ class CacheManager(context: Context) {
             }
     }
 
-    fun saveToken (newToken:String){
-        token = newToken
+    fun saveUsuario (user:User){
+        usuario = user
     }
 
-    fun getToken():String {
-        return token
+    fun getUsuario():User {
+        return usuario
     }
 
     fun addPlanEntrentamiento(planId: Int, new:PlanEntrenamiento){
