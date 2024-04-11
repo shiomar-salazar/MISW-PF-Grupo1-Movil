@@ -95,7 +95,8 @@ MISW-PF-Grupo1-Movil
 ├─ .git
 ├─ .github
 │  └─ workflows
-│     └─ android.yml
+│     ├─ gcp_android_test_config.yaml
+│     └─ Grupo1_CI_CD.yml
 ├─ .gitignore
 ├─ .idea
 │  ├─ .name
@@ -125,6 +126,8 @@ MISW-PF-Grupo1-Movil
 │     │        └─ sportapp_grupo1
 │     │           ├─ ExampleInstrumentedTest.kt
 │     │           └─ test
+│     │              ├─ AlimentacionResultTest.kt
+│     │              ├─ EntrenamientoResultTest.kt
 │     │              ├─ LoginTest.kt
 │     │              ├─ PlanAlimentacionCreateTest.kt
 │     │              └─ PlanEntrenamientoCreateTest.kt
@@ -141,22 +144,23 @@ MISW-PF-Grupo1-Movil
 │     │  │        │  └─ User.kt
 │     │  │        ├─ network
 │     │  │        │  ├─ CacheManager.kt
+│     │  │        │  ├─ LoginNetworkService.kt
 │     │  │        │  └─ NetworkServiceAdapter.kt
 │     │  │        ├─ repositories
-│     │  │        │  ├─ LoginRepository.kt
+│     │  │        │  ├─ AlimentacionRepository.kt
+│     │  │        │  ├─ EntrenamientoRepository.kt
 │     │  │        │  ├─ PlanAlimentacionRepository.kt
 │     │  │        │  └─ PlanEntrenamientoRepository.kt
 │     │  │        ├─ ui
 │     │  │        │  ├─ adapters
+│     │  │        │  ├─ AlimentacionResult.kt
+│     │  │        │  ├─ EntrenamientoMenu.kt
+│     │  │        │  ├─ EntrenamientoResult.kt
 │     │  │        │  ├─ Home.kt
 │     │  │        │  ├─ MainActivity.kt
 │     │  │        │  ├─ MainFragment.kt
 │     │  │        │  ├─ PlanAlimentacionCreate.kt
-│     │  │        │  ├─ PlanEntrenamientoCreate.kt
-│     │  │        │  └─ theme
-│     │  │        │     ├─ Color.kt
-│     │  │        │     ├─ Theme.kt
-│     │  │        │     └─ Type.kt
+│     │  │        │  └─ PlanEntrenamientoCreate.kt
 │     │  │        ├─ validator
 │     │  │        │  ├─ base
 │     │  │        │  │  ├─ BaseValidator.kt
@@ -165,10 +169,13 @@ MISW-PF-Grupo1-Movil
 │     │  │        │  ├─ EmailValidator.kt
 │     │  │        │  ├─ EmptyValidator.kt
 │     │  │        │  ├─ PasswordValidator.kt
-│     │  │        │  └─ PlanAlimentacionValidator.kt
+│     │  │        │  ├─ PlanAlimentacionValidator.kt
+│     │  │        │  └─ TimeValidator.kt
 │     │  │        └─ viewmodels
+│     │  │           ├─ AlimentacionResultViewModel.kt
+│     │  │           ├─ EntrenamientoMenuViewModel.kt
+│     │  │           ├─ EntrenamientoResultViewModel.kt
 │     │  │           ├─ HomeViewModel.kt
-│     │  │           ├─ MainViewModel.kt
 │     │  │           ├─ PlanAlimentacionViewModel.kt
 │     │  │           └─ PlanEntrenamientoCreateViewModel.kt
 │     │  └─ res
@@ -180,11 +187,14 @@ MISW-PF-Grupo1-Movil
 │     │     │  ├─ ic_launcher_foreground.xml
 │     │     │  └─ logo.jpg
 │     │     ├─ layout
+│     │     │  ├─ alimentacion_result_fragment.xml
+│     │     │  ├─ entrenamiento_result_fragment.xml
+│     │     │  ├─ entrenamiento__menu_fragment.xml
 │     │     │  ├─ home_fragment.xml
 │     │     │  ├─ main_activity.xml
 │     │     │  ├─ main_fragment.xml
-│     │     │  ├─ planentrenamiento_crear_fragment.xml
-│     │     │  └─ plan_alimentacion_create_fragment.xml
+│     │     │  ├─ plan_alimentacion_create_fragment.xml
+│     │     │  └─ plan_entrenamiento_crear_fragment.xml
 │     │     ├─ layout-v28
 │     │     ├─ mipmap-anydpi-v26
 │     │     │  ├─ ic_launcher.xml
@@ -227,6 +237,7 @@ MISW-PF-Grupo1-Movil
 │                 ├─ CaloriesValidatorUnitTest.kt
 │                 ├─ ExampleUnitTest.kt
 │                 ├─ PasswordValidatorUnitTest.kt
+│                 ├─ TimeValidatorUnitTest.kt
 │                 └─ UsernameValidatorUnitTest.kt
 ├─ gradle
 │  ├─ libs.versions.toml
@@ -236,7 +247,6 @@ MISW-PF-Grupo1-Movil
 ├─ gradle.properties
 ├─ gradlew
 ├─ gradlew.bat
-├─ README.md
-└─ robo-test.yaml
+└─ README.md
 
 ```
