@@ -10,7 +10,13 @@ import com.sportapp_grupo1.models.User
 class CacheManager(context: Context) {
     companion object {
 
-        private lateinit var usuario: User
+        private var usuario = User (
+            userId = 0,
+            nombres = "",
+            rol = "",
+            plan = "",
+            token = ""
+        )
         private var planEntrenamiento: HashMap<Int, PlanEntrenamiento> = hashMapOf()
         private var planesEntrenamiento: List<PlanEntrenamiento> = mutableListOf()
         private var planAlimentacion: HashMap<Int, PlanAlimentacion> = hashMapOf()
