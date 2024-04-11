@@ -9,6 +9,7 @@ class PlanEntrenamientoRepository(val application: Application) {
 
     suspend fun addPlanEntrenamiento (new: PlanEntrenamiento):PlanEntrenamiento{
         CacheManager.getInstance(application.applicationContext).addPlanEntrentamiento(new)
-        return NetworkServiceAdapter.getInstance(application).addPlanEntrenamiento(new)
+        var user = CacheManager.getInstance(application.applicationContext).getUsuario()
+        return NetworkServiceAdapter.getInstance(application).addPlanEntrenamiento(new, user)
     }
 }

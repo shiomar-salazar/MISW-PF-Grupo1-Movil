@@ -13,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class PlanEntrenamientoCreateViewModel(application: Application) : AndroidViewModel(application){
+class PlanEntrenamientoViewModel(application: Application) : AndroidViewModel(application){
 
     private val _planEntrenamientoRepository = PlanEntrenamientoRepository(application)
     private val _planEntrenamiento = MutableLiveData<PlanEntrenamiento>()
@@ -58,9 +58,9 @@ class PlanEntrenamientoCreateViewModel(application: Application) : AndroidViewMo
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(PlanEntrenamientoCreateViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(PlanEntrenamientoViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return PlanEntrenamientoCreateViewModel(app) as T
+                return PlanEntrenamientoViewModel(app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

@@ -10,23 +10,23 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
-import com.sportapp_grupo1.databinding.PlanEntrenamientoCrearFragmentBinding
+import com.sportapp_grupo1.databinding.PlanEntrenamientoCreateFragmentBinding
 import com.sportapp_grupo1.models.PlanEntrenamiento
 import com.sportapp_grupo1.validator.EmptyValidator
 import com.sportapp_grupo1.validator.base.BaseValidator
-import com.sportapp_grupo1.viewmodels.PlanEntrenamientoCreateViewModel
+import com.sportapp_grupo1.viewmodels.PlanEntrenamientoViewModel
 
 class PlanEntrenamientoCreate : Fragment() {
 
-    private var _binding: PlanEntrenamientoCrearFragmentBinding? = null
-    private lateinit var viewModel: PlanEntrenamientoCreateViewModel
+    private var _binding: PlanEntrenamientoCreateFragmentBinding? = null
+    private lateinit var viewModel: PlanEntrenamientoViewModel
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = PlanEntrenamientoCrearFragmentBinding.inflate(inflater, container, false)
+        _binding = PlanEntrenamientoCreateFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -76,7 +76,7 @@ class PlanEntrenamientoCreate : Fragment() {
             val argsArray: ArrayList<String> = arrayListOf(lunes, martes, miercoles, jueves, viernes, sabado, domingo, semanas)
             if (this.formIsValid(argsArray)) {
                 val newPlan = PlanEntrenamiento (
-                    actividad = actividad,
+                    entrenamiento = actividad,
                     lunes = lunes,
                     martes = martes,
                     miercoles = miercoles,
@@ -84,7 +84,7 @@ class PlanEntrenamientoCreate : Fragment() {
                     viernes = viernes,
                     sabado = sabado,
                     domingo = domingo,
-                    numero_semanas = semanas
+                    numero_semanas = semanas.toInt()
                 )
                 if (viewModel.addNewPlanEntrenamiento(newPlan)) {
                     showMessage("El nuevo Plan de Entrenamiento se registró correctamente.")
@@ -135,8 +135,8 @@ class PlanEntrenamientoCreate : Fragment() {
         }
         viewModel = ViewModelProvider(
             this,
-            PlanEntrenamientoCreateViewModel.Factory(activity.application)
-        )[PlanEntrenamientoCreateViewModel::class.java]
+            PlanEntrenamientoViewModel.Factory(activity.application)
+        )[PlanEntrenamientoViewModel::class.java]
         viewModel.planEntrenamiento.observe(viewLifecycleOwner) {
             it.apply {
 
