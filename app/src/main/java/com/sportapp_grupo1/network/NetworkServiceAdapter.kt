@@ -1,18 +1,22 @@
 package com.sportapp_grupo1.network
 
 import android.content.Context
+import com.android.volley.Request
 import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.sportapp_grupo1.models.Alimentacion
 import com.sportapp_grupo1.models.Entrenamiento
 import com.sportapp_grupo1.models.PlanAlimentacion
 import com.sportapp_grupo1.models.PlanEntrenamiento
+import org.json.JSONObject
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class NetworkServiceAdapter constructor(context: Context) {
     companion object {
-        const val BASE_URL = "http://54.172.124.166/"
+        const val BASE_URL_USER = "https://misw-pf-grupo1-backend-gestor-usuarios-klme3r4qta-uc.a.run.app/"
         private var instance: NetworkServiceAdapter? = null
         fun getInstance(context: Context) =
             instance ?: synchronized(this) {
@@ -25,11 +29,6 @@ class NetworkServiceAdapter constructor(context: Context) {
     private val requestQueue: RequestQueue by lazy {
         // applicationContext keeps you from leaking the Activity or BroadcastReceiver if someone passes one in.
         Volley.newRequestQueue(context.applicationContext)
-    }
-
-    suspend fun login(username:String, password:String): String {
-        //TODO Logica de Post Para la autenticacion
-        return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2V4YW1wbGUuYXV0aDAuY29tLyIsImF1ZCI6Imh0dHBzOi8vYXBpLmV4YW1wbGUuY29tL2NhbGFuZGFyL3YxLyIsInN1YiI6InVzcl8xMjMiLCJpYXQiOjE0NTg3ODU3OTYsImV4cCI6MTQ1ODg3MjE5Nn0.CA7eaHjIHz5NxeIJoFK9krqaeZrPLwmMmgI_XiQiIkQ"
     }
 
     suspend fun addPlanEntrenamiento(new: PlanEntrenamiento) = suspendCoroutine { cont ->
@@ -46,16 +45,16 @@ class NetworkServiceAdapter constructor(context: Context) {
                 ),
                 { response ->
                      val planCreated = PlanEntrenamiento (
-                        planEntrenamientoID = response.optInt("planId"),
-                        actividad = response.optInt("actividad"),
-                        lunes = response.optInt("lunes"),
-                        martes = response.optInt("martes"),
-                        miercoles = response.optInt("miercoles"),
-                        jueves = response.optInt("jueves"),
-                        viernes = response.optInt("viernes"),
-                        sabado = response.optInt("sabado"),
-                        domingo = response.optInt("domingo"),
-                        numero_semanas = response.optInt("numero_semanas")
+                        planEntrenamientoID = response.optString("planId"),
+                        actividad = response.optString("actividad"),
+                        lunes = response.optString("lunes"),
+                        martes = response.optString("martes"),
+                        miercoles = response.optString("miercoles"),
+                        jueves = response.optString("jueves"),
+                        viernes = response.optString("viernes"),
+                        sabado = response.optString("sabado"),
+                        domingo = response.optString("domingo"),
+                        numero_semanas = response.optString("numero_semanas")
                     )
                     cont.resume(planCreated)
                 },
@@ -65,7 +64,7 @@ class NetworkServiceAdapter constructor(context: Context) {
         )*/
 
         val planCreated = PlanEntrenamiento (
-            planEntrenamientoID = 1,
+            planEntrenamientoID = "",
             actividad = new.actividad,
             lunes = new.lunes,
             martes = new.martes,
@@ -94,15 +93,15 @@ class NetworkServiceAdapter constructor(context: Context) {
                 ),
                 { response ->
                      val planCreated = PlanAlimentacion (
-                        planAlimentacionID = response.optInt("planId"),
-                        lunes = response.optInt("lunes"),
-                        martes = response.optInt("martes"),
-                        miercoles = response.optInt("miercoles"),
-                        jueves = response.optInt("jueves"),
-                        viernes = response.optInt("viernes"),
-                        sabado = response.optInt("sabado"),
-                        domingo = response.optInt("domingo"),
-                        numero_semanas = response.optInt("numero_semanas")
+                        planAlimentacionID = response.optString("planId"),
+                        lunes = response.optString("lunes"),
+                        martes = response.optString("martes"),
+                        miercoles = response.optString("miercoles"),
+                        jueves = response.optString("jueves"),
+                        viernes = response.optString("viernes"),
+                        sabado = response.optString("sabado"),
+                        domingo = response.optString("domingo"),
+                        numero_semanas = response.optString("numero_semanas")
                     )
                     cont.resume(planCreated)
                 },
@@ -112,7 +111,7 @@ class NetworkServiceAdapter constructor(context: Context) {
         )*/
 
         val planCreated = PlanAlimentacion (
-            planAlimentacionID = 1,
+            planAlimentacionID = "",
             lunes = new.lunes,
             martes = new.martes,
             miercoles = new.miercoles,
@@ -140,7 +139,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                 ),
                 { response ->
                      val resultCreated = Alimentacion (
-                        alimentacionID = 1,
+                        alimentacionID = "",
                         calorias1 = new.calorias1,
                         calorias2 = new.calorias2,
                         calorias3 = new.calorias3,
@@ -154,7 +153,7 @@ class NetworkServiceAdapter constructor(context: Context) {
         )*/
 
         val resultCreated = Alimentacion (
-            alimentacionID = 1,
+            alimentacionID = "",
             calorias1 = new.calorias1,
             calorias2 = new.calorias2,
             calorias3 = new.calorias3,
@@ -178,7 +177,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                 ),
                 { response ->
                      val resultCreated = Entrenamiento (
-                                        entrenamientoId = 1,
+                                        entrenamientoId = "",
                                         userId = new.userId,
                                         actividad = new.actividad,
                                         distancia = new.distancia,
@@ -194,7 +193,7 @@ class NetworkServiceAdapter constructor(context: Context) {
         )*/
 
         val resultCreated = Entrenamiento (
-            entrenamientoId = 1,
+            entrenamientoId = "",
             userId = new.userId,
             actividad = new.actividad,
             distancia = new.distancia,
@@ -204,6 +203,22 @@ class NetworkServiceAdapter constructor(context: Context) {
         )
         cont.resume(resultCreated)
 
+    }
+
+    private fun postRequest(
+        path: String,
+        body: JSONObject,
+        responseListener: Response.Listener<JSONObject>,
+        errorListener: Response.ErrorListener,
+        URL:String
+    ): JsonObjectRequest {
+        return JsonObjectRequest(
+            Request.Method.POST,
+            URL + path,
+            body,
+            responseListener,
+            errorListener
+        )
     }
 
 }

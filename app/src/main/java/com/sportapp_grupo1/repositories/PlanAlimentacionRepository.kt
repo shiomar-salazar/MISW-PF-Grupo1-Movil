@@ -9,7 +9,7 @@ class PlanAlimentacionRepository (val application: Application) {
 
     suspend fun addPlanAlimentacion(new: PlanAlimentacion): PlanAlimentacion {
         CacheManager.getInstance(application.applicationContext)
-            .addPlanAlimentacion(new.planAlimentacionID, new)
+            .addPlanAlimentacion(new)
         return NetworkServiceAdapter.getInstance(application).addPlanAlimentacion(new)
     }
 
