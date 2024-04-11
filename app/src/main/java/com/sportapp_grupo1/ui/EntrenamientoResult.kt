@@ -85,8 +85,7 @@ class EntrenamientoResult : Fragment() {
                     resultado = result,
                     actividad = actividad,
                     feedback = retro,
-                    entrenamientoId = 0,
-                    userId = 0,
+                    userId = "",
                     distancia = "5km"
                 )
                 if (viewModel.addNewEntrenamientoResult(newPlan)) {

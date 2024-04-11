@@ -8,7 +8,7 @@ import com.sportapp_grupo1.network.NetworkServiceAdapter
 class PlanEntrenamientoRepository(val application: Application) {
 
     suspend fun addPlanEntrenamiento (new: PlanEntrenamiento):PlanEntrenamiento{
-        CacheManager.getInstance(application.applicationContext).addPlanEntrentamiento(new.planEntrenamientoID, new)
+        CacheManager.getInstance(application.applicationContext).addPlanEntrentamiento(new)
         return NetworkServiceAdapter.getInstance(application).addPlanEntrenamiento(new)
     }
 }

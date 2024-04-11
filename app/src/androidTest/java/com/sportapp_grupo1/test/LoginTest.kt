@@ -153,6 +153,26 @@ class LoginTest {
 
     }
 
+    @Test
+    fun TestFailedLogin_wrongPassword(){
+        setTextViewByValue(R.id.input_username,"s.salazarc@uniandes.edu.co")
+        setTextViewByValue(R.id.input_password,"123456789156Aa-123")
+        clickIntoButtonById(R.id.login_button)
+        SystemClock.sleep(delayService)
+        //Verificamos que ya no estemos en la pantalla de Inicio de Sesion
+        onView(allOf(withId(R.id.login_button), isDisplayed()))
+    }
+
+    @Test
+    fun TestFailedLogin_wrongUser(){
+        setTextViewByValue(R.id.input_username,"sh.salazarc@uniandes.edu.co")
+        setTextViewByValue(R.id.input_password,"123456789156Aa-")
+        clickIntoButtonById(R.id.login_button)
+        SystemClock.sleep(delayService)
+        //Verificamos que ya no estemos en la pantalla de Inicio de Sesion
+        onView(allOf(withId(R.id.login_button), isDisplayed()))
+    }
+
 
 
 }

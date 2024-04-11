@@ -1,6 +1,7 @@
 package com.sportapp_grupo1.network
 
 import android.content.Context
+import android.util.Log
 import com.sportapp_grupo1.models.Alimentacion
 import com.sportapp_grupo1.models.Entrenamiento
 import com.sportapp_grupo1.models.PlanAlimentacion
@@ -11,7 +12,7 @@ class CacheManager(context: Context) {
     companion object {
 
         private var usuario = User (
-            userId = 0,
+            userId = "",
             nombres = "",
             rol = "",
             plan = "",
@@ -19,11 +20,8 @@ class CacheManager(context: Context) {
         )
         private var planEntrenamiento: HashMap<Int, PlanEntrenamiento> = hashMapOf()
         private var planesEntrenamiento: List<PlanEntrenamiento> = mutableListOf()
-        private var planAlimentacion: HashMap<Int, PlanAlimentacion> = hashMapOf()
         private var planesAlimentacion: List<PlanAlimentacion> = mutableListOf()
-        private var alimentacionResult: HashMap<Int, Alimentacion> = hashMapOf()
         private var alimentacionResults: List<Alimentacion> = mutableListOf()
-        private var entrenamientoResult: HashMap<Int, Entrenamiento> = hashMapOf()
         private var entrenamientoResults: List<Entrenamiento> = mutableListOf()
 
 
@@ -36,7 +34,9 @@ class CacheManager(context: Context) {
             }
     }
 
-    fun saveUsuario (user:User){
+    fun saveUsuario (user: User){
+        Log.d("CacheManager - SaveUsuario", "Se guarda usario con ID:  ${user.userId}")
+        Log.d("CacheManager - SaveUsuario", "Se guarda usario con token:  ${user.token}")
         usuario = user
     }
 
@@ -44,31 +44,20 @@ class CacheManager(context: Context) {
         return usuario
     }
 
-    fun addPlanEntrentamiento(planId: Int, new:PlanEntrenamiento){
-        if (!planEntrenamiento.containsKey(planId)) {
-            planEntrenamiento[planId] = new
-        }
+    fun addPlanEntrentamiento(new:PlanEntrenamiento){
         planesEntrenamiento = planesEntrenamiento.plus(new)
     }
 
-    fun addPlanAlimentacion(planId: Int, new:PlanAlimentacion){
-        if (!planAlimentacion.containsKey(planId)) {
-            planAlimentacion[planId] = new
-        }
+    fun addPlanAlimentacion( new:PlanAlimentacion){
+
         planesAlimentacion = planesAlimentacion.plus(new)
     }
 
-    fun addAlimentacion(resultId: Int, new:Alimentacion){
-        if (!alimentacionResult.containsKey(resultId)) {
-            alimentacionResult[resultId] = new
-        }
+    fun addAlimentacion( new:Alimentacion){
         alimentacionResults = alimentacionResults.plus(new)
     }
 
-    fun addEntrenamiento(resultId: Int, new:Entrenamiento){
-        if (!entrenamientoResult.containsKey(resultId)) {
-            entrenamientoResult[resultId] = new
-        }
+    fun addEntrenamiento( new:Entrenamiento){
         entrenamientoResults = entrenamientoResults.plus(new)
     }
 
