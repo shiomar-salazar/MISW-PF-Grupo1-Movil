@@ -1,7 +1,7 @@
 # SportApp Plataforma Movil
 Espacio de trabajo de la Aplicacion Movil del Equipo 1 de las Materias de MISW4501-2024-11 y MISW4502-2024-12
 
-### Integrantes:
+## Integrantes:
 
 |   Nombre                         |   Correo                      | Codigo    | 
 |----------------------------------|-------------------------------|-----------|
@@ -9,6 +9,8 @@ Espacio de trabajo de la Aplicacion Movil del Equipo 1 de las Materias de MISW45
 | Haiber Humberto Galindo Sanchez  | h.galindos@uniandes.edu.co    | 202216850 |
 | Jorge M. Carrillo                | jm.carrillo@uniandes.edu.co   | 200426097 |
 | Shiomar Alberto Salazar Castillo | s.salazarc@uniandes.edu.co    | 202213359 |
+
+## Informacion Relevante del Proyecto
 
 ### Flujo de Trabajo
 Para este repositorio se utilizara un proceso de GitFlow Modificado, en donde se tendran 3  tipos de ramas:
@@ -87,8 +89,7 @@ Para esta plataforma (y por limitacion actuales de Android Studio que necesita l
 ```
 4. Revisar el reporte que se genera en el siguiguiente directorio: ```.../app/build/reports/coverage/androidTest/debug/connected/index.html```
 
-
-### Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 MISW-PF-Grupo1-Movil
@@ -160,7 +161,9 @@ MISW-PF-Grupo1-Movil
 │     │  │        │  ├─ MainActivity.kt
 │     │  │        │  ├─ MainFragment.kt
 │     │  │        │  ├─ PlanAlimentacionCreate.kt
-│     │  │        │  └─ PlanEntrenamientoCreate.kt
+│     │  │        │  ├─ PlanAlimentacionDetail.kt
+│     │  │        │  ├─ PlanEntrenamientoCreate.kt
+│     │  │        │  └─ PlanEntrenamientoDetail.kt
 │     │  │        ├─ validator
 │     │  │        │  ├─ base
 │     │  │        │  │  ├─ BaseValidator.kt
@@ -177,7 +180,7 @@ MISW-PF-Grupo1-Movil
 │     │  │           ├─ EntrenamientoResultViewModel.kt
 │     │  │           ├─ HomeViewModel.kt
 │     │  │           ├─ PlanAlimentacionViewModel.kt
-│     │  │           └─ PlanEntrenamientoCreateViewModel.kt
+│     │  │           └─ PlanEntrenamientoViewModel.kt
 │     │  └─ res
 │     │     ├─ color
 │     │     │  └─ text_input_box_stroke.xml
@@ -188,13 +191,15 @@ MISW-PF-Grupo1-Movil
 │     │     │  └─ logo.jpg
 │     │     ├─ layout
 │     │     │  ├─ alimentacion_result_fragment.xml
+│     │     │  ├─ entrenamiento_menu_fragment.xml
 │     │     │  ├─ entrenamiento_result_fragment.xml
-│     │     │  ├─ entrenamiento__menu_fragment.xml
 │     │     │  ├─ home_fragment.xml
 │     │     │  ├─ main_activity.xml
 │     │     │  ├─ main_fragment.xml
 │     │     │  ├─ plan_alimentacion_create_fragment.xml
-│     │     │  └─ plan_entrenamiento_crear_fragment.xml
+│     │     │  ├─ plan_alimentacion_detail_fragment.xml
+│     │     │  ├─ plan_entrenamiento_create_fragment.xml
+│     │     │  └─ plan_entrenamiento_detail_fragment.xml
 │     │     ├─ layout-v28
 │     │     ├─ mipmap-anydpi-v26
 │     │     │  ├─ ic_launcher.xml
