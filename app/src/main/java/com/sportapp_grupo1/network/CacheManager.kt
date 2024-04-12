@@ -19,8 +19,8 @@ class CacheManager(context: Context) {
             token = ""
         )
         private var planEntrenamiento: PlanEntrenamiento = PlanEntrenamiento(
-            entrenamiento = "",
             planEntrenamientoID = "",
+            entrenamiento = "Otro",
             lunes = "",
             martes = "",
             miercoles = "",
@@ -31,15 +31,15 @@ class CacheManager(context: Context) {
             numero_semanas = 1
         )
         private var planAlimentacion: PlanAlimentacion = PlanAlimentacion(
-            planAlimentacionID = "",
-            lunes = "",
-            martes = "",
-            miercoles = "",
-            jueves = "",
-            viernes = "",
-            sabado = "",
-            domingo = "",
-            numero_semanas = 1
+            planAlimentacionID = "df4cf616-f784-11ee-bea5-2528b3b3fb6c",
+            lunes = "1200",
+            martes = "1500",
+            miercoles = "2000",
+            jueves = "2000",
+            viernes = "1800",
+            sabado = "1600",
+            domingo = "1800",
+            numero_semanas = 12
         )
         private var alimentacionResults: List<Alimentacion> = mutableListOf()
         private var entrenamientoResults: List<Entrenamiento> = mutableListOf()
@@ -55,8 +55,8 @@ class CacheManager(context: Context) {
     }
 
     fun saveUsuario (user: User){
-        Log.d("CacheManager - SaveUsuario", "Se guarda usario con ID:  ${user.userId}")
-        Log.d("CacheManager - SaveUsuario", "Se guarda usario con token:  ${user.token}")
+        Log.d("SaveUsuario", "Se guarda usario con ID:  ${user.userId}")
+        Log.d("SaveUsuario", "Se guarda usario con token:  ${user.token}")
         usuario = user
     }
 
@@ -69,11 +69,11 @@ class CacheManager(context: Context) {
     }
 
     fun getPlanEntrenamiento(): PlanEntrenamiento {
+        Log.d("getPlanEntrenamiento", planEntrenamiento.planEntrenamientoID)
         return planEntrenamiento
     }
 
     fun addPlanAlimentacion(new:PlanAlimentacion){
-
         planAlimentacion = new
     }
 

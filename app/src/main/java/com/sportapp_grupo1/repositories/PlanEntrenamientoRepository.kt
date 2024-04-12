@@ -17,13 +17,13 @@ class PlanEntrenamientoRepository(val application: Application) {
     suspend fun getPlanEntrenamiento(): PlanEntrenamiento {
         var user = CacheManager.getInstance(application.applicationContext).getUsuario()
         val potentialResp = CacheManager.getInstance(application.applicationContext).getPlanEntrenamiento()
-        return if (potentialResp.planEntrenamientoID == "") {
+        return if (potentialResp.entrenamiento == "Otro") {
             Log.d("Cache decision", "get from network")
             val planEnt = NetworkServiceAdapter.getInstance(application).getPlanEntrenamiento(user)
             CacheManager.getInstance(application.applicationContext).addPlanEntrentamiento(planEnt)
             planEnt
         } else {
-            Log.d("Cache decision", "return ${potentialResp.planEntrenamientoID} elements from cache")
+            Log.d("Cache decision", "return Entrenamiento with ID ${potentialResp.planEntrenamientoID} from cache")
             potentialResp
         }
 
