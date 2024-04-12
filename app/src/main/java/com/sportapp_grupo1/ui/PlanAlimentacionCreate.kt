@@ -83,7 +83,7 @@ class PlanAlimentacionCreate : Fragment() {
                     viernes = viernes,
                     sabado = sabado,
                     domingo = domingo,
-                    numero_semanas = semanas
+                    numero_semanas = semanas.toInt()
                 )
                 if (viewModel.addNewPlanAlimentacion(newPlan)) {
                     showMessage("El nuevo Plan Alimentacion se registró correctamente.")

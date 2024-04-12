@@ -51,7 +51,7 @@ class EntrenamientoResult : Fragment() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                if (binding.actividadSpinner.selectedItem.equals("Atletismo")){
+                if (binding.actividadSpinner.selectedItem.equals("Carreras")){
                     binding.result.hint = "Vo2Max"
                     binding.result.suffixText = "ml/kg/min"
                 }
