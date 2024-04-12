@@ -33,6 +33,7 @@ class PlanAlimentacionViewModel (application: Application) : AndroidViewModel(ap
         get() = _isNetworkErrorShown
 
     init {
+        getPlanAlimentacion()
     }
 
     fun onNetworkErrorShown() {
@@ -52,6 +53,22 @@ class PlanAlimentacionViewModel (application: Application) : AndroidViewModel(ap
         } catch (e:Exception){
             _eventNetworkError.value = true
             false
+        }
+    }
+
+    private fun getPlanAlimentacion() {
+        try {
+            viewModelScope.launch (Dispatchers.Default){
+                withContext(Dispatchers.IO){
+                    val data = _planAlimentacionRepository.getPlanAlimentacion()
+                    _planAlimentacion.postValue(data)
+                }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+            }
+
+        } catch (e:Exception){
+            _eventNetworkError.value = true
         }
 
     }

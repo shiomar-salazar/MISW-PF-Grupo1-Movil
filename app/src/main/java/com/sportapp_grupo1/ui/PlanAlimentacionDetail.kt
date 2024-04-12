@@ -9,45 +9,35 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
-import com.sportapp_grupo1.databinding.HomeFragmentBinding
-import com.sportapp_grupo1.viewmodels.HomeViewModel
+import com.sportapp_grupo1.databinding.PlanAlimentacionDetailFragmentBinding
+import com.sportapp_grupo1.viewmodels.PlanAlimentacionViewModel
+
+class PlanAlimentacionDetail : Fragment() {
 
 
-class Home : Fragment() {
-
-    private var _binding: HomeFragmentBinding? = null
-    private lateinit var viewModel: HomeViewModel
+    private var _binding: PlanAlimentacionDetailFragmentBinding? = null
+    private lateinit var viewModel: PlanAlimentacionViewModel
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = HomeFragmentBinding.inflate(inflater, container, false)
+        _binding = PlanAlimentacionDetailFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.alimentacion.setOnClickListener {
-            findNavController().navigate((R.id.action_home2_to_alimentacionResult))
-        }
-        binding.entrenamiento.setOnClickListener {
-            findNavController().navigate((R.id.action_home2_to_entrenamiento_Menu))
-        }
-        binding.tusEventos.setOnClickListener {
-            showMessage("Not implemented yet.")
-        }
-        binding.sugerencias.setOnClickListener {
-            showMessage("Not implemented yet.")
-        }
-        binding.planAlimentacion.setOnClickListener {
-            findNavController().navigate(R.id.action_home2_to_planAlimentacionDetail)
+
+        binding.crear.setOnClickListener {
+            navigateToCreatePlan()
         }
 
-        binding.planEntrenamiento.setOnClickListener {
-            findNavController().navigate(R.id.action_home2_to_planEntrenamientoDetail)
-        }
+    }
+
+    private fun navigateToCreatePlan() {
+        findNavController().navigate(R.id.action_planAlimentacionDetail_to_planAlimentacionCreate)
     }
 
     private fun onNetworkError() {
@@ -57,9 +47,6 @@ class Home : Fragment() {
         }
     }
 
-    private fun showMessage(s: String) {
-        Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -73,11 +60,18 @@ class Home : Fragment() {
         }
         viewModel = ViewModelProvider(
             this,
-            HomeViewModel.Factory(activity.application)
-        )[HomeViewModel::class.java]
-        viewModel.full_access.observe(viewLifecycleOwner) {
+            PlanAlimentacionViewModel.Factory(activity.application)
+        )[PlanAlimentacionViewModel::class.java]
+        viewModel.planAplimentacion.observe(viewLifecycleOwner) {
             it.apply {
-
+                binding.lunesDetail.text = this.lunes
+                binding.martesDetail.text = this.martes
+                binding.miercolesDetail.text = this.miercoles
+                binding.juevesDetail.text = this.jueves
+                binding.viernesDetail.text = this.viernes
+                binding.sabadoDetail.text = this.sabado
+                binding.domingoDetail.text = this.domingo
+                binding.semanasDetail.text = this.numero_semanas.toString()
             }
         }
         viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->
@@ -87,4 +81,3 @@ class Home : Fragment() {
 
 
 }
-
