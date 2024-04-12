@@ -77,25 +77,22 @@ class NetworkServiceAdapter constructor(context: Context) {
 
     suspend fun getPlanEntrenamiento(user: User) = suspendCoroutine { cont ->
 
-        val params = mapOf(
-            "userId" to user.userId
-        )
 
         requestQueue.add(
             getRequest_token(
-                "entrenamientos/plan-entrenamiento",
-                JSONObject(params),
+                "entrenamientos/plan-entrenamiento/usuario/"+user.userId,
+                null,
                 { response ->
                     val plan = PlanEntrenamiento (
-                        planEntrenamientoID = response.optString("planId"),
+                        planEntrenamientoID = response.optString("id"),
                         entrenamiento = response.optString("entrenamiento"),
-                        lunes = response.optString("lunes"),
-                        martes = response.optString("martes"),
-                        miercoles = response.optString("miercoles"),
-                        jueves = response.optString("jueves"),
-                        viernes = response.optString("viernes"),
-                        sabado = response.optString("sabado"),
-                        domingo = response.optString("domingo"),
+                        lunes = response.getJSONObject("plan_entrenamiento").optInt("lunes").toString(),
+                        martes = response.getJSONObject("plan_entrenamiento").optInt("martes").toString(),
+                        miercoles = response.getJSONObject("plan_entrenamiento").optInt("miercoles").toString(),
+                        jueves = response.getJSONObject("plan_entrenamiento").optInt("jueves").toString(),
+                        viernes = response.getJSONObject("plan_entrenamiento").optInt("viernes").toString(),
+                        sabado = response.getJSONObject("plan_entrenamiento").optInt("sabado").toString(),
+                        domingo = response.getJSONObject("plan_entrenamiento").optInt("domingo").toString(),
                         numero_semanas = response.optInt("numero_semanas")
                     )
                     cont.resume(plan)
@@ -258,7 +255,7 @@ class NetworkServiceAdapter constructor(context: Context) {
     }
     private fun getRequest_token(
         path: String,
-        body: JSONObject,
+        body: JSONObject?,
         responseListener: Response.Listener<JSONObject>,
         errorListener: Response.ErrorListener,
         URL:String,

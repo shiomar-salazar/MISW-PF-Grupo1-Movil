@@ -17,7 +17,7 @@ class PlanEntrenamientoRepository(val application: Application) {
     suspend fun getPlanEntrenamiento(): PlanEntrenamiento {
         var user = CacheManager.getInstance(application.applicationContext).getUsuario()
         val potentialResp = CacheManager.getInstance(application.applicationContext).getPlanEntrenamiento()
-        return if (potentialResp.entrenamiento == "Otro") {
+        return if (potentialResp.entrenamiento == "") {
             Log.d("Cache decision", "get from network")
             val planEnt = NetworkServiceAdapter.getInstance(application).getPlanEntrenamiento(user)
             CacheManager.getInstance(application.applicationContext).addPlanEntrentamiento(planEnt)

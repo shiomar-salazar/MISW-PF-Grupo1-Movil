@@ -20,7 +20,7 @@ class CacheManager(context: Context) {
         )
         private var planEntrenamiento: PlanEntrenamiento = PlanEntrenamiento(
             planEntrenamientoID = "",
-            entrenamiento = "Otro",
+            entrenamiento = "",
             lunes = "",
             martes = "",
             miercoles = "",
