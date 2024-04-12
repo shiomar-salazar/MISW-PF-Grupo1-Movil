@@ -76,8 +76,6 @@ class NetworkServiceAdapter constructor(context: Context) {
     }
 
     suspend fun getPlanEntrenamiento(user: User) = suspendCoroutine { cont ->
-
-
         requestQueue.add(
             getRequest_token(
                 "entrenamientos/plan-entrenamiento/usuario/"+user.userId,
@@ -101,7 +99,6 @@ class NetworkServiceAdapter constructor(context: Context) {
                     cont.resumeWithException(it)
                 }, BASE_URL_ENTRENAMIENTO, user.token)
         )
-
     }
 
 
@@ -149,6 +146,31 @@ class NetworkServiceAdapter constructor(context: Context) {
         )
         cont.resume(planCreated)
 
+    }
+
+    suspend fun getPlanAlimentacion(user: User) = suspendCoroutine { cont ->
+        requestQueue.add(
+            getRequest_token(
+                "entrenamientos/plan-alimentacion/usuario/"+user.userId,
+                null,
+                { response ->
+                    val plan = PlanAlimentacion (
+                        planAlimentacionID = response.optString("id"),
+                        lunes = response.getJSONObject("plan_entrenamiento").optInt("lunes").toString(),
+                        martes = response.getJSONObject("plan_entrenamiento").optInt("martes").toString(),
+                        miercoles = response.getJSONObject("plan_entrenamiento").optInt("miercoles").toString(),
+                        jueves = response.getJSONObject("plan_entrenamiento").optInt("jueves").toString(),
+                        viernes = response.getJSONObject("plan_entrenamiento").optInt("viernes").toString(),
+                        sabado = response.getJSONObject("plan_entrenamiento").optInt("sabado").toString(),
+                        domingo = response.getJSONObject("plan_entrenamiento").optInt("domingo").toString(),
+                        numero_semanas = response.optInt("numero_semanas")
+                    )
+                    cont.resume(plan)
+                },
+                {
+                    cont.resumeWithException(it)
+                }, BASE_URL_ENTRENAMIENTO, user.token)
+        )
     }
 
     suspend fun addAlimentacion(new: Alimentacion) = suspendCoroutine { cont ->

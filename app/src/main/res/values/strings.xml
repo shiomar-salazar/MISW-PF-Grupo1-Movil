@@ -49,6 +49,7 @@
     <string name="vo2max">Vo2Max</string>
     <string name="registrar_entrenamiento">Registrar Entrenamiento</string>
     <string name="detalle_de_plan_de_entrenamiento">Detalle de Plan de Entrenamiento</string>
+    <string name="detalle_de_plan_de_alimentacion">Detalle de Plan de Alimentacion</string>
     <string-array name="Deportes">
         <item>Carreras</item>
         <item>Ciclismo</item>

@@ -65,9 +65,6 @@ class MainFragment : Fragment() {
             binding.inputPassword.error =
                 if (!passwordValidations.isSuccess) getString(passwordValidations.message) else null
 
-            //Test-Only
-            //findNavController().navigate(R.id.action_mainFragment_to_home2)
-
             if (binding.inputUsername.error == null && binding.inputPassword.error == null ){
                 val loginParams = mapOf<String, Any>(
                     "email" to username,

@@ -77,6 +77,11 @@ class CacheManager(context: Context) {
         planAlimentacion = new
     }
 
+    fun getPlanAlimentacion(): PlanAlimentacion {
+        Log.d("getPlanEntrenamiento", planAlimentacion.planAlimentacionID)
+        return planAlimentacion
+    }
+
     fun addAlimentacion( new:Alimentacion){
         alimentacionResults = alimentacionResults.plus(new)
     }

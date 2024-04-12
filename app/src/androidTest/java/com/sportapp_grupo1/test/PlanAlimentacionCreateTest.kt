@@ -95,6 +95,14 @@ class PlanAlimentacionCreateTest {
             )
         )
         clickIntoButtonById(R.id.plan_alimentacion)
+        SystemClock.sleep(delayService2)
+        Espresso.onView(
+            AllOf.allOf(
+                ViewMatchers.withId(R.id.crear),
+                ViewMatchers.isDisplayed()
+            )
+        )
+        clickIntoButtonByIdwithScroll(R.id.crear)
     }
 
     /**
