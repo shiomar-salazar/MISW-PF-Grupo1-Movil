@@ -18,9 +18,29 @@ class CacheManager(context: Context) {
             plan = "",
             token = ""
         )
-        private var planEntrenamiento: HashMap<Int, PlanEntrenamiento> = hashMapOf()
-        private var planesEntrenamiento: List<PlanEntrenamiento> = mutableListOf()
-        private var planesAlimentacion: List<PlanAlimentacion> = mutableListOf()
+        private var planEntrenamiento: PlanEntrenamiento = PlanEntrenamiento(
+            entrenamiento = "",
+            planEntrenamientoID = "",
+            lunes = "",
+            martes = "",
+            miercoles = "",
+            jueves = "",
+            viernes = "",
+            sabado = "",
+            domingo = "",
+            numero_semanas = 1
+        )
+        private var planAlimentacion: PlanAlimentacion = PlanAlimentacion(
+            planAlimentacionID = "",
+            lunes = "",
+            martes = "",
+            miercoles = "",
+            jueves = "",
+            viernes = "",
+            sabado = "",
+            domingo = "",
+            numero_semanas = 1
+        )
         private var alimentacionResults: List<Alimentacion> = mutableListOf()
         private var entrenamientoResults: List<Entrenamiento> = mutableListOf()
 
@@ -45,12 +65,16 @@ class CacheManager(context: Context) {
     }
 
     fun addPlanEntrentamiento(new:PlanEntrenamiento){
-        planesEntrenamiento = planesEntrenamiento.plus(new)
+        planEntrenamiento = new
     }
 
-    fun addPlanAlimentacion( new:PlanAlimentacion){
+    fun getPlanEntrenamiento(): PlanEntrenamiento {
+        return planEntrenamiento
+    }
 
-        planesAlimentacion = planesAlimentacion.plus(new)
+    fun addPlanAlimentacion(new:PlanAlimentacion){
+
+        planAlimentacion = new
     }
 
     fun addAlimentacion( new:Alimentacion){

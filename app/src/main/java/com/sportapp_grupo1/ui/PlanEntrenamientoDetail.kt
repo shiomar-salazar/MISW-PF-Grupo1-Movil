@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
 import com.sportapp_grupo1.databinding.PlanEntrenamientoDetailFragmentBinding
+import com.sportapp_grupo1.models.PlanEntrenamiento
 import com.sportapp_grupo1.viewmodels.PlanEntrenamientoViewModel
 
 
@@ -18,6 +19,7 @@ class PlanEntrenamientoDetail : Fragment() {
     private var _binding: PlanEntrenamientoDetailFragmentBinding? = null
     private lateinit var viewModel: PlanEntrenamientoViewModel
     private val binding get() = _binding!!
+    private var planEntrenamientoUser: PlanEntrenamiento? = null
 
 
     override fun onCreateView(
@@ -30,6 +32,16 @@ class PlanEntrenamientoDetail : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.actividadDetail.text = planEntrenamientoUser?.entrenamiento
+        binding.lunesDetail.text = planEntrenamientoUser?.lunes
+        binding.martesDetail.text = planEntrenamientoUser?.martes
+        binding.miercolesDetail.text = planEntrenamientoUser?.miercoles
+        binding.juevesDetail.text = planEntrenamientoUser?.jueves
+        binding.viernesDetail.text = planEntrenamientoUser?.viernes
+        binding.sabadoDetail.text = planEntrenamientoUser?.sabado
+        binding.domingoDetail.text = planEntrenamientoUser?.domingo
+        binding.semanasDetail.text = planEntrenamientoUser?.numero_semanas.toString()
 
         binding.crear.setOnClickListener {
             navigateToCreatePlan()
@@ -65,7 +77,7 @@ class PlanEntrenamientoDetail : Fragment() {
         )[PlanEntrenamientoViewModel::class.java]
         viewModel.planEntrenamiento.observe(viewLifecycleOwner) {
             it.apply {
-
+                planEntrenamientoUser = this
             }
         }
         viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->

@@ -39,6 +39,7 @@ tools:context=".ui.PlanEntrenamientoDetail">
             android:text="@string/actividad" />
 
         <TextView
+            android:id="@+id/actividad_detail"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"

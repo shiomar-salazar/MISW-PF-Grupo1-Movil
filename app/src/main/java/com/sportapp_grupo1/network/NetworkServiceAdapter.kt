@@ -75,6 +75,39 @@ class NetworkServiceAdapter constructor(context: Context) {
         )
     }
 
+    suspend fun getPlanEntrenamiento(user: User) = suspendCoroutine { cont ->
+
+        val params = mapOf(
+            "userId" to user.userId
+        )
+
+        requestQueue.add(
+            getRequest_token(
+                "entrenamientos/plan-entrenamiento",
+                JSONObject(params),
+                { response ->
+                    val plan = PlanEntrenamiento (
+                        planEntrenamientoID = response.optString("planId"),
+                        entrenamiento = response.optString("entrenamiento"),
+                        lunes = response.optString("lunes"),
+                        martes = response.optString("martes"),
+                        miercoles = response.optString("miercoles"),
+                        jueves = response.optString("jueves"),
+                        viernes = response.optString("viernes"),
+                        sabado = response.optString("sabado"),
+                        domingo = response.optString("domingo"),
+                        numero_semanas = response.optInt("numero_semanas")
+                    )
+                    cont.resume(plan)
+                },
+                {
+                    cont.resumeWithException(it)
+                }, BASE_URL_ENTRENAMIENTO, user.token)
+        )
+
+    }
+
+
     suspend fun addPlanAlimentacion(new: PlanAlimentacion) = suspendCoroutine { cont ->
         /*requestQueue.add(
             postRequest_token(
@@ -221,10 +254,31 @@ class NetworkServiceAdapter constructor(context: Context) {
                 return params
             }
         }
-
         return jsonRequest
-
     }
+    private fun getRequest_token(
+        path: String,
+        body: JSONObject,
+        responseListener: Response.Listener<JSONObject>,
+        errorListener: Response.ErrorListener,
+        URL:String,
+        token:String
+    ):JsonObjectRequest {
+        val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(
+            Method.GET, URL + path, body,
+            responseListener,
+            errorListener) {
+            //this is the part, that adds the header to the request
+            override fun getHeaders(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["Authorization"] = "Bearer $token"
+                params["content-type"] = "application/json"
+                return params
+            }
+        }
+        return jsonRequest
+    }
+
 
 
 }

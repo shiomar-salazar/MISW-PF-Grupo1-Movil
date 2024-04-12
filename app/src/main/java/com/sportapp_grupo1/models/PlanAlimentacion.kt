@@ -9,6 +9,6 @@ data class PlanAlimentacion (
     val viernes: String,
     val sabado: String,
     val domingo: String,
-    val numero_semanas: String
+    val numero_semanas: Int = 1
 
 )
