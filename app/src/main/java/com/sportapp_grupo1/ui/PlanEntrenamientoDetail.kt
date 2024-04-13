@@ -65,13 +65,13 @@ class PlanEntrenamientoDetail : Fragment() {
         viewModel.planEntrenamiento.observe(viewLifecycleOwner) {
             it.apply {
                 binding.actividadDetail.text = this.entrenamiento
-                binding.lunesDetail.text = this.lunes
-                binding.martesDetail.text = this.martes
-                binding.miercolesDetail.text = this.miercoles
-                binding.juevesDetail.text = this.jueves
-                binding.viernesDetail.text = this.viernes
-                binding.sabadoDetail.text = this.sabado
-                binding.domingoDetail.text = this.domingo
+                binding.lunesDetail.text = this.lunes.plus(" km")
+                binding.martesDetail.text = this.martes.plus(" km")
+                binding.miercolesDetail.text = this.miercoles.plus(" km")
+                binding.juevesDetail.text = this.jueves.plus(" km")
+                binding.viernesDetail.text = this.viernes.plus(" km")
+                binding.sabadoDetail.text = this.sabado.plus(" km")
+                binding.domingoDetail.text = this.domingo.plus(" km")
                 binding.semanasDetail.text = this.numero_semanas.toString()
             }
         }

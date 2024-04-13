@@ -64,13 +64,13 @@ class PlanAlimentacionDetail : Fragment() {
         )[PlanAlimentacionViewModel::class.java]
         viewModel.planAplimentacion.observe(viewLifecycleOwner) {
             it.apply {
-                binding.lunesDetail.text = this.lunes
-                binding.martesDetail.text = this.martes
-                binding.miercolesDetail.text = this.miercoles
-                binding.juevesDetail.text = this.jueves
-                binding.viernesDetail.text = this.viernes
-                binding.sabadoDetail.text = this.sabado
-                binding.domingoDetail.text = this.domingo
+                binding.lunesDetail.text = this.lunes.plus(" kcal")
+                binding.martesDetail.text = this.martes.plus(" kcal")
+                binding.miercolesDetail.text = this.miercoles.plus(" kcal")
+                binding.juevesDetail.text = this.jueves.plus(" kcal")
+                binding.viernesDetail.text = this.viernes.plus(" kcal")
+                binding.sabadoDetail.text = this.sabado.plus(" kcal")
+                binding.domingoDetail.text = this.domingo.plus(" kcal")
                 binding.semanasDetail.text = this.numero_semanas.toString()
             }
         }
