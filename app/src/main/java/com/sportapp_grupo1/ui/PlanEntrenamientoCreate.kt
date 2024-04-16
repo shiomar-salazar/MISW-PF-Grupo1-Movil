@@ -1,26 +1,29 @@
 package com.sportapp_grupo1.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
 import com.sportapp_grupo1.databinding.PlanEntrenamientoCreateFragmentBinding
 import com.sportapp_grupo1.models.PlanEntrenamiento
+import com.sportapp_grupo1.network.CacheManager
+import com.sportapp_grupo1.network.PlanEntrenamientoNetworkService
 import com.sportapp_grupo1.validator.EmptyValidator
 import com.sportapp_grupo1.validator.base.BaseValidator
-import com.sportapp_grupo1.viewmodels.PlanEntrenamientoViewModel
+import org.json.JSONObject
 
 class PlanEntrenamientoCreate : Fragment() {
 
     private var _binding: PlanEntrenamientoCreateFragmentBinding? = null
-    private lateinit var viewModel: PlanEntrenamientoViewModel
     private val binding get() = _binding!!
+    private  lateinit var volleyBroker: PlanEntrenamientoNetworkService
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,8 +33,10 @@ class PlanEntrenamientoCreate : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("UseRequireInsteadOfGet")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        volleyBroker = this.context?.let { PlanEntrenamientoNetworkService(it) }!!
 
         binding.cancelar.setOnClickListener {
             navigateToHome()
@@ -75,23 +80,49 @@ class PlanEntrenamientoCreate : Fragment() {
 
             val argsArray: ArrayList<String> = arrayListOf(lunes, martes, miercoles, jueves, viernes, sabado, domingo, semanas)
             if (this.formIsValid(argsArray)) {
-                val newPlan = PlanEntrenamiento (
-                    entrenamiento = actividad,
-                    lunes = lunes,
-                    martes = martes,
-                    miercoles = miercoles,
-                    jueves = jueves,
-                    viernes = viernes,
-                    sabado = sabado,
-                    domingo = domingo,
-                    numero_semanas = semanas.toInt()
+                val params = mapOf(
+                    "entrenamiento" to actividad,
+                    "numero_semanas" to semanas.toInt(),
+                    "id_usuario" to CacheManager.getInstance(this.requireContext()).getUsuario().userId,
+                    "plan_entrenamiento" to mapOf<String, Any>(
+                        "lunes" to lunes,
+                        "martes" to martes,
+                        "miercoles" to miercoles,
+                        "jueves" to jueves,
+                        "viernes" to viernes,
+                        "sabado" to sabado,
+                        "domingo" to  domingo
+                    )
                 )
-                if (viewModel.addNewPlanEntrenamiento(newPlan)) {
-                    showMessage("El nuevo Plan de Entrenamiento se registró correctamente.")
-                    navigateToHome()
-                } else {
-                    showMessage("Ocurrió un error en el registro del nuevo Plan de Entrenamiento.")
-                }
+                Log.d("PlanEntrenamiento create", params.toString())
+                volleyBroker.instance.add(PlanEntrenamientoNetworkService.postRequest(
+                    JSONObject(params),
+                    {response ->
+                        /* Guardar Plan en Cache */
+                        val plan = PlanEntrenamiento (
+                            planEntrenamientoID = response.optString("id"),
+                            entrenamiento = response.optString("entrenamiento"),
+                            lunes = response.getJSONObject("plan_entrenamiento").optString("lunes"),
+                            martes = response.getJSONObject("plan_entrenamiento").optString("martes"),
+                            miercoles = response.getJSONObject("plan_entrenamiento").optString("miercoles"),
+                            jueves = response.getJSONObject("plan_entrenamiento").optString("jueves"),
+                            viernes = response.getJSONObject("plan_entrenamiento").optString("viernes"),
+                            sabado = response.getJSONObject("plan_entrenamiento").optString("sabado"),
+                            domingo = response.getJSONObject("plan_entrenamiento").optString("domingo"),
+                            numero_semanas = response.optInt("numero_semanas")
+                        )
+                        CacheManager.getInstance(this.requireContext()).addPlanEntrentamiento(plan)
+                        /* Mostar Toast */
+                        showMessage("Registro Exitoso.")
+                        // Navegar a Home
+                        navigateToHome()
+                    },
+                    {
+                        showMessage("Registro Fallido.")
+                    },
+                    "entrenamientos/plan-entrenamiento",
+                    CacheManager.getInstance(this.requireContext()).getUsuario().token
+                ))
             } else {
                 showMessage("Todos los campos deben ser diligenciados, por favor corrija e intente de nuevo.")
             }
@@ -103,12 +134,6 @@ class PlanEntrenamientoCreate : Fragment() {
         findNavController().navigate(R.id.action_planentrenamiento_crear_fragment_to_home2)
     }
 
-    private fun onNetworkError() {
-        if (!viewModel.isNetworkErrorShown.value!!) {
-            Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
-            viewModel.onNetworkErrorShown()
-        }
-    }
 
     private fun formIsValid(array: ArrayList<String>): Boolean {
         for (elem in array) {
@@ -132,18 +157,6 @@ class PlanEntrenamientoCreate : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
-        }
-        viewModel = ViewModelProvider(
-            this,
-            PlanEntrenamientoViewModel.Factory(activity.application)
-        )[PlanEntrenamientoViewModel::class.java]
-        viewModel.planEntrenamiento.observe(viewLifecycleOwner) {
-            it.apply {
-
-            }
-        }
-        viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->
-            if (isNetworkError) onNetworkError()
         }
     }
 
