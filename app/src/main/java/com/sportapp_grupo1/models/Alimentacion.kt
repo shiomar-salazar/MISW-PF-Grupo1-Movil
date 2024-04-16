@@ -6,5 +6,6 @@ data class Alimentacion(
     val calorias2:String,
     val calorias3:String,
     val ml_agua:String,
-    val date: String
+    val date: String,
+    val total_calories: String
 )

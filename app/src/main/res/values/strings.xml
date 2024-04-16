@@ -50,6 +50,10 @@
     <string name="registrar_entrenamiento">Registrar Entrenamiento</string>
     <string name="detalle_de_plan_de_entrenamiento">Detalle de Plan de Entrenamiento</string>
     <string name="detalle_de_plan_de_alimentacion">Detalle de Plan de Alimentacion</string>
+    <string name="resultados_de_alimentacion">Resultados de Alimentacion</string>
+    <string name="registrar_nuevo_resultado">Registrar nuevo Resultado</string>
+    <string name="calorias_totales">Calorias Totales</string>
+    <string name="ml_de_agua">ml de Agua</string>
     <string-array name="Deportes">
         <item>Carreras</item>
         <item>Ciclismo</item>

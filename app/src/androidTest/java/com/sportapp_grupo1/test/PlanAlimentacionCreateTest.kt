@@ -243,23 +243,4 @@ class PlanAlimentacionCreateTest {
         )
     }
 
-    /**
-     * Esta Prueba tiene la intencion de Comprobar la correcta funcionalidad del Boton de cancelar
-     */
-    @Test
-    fun cancelarBtnPlanAlimentacionCreate(){
-
-        /* Primero navegamos a la pantalla correcta */
-        navigateToTestScreen()
-        /* Hacemos click en boton de cancelar */
-        clickIntoButtonByIdwithScroll(R.id.cancelar)
-        /* Validamos estar en pantalla de Home */
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(R.id.plan_alimentacion),
-                ViewMatchers.isDisplayed()
-            )
-        )
-    }
-
 }

@@ -9,17 +9,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
-import com.sportapp_grupo1.databinding.AlimentacionResultFragmentBinding
+import com.sportapp_grupo1.databinding.AlimentacionResultCreateFragmentBinding
 import com.sportapp_grupo1.models.Alimentacion
 import com.sportapp_grupo1.validator.EmptyValidator
 import com.sportapp_grupo1.validator.base.BaseValidator
 import com.sportapp_grupo1.viewmodels.AlimentacionResultViewModel
 
 
-class AlimentacionResult : Fragment() {
+class AlimentacionResultCreate : Fragment() {
 
 
-    private var _binding:AlimentacionResultFragmentBinding? = null
+    private var _binding:AlimentacionResultCreateFragmentBinding? = null
     private lateinit var viewModel: AlimentacionResultViewModel
     private val binding get() = _binding!!
 
@@ -27,7 +27,7 @@ class AlimentacionResult : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = AlimentacionResultFragmentBinding.inflate(inflater, container, false)
+        _binding = AlimentacionResultCreateFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -68,7 +68,8 @@ class AlimentacionResult : Fragment() {
                     calorias2 = comida2,
                     calorias3 = comida3,
                     ml_agua = agua,
-                    date = date
+                    date = date,
+                    total_calories = ""
                 )
                 if (viewModel.addNewAlimentacionResult(newPlan)) {
                     showMessage("La alimentacion del Dia se registró correctamente.")
