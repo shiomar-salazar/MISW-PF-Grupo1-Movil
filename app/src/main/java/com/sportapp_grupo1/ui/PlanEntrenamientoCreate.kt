@@ -3,7 +3,6 @@ package com.sportapp_grupo1.ui
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -94,7 +93,6 @@ class PlanEntrenamientoCreate : Fragment() {
                         "domingo" to  domingo
                     )
                 )
-                Log.d("PlanEntrenamiento create", params.toString())
                 volleyBroker.instance.add(PlanEntrenamientoNetworkService.postRequest(
                     JSONObject(params),
                     {response ->
