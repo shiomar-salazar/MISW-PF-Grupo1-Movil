@@ -1,23 +1,25 @@
 package com.sportapp_grupo1.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
 import com.sportapp_grupo1.databinding.PlanAlimentacionDetailFragmentBinding
-import com.sportapp_grupo1.viewmodels.PlanAlimentacionViewModel
+import com.sportapp_grupo1.models.PlanAlimentacion
+import com.sportapp_grupo1.network.CacheManager
+import com.sportapp_grupo1.network.PlanAlimentacionNetworkService
 
 class PlanAlimentacionDetail : Fragment() {
 
 
     private var _binding: PlanAlimentacionDetailFragmentBinding? = null
-    private lateinit var viewModel: PlanAlimentacionViewModel
     private val binding get() = _binding!!
+    private  lateinit var volleyBroker: PlanAlimentacionNetworkService
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,12 +29,47 @@ class PlanAlimentacionDetail : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("UseRequireInsteadOfGet")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        volleyBroker = this.context?.let { PlanAlimentacionNetworkService(it) }!!
 
         binding.crear.setOnClickListener {
             navigateToCreatePlan()
         }
+
+        val user = CacheManager.getInstance(this.requireContext()).getUsuario()
+        volleyBroker.instance.add(PlanAlimentacionNetworkService.getRequest(
+            {response ->
+                /* Guardar Plan en Cache */
+                val plan = PlanAlimentacion (
+                    planAlimentacionID = response.optString("id"),
+                    lunes = response.getJSONObject("plan_alimentacion").optString("lunes"),
+                    martes = response.getJSONObject("plan_alimentacion").optString("martes"),
+                    miercoles = response.getJSONObject("plan_alimentacion").optString("miercoles"),
+                    jueves = response.getJSONObject("plan_alimentacion").optString("jueves"),
+                    viernes = response.getJSONObject("plan_alimentacion").optString("viernes"),
+                    sabado = response.getJSONObject("plan_alimentacion").optString("sabado"),
+                    domingo = response.getJSONObject("plan_alimentacion").optString("domingo"),
+                    numero_semanas = response.optInt("numero_semanas")
+                )
+                /* Mostar Toast */
+                binding.lunesDetail.text = plan.lunes.plus(" kcal")
+                binding.martesDetail.text = plan.martes.plus(" kcal")
+                binding.miercolesDetail.text = plan.miercoles.plus(" kcal")
+                binding.juevesDetail.text = plan.jueves.plus(" kcal")
+                binding.viernesDetail.text = plan.viernes.plus(" kcal")
+                binding.sabadoDetail.text = plan.sabado.plus(" kcal")
+                binding.domingoDetail.text = plan.domingo.plus(" kcal")
+                binding.semanasDetail.text = plan.numero_semanas.toString()
+                showMessage("Carga Exitosa.")
+            },
+            {
+                showMessage("Carga Fallida.")
+            },
+            "entrenamientos/plan-entrenamiento/usuario/"+user.userId,
+            user.token
+        ))
 
     }
 
@@ -40,13 +77,9 @@ class PlanAlimentacionDetail : Fragment() {
         findNavController().navigate(R.id.action_planAlimentacionDetail_to_planAlimentacionCreate)
     }
 
-    private fun onNetworkError() {
-        if (!viewModel.isNetworkErrorShown.value!!) {
-            Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
-            viewModel.onNetworkErrorShown()
-        }
+    private fun showMessage(s: String) {
+        Toast.makeText(activity, s, Toast.LENGTH_LONG).show()
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -57,25 +90,6 @@ class PlanAlimentacionDetail : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
-        }
-        viewModel = ViewModelProvider(
-            this,
-            PlanAlimentacionViewModel.Factory(activity.application)
-        )[PlanAlimentacionViewModel::class.java]
-        viewModel.planAplimentacion.observe(viewLifecycleOwner) {
-            it.apply {
-                binding.lunesDetail.text = this.lunes
-                binding.martesDetail.text = this.martes
-                binding.miercolesDetail.text = this.miercoles
-                binding.juevesDetail.text = this.jueves
-                binding.viernesDetail.text = this.viernes
-                binding.sabadoDetail.text = this.sabado
-                binding.domingoDetail.text = this.domingo
-                binding.semanasDetail.text = this.numero_semanas.toString()
-            }
-        }
-        viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->
-            if (isNetworkError) onNetworkError()
         }
     }
 

@@ -72,7 +72,7 @@ jobs:
           path: app/build/reports/coverage/androidTest/debug/coverage
   test-for-relese:
     needs: steps-for-merge
-    if: startsWith(github.head_ref, 'release')
+    #if: startsWith(github.head_ref, 'release')
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -121,12 +121,18 @@ jobs:
           zip -r apks.zip apks/
           zip -r instrumentation-test-results.zip instrumentation-test-results/
           zip -r unit-test-results.zip unit-test-results/
+
+      - name: Merge Pull Request
+        uses: juliangruber/merge-pull-request-action@v1.3.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ github.event.number }}
       
       - name: Create Release
         uses: softprops/action-gh-release@v2.0.4
         with:
-          name: SportApp - Grupo 1 - Sprint1
-          tag_name: Sprint1
+          name: SportApp - Grupo 1 - Sprint1 - Test
+          tag_name: Sprint1-Test
           files: |
             apks.zip
             coverage_results.zip

@@ -68,18 +68,8 @@ class CacheManager(context: Context) {
         planEntrenamiento = new
     }
 
-    fun getPlanEntrenamiento(): PlanEntrenamiento {
-        Log.d("getPlanEntrenamiento", planEntrenamiento.planEntrenamientoID)
-        return planEntrenamiento
-    }
-
     fun addPlanAlimentacion(new:PlanAlimentacion){
         planAlimentacion = new
-    }
-
-    fun getPlanAlimentacion(): PlanAlimentacion {
-        Log.d("getPlanEntrenamiento", planAlimentacion.planAlimentacionID)
-        return planAlimentacion
     }
 
     fun addAlimentacion( new:Alimentacion){
