@@ -205,7 +205,8 @@ class NetworkServiceAdapter constructor(context: Context) {
             calorias1 = new.calorias1,
             calorias2 = new.calorias2,
             calorias3 = new.calorias3,
-            ml_agua = new.ml_agua
+            ml_agua = new.ml_agua,
+            date = new.date
         )
         cont.resume(resultCreated)
 

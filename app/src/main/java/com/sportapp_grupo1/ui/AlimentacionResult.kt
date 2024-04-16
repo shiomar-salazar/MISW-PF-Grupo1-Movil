@@ -45,6 +45,7 @@ class AlimentacionResult : Fragment() {
             val comida2 = binding.comida2Text.text.toString()
             val comida3 = binding.comida3Text.text.toString()
             val agua = binding.aguaText.text.toString()
+            val date = ""
 
 
             val comida1Validator = BaseValidator.validate(EmptyValidator(comida1))
@@ -66,7 +67,8 @@ class AlimentacionResult : Fragment() {
                     calorias1 = comida1,
                     calorias2 = comida2,
                     calorias3 = comida3,
-                    ml_agua = agua
+                    ml_agua = agua,
+                    date = date
                 )
                 if (viewModel.addNewAlimentacionResult(newPlan)) {
                     showMessage("La alimentacion del Dia se registró correctamente.")
