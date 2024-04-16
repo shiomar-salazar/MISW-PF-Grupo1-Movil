@@ -95,6 +95,14 @@ class PlanAlimentacionCreateTest {
             )
         )
         clickIntoButtonById(R.id.plan_alimentacion)
+        SystemClock.sleep(delayService2)
+        Espresso.onView(
+            AllOf.allOf(
+                ViewMatchers.withId(R.id.crear),
+                ViewMatchers.isDisplayed()
+            )
+        )
+        clickIntoButtonByIdwithScroll(R.id.crear)
     }
 
     /**
@@ -207,7 +215,26 @@ class PlanAlimentacionCreateTest {
         setTextViewByValue(R.id.domingo_text,"2100")
         setTextViewByValue(R.id.semana_text,"6")
         clickIntoButtonByIdwithScroll(R.id.crear)
-        SystemClock.sleep(delayService2)
+        /*SystemClock.sleep(delayService2)
+        Espresso.onView(
+            AllOf.allOf(
+                ViewMatchers.withId(R.id.plan_alimentacion),
+                ViewMatchers.isDisplayed()
+            )
+        )*/
+    }
+
+    /**
+     * Esta Prueba tiene la intencion de Comprobar la correcta funcionalidad del Boton de cancelar
+     */
+    @Test
+    fun cancelarBtnPlanAlimentacionCreate(){
+
+        /* Primero navegamos a la pantalla correcta */
+        navigateToTestScreen()
+        /* Hacemos click en boton de cancelar */
+        clickIntoButtonByIdwithScroll(R.id.cancelar)
+        /* Validamos estar en pantalla de Home */
         Espresso.onView(
             AllOf.allOf(
                 ViewMatchers.withId(R.id.plan_alimentacion),

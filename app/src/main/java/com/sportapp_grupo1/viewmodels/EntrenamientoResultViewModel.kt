@@ -7,19 +7,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.sportapp_grupo1.models.PlanEntrenamiento
-import com.sportapp_grupo1.repositories.PlanEntrenamientoRepository
+import com.sportapp_grupo1.models.Entrenamiento
+import com.sportapp_grupo1.repositories.EntrenamientoRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class PlanEntrenamientoCreateViewModel(application: Application) : AndroidViewModel(application){
+class EntrenamientoResultViewModel (application: Application) : AndroidViewModel(application){
 
-    private val _planEntrenamientoRepository = PlanEntrenamientoRepository(application)
-    private val _planEntrenamiento = MutableLiveData<PlanEntrenamiento>()
+    private val _entrenamientoRepository = EntrenamientoRepository(application)
+    private val _entrenamiento = MutableLiveData<Entrenamiento>()
 
-    var planEntrenamiento: LiveData<PlanEntrenamiento>
-        get() = _planEntrenamiento
+    var entrenamiento: LiveData<Entrenamiento>
+        get() = _entrenamiento
         set(value) {}
 
     private var _eventNetworkError = MutableLiveData(false)
@@ -39,11 +39,11 @@ class PlanEntrenamientoCreateViewModel(application: Application) : AndroidViewMo
         _isNetworkErrorShown.value = true
     }
 
-    fun addNewPlanEntrenamiento(newPlan:PlanEntrenamiento): Boolean {
+    fun addNewEntrenamientoResult(newResult: Entrenamiento): Boolean {
         return try {
             viewModelScope.launch (Dispatchers.Default){
                 withContext(Dispatchers.IO){
-                    _planEntrenamientoRepository.addPlanEntrenamiento(newPlan)
+                    _entrenamientoRepository.addEntrenamiento(newResult)
                 }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
@@ -58,13 +58,11 @@ class PlanEntrenamientoCreateViewModel(application: Application) : AndroidViewMo
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(PlanEntrenamientoCreateViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(EntrenamientoResultViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return PlanEntrenamientoCreateViewModel(app) as T
+                return EntrenamientoResultViewModel(app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
     }
-
-
 }

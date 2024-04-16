@@ -9,44 +9,35 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
-import com.sportapp_grupo1.databinding.HomeFragmentBinding
-import com.sportapp_grupo1.viewmodels.HomeViewModel
+import com.sportapp_grupo1.databinding.EntrenamientoMenuFragmentBinding
+import com.sportapp_grupo1.viewmodels.EntrenamientoMenuViewModel
 
 
-class Home : Fragment() {
+class EntrenamientoMenu : Fragment() {
 
-    private var _binding: HomeFragmentBinding? = null
-    private lateinit var viewModel: HomeViewModel
-    private val binding get() = _binding!!
+    private var _binding: EntrenamientoMenuFragmentBinding? = null
+    private lateinit var  viewModel: EntrenamientoMenuViewModel
+    private  val  binding get() = _binding !!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = HomeFragmentBinding.inflate(inflater, container, false)
+        _binding = EntrenamientoMenuFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.alimentacion.setOnClickListener {
-            findNavController().navigate((R.id.action_home2_to_alimentacionResult))
-        }
-        binding.entrenamiento.setOnClickListener {
-            findNavController().navigate((R.id.action_home2_to_entrenamiento_Menu))
-        }
-        binding.tusEventos.setOnClickListener {
-            showMessage("Not implemented yet.")
-        }
-        binding.sugerencias.setOnClickListener {
-            showMessage("Not implemented yet.")
-        }
-        binding.planAlimentacion.setOnClickListener {
-            findNavController().navigate(R.id.action_home2_to_planAlimentacionDetail)
-        }
 
-        binding.planEntrenamiento.setOnClickListener {
-            findNavController().navigate(R.id.action_home2_to_planEntrenamientoDetail)
+        /* TODO: Cambiar para obtener la distancia del entrenamiento del dia */
+        binding.goal.text = "5 km"
+
+        binding.monitoreoBtn.setOnClickListener {
+            showMessage("Not implemented yet.")
+        }
+        binding.entreResultBtn.setOnClickListener {
+            findNavController().navigate((R.id.action_entrenamiento_Menu_to_entrenamientoResult))
         }
     }
 
@@ -73,8 +64,8 @@ class Home : Fragment() {
         }
         viewModel = ViewModelProvider(
             this,
-            HomeViewModel.Factory(activity.application)
-        )[HomeViewModel::class.java]
+            EntrenamientoMenuViewModel.Factory(activity.application)
+        )[EntrenamientoMenuViewModel::class.java]
         viewModel.full_access.observe(viewLifecycleOwner) {
             it.apply {
 
@@ -85,6 +76,4 @@ class Home : Fragment() {
         }
     }
 
-
 }
-

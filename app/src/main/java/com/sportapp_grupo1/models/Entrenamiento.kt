@@ -1,9 +1,9 @@
 package com.sportapp_grupo1.models
 
 data class Entrenamiento (
-    val entrenamientoId: Int = 0,
-    val userId: Int = 0,
-    val actividad:Int,
+    val entrenamientoId: String = "",
+    val userId: String,
+    val actividad:String,
     val distancia: String,
     val tiempo:String,
     val resultado:String, //FTP o Vo2Max

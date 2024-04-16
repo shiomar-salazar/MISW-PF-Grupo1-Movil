@@ -1,7 +1,6 @@
 package com.sportapp_grupo1.ui
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-
 import com.sportapp_grupo1.R
 import com.sportapp_grupo1.databinding.AlimentacionResultFragmentBinding
 import com.sportapp_grupo1.models.Alimentacion
@@ -47,6 +45,7 @@ class AlimentacionResult : Fragment() {
             val comida2 = binding.comida2Text.text.toString()
             val comida3 = binding.comida3Text.text.toString()
             val agua = binding.aguaText.text.toString()
+            val date = ""
 
 
             val comida1Validator = BaseValidator.validate(EmptyValidator(comida1))
@@ -68,7 +67,8 @@ class AlimentacionResult : Fragment() {
                     calorias1 = comida1,
                     calorias2 = comida2,
                     calorias3 = comida3,
-                    ml_agua = agua
+                    ml_agua = agua,
+                    date = date
                 )
                 if (viewModel.addNewAlimentacionResult(newPlan)) {
                     showMessage("La alimentacion del Dia se registró correctamente.")
@@ -92,15 +92,6 @@ class AlimentacionResult : Fragment() {
             Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
         }
-    }
-
-    private fun formIsValid(array: ArrayList<String>): Boolean {
-        for (elem in array) {
-            if (TextUtils.isEmpty(elem)) {
-                return false
-            }
-        }
-        return true
     }
 
     private fun showMessage(s: String) {
