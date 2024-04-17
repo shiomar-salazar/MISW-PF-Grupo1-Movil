@@ -16,6 +16,10 @@
     <string name="text_validation_error_lowercase">La contraseña necesita al menos una minuscula</string>
     <string name="text_validation_error_special_char">La contraseña necesita al menos un simbolo especial</string>
     <string name="text_validation_error_max_pass_length">La contraseña debe tener maximo 64 caracteres</string>
+    <string name="text_validation_date_format">La debe ser en formato AAAA-MM-DD</string>
+    <string name="text_validation_date_blank_space">La Fecha no debe tener espacios en blanco</string>
+    <string name="text_validation_date_month">El mes debe ser un valor entre 01 y 12</string>
+    <string name="text_validation_date_day">El dia debe ser un valor entre 01 y 31</string>
     <string name="text_validation_success">Todo bien</string>
     <string name="text_validation_error_empty_field">El campo no debe estar vacio</string>
     <string name="text_validation_error_email">El usuario debe ser un correo valido</string>
@@ -54,6 +58,7 @@
     <string name="registrar_nuevo_resultado">Registrar nuevo Resultado</string>
     <string name="calorias_totales">Calorias Totales</string>
     <string name="ml_de_agua">ml de Agua</string>
+    <string name="fecha">Fecha</string>
     <string-array name="Deportes">
         <item>Carreras</item>
         <item>Ciclismo</item>

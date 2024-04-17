@@ -25,7 +25,7 @@
         tools:listitem="@layout/alimentacion_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add_album"
+        android:id="@+id/fab_add_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

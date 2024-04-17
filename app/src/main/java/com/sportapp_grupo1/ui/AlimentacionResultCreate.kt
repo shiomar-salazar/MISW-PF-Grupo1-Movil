@@ -1,6 +1,7 @@
 package com.sportapp_grupo1.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
 import com.sportapp_grupo1.databinding.AlimentacionResultCreateFragmentBinding
 import com.sportapp_grupo1.models.Alimentacion
+import com.sportapp_grupo1.validator.DateValidator
 import com.sportapp_grupo1.validator.EmptyValidator
 import com.sportapp_grupo1.validator.base.BaseValidator
 import com.sportapp_grupo1.viewmodels.AlimentacionResultViewModel
@@ -45,7 +47,7 @@ class AlimentacionResultCreate : Fragment() {
             val comida2 = binding.comida2Text.text.toString()
             val comida3 = binding.comida3Text.text.toString()
             val agua = binding.aguaText.text.toString()
-            val date = ""
+            val date = binding.dateText.text.toString()
 
 
             val comida1Validator = BaseValidator.validate(EmptyValidator(comida1))
@@ -60,17 +62,21 @@ class AlimentacionResultCreate : Fragment() {
             val aguaValidator = BaseValidator.validate(EmptyValidator(agua))
             binding.agua.error =
                 if (!aguaValidator.isSuccess) getString(aguaValidator.message) else null
+            val dateValidator = BaseValidator.validate(EmptyValidator(date), DateValidator(date))
+            binding.date.error =
+                if (!dateValidator.isSuccess) getString(dateValidator.message) else null
 
             if (comida1Validator.isSuccess && comida2Validator.isSuccess && comida3Validator.isSuccess
-                && aguaValidator.isSuccess) {
+                && aguaValidator.isSuccess && dateValidator.isSuccess) {
                 val newPlan = Alimentacion (
                     calorias1 = comida1,
                     calorias2 = comida2,
                     calorias3 = comida3,
                     ml_agua = agua,
                     date = date,
-                    total_calories = ""
+                    total_calories = (comida1.toInt() + comida2.toInt() + comida3.toInt()).toString()
                 )
+                Log.d("Alimentacion Result Created", newPlan.total_calories)
                 if (viewModel.addNewAlimentacionResult(newPlan)) {
                     showMessage("La alimentacion del Dia se registró correctamente.")
                     navigateToHome()

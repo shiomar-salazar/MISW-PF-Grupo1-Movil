@@ -95,6 +95,13 @@ class AlimentacionResultCreateTest {
             )
         )
         clickIntoButtonById(R.id.alimentacion)
+        Espresso.onView(
+            AllOf.allOf(
+                ViewMatchers.withId(R.id.fab_add_result),
+                ViewMatchers.isDisplayed()
+            )
+        )
+        clickIntoButtonById(R.id.fab_add_result)
     }
 
 
@@ -105,6 +112,7 @@ class AlimentacionResultCreateTest {
     fun positiveTestSuccesfullAlimentacionResult(){
         /* Primero navegamos a la pantalla correcta */
         navigateToTestScreen()
+        setTextViewByValue(R.id.date_text,"2024-04-15")
         setTextViewByValue(R.id.comida1_text,"300")
         setTextViewByValue(R.id.comida2_text,"700")
         setTextViewByValue(R.id.comida3_text,"700")
@@ -149,6 +157,10 @@ class AlimentacionResultCreateTest {
         clickIntoButtonByIdwithScroll(R.id.registrar)
 
         /* Validamos respuestas negativas */
+        Espresso.onView(ViewMatchers.withId(R.id.date)).check { view, _ ->
+            val actualError = (view as TextInputLayout).error
+            Assert.assertEquals(actualError, "El campo no debe estar vacio")
+        }
         Espresso.onView(ViewMatchers.withId(R.id.comida1)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
             Assert.assertEquals(actualError, "El campo no debe estar vacio")
