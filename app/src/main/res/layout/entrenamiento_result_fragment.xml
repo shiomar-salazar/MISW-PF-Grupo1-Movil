@@ -63,11 +63,34 @@
             android:spinnerMode="dropdown" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tiempo"
+            android:id="@+id/date"
             style="@style/LoginTextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/actividad_spinner"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
+            android:textColorHint="@color/lightGrey"
+            android:backgroundTint="@color/lightGrey"
+            app:suffixText="AAAA-MM-DD"
+            app:suffixTextColor="@color/lightGrey"
+            android:hint="@string/fecha">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/date_text"
+                android:layout_width="match_parent"
+                android:textColor="@color/lightGrey"
+                android:inputType="date"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiempo"
+            style="@style/LoginTextInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/date"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
