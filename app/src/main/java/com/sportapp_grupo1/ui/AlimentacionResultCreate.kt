@@ -1,29 +1,30 @@
 package com.sportapp_grupo1.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
 import com.sportapp_grupo1.databinding.AlimentacionResultCreateFragmentBinding
 import com.sportapp_grupo1.models.Alimentacion
+import com.sportapp_grupo1.network.AlimentacionNetworkService
+import com.sportapp_grupo1.network.CacheManager
 import com.sportapp_grupo1.validator.DateValidator
 import com.sportapp_grupo1.validator.EmptyValidator
 import com.sportapp_grupo1.validator.base.BaseValidator
-import com.sportapp_grupo1.viewmodels.AlimentacionResultViewModel
+import org.json.JSONObject
 
 
 class AlimentacionResultCreate : Fragment() {
 
 
     private var _binding:AlimentacionResultCreateFragmentBinding? = null
-    private lateinit var viewModel: AlimentacionResultViewModel
     private val binding get() = _binding!!
+    private  lateinit var volleyBroker: AlimentacionNetworkService
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,8 +34,12 @@ class AlimentacionResultCreate : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("UseRequireInsteadOfGet")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        volleyBroker = this.context?.let { AlimentacionNetworkService(it) }!!
+        val user = CacheManager.getInstance(this.requireContext()).getUsuario()
+
         /* TODO: Cambiar para obtener las calorias meta del dia */
         binding.goal.text = "1500 kcal"
 
@@ -68,21 +73,47 @@ class AlimentacionResultCreate : Fragment() {
 
             if (comida1Validator.isSuccess && comida2Validator.isSuccess && comida3Validator.isSuccess
                 && aguaValidator.isSuccess && dateValidator.isSuccess) {
-                val newPlan = Alimentacion (
-                    calorias1 = comida1,
-                    calorias2 = comida2,
-                    calorias3 = comida3,
-                    ml_agua = agua,
-                    date = date,
-                    total_calories = (comida1.toInt() + comida2.toInt() + comida3.toInt()).toString()
+                val params = mapOf(
+                    "fecha" to date,
+                    "calorias_1" to comida1,
+                    "calorias_2" to comida2,
+                    "calorias_3" to comida3,
+                    "ml_agua" to agua,
+                    "id_usuario" to user.userId
                 )
-                Log.d("Alimentacion Result Created", newPlan.total_calories)
-                if (viewModel.addNewAlimentacionResult(newPlan)) {
-                    showMessage("La alimentacion del Dia se registró correctamente.")
-                    navigateToHome()
-                } else {
-                    showMessage("Ocurrió un error en el registro de la Alimentacion.")
-                }
+
+                volleyBroker.instance.add(
+                    AlimentacionNetworkService.postRequest(
+                    JSONObject(params),
+                    {response ->
+                        val calorias1 = response.optInt("calorias_1").toString()
+                        val calorias2 = response.optInt("calorias_2").toString()
+                        val calorias3 = response.optInt("calorias_3").toString()
+
+                        /* Guardar Plan en Cache */
+                        val result = Alimentacion (
+                            alimentacionID = response.optString("id"),
+                            calorias1 = calorias1,
+                            calorias2 = calorias2,
+                            calorias3 = calorias3,
+                            date = response.optString("fecha"),
+                            ml_agua = response.optInt("ml_agua").toString(),
+                            total_calories = (calorias1.toInt() + calorias2.toInt() + calorias3.toInt()).toString()
+
+                        )
+                        CacheManager.getInstance(this.requireContext()).addAlimentacion(result)
+                        /* Mostar Toast */
+                        showMessage("Registro Exitoso.")
+                        // Navegar a Home
+                        navigateToHome()
+                    },
+                    {
+                        showMessage("Registro Fallido.")
+                    },
+                    "nutricion/resultados-alimentacion",
+                        user.token
+                ))
+
             } else {
                 showMessage("Todos los campos deben ser diligenciados, por favor corrija e intente de nuevo.")
             }
@@ -92,13 +123,6 @@ class AlimentacionResultCreate : Fragment() {
 
     private fun navigateToHome() {
         findNavController().navigate(R.id.action_alimentacionResult_to_home2)
-    }
-
-    private fun onNetworkError() {
-        if (!viewModel.isNetworkErrorShown.value!!) {
-            Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
-            viewModel.onNetworkErrorShown()
-        }
     }
 
     private fun showMessage(s: String) {
@@ -114,18 +138,6 @@ class AlimentacionResultCreate : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
-        }
-        viewModel = ViewModelProvider(
-            this,
-            AlimentacionResultViewModel.Factory(activity.application)
-        )[AlimentacionResultViewModel::class.java]
-        viewModel.alimentacion.observe(viewLifecycleOwner) {
-            it.apply {
-
-            }
-        }
-        viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->
-            if (isNetworkError) onNetworkError()
         }
     }
 }
