@@ -39,6 +39,9 @@ class EntrenamientoMenu : Fragment() {
         binding.entreResultBtn.setOnClickListener {
             findNavController().navigate((R.id.action_entrenamiento_Menu_to_entrenamientoResult))
         }
+        binding.resultListBtn.setOnClickListener {
+            findNavController().navigate((R.id.action_entrenamiento_Menu_to_entrenamientoResultList))
+        }
     }
 
     private fun onNetworkError() {

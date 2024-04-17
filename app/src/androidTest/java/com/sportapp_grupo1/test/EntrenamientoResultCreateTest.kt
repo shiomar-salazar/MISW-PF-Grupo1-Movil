@@ -25,7 +25,7 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class EntrenamientoResultTest {
+class EntrenamientoResultCreateTest {
 
     @Rule
     @JvmField
@@ -132,6 +132,7 @@ class EntrenamientoResultTest {
         /* Primero navegamos a la pantalla correcta */
         navigateToTestScreen()
         /* Ingresamos Datos a Campos */
+        setTextViewByValue(R.id.date_text,"2024-04-15")
         setTextViewByValue(R.id.tiempo_text,"12:34.56")
         setTextViewByValue(R.id.result_text,"30")
         clickIntoButtonByIdwithScroll(R.id.registrar)
@@ -156,7 +157,7 @@ class EntrenamientoResultTest {
         onView(ViewMatchers.withId(R.id.actividad_spinner)).perform(ViewActions.click());
         onData(AllOf.allOf(`is`(instanceOf(String::class.java)))).atPosition(1).perform(ViewActions.click())
 
-
+        setTextViewByValue(R.id.date_text,"2024-04-15")
         setTextViewByValue(R.id.tiempo_text,"12:34.56")
         setTextViewByValue(R.id.result_text,"30")
         clickIntoButtonByIdwithScroll(R.id.registrar)
@@ -188,6 +189,11 @@ class EntrenamientoResultTest {
             val actualError = (view as TextInputLayout).error
             Assert.assertEquals(actualError, "El campo no debe estar vacio")
         }
+        Espresso.onView(ViewMatchers.withId(R.id.date)).check { view, _ ->
+            val actualError = (view as TextInputLayout).error
+            Assert.assertEquals(actualError, "El campo no debe estar vacio")
+        }
+
         /* Validamos mensaje de error del campo tiempo */
         setTextViewByValue(R.id.tiempo_text,"12:3456")
         clickIntoButtonByIdwithScroll(R.id.registrar)

@@ -53,7 +53,6 @@ class PlanAlimentacionDetail : Fragment() {
                     domingo = response.getJSONObject("plan_alimentacion").optString("domingo"),
                     numero_semanas = response.optInt("numero_semanas")
                 )
-                /* Mostar Toast */
                 binding.lunesDetail.text = plan.lunes.plus(" kcal")
                 binding.martesDetail.text = plan.martes.plus(" kcal")
                 binding.miercolesDetail.text = plan.miercoles.plus(" kcal")
@@ -65,7 +64,21 @@ class PlanAlimentacionDetail : Fragment() {
                 showMessage("Carga Exitosa.")
             },
             {
-                showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
+                if(it.networkResponse.statusCode == 404){
+                    showMessage("Usuario no tiene datos cargados aun.")
+                    binding.lunesDetail.text = getString(R.string.sin_datos)
+                    binding.martesDetail.text = getString(R.string.sin_datos)
+                    binding.miercolesDetail.text = getString(R.string.sin_datos)
+                    binding.juevesDetail.text = getString(R.string.sin_datos)
+                    binding.viernesDetail.text = getString(R.string.sin_datos)
+                    binding.sabadoDetail.text = getString(R.string.sin_datos)
+                    binding.domingoDetail.text = getString(R.string.sin_datos)
+                    binding.semanasDetail.text = getString(R.string.sin_datos)
+                }
+                else
+                {
+                    showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
+                }
             },
             "entrenamientos/plan-entrenamiento/usuario/"+user.userId,
             user.token

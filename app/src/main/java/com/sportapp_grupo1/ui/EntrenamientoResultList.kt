@@ -2,76 +2,65 @@ package com.sportapp_grupo1.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sportapp_grupo1.R
-import com.sportapp_grupo1.databinding.AlimentacionResultListFragmentBinding
-import com.sportapp_grupo1.models.Alimentacion
-import com.sportapp_grupo1.models.PlanAlimentacion
-import com.sportapp_grupo1.network.AlimentacionNetworkService
+import com.sportapp_grupo1.databinding.EntrenamientoResultListFragmentBinding
+import com.sportapp_grupo1.models.Entrenamiento
 import com.sportapp_grupo1.network.CacheManager
-import com.sportapp_grupo1.network.PlanAlimentacionNetworkService
-import com.sportapp_grupo1.ui.adapters.AlimentacionAdapter
-import org.json.JSONArray
+import com.sportapp_grupo1.network.EntrenamientoNetworkService
+import com.sportapp_grupo1.ui.adapters.EntrenamientoAdapter
 import org.json.JSONObject
 
-class AlimentacionResultList : Fragment() {
 
-    private var _binding: AlimentacionResultListFragmentBinding? = null
+class EntrenamientoResultList : Fragment() {
+
+    private var _binding: EntrenamientoResultListFragmentBinding? = null
     private  val  binding get() = _binding !!
     private lateinit var recyclerView: RecyclerView
-    private var viewAdapter: AlimentacionAdapter? = null
-    private  lateinit var volleyBroker: AlimentacionNetworkService
-
+    private var viewAdapter: EntrenamientoAdapter? = null
+    private  lateinit var volleyBroker: EntrenamientoNetworkService
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = AlimentacionResultListFragmentBinding.inflate(inflater, container, false)
+        _binding = EntrenamientoResultListFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewAdapter = AlimentacionAdapter()
+        viewAdapter = EntrenamientoAdapter()
         return view
     }
 
     @SuppressLint("UseRequireInsteadOfGet")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        recyclerView = binding.aliResultFragment
+        recyclerView = binding.entreResultFragment
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = viewAdapter
-        volleyBroker = this.context?.let { AlimentacionNetworkService(it) }!!
+        volleyBroker = this.context?.let { EntrenamientoNetworkService(it) }!!
 
-        binding.fabAddResult.setOnClickListener {
-            navigateToCreateResult()
-        }
 
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
-        volleyBroker.instance.add(AlimentacionNetworkService.getRequest(
+        volleyBroker.instance.add(
+            EntrenamientoNetworkService.getRequest(
             {response ->
-                val list = mutableListOf<Alimentacion>()
+                val list = mutableListOf<Entrenamiento>()
                 var item: JSONObject
                 (0 until response.length()).forEach { it ->
                     item = response.getJSONObject(it)
-                    val calorias1 = item.getInt("calorias_1").toString()
-                    val calorias2 = item.getInt("calorias_2").toString()
-                    val calorias3 = item.getInt("calorias_3").toString()
                     list.add(it,
-                        Alimentacion(
-                            alimentacionID = item.getString("id"),
-                            calorias1 = calorias1,
-                            calorias2 = calorias2,
-                            calorias3 = calorias3,
-                            ml_agua = item.getInt("ml_agua").toString().plus(" ml"),
+                        Entrenamiento(
+                            entrenamientoId = item.getString("id"),
+                            actividad = item.getString("entrenamiento"),
+                            distancia = item.getString("Distancia").plus(" km"),
+                            tiempo = item.getString("tiempo"),
                             date = item.getString("fecha"),
-                            total_calories = (calorias1.toInt() + calorias2.toInt() + calorias3.toInt()).toString().plus(" kcal")
+                            resultado = item.getString("resultado"),
+                            feedback = item.getString("retroalimentacion")
                         )
                     )
                 }
@@ -81,16 +70,16 @@ class AlimentacionResultList : Fragment() {
             {
                 if(it.networkResponse.statusCode == 404){
                     showMessage("Usuario no tiene datos cargados aun.")
-                    val list = mutableListOf<Alimentacion>()
+                    val list = mutableListOf<Entrenamiento>()
                     list.add(0,
-                        Alimentacion(
-                            alimentacionID = "",
-                            calorias1 = "",
-                            calorias2 = "",
-                            calorias3 = "",
-                            ml_agua = "Sin Datos",
+                        Entrenamiento(
+                            entrenamientoId = "",
+                            actividad = "Sin datos",
+                            distancia = "Sin datos",
+                            tiempo = "Sin Datos",
                             date = "Sin Datos",
-                            total_calories = "Sin Datos"
+                            resultado = "Sin Datos",
+                            feedback = ""
                         )
                     )
                     viewAdapter!!.results = list
@@ -109,15 +98,10 @@ class AlimentacionResultList : Fragment() {
         Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
     }
 
-    private fun navigateToCreateResult() {
-        findNavController().navigate(R.id.action_alimentacionResultList_to_alimentacionResultCreate)
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
     }
-
 }

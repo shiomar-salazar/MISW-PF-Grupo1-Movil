@@ -38,6 +38,7 @@
     <string name="crear_plan_de_alimentacion">Crear Plan de Alimentacion</string>
     <string name="sufix_alimentacion"> kcal</string>
     <string name="actividad">Actividad</string>
+    <string name="actividad_title">Actividad:</string>
     <string name="alimentacion_del_dia">Alimentacion del Dia</string>
     <string name="comida_1">Comida 1</string>
     <string name="comida_2">Comida 2</string>
@@ -59,6 +60,11 @@
     <string name="calorias_totales">Calorias Totales:</string>
     <string name="ml_de_agua">Cantidad de Agua:</string>
     <string name="fecha">Fecha:</string>
+    <string name="listado_de_resultados_de_entrenamiento">Listado de Resultados de Entrenamiento</string>
+    <string name="resultados_de_entrenamiento">Resultados de Entrenamiento</string>
+    <string name="tiempo_title">Tiempo:</string>
+    <string name="distancia_title">Distancia:</string>
+    <string name="sin_datos">Sin Datos</string>
     <string-array name="Deportes">
         <item>Carreras</item>
         <item>Ciclismo</item>

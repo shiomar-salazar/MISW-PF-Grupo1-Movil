@@ -54,7 +54,6 @@ class AlimentacionResultCreate : Fragment() {
             val agua = binding.aguaText.text.toString()
             val date = binding.dateText.text.toString()
 
-
             val comida1Validator = BaseValidator.validate(EmptyValidator(comida1))
             binding.comida1.error =
                 if (!comida1Validator.isSuccess) getString(comida1Validator.message) else null
@@ -113,7 +112,6 @@ class AlimentacionResultCreate : Fragment() {
                     "nutricion/resultados-alimentacion",
                         user.token
                 ))
-
             } else {
                 showMessage("Todos los campos deben ser diligenciados, por favor corrija e intente de nuevo.")
             }

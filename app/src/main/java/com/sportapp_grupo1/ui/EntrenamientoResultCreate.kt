@@ -1,5 +1,6 @@
 package com.sportapp_grupo1.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,22 +8,24 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
 import com.sportapp_grupo1.databinding.EntrenamientoResultFragmentBinding
 import com.sportapp_grupo1.models.Entrenamiento
+import com.sportapp_grupo1.network.CacheManager
+import com.sportapp_grupo1.network.EntrenamientoNetworkService
+import com.sportapp_grupo1.validator.DateValidator
 import com.sportapp_grupo1.validator.EmptyValidator
 import com.sportapp_grupo1.validator.TimeValidator
 import com.sportapp_grupo1.validator.base.BaseValidator
-import com.sportapp_grupo1.viewmodels.EntrenamientoResultViewModel
+import org.json.JSONObject
 
 
-class EntrenamientoResult : Fragment() {
+class EntrenamientoResultCreate : Fragment() {
 
     private var _binding: EntrenamientoResultFragmentBinding? = null
-    private lateinit var viewModel: EntrenamientoResultViewModel
     private val binding get() = _binding!!
+    private  lateinit var volleyBroker: EntrenamientoNetworkService
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,8 +35,12 @@ class EntrenamientoResult : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("UseRequireInsteadOfGet")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        volleyBroker = this.context?.let { EntrenamientoNetworkService(it) }!!
+        val user = CacheManager.getInstance(this.requireContext()).getUsuario()
+
         /* TODO: Cambiar para obtener la distancia del entrenamiento del dia */
         binding.goal.text = "5 km"
 
@@ -69,7 +76,7 @@ class EntrenamientoResult : Fragment() {
             val tiempo = binding.tiempoText.text.toString()
             val result = binding.resultText.text.toString()
             val retro = binding.retroSpinner.selectedItem.toString().trim()
-
+            val date = binding.dateText.text.toString()
 
             val tiempoValidator = BaseValidator.validate(EmptyValidator(tiempo), TimeValidator(tiempo))
             binding.tiempo.error =
@@ -77,23 +84,47 @@ class EntrenamientoResult : Fragment() {
             val resultValidator = BaseValidator.validate(EmptyValidator(result))
             binding.result.error =
                 if (!resultValidator.isSuccess) getString(resultValidator.message) else null
+            val dateValidator = BaseValidator.validate(EmptyValidator(date), DateValidator(date))
+            binding.date.error =
+                if (!dateValidator.isSuccess) getString(dateValidator.message) else null
 
 
-            if (tiempoValidator.isSuccess && resultValidator.isSuccess) {
-                val newPlan = Entrenamiento (
-                    tiempo = tiempo,
-                    resultado = result,
-                    actividad = actividad,
-                    feedback = retro,
-                    userId = "",
-                    distancia = "5km"
+            if (tiempoValidator.isSuccess && resultValidator.isSuccess && dateValidator.isSuccess) {
+                val params = mapOf(
+                    "fecha" to date,
+                    "id_usuario" to user.userId,
+                    "resultado" to result,
+                    "retroalimentacion" to retro,
+                    "entrenamiento" to actividad,
+                    "tiempo" to tiempo
                 )
-                if (viewModel.addNewEntrenamientoResult(newPlan)) {
-                    showMessage("El Entrenamiento del Dia se registró correctamente.")
-                    navigateToHome()
-                } else {
-                    showMessage("Ocurrió un error en el registro del Entrenamiento.")
-                }
+
+                volleyBroker.instance.add(
+                    EntrenamientoNetworkService.postRequest(
+                        JSONObject(params),
+                        {response ->
+                            /* Guardar Plan en Cache */
+                            val result = Entrenamiento (
+                                entrenamientoId = response.optString("id"),
+                                date = response.optString("fecha"),
+                                actividad = response.optString("entrenamiento") ,
+                                distancia = response.optString("distancia"),
+                                tiempo = response.optString("tiempo"),
+                                resultado = response.optString("resultado"),
+                                feedback = response.optString("retroalimentacion")
+                            )
+                            CacheManager.getInstance(this.requireContext()).addEntrenamiento(result)
+                            /* Mostar Toast */
+                            showMessage("Registro Exitoso.")
+                            // Navegar a Home
+                            navigateToHome()
+                        },
+                        {
+                            showMessage("Registro Fallido.Error:".plus(it.networkResponse.statusCode.toString()))
+                        },
+                        "nutricion/resultados-alimentacion",
+                        user.token
+                    ))
             } else {
                 showMessage("Todos los campos deben ser diligenciados, por favor corrija e intente de nuevo.")
             }
@@ -103,13 +134,6 @@ class EntrenamientoResult : Fragment() {
 
     private fun navigateToHome() {
         findNavController().navigate(R.id.action_entrenamientoResult_to_home2)
-    }
-
-    private fun onNetworkError() {
-        if (!viewModel.isNetworkErrorShown.value!!) {
-            Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
-            viewModel.onNetworkErrorShown()
-        }
     }
 
     private fun showMessage(s: String) {
@@ -126,18 +150,5 @@ class EntrenamientoResult : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        viewModel = ViewModelProvider(
-            this,
-            EntrenamientoResultViewModel.Factory(activity.application)
-        )[EntrenamientoResultViewModel::class.java]
-        viewModel.entrenamiento.observe(viewLifecycleOwner) {
-            it.apply {
-
-            }
-        }
-        viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->
-            if (isNetworkError) onNetworkError()
-        }
     }
-
 }
