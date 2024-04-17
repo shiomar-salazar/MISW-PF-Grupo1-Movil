@@ -108,7 +108,7 @@ class AlimentacionResultCreate : Fragment() {
                         navigateToHome()
                     },
                     {
-                        showMessage("Registro Fallido.")
+                        showMessage("Registro Fallido.Error:".plus(it.networkResponse.statusCode.toString()))
                     },
                     "nutricion/resultados-alimentacion",
                         user.token

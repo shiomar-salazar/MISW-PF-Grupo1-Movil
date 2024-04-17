@@ -56,9 +56,9 @@
     <string name="detalle_de_plan_de_alimentacion">Detalle de Plan de Alimentacion</string>
     <string name="resultados_de_alimentacion">Resultados de Alimentacion</string>
     <string name="registrar_nuevo_resultado">Registrar nuevo Resultado</string>
-    <string name="calorias_totales">Calorias Totales</string>
-    <string name="ml_de_agua">ml de Agua</string>
-    <string name="fecha">Fecha</string>
+    <string name="calorias_totales">Calorias Totales:</string>
+    <string name="ml_de_agua">Cantidad de Agua:</string>
+    <string name="fecha">Fecha:</string>
     <string-array name="Deportes">
         <item>Carreras</item>
         <item>Ciclismo</item>

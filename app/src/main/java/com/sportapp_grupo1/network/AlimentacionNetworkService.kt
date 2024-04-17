@@ -3,8 +3,10 @@ package com.sportapp_grupo1.network
 import android.content.Context
 import com.android.volley.RequestQueue
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import org.json.JSONArray
 import org.json.JSONObject
 
 class AlimentacionNetworkService constructor(context: Context) {
@@ -36,11 +38,11 @@ class AlimentacionNetworkService constructor(context: Context) {
         }
 
         fun getRequest(
-            responseListener: Response.Listener<JSONObject>,
+            responseListener: Response.Listener<JSONArray>,
             errorListener: Response.ErrorListener, path: String, token: String
         ):
-                JsonObjectRequest {
-            val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(
+                JsonArrayRequest {
+            val jsonRequest: JsonArrayRequest = object : JsonArrayRequest(
                 Method.GET, URL_A + path, null,
                 responseListener,
                 errorListener

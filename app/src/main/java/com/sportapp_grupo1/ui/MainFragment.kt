@@ -88,7 +88,7 @@ class MainFragment : Fragment() {
                         findNavController().navigate(R.id.action_mainFragment_to_home2)
                     },
                     {
-                        showMessage("Inicio de Sesion Fallido.")
+                        showMessage("Inicio de Sesion Fallido. Error:".plus(it.networkResponse.statusCode.toString()))
                     }))
             } else {
                 showMessage("Todos los campos deben ser diligenciados, por favor corrija e intente de nuevo.")

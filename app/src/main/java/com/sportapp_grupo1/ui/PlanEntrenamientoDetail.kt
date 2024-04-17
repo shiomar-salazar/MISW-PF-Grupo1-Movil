@@ -67,7 +67,7 @@ class PlanEntrenamientoDetail : Fragment() {
                 showMessage("Carga Exitosa.")
             },
             {
-                showMessage("Carga Fallida.")
+                showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
             },
             "entrenamientos/plan-entrenamiento/usuario/"+user.userId,
             user.token
