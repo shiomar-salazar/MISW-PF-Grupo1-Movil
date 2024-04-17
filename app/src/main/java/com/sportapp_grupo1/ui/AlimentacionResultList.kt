@@ -93,20 +93,15 @@ class AlimentacionResultList : Fragment() {
                         )
                     )
                     viewAdapter!!.results = list
-
                 }
                 else
                 {
                     showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
                 }
-
             },
             "nutricion/resultados-alimentacion/"+user.userId,
             user.token
         ))
-
-
-
     }
 
     private fun showMessage(s: String) {

@@ -96,12 +96,12 @@ class NetworkServiceAdapter constructor(context: Context) {
 
         val resultCreated = Entrenamiento (
             entrenamientoId = "",
-            userId = new.userId,
             actividad = new.actividad,
             distancia = new.distancia,
             tiempo = new.tiempo,
             resultado = new.resultado,
-            feedback = new.feedback
+            feedback = new.feedback,
+            date = ""
         )
         cont.resume(resultCreated)
 

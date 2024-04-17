@@ -62,10 +62,13 @@
         <action
             android:id="@+id/action_entrenamiento_Menu_to_entrenamientoResult"
             app:destination="@id/entrenamientoResult" />
+        <action
+            android:id="@+id/action_entrenamiento_Menu_to_entrenamientoResultList"
+            app:destination="@id/entrenamientoResultList" />
     </fragment>
     <fragment
         android:id="@+id/entrenamientoResult"
-        android:name="com.sportapp_grupo1.ui.EntrenamientoResult"
+        android:name="com.sportapp_grupo1.ui.EntrenamientoResultCreate"
         tools:layout="@layout/entrenamiento_result_fragment" >
         <action
             android:id="@+id/action_entrenamientoResult_to_home2"
@@ -98,4 +101,8 @@
             android:id="@+id/action_alimentacionResultList_to_alimentacionResultCreate"
             app:destination="@id/alimentacionResultCreate" />
     </fragment>
+    <fragment
+        android:id="@+id/entrenamientoResultList"
+        android:name="com.sportapp_grupo1.ui.EntrenamientoResultList"
+        tools:layout="@layout/entrenamiento_result_list_fragment" />
 </navigation>

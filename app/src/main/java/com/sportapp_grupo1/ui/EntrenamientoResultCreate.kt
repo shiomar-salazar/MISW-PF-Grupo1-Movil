@@ -18,7 +18,7 @@ import com.sportapp_grupo1.validator.base.BaseValidator
 import com.sportapp_grupo1.viewmodels.EntrenamientoResultViewModel
 
 
-class EntrenamientoResult : Fragment() {
+class EntrenamientoResultCreate : Fragment() {
 
     private var _binding: EntrenamientoResultFragmentBinding? = null
     private lateinit var viewModel: EntrenamientoResultViewModel
@@ -85,8 +85,8 @@ class EntrenamientoResult : Fragment() {
                     resultado = result,
                     actividad = actividad,
                     feedback = retro,
-                    userId = "",
-                    distancia = "5km"
+                    distancia = "5km",
+                    date=""
                 )
                 if (viewModel.addNewEntrenamientoResult(newPlan)) {
                     showMessage("El Entrenamiento del Dia se registró correctamente.")
