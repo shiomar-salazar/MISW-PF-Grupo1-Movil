@@ -89,10 +89,10 @@ class EntrenamientoResult : Fragment() {
                     distancia = "5km"
                 )
                 if (viewModel.addNewEntrenamientoResult(newPlan)) {
-                    showMessage("La alimentacion del Dia se registró correctamente.")
+                    showMessage("El Entrenamiento del Dia se registró correctamente.")
                     navigateToHome()
                 } else {
-                    showMessage("Ocurrió un error en el registro de la Alimentacion.")
+                    showMessage("Ocurrió un error en el registro del Entrenamiento.")
                 }
             } else {
                 showMessage("Todos los campos deben ser diligenciados, por favor corrija e intente de nuevo.")

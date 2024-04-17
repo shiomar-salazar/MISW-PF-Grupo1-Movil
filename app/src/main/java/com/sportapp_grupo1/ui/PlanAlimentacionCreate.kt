@@ -117,7 +117,7 @@ class PlanAlimentacionCreate : Fragment() {
                         navigateToHome()
                     },
                     {
-                        showMessage("Registro Fallido.")
+                        showMessage("Registro Fallido. Error:".plus(it.networkResponse.statusCode.toString()))
                     },
                     "entrenamientos/plan-entrenamiento",
                     CacheManager.getInstance(this.requireContext()).getUsuario().token

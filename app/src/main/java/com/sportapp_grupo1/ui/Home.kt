@@ -30,7 +30,7 @@ class Home : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.alimentacion.setOnClickListener {
-            findNavController().navigate((R.id.action_home2_to_alimentacionResult))
+            findNavController().navigate((R.id.action_home2_to_alimentacionResultList))
         }
         binding.entrenamiento.setOnClickListener {
             findNavController().navigate((R.id.action_home2_to_entrenamiento_Menu))
