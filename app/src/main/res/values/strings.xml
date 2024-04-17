@@ -64,6 +64,7 @@
     <string name="resultados_de_entrenamiento">Resultados de Entrenamiento</string>
     <string name="tiempo_title">Tiempo:</string>
     <string name="distancia_title">Distancia:</string>
+    <string name="sin_datos">Sin Datos</string>
     <string-array name="Deportes">
         <item>Carreras</item>
         <item>Ciclismo</item>

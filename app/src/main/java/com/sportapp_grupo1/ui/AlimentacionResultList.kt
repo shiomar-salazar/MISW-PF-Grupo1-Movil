@@ -80,6 +80,7 @@ class AlimentacionResultList : Fragment() {
             },
             {
                 if(it.networkResponse.statusCode == 404){
+                    showMessage("Usuario no tiene datos cargados aun.")
                     val list = mutableListOf<Alimentacion>()
                     list.add(0,
                         Alimentacion(

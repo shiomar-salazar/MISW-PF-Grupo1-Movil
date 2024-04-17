@@ -69,6 +69,7 @@ class EntrenamientoResultList : Fragment() {
             },
             {
                 if(it.networkResponse.statusCode == 404){
+                    showMessage("Usuario no tiene datos cargados aun.")
                     val list = mutableListOf<Entrenamiento>()
                     list.add(0,
                         Entrenamiento(
