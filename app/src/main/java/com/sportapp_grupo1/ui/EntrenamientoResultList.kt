@@ -50,16 +50,26 @@ class EntrenamientoResultList : Fragment() {
             {response ->
                 val list = mutableListOf<Entrenamiento>()
                 var item: JSONObject
+                var res:String = ""
                 (0 until response.length()).forEach { it ->
                     item = response.getJSONObject(it)
+                    val actividad = item.getString("actividad")
+                    if(actividad == "Ciclismo")
+                    {
+                        res = item.getInt("ftp").toString()
+                    }
+                    else
+                    {
+                        res = item.getInt("vo2max").toString()
+                    }
                     list.add(it,
                         Entrenamiento(
                             entrenamientoId = item.getString("id"),
-                            actividad = item.getString("entrenamiento"),
-                            distancia = item.getString("Distancia").plus(" km"),
+                            actividad = item.getString("actividad"),
+                            distancia = item.getString("distancia").plus(" km"),
                             tiempo = item.getString("tiempo"),
                             date = item.getString("fecha"),
-                            resultado = item.getString("resultado"),
+                            resultado = res,
                             feedback = item.getString("retroalimentacion")
                         )
                     )

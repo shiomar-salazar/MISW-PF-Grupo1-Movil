@@ -2,6 +2,7 @@ package com.sportapp_grupo1.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +41,8 @@ class EntrenamientoResultCreate : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         volleyBroker = this.context?.let { EntrenamientoNetworkService(it) }!!
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
+        var result_ftp = 0.0
+        var result_vo2 = 0.0
 
         /* TODO: Cambiar para obtener la distancia del entrenamiento del dia */
         binding.goal.text = "5 km"
@@ -58,7 +61,7 @@ class EntrenamientoResultCreate : Fragment() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                if (binding.actividadSpinner.selectedItem.equals("Carreras")){
+                if (binding.actividadSpinner.selectedItem.equals("Atletismo")){
                     binding.result.hint = "Vo2Max"
                     binding.result.suffixText = "ml/kg/min"
                 }
@@ -66,9 +69,7 @@ class EntrenamientoResultCreate : Fragment() {
                     binding.result.hint = "FTP"
                     binding.result.suffixText = "%"
                 }
-
             }
-
         }
 
         binding.registrar.setOnClickListener {
@@ -88,16 +89,29 @@ class EntrenamientoResultCreate : Fragment() {
             binding.date.error =
                 if (!dateValidator.isSuccess) getString(dateValidator.message) else null
 
+            if(actividad == "Ciclismo"){
+                result_ftp = result.toDouble()
+                result_vo2 = 0.0
+            }
+            else
+            {
+                result_vo2 = result.toDouble()
+                result_ftp = 0.0
+            }
+
 
             if (tiempoValidator.isSuccess && resultValidator.isSuccess && dateValidator.isSuccess) {
                 val params = mapOf(
                     "fecha" to date,
                     "id_usuario" to user.userId,
-                    "resultado" to result,
+                    "ftp" to result_ftp.toFloat(),
+                    "vo2max" to result_vo2.toFloat(),
                     "retroalimentacion" to retro,
-                    "entrenamiento" to actividad,
+                    "actividad" to actividad,
+                    //"distancia" to binding.goal.text,
                     "tiempo" to tiempo
                 )
+                Log.d("Request", params.toString())
 
                 volleyBroker.instance.add(
                     EntrenamientoNetworkService.postRequest(
@@ -108,7 +122,7 @@ class EntrenamientoResultCreate : Fragment() {
                                 entrenamientoId = response.optString("id"),
                                 date = response.optString("fecha"),
                                 actividad = response.optString("entrenamiento") ,
-                                distancia = response.optString("distancia"),
+                                distancia = "",//response.optString("distancia"),
                                 tiempo = response.optString("tiempo"),
                                 resultado = response.optString("resultado"),
                                 feedback = response.optString("retroalimentacion")
@@ -122,7 +136,7 @@ class EntrenamientoResultCreate : Fragment() {
                         {
                             showMessage("Registro Fallido.Error:".plus(it.networkResponse.statusCode.toString()))
                         },
-                        "nutricion/resultados-alimentacion",
+                        "entrenamientos/resultados-plan-entrenamiento",
                         user.token
                     ))
             } else {
