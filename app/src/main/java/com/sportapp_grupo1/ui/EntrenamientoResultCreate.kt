@@ -108,7 +108,7 @@ class EntrenamientoResultCreate : Fragment() {
                     "vo2max" to result_vo2.toFloat(),
                     "retroalimentacion" to retro,
                     "actividad" to actividad,
-                    //"distancia" to binding.goal.text,
+                    "distancia" to binding.goal.text.dropLast(3).toString().toInt(),
                     "tiempo" to tiempo
                 )
                 Log.d("Request", params.toString())
@@ -122,7 +122,7 @@ class EntrenamientoResultCreate : Fragment() {
                                 entrenamientoId = response.optString("id"),
                                 date = response.optString("fecha"),
                                 actividad = response.optString("entrenamiento") ,
-                                distancia = "",//response.optString("distancia"),
+                                distancia = response.optString("distancia"),
                                 tiempo = response.optString("tiempo"),
                                 resultado = response.optString("resultado"),
                                 feedback = response.optString("retroalimentacion")

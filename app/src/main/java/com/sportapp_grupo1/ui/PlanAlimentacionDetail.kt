@@ -80,7 +80,7 @@ class PlanAlimentacionDetail : Fragment() {
                     showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
                 }
             },
-            "entrenamientos/plan-entrenamiento/usuario/"+user.userId,
+            "nutricion/plan-nutricional/"+user.userId,
             user.token
         ))
 

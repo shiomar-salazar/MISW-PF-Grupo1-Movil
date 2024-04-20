@@ -149,7 +149,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginBottom="10dp"
             android:backgroundTint="@android:color/holo_blue_dark"
-            android:text="@string/registrar_alimentacion"
+            android:text="@string/registrar_entrenamiento"
             android:textSize="20sp" />
 
         <Button
