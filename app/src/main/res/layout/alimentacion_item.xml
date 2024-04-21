@@ -41,7 +41,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/fecha"
+                        android:text="@string/fecha_label"
                         android:textColor="@color/lightGrey"
                         android:textSize="20sp" />
                     <TextView

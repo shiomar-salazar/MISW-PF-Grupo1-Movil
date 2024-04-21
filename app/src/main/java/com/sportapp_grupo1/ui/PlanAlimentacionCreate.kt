@@ -76,6 +76,7 @@ class PlanAlimentacionCreate : Fragment() {
             val semanasValidator = BaseValidator.validate(EmptyValidator(semanas))
             binding.semanas.error =
                 if (!semanasValidator.isSuccess) getString(semanasValidator.message) else null
+            val user = CacheManager.getInstance(this.requireContext()).getUsuario()
 
             if (semanasValidator.isSuccess && domingoValidator.isSuccess && sabadoValidator.isSuccess
                 && viernesValidator.isSuccess && juevesValidator.isSuccess && miercolesValidator.isSuccess
@@ -83,8 +84,8 @@ class PlanAlimentacionCreate : Fragment() {
 
                 val params = mapOf(
                     "numero_semanas" to semanas.toInt(),
-                    "id_usuario" to CacheManager.getInstance(this.requireContext()).getUsuario().userId,
-                    "plan_Alimentacion" to mapOf<String, Any>(
+                    "id_usuario" to user.userId,
+                    "plan_alimentacion" to mapOf<String, Any>(
                         "lunes" to lunes,
                         "martes" to martes,
                         "miercoles" to miercoles,
@@ -119,8 +120,8 @@ class PlanAlimentacionCreate : Fragment() {
                     {
                         showMessage("Registro Fallido. Error:".plus(it.networkResponse.statusCode.toString()))
                     },
-                    "entrenamientos/plan-entrenamiento",
-                    CacheManager.getInstance(this.requireContext()).getUsuario().token
+                    "nutricion/plan-nutricional",
+                        user.token
                 ))
             } else {
                 showMessage("Todos los campos deben ser diligenciados, por favor corrija e intente de nuevo.")

@@ -14,7 +14,7 @@ class EntrenamientoNetworkService constructor(context: Context) {
     val instance: RequestQueue = Volley.newRequestQueue(context.applicationContext)
 
     companion object {
-        const val URL_E = "https://misw-pf-grupo1-backend-gestor-plan-entrenamiento-klme3r4qta-uc.a.run.app/"
+        const val URL_E = "https://misw-pf-grupo1-backend-gestor-entrenamientos-klme3r4qta-uc.a.run.app/"
 
         fun postRequest(
             body: JSONObject, responseListener: Response.Listener<JSONObject>,

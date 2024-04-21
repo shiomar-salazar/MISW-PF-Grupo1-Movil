@@ -7,7 +7,7 @@
     <string name="registrarse">Registrarse</string>
     <string name="password_recovery">Recuperar Contraseña</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="text_validation_error_time_format">El tiempo tiene que estar en formato XX:YY.ZZ</string>
+    <string name="text_validation_error_time_format">El tiempo tiene que estar en formato XX:YY:ZZ</string>
     <string name="text_validation_error_time_letters">El tiempo solo debe contener numeros</string>
     <string name="text_validation_error_min_pass_length">La contraseña debe tener al menos 8 caracteres</string>
     <string name="text_validation_error_min_calories">Las calorias objetivo deben ser al menos 500</string>
@@ -59,14 +59,15 @@
     <string name="registrar_nuevo_resultado">Registrar nuevo Resultado</string>
     <string name="calorias_totales">Calorias Totales:</string>
     <string name="ml_de_agua">Cantidad de Agua:</string>
-    <string name="fecha">Fecha:</string>
+    <string name="fecha">Fecha</string>
+    <string name="fecha_label">Fecha:</string>
     <string name="listado_de_resultados_de_entrenamiento">Listado de Resultados de Entrenamiento</string>
     <string name="resultados_de_entrenamiento">Resultados de Entrenamiento</string>
     <string name="tiempo_title">Tiempo:</string>
     <string name="distancia_title">Distancia:</string>
     <string name="sin_datos">Sin Datos</string>
     <string-array name="Deportes">
-        <item>Carreras</item>
+        <item>Atletismo</item>
         <item>Ciclismo</item>
     </string-array>
     <string-array name="Retroalimentacion">

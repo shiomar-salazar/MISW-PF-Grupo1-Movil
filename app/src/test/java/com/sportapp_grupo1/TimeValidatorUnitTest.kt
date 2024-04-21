@@ -11,26 +11,21 @@ class TimeValidatorUnitTest {
     }
 
     @Test
-    fun password_nodot() {
-        Assert.assertFalse(TimeValidator("12:34").validate().isSuccess)
-    }
-
-    @Test
-    fun password_nocolon() {
+    fun time_nocolon() {
         Assert.assertFalse(TimeValidator("12.34").validate().isSuccess)
     }
 
     @Test
-    fun password_notext() {
-        Assert.assertFalse(TimeValidator("12.34.1h").validate().isSuccess)
+    fun time_text() {
+        Assert.assertFalse(TimeValidator("12.34:1h").validate().isSuccess)
     }
 
     @Test
-    fun password_nosimbols() {
-        Assert.assertFalse(TimeValidator("12.34.11-").validate().isSuccess)
+    fun time_extra_simbols() {
+        Assert.assertFalse(TimeValidator("12.34:11-").validate().isSuccess)
     }
 
     @Test fun time_correct() {
-        Assert.assertTrue(TimeValidator("12:34.56").validate().isSuccess)
+        Assert.assertTrue(TimeValidator("12:34:56").validate().isSuccess)
     }
 }

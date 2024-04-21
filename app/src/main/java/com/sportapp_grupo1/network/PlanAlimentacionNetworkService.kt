@@ -13,7 +13,7 @@ class PlanAlimentacionNetworkService constructor(context: Context) {
 
     companion object {
         const val URL_PA =
-            "https://misw-pf-grupo1-backend-gestor-nutricional-klme3r4qta-uc.a.run.app/"
+            "https://misw-pf-grupo1-backend-gestor-plan-nutricional-klme3r4qta-uc.a.run.app/"
 
         fun postRequest(
             body: JSONObject, responseListener: Response.Listener<JSONObject>,
