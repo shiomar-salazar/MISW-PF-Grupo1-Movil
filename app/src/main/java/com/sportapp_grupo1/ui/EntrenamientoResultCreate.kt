@@ -2,7 +2,6 @@ package com.sportapp_grupo1.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -111,7 +110,6 @@ class EntrenamientoResultCreate : Fragment() {
                     "distancia" to binding.goal.text.dropLast(3).toString().toInt(),
                     "tiempo" to tiempo
                 )
-                Log.d("Request", params.toString())
 
                 volleyBroker.instance.add(
                     EntrenamientoNetworkService.postRequest(
