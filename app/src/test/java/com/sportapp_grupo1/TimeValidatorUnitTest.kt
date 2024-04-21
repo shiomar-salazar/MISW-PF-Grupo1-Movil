@@ -17,15 +17,15 @@ class TimeValidatorUnitTest {
 
     @Test
     fun time_text() {
-        Assert.assertFalse(TimeValidator("12.34.1h").validate().isSuccess)
+        Assert.assertFalse(TimeValidator("12.34:1h").validate().isSuccess)
     }
 
     @Test
     fun time_extra_simbols() {
-        Assert.assertFalse(TimeValidator("12.34.11-").validate().isSuccess)
+        Assert.assertFalse(TimeValidator("12.34:11-").validate().isSuccess)
     }
 
     @Test fun time_correct() {
-        Assert.assertTrue(TimeValidator("12:34.56").validate().isSuccess)
+        Assert.assertTrue(TimeValidator("12:34:56").validate().isSuccess)
     }
 }

@@ -133,7 +133,7 @@ class EntrenamientoResultCreateTest {
         navigateToTestScreen()
         /* Ingresamos Datos a Campos */
         setTextViewByValue(R.id.date_text,"2024-04-15")
-        setTextViewByValue(R.id.tiempo_text,"12:34.56")
+        setTextViewByValue(R.id.tiempo_text,"12:34:56")
         setTextViewByValue(R.id.result_text,"30")
         clickIntoButtonByIdwithScroll(R.id.registrar)
         SystemClock.sleep(delayService2)
@@ -158,7 +158,7 @@ class EntrenamientoResultCreateTest {
         onData(AllOf.allOf(`is`(instanceOf(String::class.java)))).atPosition(1).perform(ViewActions.click())
 
         setTextViewByValue(R.id.date_text,"2024-04-15")
-        setTextViewByValue(R.id.tiempo_text,"12:34.56")
+        setTextViewByValue(R.id.tiempo_text,"12:34:56")
         setTextViewByValue(R.id.result_text,"30")
         clickIntoButtonByIdwithScroll(R.id.registrar)
         SystemClock.sleep(delayService2)
@@ -195,11 +195,11 @@ class EntrenamientoResultCreateTest {
         }
 
         /* Validamos mensaje de error del campo tiempo */
-        setTextViewByValue(R.id.tiempo_text,"12:3456")
+        setTextViewByValue(R.id.tiempo_text,"12:34.56")
         clickIntoButtonByIdwithScroll(R.id.registrar)
         Espresso.onView(ViewMatchers.withId(R.id.tiempo)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
-            Assert.assertEquals(actualError, "El tiempo tiene que estar en formato XX:YY.ZZ")
+            Assert.assertEquals(actualError, "El tiempo tiene que estar en formato XX:YY:ZZ")
         }
         /* Validamos seguir en la pantalla de Resultado de Entrenamiento */
         Espresso.onView(

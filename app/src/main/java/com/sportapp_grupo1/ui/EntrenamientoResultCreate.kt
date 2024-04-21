@@ -88,18 +88,17 @@ class EntrenamientoResultCreate : Fragment() {
             binding.date.error =
                 if (!dateValidator.isSuccess) getString(dateValidator.message) else null
 
-            if(actividad == "Ciclismo"){
-                result_ftp = result.toDouble()
-                result_vo2 = 0.0
-            }
-            else
-            {
-                result_vo2 = result.toDouble()
-                result_ftp = 0.0
-            }
-
-
             if (tiempoValidator.isSuccess && resultValidator.isSuccess && dateValidator.isSuccess) {
+                if(actividad == "Ciclismo"){
+                    result_ftp = result.toDouble()
+                    result_vo2 = 0.0
+                }
+                else
+                {
+                    result_vo2 = result.toDouble()
+                    result_ftp = 0.0
+                }
+
                 val params = mapOf(
                     "fecha" to date,
                     "id_usuario" to user.userId,

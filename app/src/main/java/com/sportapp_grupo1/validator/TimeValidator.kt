@@ -13,8 +13,8 @@ class TimeValidator(val time: String) : BaseValidator() {
             return ValidateResult(false, R.string.text_validation_error_time_letters)
         if (time.contains(Regex("[a-z]+")))
             return ValidateResult(false, R.string.text_validation_error_time_letters)
-        if (time.contains(Regex("[\$&+,;=?@#|'<>^*()%!-]+")))
-            return ValidateResult(false, R.string.text_validation_error_time_letters)
+        if (time.contains(Regex("[\$&+,;=?@#|'.<>^*()%!-]+")))
+            return ValidateResult(false, R.string.text_validation_error_time_format)
         return ValidateResult(true, R.string.text_validation_success)
     }
 }
