@@ -17,90 +17,102 @@
         android:textSize="30sp"
         />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/entrenamiento_card"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/first_row"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        app:strokeColor="@color/lightGrey"
-        app:cardBackgroundColor="@android:color/transparent"
-        app:strokeWidth="2dp"
+        android:layout_marginStart="10dp"
         android:layout_below="@+id/header">
-        <RelativeLayout
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/title_entre_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/lightGrey"
-                android:layout_marginTop="5dp"
-                android:text="@string/entrenamiento_del_dia"/>
-            <TextView
-                android:id="@+id/distance_day_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:textColor="@color/lightGrey"
-                android:layout_marginTop="5dp"
-                android:layout_below="@+id/title_entre_day"
-                />
-            <Button
-                android:id="@+id/entrenamiento"
-                android:text="@string/registrar"
-                android:layout_width="wrap_content"
-                android:textSize="15sp"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_below="@+id/distance_day_text"/>
-        </RelativeLayout>
-    </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/alimentacion_card"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        app:strokeColor="@color/lightGrey"
-        app:cardBackgroundColor="@android:color/transparent"
-        app:strokeWidth="2dp"
-        android:layout_below="@+id/header"
-        android:layout_toEndOf="@+id/entrenamiento_card">
-        <RelativeLayout
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/title_ali_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/lightGrey"
-                android:layout_marginTop="5dp"
-                android:text="@string/entrenamiento_del_dia"/>
-            <TextView
-                android:id="@+id/calories_day_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:textColor="@color/lightGrey"
-                android:layout_marginTop="5dp"
-                android:layout_below="@+id/title_ali_day"
-                />
-            <Button
-                android:id="@+id/alimentacion"
-                android:text="@string/registrar"
-                android:layout_width="wrap_content"
-                android:textSize="15sp"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_below="@+id/calories_day_text"/>
-        </RelativeLayout>
-    </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/entrenamiento_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            app:strokeColor="@color/lightGrey"
+            android:layout_weight="1"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:strokeWidth="2dp">
+            <RelativeLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/title_entre_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/entrenamiento_de_hoy"
+                    android:textColor="@color/lightGrey"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/distance_day_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/lightGrey"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/title_entre_day"
+                    />
+                <Button
+                    android:id="@+id/entrenamiento"
+                    android:text="@string/registrar"
+                    android:layout_width="wrap_content"
+                    android:textSize="15sp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_below="@+id/distance_day_text"/>
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/alimentacion_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+
+            android:layout_weight="1"
+            app:strokeColor="@color/lightGrey"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:strokeWidth="2dp">
+            <RelativeLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/title_ali_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/lightGrey"
+                    android:layout_marginTop="5dp"
+                    android:textStyle="bold"
+                    android:text="@string/alimentacion_de_hoy"/>
+                <TextView
+                    android:id="@+id/calories_day_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/lightGrey"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/title_ali_day"
+                    />
+                <Button
+                    android:id="@+id/alimentacion"
+                    android:text="@string/registrar"
+                    android:layout_width="wrap_content"
+                    android:textSize="15sp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_below="@+id/calories_day_text"/>
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/eventos_card"
@@ -112,7 +124,7 @@
         app:strokeColor="@color/lightGrey"
         app:cardBackgroundColor="@android:color/transparent"
         app:strokeWidth="2dp"
-        android:layout_below="@+id/entrenamiento_card">
+        android:layout_below="@+id/first_row">
         <RelativeLayout
             android:padding="5dp"
             android:layout_width="match_parent"
@@ -122,8 +134,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/lightGrey"
+                android:layout_marginStart="15dp"
                 android:textSize="20sp"
                 android:layout_marginTop="5dp"
+                android:textStyle="bold"
                 android:text="@string/eventos_cerca_de_ti"/>
             <TextView
                 android:id="@+id/event_name_text"
@@ -189,7 +203,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/lightGrey"
+                android:layout_marginStart="15dp"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 android:layout_marginTop="5dp"
                 android:text="Tus proximos eventos"/>
             <TextView
@@ -236,26 +252,35 @@
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 
+    <LinearLayout
+        android:id="@+id/last_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_below="@+id/mis_eventos_card">
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/plan_entrenamiento_card"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_weight="1"
         android:layout_marginEnd="10dp"
         app:strokeColor="@color/lightGrey"
         app:cardBackgroundColor="@android:color/transparent"
-        app:strokeWidth="2dp"
-        android:layout_below="@+id/mis_eventos_card">
+        app:strokeWidth="2dp">
         <RelativeLayout
             android:padding="5dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
                 android:id="@+id/title_plan_entre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/lightGrey"
+                android:textStyle="bold"
                 android:layout_marginTop="5dp"
                 android:text="@string/plan_de_entrenamiento"/>
             <TextView
@@ -278,24 +303,24 @@
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 
+
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/plan_alimentacion_card"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
         app:strokeColor="@color/lightGrey"
         app:cardBackgroundColor="@android:color/transparent"
-        app:strokeWidth="2dp"
-        android:layout_below="@+id/mis_eventos_card"
-        android:layout_toEndOf="@+id/plan_entrenamiento_card">
+        app:strokeWidth="2dp">
         <RelativeLayout
             android:padding="5dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
                 android:id="@+id/title_plan_ali"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/lightGrey"
@@ -321,6 +346,7 @@
                 android:layout_below="@+id/plan_ali_duration_text"/>
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 
 
 
