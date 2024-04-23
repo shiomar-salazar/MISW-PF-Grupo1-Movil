@@ -4,24 +4,22 @@ import android.os.SystemClock
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import com.google.android.material.textfield.TextInputLayout
 import com.sportapp_grupo1.R
 import com.sportapp_grupo1.ui.MainActivity
 import org.hamcrest.CoreMatchers
 import org.hamcrest.core.AllOf
-import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class AlimentacionResultCreateTest {
+class AlimentacionResultListEmptyTest {
 
     @Rule
     @JvmField
@@ -84,7 +82,7 @@ class AlimentacionResultCreateTest {
 
 
     fun navigateToTestScreen(){
-        setTextViewByValue(R.id.input_username,"s.salazarc@uniandes.edu.co")
+        setTextViewByValue(R.id.input_username,"s.salazarc_vacio@uniandes.edu.co")
         setTextViewByValue(R.id.input_password,"123456789156Aa-")
         clickIntoButtonById(R.id.login_button)
         SystemClock.sleep(delayService2)
@@ -95,95 +93,31 @@ class AlimentacionResultCreateTest {
             )
         )
         clickIntoButtonById(R.id.alimentacion)
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(R.id.fab_add_result),
-                ViewMatchers.isDisplayed()
-            )
-        )
-        clickIntoButtonById(R.id.fab_add_result)
-    }
-
-
-    /**
-     * Esta Prueba tiene la intencion de Comprobar que el registro de la Alimentacion es Exitoso
-     */
-    @Test
-    fun positiveTestSuccesfullAlimentacionResult(){
-        /* Primero navegamos a la pantalla correcta */
-        navigateToTestScreen()
-        setTextViewByValue(R.id.date_text,"2024-04-15")
-        setTextViewByValue(R.id.comida1_text,"300")
-        setTextViewByValue(R.id.comida2_text,"700")
-        setTextViewByValue(R.id.comida3_text,"700")
-        setTextViewByValue(R.id.agua_text,"1500")
-        clickIntoButtonByIdwithScroll(R.id.registrar)
         SystemClock.sleep(delayService)
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(R.id.alimentacion),
-                ViewMatchers.isDisplayed()
-            )
-        )
     }
 
     /**
-     * Esta Prueba tiene la intencion de Comprobar la correcta funcionalidad del Boton de cancelar
+     * Esta Prueba tiene la intencion de verificar el caso de error 404
      */
     @Test
-    fun cancelarBtnAlimentacionResult(){
-
+    fun EntrenamientoDetailEmpty(){
         /* Primero navegamos a la pantalla correcta */
         navigateToTestScreen()
-        /* Hacemos click en boton de cancelar */
-        clickIntoButtonByIdwithScroll(R.id.cancelar)
-        /* Validamos estar en pantalla de Home */
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(R.id.alimentacion),
-                ViewMatchers.isDisplayed()
+
+        Espresso.onView(ViewMatchers.withId(R.id.date)).check(
+            ViewAssertions.matches(
+                ViewMatchers.withText("Sin Datos")
+            )
+        )
+        Espresso.onView(ViewMatchers.withId(R.id.calories)).check(
+            ViewAssertions.matches(
+                ViewMatchers.withText("Sin Datos")
+            )
+        )
+        Espresso.onView(ViewMatchers.withId(R.id.agua)).check(
+            ViewAssertions.matches(
+                ViewMatchers.withText("Sin Datos")
             )
         )
     }
-
-    /**
-     * Esta Prueba tiene la intencion de los casos de validacion negativa
-     */
-    @Test
-    fun negativeTestFailedAlimentacionResult() {
-        /* Primero navegamos a la pantalla correcta */
-        navigateToTestScreen()
-        /* Hacemos click en boton de registrar */
-        clickIntoButtonByIdwithScroll(R.id.registrar)
-
-        /* Validamos respuestas negativas */
-        Espresso.onView(ViewMatchers.withId(R.id.date)).check { view, _ ->
-            val actualError = (view as TextInputLayout).error
-            Assert.assertEquals(actualError, "El campo no debe estar vacio")
-        }
-        Espresso.onView(ViewMatchers.withId(R.id.comida1)).check { view, _ ->
-            val actualError = (view as TextInputLayout).error
-            Assert.assertEquals(actualError, "El campo no debe estar vacio")
-        }
-        Espresso.onView(ViewMatchers.withId(R.id.comida2)).check { view, _ ->
-            val actualError = (view as TextInputLayout).error
-            Assert.assertEquals(actualError, "El campo no debe estar vacio")
-        }
-        Espresso.onView(ViewMatchers.withId(R.id.comida3)).check { view, _ ->
-            val actualError = (view as TextInputLayout).error
-            Assert.assertEquals(actualError, "El campo no debe estar vacio")
-        }
-        Espresso.onView(ViewMatchers.withId(R.id.agua)).check { view, _ ->
-            val actualError = (view as TextInputLayout).error
-            Assert.assertEquals(actualError, "El campo no debe estar vacio")
-        }
-        /* Validamos seguir en la pantalla de Resultado de Alimentacion */
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(R.id.registrar),
-                ViewMatchers.isDisplayed()
-            )
-        )
-    }
-
 }

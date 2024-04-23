@@ -171,7 +171,7 @@ class PlanEntrenamientoCreateTest {
         setTextViewByValue(R.id.domingo_text,"8")
         setTextViewByValue(R.id.semana_text,"25")
         clickIntoButtonByIdwithScroll(R.id.crear)
-        SystemClock.sleep(delayService2)
+        SystemClock.sleep(delayService)
         Espresso.onView(
             AllOf.allOf(
                 ViewMatchers.withId(R.id.plan_entrenamiento),
