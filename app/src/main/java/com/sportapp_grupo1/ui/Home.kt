@@ -59,6 +59,8 @@ class Home : Fragment() {
                 },
                 {
                     distance = 0
+                    binding.distanceDayText.text = "Sin Datos"
+                    binding.planEntreDurationText.text = "Sin Datos"
                 },
                 "entrenamientos/plan-entrenamiento/usuario/" + user.userId,
                 user.token
@@ -75,6 +77,8 @@ class Home : Fragment() {
             },
             {
                 calories_goal = 0
+                binding.caloriesDayText.text = "Sin Datos"
+                binding.planAliDurationText.text = "Sin Datos"
             },
             "nutricion/plan-nutricional/"+user.userId,
             user.token
