@@ -35,13 +35,13 @@ class ProfileFragment : Fragment() {
             findNavController().navigate((R.id.action_profileFragment_to_mainFragment))
         }
         binding.cambiarContraseA.setOnClickListener {
-            showMessage("Not implemented yet.")
+            showMessage("Fuera del Alcance del MVP.")
         }
         binding.mejorarPlan.setOnClickListener {
-            showMessage("Not implemented yet.")
+            showMessage("Fuera del Alcance del MVP.")
         }
         binding.editarPerfil.setOnClickListener {
-            showMessage("Not implemented yet.")
+            showMessage("Fuera del Alcance del MVP.")
         }
 
     }
