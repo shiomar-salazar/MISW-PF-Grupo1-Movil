@@ -9,14 +9,6 @@
         <item name="android:statusBarColor" >?attr/colorSecondaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="Theme.SportAppGrupo1.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <style name="RatingBar" parent="Theme.AppCompat">
-        <item name="colorControlNormal">@color/lightGrey</item>
-        <item name="colorControlActivated">@color/duskYellow</item>
-    </style>
     <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxStrokeColor">@color/text_input_box_stroke</item>
     </style>
