@@ -66,6 +66,13 @@
     <string name="tiempo_title">Tiempo:</string>
     <string name="distancia_title">Distancia:</string>
     <string name="sin_datos">Sin Datos</string>
+    <string name="entrenamiento_de_hoy">Entrenamiento de Hoy</string>
+    <string name="alimentacion_de_hoy">Alimentacion de Hoy</string>
+    <string name="registrar">Registrar</string>
+    <string name="plan_de_entrenamiento">Plan de Entrenamiento</string>
+    <string name="ver_mas">Ver mas</string>
+    <string name="plan_de_alimentacion">Plan de Alimentacion</string>
+    <string name="eventos_cerca_de_ti">Eventos Cerca de Ti</string>
     <string-array name="Deportes">
         <item>Atletismo</item>
         <item>Ciclismo</item>

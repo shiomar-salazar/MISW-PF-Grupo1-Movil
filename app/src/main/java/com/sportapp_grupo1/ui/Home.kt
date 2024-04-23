@@ -46,11 +46,16 @@ class Home : Fragment() {
         var calories_goal = 0
 
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
+        binding.header.text = "Bienvenido ".plus(user.nombres.substringBefore(" "))
+
         volleyBroker.instance.add(
             PlanEntrenamientoNetworkService.getRequest(
                 { response ->
                     distance =
                         response.getJSONObject("plan_entrenamiento").optString(day).toInt()
+                    val duration = response.optInt("numero_semanas").toString().plus(" semanas")
+                    binding.distanceDayText.text = distance.toString().plus(" km")
+                    binding.planEntreDurationText.text = "Quedan ".plus(duration)
                 },
                 {
                     distance = 0
@@ -64,6 +69,9 @@ class Home : Fragment() {
             PlanAlimentacionNetworkService.getRequest(
             {response ->
                 calories_goal = response.getJSONObject("plan_alimentacion").optInt(day)
+                val duration = response.optInt("numero_semanas").toString().plus(" semanas")
+                binding.caloriesDayText.text = calories_goal.toString().plus(" kcal")
+                binding.planAliDurationText.text = "Quedan ".plus(duration)
             },
             {
                 calories_goal = 0
