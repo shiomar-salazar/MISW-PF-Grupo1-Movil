@@ -6,7 +6,6 @@
     <string name="password">Contraseña</string>
     <string name="registrarse">Registrarse</string>
     <string name="password_recovery">Recuperar Contraseña</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_validation_error_time_format">El tiempo tiene que estar en formato XX:YY:ZZ</string>
     <string name="text_validation_error_time_letters">El tiempo solo debe contener numeros</string>
     <string name="text_validation_error_min_pass_length">La contraseña debe tener al menos 8 caracteres</string>
@@ -51,7 +50,6 @@
     <string name="monitoreo">Monitoreo</string>
     <string name="entrenamiento_del_dia">Entrenamiento del Dia</string>
     <string name="tiempo">Tiempo</string>
-    <string name="vo2max">Vo2Max</string>
     <string name="registrar_entrenamiento">Registrar Entrenamiento</string>
     <string name="detalle_de_plan_de_entrenamiento">Detalle de Plan de Entrenamiento</string>
     <string name="detalle_de_plan_de_alimentacion">Detalle de Plan de Alimentacion</string>
@@ -66,6 +64,14 @@
     <string name="tiempo_title">Tiempo:</string>
     <string name="distancia_title">Distancia:</string>
     <string name="sin_datos">Sin Datos</string>
+    <string name="entrenamiento_de_hoy">Entrenamiento de Hoy</string>
+    <string name="alimentacion_de_hoy">Alimentacion de Hoy</string>
+    <string name="registrar">Registrar</string>
+    <string name="plan_de_entrenamiento">Plan de Entrenamiento</string>
+    <string name="ver_mas">Ver mas</string>
+    <string name="plan_de_alimentacion">Plan de Alimentacion</string>
+    <string name="eventos_cerca_de_ti">Eventos Cerca de Ti</string>
+    <string name="perfil_de_usuario">Perfil de Usuario</string>
     <string-array name="Deportes">
         <item>Atletismo</item>
         <item>Ciclismo</item>
@@ -79,5 +85,21 @@
         <item>Muy Mal</item>
         <item>Pesimo</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nombre">Nombre</string>
+    <string name="edad">Edad</string>
+    <string name="peso">Peso</string>
+    <string name="telefono">Telefono</string>
+    <string name="correo">Correo</string>
+    <string name="sexo">Sexo</string>
+    <string name="ciudad">Ciudad</string>
+    <string name="vo2max">Vo2Max</string>
+    <string name="ftp">FTP</string>
+    <string name="altura">Altura</string>
+    <string name="editar_informacion_de_perfil">Editar Informacion de Perfil</string>
+    <string name="cambiar_contrase_a">Cambiar Contraseña</string>
+    <string name="mejorar_plan">Mejorar Plan</string>
+    <string name="cerrar_session">Cerrar Sesion</string>
 
 </resources>

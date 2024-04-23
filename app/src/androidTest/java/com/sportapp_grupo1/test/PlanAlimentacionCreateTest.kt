@@ -94,7 +94,7 @@ class PlanAlimentacionCreateTest {
                 ViewMatchers.isDisplayed()
             )
         )
-        clickIntoButtonById(R.id.plan_alimentacion)
+        clickIntoButtonByIdwithScroll(R.id.plan_alimentacion)
         SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
@@ -215,13 +215,13 @@ class PlanAlimentacionCreateTest {
         setTextViewByValue(R.id.domingo_text,"2100")
         setTextViewByValue(R.id.semana_text,"6")
         clickIntoButtonByIdwithScroll(R.id.crear)
-        /*SystemClock.sleep(delayService2)
+        SystemClock.sleep(delayService)
         Espresso.onView(
             AllOf.allOf(
                 ViewMatchers.withId(R.id.plan_alimentacion),
                 ViewMatchers.isDisplayed()
             )
-        )*/
+        )
     }
 
     /**

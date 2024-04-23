@@ -84,8 +84,8 @@ class EntrenamientoResultList : Fragment() {
                     list.add(0,
                         Entrenamiento(
                             entrenamientoId = "",
-                            actividad = "Sin datos",
-                            distancia = "Sin datos",
+                            actividad = "Sin Datos",
+                            distancia = "Sin Datos",
                             tiempo = "Sin Datos",
                             date = "Sin Datos",
                             resultado = "Sin Datos",

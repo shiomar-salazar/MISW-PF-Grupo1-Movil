@@ -4,24 +4,22 @@ import android.os.SystemClock
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import com.google.android.material.textfield.TextInputLayout
 import com.sportapp_grupo1.R
 import com.sportapp_grupo1.ui.MainActivity
 import org.hamcrest.CoreMatchers
 import org.hamcrest.core.AllOf
-import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class PlanEntrenamientoCreateTest {
+class UserProfileTest {
 
     @Rule
     @JvmField
@@ -87,116 +85,131 @@ class PlanEntrenamientoCreateTest {
         setTextViewByValue(R.id.input_username,"s.salazarc@uniandes.edu.co")
         setTextViewByValue(R.id.input_password,"123456789156Aa-")
         clickIntoButtonById(R.id.login_button)
-        SystemClock.sleep(delayService2)
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(R.id.plan_entrenamiento),
-                ViewMatchers.isDisplayed()
-            )
-        )
-        clickIntoButtonByIdwithScroll(R.id.plan_entrenamiento)
-        SystemClock.sleep(delayService2)
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(R.id.crear),
-                ViewMatchers.isDisplayed()
-            )
-        )
-        clickIntoButtonByIdwithScroll(R.id.crear)
-    }
-
-    /**
-     * Esta Prueba tiene la intencion de los casos de validacion negativa
-     */
-    @Test
-    fun negativeTestFailedPlanEntrenamientoCreate(){
-        /* Primero navegamos a la pantalla correcta */
-        navigateToTestScreen()
-
-        clickIntoButtonByIdwithScroll(R.id.crear)
-        Espresso.onView(ViewMatchers.withId(R.id.lunes)).check { view, _ ->
-            val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "El campo no debe estar vacio")
-        }
-        Espresso.onView(ViewMatchers.withId(R.id.martes)).check { view, _ ->
-            val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "El campo no debe estar vacio")
-        }
-        Espresso.onView(ViewMatchers.withId(R.id.miercoles)).check { view, _ ->
-            val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "El campo no debe estar vacio")
-        }
-        Espresso.onView(ViewMatchers.withId(R.id.jueves)).check { view, _ ->
-            val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "El campo no debe estar vacio")
-        }
-        Espresso.onView(ViewMatchers.withId(R.id.viernes)).check { view, _ ->
-            val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "El campo no debe estar vacio")
-        }
-        Espresso.onView(ViewMatchers.withId(R.id.sabado)).check { view, _ ->
-            val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "El campo no debe estar vacio")
-        }
-        Espresso.onView(ViewMatchers.withId(R.id.domingo)).check { view, _ ->
-            val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "El campo no debe estar vacio")
-        }
-        Espresso.onView(ViewMatchers.withId(R.id.semanas)).check { view, _ ->
-            val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "El campo no debe estar vacio")
-        }
-        SystemClock.sleep(delayService2)
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(R.id.crear),
-                ViewMatchers.isDisplayed()
-            )
-        )
-    }
-
-    /**
-     * Esta Prueba tiene la intencion de Comprobar que la creacion del Plan de Entrenamiento
-     */
-    @Test
-    fun positiveTestSuccesfullPlanEntrenamientoCreate(){
-        /* Primero navegamos a la pantalla correcta */
-        navigateToTestScreen()
-        setTextViewByValue(R.id.lunes_text,"8")
-        setTextViewByValue(R.id.martes_text,"12")
-        setTextViewByValue(R.id.miercoles_text,"0")
-        setTextViewByValue(R.id.jueves_text,"5")
-        setTextViewByValue(R.id.viernes_text,"0")
-        setTextViewByValue(R.id.sabado_text,"10")
-        setTextViewByValue(R.id.domingo_text,"8")
-        setTextViewByValue(R.id.semana_text,"25")
-        clickIntoButtonByIdwithScroll(R.id.crear)
         SystemClock.sleep(delayService)
         Espresso.onView(
             AllOf.allOf(
-                ViewMatchers.withId(R.id.plan_entrenamiento),
+                ViewMatchers.withId(R.id.fab_profile),
+                ViewMatchers.isDisplayed()
+            )
+        )
+        clickIntoButtonById(R.id.fab_profile)
+        SystemClock.sleep(delayService)
+        Espresso.onView(
+            AllOf.allOf(
+                ViewMatchers.withId(R.id.cerrar_sesion),
                 ViewMatchers.isDisplayed()
             )
         )
     }
 
     /**
-     * Esta Prueba tiene la intencion de Comprobar la correcta funcionalidad del Boton de cancelar
+     * Esta prueba tiene la intencion de comprobar la informacion de Perfil
      */
     @Test
-    fun cancelarBtnPlanEntrenamientoCreate(){
-
+    fun positiveTestSuccesfull(){
         /* Primero navegamos a la pantalla correcta */
         navigateToTestScreen()
-        /* Hacemos click en boton de cancelar */
-        clickIntoButtonByIdwithScroll(R.id.cancelar)
-        /* Validamos estar en pantalla de Home */
+        Espresso.onView(ViewMatchers.withId(R.id.nombre_text)).check(
+            ViewAssertions.matches(
+                ViewMatchers.withText("Shiomar Salazar Castillo")
+            )
+        )
+        //TODO: Descomentar despues de terminar implementacion
+        /*Espresso.onView(ViewMatchers.withId(R.id.edad_text)).check(
+            ViewAssertions.matches(
+                ViewMatchers.withText("")
+            )
+        )
+        Espresso.onView(ViewMatchers.withId(R.id.peso_text)).check(
+            ViewAssertions.matches(
+                ViewMatchers.withText("")
+            )
+        )
+        Espresso.onView(ViewMatchers.withId(R.id.altura_text)).check(
+            ViewAssertions.matches(
+                ViewMatchers.withText("")
+            )
+        )
+        Espresso.onView(ViewMatchers.withId(R.id.Telefono_text)).check(
+            ViewAssertions.matches(
+                ViewMatchers.withText("")
+            )
+        )
+        Espresso.onView(ViewMatchers.withId(R.id.correo_text)).check(
+            ViewAssertions.matches(
+                ViewMatchers.withText("")
+            )
+        )
+        Espresso.onView(ViewMatchers.withId(R.id.sexo_text)).check(
+            ViewAssertions.matches(
+                ViewMatchers.withText("")
+            )
+        )
+        Espresso.onView(ViewMatchers.withId(R.id.ciudad_text)).check(
+            ViewAssertions.matches(
+                ViewMatchers.withText("")
+            )
+        )
+        Espresso.onView(ViewMatchers.withId(R.id.vo2max_text)).check(
+            ViewAssertions.matches(
+                ViewMatchers.withText("")
+            )
+        )
+        Espresso.onView(ViewMatchers.withId(R.id.ftp_text)).check(
+            ViewAssertions.matches(
+                ViewMatchers.withText("")
+            )
+        )*/
+    }
+
+    /**
+     * Esta prueba tiene la intencion de comprobar los botones no implementados
+     */
+    @Test
+    fun notImplementedButtons(){
+        /* Primero navegamos a la pantalla correcta */
+        navigateToTestScreen()
+        clickIntoButtonById(R.id.editar_perfil)
+        SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
-                ViewMatchers.withId(R.id.plan_entrenamiento),
+                ViewMatchers.withId(R.id.cerrar_sesion),
                 ViewMatchers.isDisplayed()
             )
         )
+        clickIntoButtonById(R.id.cambiar_contraseña)
+        SystemClock.sleep(delayService2)
+        Espresso.onView(
+            AllOf.allOf(
+                ViewMatchers.withId(R.id.cerrar_sesion),
+                ViewMatchers.isDisplayed()
+            )
+        )
+        clickIntoButtonById(R.id.mejorar_plan)
+        SystemClock.sleep(delayService2)
+        Espresso.onView(
+            AllOf.allOf(
+                ViewMatchers.withId(R.id.cerrar_sesion),
+                ViewMatchers.isDisplayed()
+            )
+        )
+    }
+    /**
+     * Esta prueba tiene la intencion de comprobar el cerrado de sesion
+     */
+    @Test
+    fun cerrarSesion(){
+        /* Primero navegamos a la pantalla correcta */
+        navigateToTestScreen()
+        clickIntoButtonById(R.id.cerrar_sesion)
+        SystemClock.sleep(delayService2)
+        Espresso.onView(
+            AllOf.allOf(
+                ViewMatchers.withId(R.id.login_button),
+                ViewMatchers.isDisplayed()
+            )
+        )
+
     }
 
 }

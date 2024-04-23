@@ -1,6 +1,5 @@
 package com.sportapp_grupo1.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,37 +8,42 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
-import com.sportapp_grupo1.databinding.EntrenamientoMenuFragmentBinding
+import com.sportapp_grupo1.databinding.ProfileFragmentBinding
+import com.sportapp_grupo1.network.CacheManager
 
 
-class EntrenamientoMenu : Fragment() {
+class ProfileFragment : Fragment() {
 
-    private var _binding: EntrenamientoMenuFragmentBinding? = null
-    private  val  binding get() = _binding !!
+    private var _binding: ProfileFragmentBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = EntrenamientoMenuFragmentBinding.inflate(inflater, container, false)
+        _binding = ProfileFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        super.onCreate(savedInstanceState)
 
-        val sharedPref = activity?.getSharedPreferences("myPref", Context.MODE_PRIVATE)
-        binding.goal.text = sharedPref!!.getInt("entre_goal",0).toString().plus(" km")
+        val user = CacheManager.getInstance(this.requireContext()).getUsuario()
+        binding.nombreText.text = user.nombres
 
-        binding.monitoreoBtn.setOnClickListener {
-            showMessage("Not implemented yet.")
+        binding.cerrarSesion.setOnClickListener{
+            findNavController().navigate((R.id.action_profileFragment_to_mainFragment))
         }
-        binding.entreResultBtn.setOnClickListener {
-            findNavController().navigate((R.id.action_entrenamiento_Menu_to_entrenamientoResult))
+        binding.cambiarContraseA.setOnClickListener {
+            showMessage("Fuera del Alcance del MVP.")
         }
-        binding.resultListBtn.setOnClickListener {
-            findNavController().navigate((R.id.action_entrenamiento_Menu_to_entrenamientoResultList))
+        binding.mejorarPlan.setOnClickListener {
+            showMessage("Fuera del Alcance del MVP.")
         }
+        binding.editarPerfil.setOnClickListener {
+            showMessage("Fuera del Alcance del MVP.")
+        }
+
     }
 
     private fun showMessage(s: String) {

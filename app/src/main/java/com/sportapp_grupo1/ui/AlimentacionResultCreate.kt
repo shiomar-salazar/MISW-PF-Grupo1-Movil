@@ -1,6 +1,7 @@
 package com.sportapp_grupo1.ui
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -38,10 +39,11 @@ class AlimentacionResultCreate : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         volleyBroker = this.context?.let { AlimentacionNetworkService(it) }!!
+        val sharedPref = activity?.getSharedPreferences("myPref", Context.MODE_PRIVATE)
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
 
-        /* TODO: Cambiar para obtener las calorias meta del dia */
-        binding.goal.text = "1500 kcal"
+
+        binding.goal.text = sharedPref!!.getInt("alime_goal", 2000).toString().plus(" kcal")
 
         binding.cancelar.setOnClickListener {
             navigateToHome()

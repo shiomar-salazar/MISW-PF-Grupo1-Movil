@@ -1,6 +1,7 @@
 package com.sportapp_grupo1.ui
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,8 +44,9 @@ class EntrenamientoResultCreate : Fragment() {
         var result_ftp = 0.0
         var result_vo2 = 0.0
 
-        /* TODO: Cambiar para obtener la distancia del entrenamiento del dia */
-        binding.goal.text = "5 km"
+        val sharedPref = activity?.getSharedPreferences("myPref", Context.MODE_PRIVATE)
+        val distance = sharedPref!!.getInt("entre_goal",0)
+        binding.goal.text = distance.toString().plus(" km")
 
         /* Valores por defecto */
         binding.result.hint = "Vo2Max"
@@ -106,7 +108,7 @@ class EntrenamientoResultCreate : Fragment() {
                     "vo2max" to result_vo2.toFloat(),
                     "retroalimentacion" to retro,
                     "actividad" to actividad,
-                    "distancia" to binding.goal.text.dropLast(3).toString().toInt(),
+                    "distancia" to distance,
                     "tiempo" to tiempo
                 )
 

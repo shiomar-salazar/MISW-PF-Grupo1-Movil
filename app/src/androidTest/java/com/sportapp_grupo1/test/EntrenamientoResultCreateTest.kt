@@ -136,7 +136,7 @@ class EntrenamientoResultCreateTest {
         setTextViewByValue(R.id.tiempo_text,"12:34:56")
         setTextViewByValue(R.id.result_text,"30")
         clickIntoButtonByIdwithScroll(R.id.registrar)
-        SystemClock.sleep(delayService2)
+        SystemClock.sleep(delayService)
         Espresso.onView(
             AllOf.allOf(
                 ViewMatchers.withId(R.id.entrenamiento),
