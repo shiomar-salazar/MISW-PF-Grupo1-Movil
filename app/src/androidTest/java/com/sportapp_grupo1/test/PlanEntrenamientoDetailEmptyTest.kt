@@ -113,7 +113,7 @@ class PlanEntrenamientoDetailEmptyTest {
                 ViewMatchers.isDisplayed()
             )
         )
-        clickIntoButtonById(R.id.plan_entrenamiento)
+        clickIntoButtonByIdwithScroll(R.id.plan_entrenamiento)
         SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
