@@ -7,17 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
 import com.sportapp_grupo1.databinding.EntrenamientoMenuFragmentBinding
-import com.sportapp_grupo1.viewmodels.EntrenamientoMenuViewModel
 
 
 class EntrenamientoMenu : Fragment() {
 
     private var _binding: EntrenamientoMenuFragmentBinding? = null
-    private lateinit var  viewModel: EntrenamientoMenuViewModel
     private  val  binding get() = _binding !!
 
     override fun onCreateView(
@@ -45,13 +42,6 @@ class EntrenamientoMenu : Fragment() {
         }
     }
 
-    private fun onNetworkError() {
-        if (!viewModel.isNetworkErrorShown.value!!) {
-            Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
-            viewModel.onNetworkErrorShown()
-        }
-    }
-
     private fun showMessage(s: String) {
         Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
     }
@@ -65,18 +55,6 @@ class EntrenamientoMenu : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
-        }
-        viewModel = ViewModelProvider(
-            this,
-            EntrenamientoMenuViewModel.Factory(activity.application)
-        )[EntrenamientoMenuViewModel::class.java]
-        viewModel.full_access.observe(viewLifecycleOwner) {
-            it.apply {
-
-            }
-        }
-        viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->
-            if (isNetworkError) onNetworkError()
         }
     }
 
