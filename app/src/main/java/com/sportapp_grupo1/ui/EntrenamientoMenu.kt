@@ -1,5 +1,6 @@
 package com.sportapp_grupo1.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,8 +31,8 @@ class EntrenamientoMenu : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /* TODO: Cambiar para obtener la distancia del entrenamiento del dia */
-        binding.goal.text = "5 km"
+        val sharedPref = activity?.getSharedPreferences("myPref", Context.MODE_PRIVATE)
+        binding.goal.text = sharedPref!!.getInt("entre_goal",0).toString().plus(" km")
 
         binding.monitoreoBtn.setOnClickListener {
             showMessage("Not implemented yet.")

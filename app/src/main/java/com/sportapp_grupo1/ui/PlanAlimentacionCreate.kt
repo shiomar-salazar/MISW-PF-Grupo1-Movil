@@ -13,7 +13,6 @@ import com.sportapp_grupo1.databinding.PlanAlimentacionCreateFragmentBinding
 import com.sportapp_grupo1.models.PlanAlimentacion
 import com.sportapp_grupo1.network.CacheManager
 import com.sportapp_grupo1.network.PlanAlimentacionNetworkService
-import com.sportapp_grupo1.network.PlanEntrenamientoNetworkService
 import com.sportapp_grupo1.validator.EmptyValidator
 import com.sportapp_grupo1.validator.PlanAlimentacionValidator
 import com.sportapp_grupo1.validator.base.BaseValidator
@@ -23,7 +22,7 @@ class PlanAlimentacionCreate : Fragment() {
 
     private var _binding: PlanAlimentacionCreateFragmentBinding? = null
     private val binding get() = _binding!!
-    private  lateinit var volleyBroker: PlanEntrenamientoNetworkService
+    private  lateinit var volleyBroker: PlanAlimentacionNetworkService
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +35,7 @@ class PlanAlimentacionCreate : Fragment() {
     @SuppressLint("UseRequireInsteadOfGet")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        volleyBroker = this.context?.let { PlanEntrenamientoNetworkService(it) }!!
+        volleyBroker = this.context?.let { PlanAlimentacionNetworkService(it) }!!
 
         binding.cancelar.setOnClickListener {
             navigateToHome()
