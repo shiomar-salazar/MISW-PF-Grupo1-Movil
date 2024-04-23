@@ -17,6 +17,21 @@
         android:textSize="30sp"
         />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_profile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:fabCustomSize="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="end|top"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:backgroundTint="@color/lightGrey"
+        android:layout_marginBottom="10dp"
+        android:contentDescription="@string/perfil_de_usuario"
+        android:src="@drawable/baseline_person_24" />
+
     <LinearLayout
         android:id="@+id/first_row"
         android:layout_width="match_parent"

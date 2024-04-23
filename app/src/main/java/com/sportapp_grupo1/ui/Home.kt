@@ -46,7 +46,7 @@ class Home : Fragment() {
         var calories_goal = 0
 
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
-        binding.header.text = "Bienvenido ".plus(user.nombres.substringBefore(" "))
+        binding.header.text = "Hola ".plus(user.nombres.substringBefore(" "))
 
         volleyBroker.instance.add(
             PlanEntrenamientoNetworkService.getRequest(
@@ -109,6 +109,10 @@ class Home : Fragment() {
 
         binding.planEntrenamiento.setOnClickListener {
             findNavController().navigate(R.id.action_home2_to_planEntrenamientoDetail)
+        }
+
+        binding.fabProfile.setOnClickListener{
+            findNavController().navigate(R.id.action_home2_to_profileFragment)
         }
     }
 

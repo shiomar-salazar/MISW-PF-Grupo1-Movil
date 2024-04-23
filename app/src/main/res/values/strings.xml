@@ -71,6 +71,7 @@
     <string name="ver_mas">Ver mas</string>
     <string name="plan_de_alimentacion">Plan de Alimentacion</string>
     <string name="eventos_cerca_de_ti">Eventos Cerca de Ti</string>
+    <string name="perfil_de_usuario">Perfil de Usuario</string>
     <string-array name="Deportes">
         <item>Atletismo</item>
         <item>Ciclismo</item>
@@ -84,5 +85,21 @@
         <item>Muy Mal</item>
         <item>Pesimo</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nombre">Nombre</string>
+    <string name="edad">Edad</string>
+    <string name="peso">Peso</string>
+    <string name="telefono">Telefono</string>
+    <string name="correo">Correo</string>
+    <string name="sexo">Sexo</string>
+    <string name="ciudad">Ciudad</string>
+    <string name="vo2max">Vo2Max</string>
+    <string name="ftp">FTP</string>
+    <string name="altura">Altura</string>
+    <string name="editar_informacion_de_perfil">Editar Informacion de Perfil</string>
+    <string name="cambiar_contrase_a">Cambiar Contraseña</string>
+    <string name="mejorar_plan">Mejorar Plan</string>
+    <string name="cerrar_session">Cerrar Sesion</string>
 
 </resources>

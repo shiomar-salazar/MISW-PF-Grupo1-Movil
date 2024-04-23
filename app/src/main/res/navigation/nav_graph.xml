@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_home2_to_alimentacionResultList"
             app:destination="@id/alimentacionResultList" />
+        <action
+            android:id="@+id/action_home2_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/planentrenamiento_crear_fragment"
@@ -105,4 +108,12 @@
         android:id="@+id/entrenamientoResultList"
         android:name="com.sportapp_grupo1.ui.EntrenamientoResultList"
         tools:layout="@layout/entrenamiento_result_list_fragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.sportapp_grupo1.ui.ProfileFragment"
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>
