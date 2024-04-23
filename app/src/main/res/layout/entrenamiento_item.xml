@@ -46,6 +46,7 @@
                         android:textColor="@color/lightGrey"
                         android:textSize="20sp" />
                     <TextView
+                        android:id="@+id/result_list_actividad"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/lightGrey"
@@ -69,6 +70,7 @@
                         android:textColor="@color/lightGrey"
                         android:textSize="15sp" />
                     <TextView
+                        android:id="@+id/result_list_fecha"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/lightGrey"
@@ -91,6 +93,7 @@
                         android:textColor="@color/lightGrey"
                         android:textSize="15sp" />
                     <TextView
+                        android:id="@+id/result_list_tiempo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/lightGrey"
@@ -113,6 +116,7 @@
                         android:textColor="@color/lightGrey"
                         android:textSize="15sp" />
                     <TextView
+                        android:id="@+id/result_list_distancia"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/lightGrey"
@@ -135,6 +139,7 @@
                         android:textColor="@color/lightGrey"
                         android:textSize="15sp" />
                     <TextView
+                        android:id="@+id/result_list_resultado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/lightGrey"
