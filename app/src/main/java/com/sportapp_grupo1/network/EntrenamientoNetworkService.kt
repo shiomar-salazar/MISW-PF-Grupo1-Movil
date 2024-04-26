@@ -15,6 +15,7 @@ class EntrenamientoNetworkService constructor(context: Context) {
 
     companion object {
         const val URL_E = "https://misw-pf-grupo1-backend-gestor-entrenamientos-klme3r4qta-uc.a.run.app/"
+        const val URL_Consulta = "https://misw-pf-grupo1-backend-gestor-consultas-klme3r4qta-uc.a.run.app/consultas/"
 
         fun postRequest(
             body: JSONObject, responseListener: Response.Listener<JSONObject>,
@@ -43,7 +44,7 @@ class EntrenamientoNetworkService constructor(context: Context) {
         ):
                 JsonArrayRequest {
             val jsonRequest: JsonArrayRequest = object : JsonArrayRequest(
-                Method.GET, URL_E + path, null,
+                Method.GET, URL_Consulta + path, null,
                 responseListener,
                 errorListener
             ) {

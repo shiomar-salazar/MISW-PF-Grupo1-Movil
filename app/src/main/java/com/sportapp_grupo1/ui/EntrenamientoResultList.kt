@@ -2,6 +2,7 @@ package com.sportapp_grupo1.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,34 +52,8 @@ class EntrenamientoResultList : Fragment() {
                 val list = mutableListOf<Entrenamiento>()
                 var item: JSONObject
                 var res:String = ""
-                (0 until response.length()).forEach { it ->
-                    item = response.getJSONObject(it)
-                    val actividad = item.getString("actividad")
-                    if(actividad == "Ciclismo")
-                    {
-                        res = item.getInt("ftp").toString()
-                    }
-                    else
-                    {
-                        res = item.getInt("vo2max").toString()
-                    }
-                    list.add(it,
-                        Entrenamiento(
-                            entrenamientoId = item.getString("id"),
-                            actividad = item.getString("actividad"),
-                            distancia = item.getString("distancia").plus(" km"),
-                            tiempo = item.getString("tiempo"),
-                            date = item.getString("fecha"),
-                            resultado = res,
-                            feedback = item.getString("retroalimentacion")
-                        )
-                    )
-                }
-                viewAdapter!!.results = list
-                showMessage("Carga Exitosa.")
-            },
-            {
-                if(it.networkResponse.statusCode == 404){
+                Log.d("EntrenamientoList", response.length().toString())
+                if( response.length() == 0){
                     showMessage("Usuario no tiene datos cargados aun.")
                     val list = mutableListOf<Entrenamiento>()
                     list.add(0,
@@ -93,11 +68,35 @@ class EntrenamientoResultList : Fragment() {
                         )
                     )
                     viewAdapter!!.results = list
+
+                }else {
+                    (0 until response.length()).forEach { it ->
+                        item = response.getJSONObject(it)
+                        val actividad = item.getString("actividad")
+                        res = if (actividad == "Ciclismo") {
+                            item.getInt("ftp").toString()
+                        } else {
+                            item.getInt("vo2max").toString()
+                        }
+                        list.add(
+                            it,
+                            Entrenamiento(
+                                entrenamientoId = item.getString("id"),
+                                actividad = item.getString("actividad"),
+                                distancia = item.getString("distancia").plus(" km"),
+                                tiempo = item.getString("tiempo"),
+                                date = item.getString("fecha"),
+                                resultado = res,
+                                feedback = item.getString("retroalimentacion")
+                            )
+                        )
+                    }
+                    viewAdapter!!.results = list
+                    showMessage("Carga Exitosa.")
                 }
-                else
-                {
-                    showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
-                }
+            },
+            {
+                showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
             },
             "resultado-entrenamiento/usuario/"+user.userId,
             user.token
