@@ -98,6 +98,7 @@ class EntrenamientoResultListEmptyTest {
         /* Llegar a Entrenamiento Results */
         clickIntoButtonById(R.id.result_list_btn)
         SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService)
     }
 
     /**
