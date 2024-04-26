@@ -95,25 +95,6 @@
                 android:textColor="@color/lightGrey"/>
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="1">
-            <TextView
-                android:id="@+id/altura_title"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/lightGrey"
-                android:text="@string/altura" />
-            <TextView
-                android:id="@+id/altura_text"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/altura_title"
-                android:textSize="20sp"
-                android:textColor="@color/lightGrey"/>
-        </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -131,16 +112,16 @@
             android:orientation="horizontal"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/telefono_title"
+                android:id="@+id/altura_title"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/lightGrey"
-                android:text="@string/telefono" />
+                android:text="@string/altura" />
             <TextView
-                android:id="@+id/Telefono_text"
+                android:id="@+id/altura_text"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/telefono_title"
+                android:layout_below="@id/altura_title"
                 android:textSize="20sp"
                 android:textColor="@color/lightGrey"/>
         </RelativeLayout>
@@ -150,16 +131,16 @@
             android:orientation="horizontal"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/correo_title"
+                android:id="@+id/plan_title"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/lightGrey"
-                android:text="@string/correo" />
+                android:text="@string/plan" />
             <TextView
-                android:id="@+id/correo_text"
+                android:id="@+id/plan_text"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/correo_title"
+                android:layout_below="@+id/plan_title"
                 android:textSize="20sp"
                 android:textColor="@color/lightGrey"/>
         </RelativeLayout>
@@ -199,15 +180,15 @@
             android:orientation="horizontal"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/ciudad_title"
+                android:id="@+id/correo_title"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/lightGrey"
-                android:text="@string/ciudad" />
+                android:text="@string/correo" />
             <TextView
-                android:id="@+id/ciudad_text"
+                android:id="@+id/correo_text"
                 android:layout_width="fill_parent"
-                android:layout_below="@+id/ciudad_title"
+                android:layout_below="@+id/correo_title"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:textColor="@color/lightGrey"/>
@@ -229,16 +210,16 @@
             android:orientation="horizontal"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/vo2max_title"
+                android:id="@+id/ciudad_title"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/lightGrey"
-                android:text="@string/vo2max" />
+                android:text="@string/ciudad" />
             <TextView
-                android:id="@+id/vo2max_text"
+                android:id="@+id/ciudad_text"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/vo2max_title"
+                android:layout_below="@+id/ciudad_title"
                 android:textSize="20sp"
                 android:textColor="@color/lightGrey"/>
         </RelativeLayout>
@@ -248,16 +229,16 @@
             android:orientation="horizontal"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/ftp_title"
+                android:id="@+id/pais_title"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/lightGrey"
-                android:text="@string/ftp" />
+                android:text="@string/pais" />
             <TextView
-                android:id="@+id/ftp_text"
+                android:id="@+id/pais_text"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ftp_title"
+                android:layout_below="@+id/pais_title"
                 android:textSize="20sp"
                 android:textColor="@color/lightGrey"/>
         </RelativeLayout>

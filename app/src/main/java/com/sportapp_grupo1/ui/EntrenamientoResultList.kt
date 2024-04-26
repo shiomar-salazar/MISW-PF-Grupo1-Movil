@@ -99,7 +99,7 @@ class EntrenamientoResultList : Fragment() {
                     showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
                 }
             },
-            "nutricion/resultados-alimentacion/"+user.userId,
+            "resultado-entrenamiento/usuario/"+user.userId,
             user.token
         ))
     }
