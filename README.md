@@ -101,16 +101,13 @@ MISW-PF-Grupo1-Movil
 ├─ .gitignore
 ├─ .idea
 │  ├─ .name
-│  ├─ androidTestResultsUserPreferences.xml
 │  ├─ appInsightsSettings.xml
 │  ├─ compiler.xml
-│  ├─ deploymentTargetDropDown.xml
 │  ├─ gradle.xml
 │  ├─ inspectionProfiles
 │  │  └─ Project_Default.xml
 │  ├─ kotlinc.xml
 │  ├─ migrations.xml
-│  ├─ misc.xml
 │  ├─ modules
 │  │  └─ app
 │  └─ vcs.xml
@@ -127,11 +124,16 @@ MISW-PF-Grupo1-Movil
 │     │        └─ sportapp_grupo1
 │     │           ├─ ExampleInstrumentedTest.kt
 │     │           └─ test
-│     │              ├─ AlimentacionResultTest.kt
-│     │              ├─ EntrenamientoResultTest.kt
+│     │              ├─ AlimentacionResultCreateTest.kt
+│     │              ├─ AlimentacionResultListEmptyTest.kt
+│     │              ├─ EntrenamientoResultCreateTest.kt
+│     │              ├─ EntrenamientoResultListEmptyTest.kt
 │     │              ├─ LoginTest.kt
 │     │              ├─ PlanAlimentacionCreateTest.kt
-│     │              └─ PlanEntrenamientoCreateTest.kt
+│     │              ├─ PlanAlimentacionDetailEmptyTest.kt
+│     │              ├─ PlanEntrenamientoCreateTest.kt
+│     │              ├─ PlanEntrenamientoDetailEmptyTest.kt
+│     │              └─ UserProfileTest.kt
 │     ├─ main
 │     │  ├─ AndroidManifest.xml
 │     │  ├─ java
@@ -144,62 +146,66 @@ MISW-PF-Grupo1-Movil
 │     │  │        │  ├─ PlanEntrenamiento.kt
 │     │  │        │  └─ User.kt
 │     │  │        ├─ network
+│     │  │        │  ├─ AlimentacionNetworkService.kt
 │     │  │        │  ├─ CacheManager.kt
+│     │  │        │  ├─ EntrenamientoNetworkService.kt
 │     │  │        │  ├─ LoginNetworkService.kt
-│     │  │        │  └─ NetworkServiceAdapter.kt
-│     │  │        ├─ repositories
-│     │  │        │  ├─ AlimentacionRepository.kt
-│     │  │        │  ├─ EntrenamientoRepository.kt
-│     │  │        │  ├─ PlanAlimentacionRepository.kt
-│     │  │        │  └─ PlanEntrenamientoRepository.kt
+│     │  │        │  ├─ PlanAlimentacionNetworkService.kt
+│     │  │        │  └─ PlanEntrenamientoNetworkService.kt
 │     │  │        ├─ ui
 │     │  │        │  ├─ adapters
-│     │  │        │  ├─ AlimentacionResult.kt
+│     │  │        │  │  ├─ AlimentacionAdapter.kt
+│     │  │        │  │  └─ EntrenamientoAdapter.kt
+│     │  │        │  ├─ AlimentacionResultCreate.kt
+│     │  │        │  ├─ AlimentacionResultList.kt
 │     │  │        │  ├─ EntrenamientoMenu.kt
-│     │  │        │  ├─ EntrenamientoResult.kt
+│     │  │        │  ├─ EntrenamientoResultCreate.kt
+│     │  │        │  ├─ EntrenamientoResultList.kt
 │     │  │        │  ├─ Home.kt
 │     │  │        │  ├─ MainActivity.kt
 │     │  │        │  ├─ MainFragment.kt
 │     │  │        │  ├─ PlanAlimentacionCreate.kt
 │     │  │        │  ├─ PlanAlimentacionDetail.kt
 │     │  │        │  ├─ PlanEntrenamientoCreate.kt
-│     │  │        │  └─ PlanEntrenamientoDetail.kt
-│     │  │        ├─ validator
-│     │  │        │  ├─ base
-│     │  │        │  │  ├─ BaseValidator.kt
-│     │  │        │  │  ├─ IValidator.kt
-│     │  │        │  │  └─ ValidateResult.kt
-│     │  │        │  ├─ EmailValidator.kt
-│     │  │        │  ├─ EmptyValidator.kt
-│     │  │        │  ├─ PasswordValidator.kt
-│     │  │        │  ├─ PlanAlimentacionValidator.kt
-│     │  │        │  └─ TimeValidator.kt
-│     │  │        └─ viewmodels
-│     │  │           ├─ AlimentacionResultViewModel.kt
-│     │  │           ├─ EntrenamientoMenuViewModel.kt
-│     │  │           ├─ EntrenamientoResultViewModel.kt
-│     │  │           ├─ HomeViewModel.kt
-│     │  │           ├─ PlanAlimentacionViewModel.kt
-│     │  │           └─ PlanEntrenamientoViewModel.kt
+│     │  │        │  ├─ PlanEntrenamientoDetail.kt
+│     │  │        │  └─ ProfileFragment.kt
+│     │  │        └─ validator
+│     │  │           ├─ base
+│     │  │           │  ├─ BaseValidator.kt
+│     │  │           │  ├─ IValidator.kt
+│     │  │           │  └─ ValidateResult.kt
+│     │  │           ├─ DateValidator.kt
+│     │  │           ├─ EmailValidator.kt
+│     │  │           ├─ EmptyValidator.kt
+│     │  │           ├─ PasswordValidator.kt
+│     │  │           ├─ PlanAlimentacionValidator.kt
+│     │  │           └─ TimeValidator.kt
 │     │  └─ res
 │     │     ├─ color
 │     │     │  └─ text_input_box_stroke.xml
 │     │     ├─ drawable
 │     │     │  ├─ background.jpg
+│     │     │  ├─ baseline_add_circle_24.xml
+│     │     │  ├─ baseline_person_24.xml
 │     │     │  ├─ ic_launcher_background.xml
 │     │     │  ├─ ic_launcher_foreground.xml
 │     │     │  └─ logo.jpg
 │     │     ├─ layout
-│     │     │  ├─ alimentacion_result_fragment.xml
+│     │     │  ├─ alimentacion_item.xml
+│     │     │  ├─ alimentacion_result_create_fragment.xml
+│     │     │  ├─ alimentacion_result_list_fragment.xml
+│     │     │  ├─ entrenamiento_item.xml
 │     │     │  ├─ entrenamiento_menu_fragment.xml
 │     │     │  ├─ entrenamiento_result_fragment.xml
+│     │     │  ├─ entrenamiento_result_list_fragment.xml
 │     │     │  ├─ home_fragment.xml
 │     │     │  ├─ main_activity.xml
 │     │     │  ├─ main_fragment.xml
 │     │     │  ├─ plan_alimentacion_create_fragment.xml
 │     │     │  ├─ plan_alimentacion_detail_fragment.xml
 │     │     │  ├─ plan_entrenamiento_create_fragment.xml
-│     │     │  └─ plan_entrenamiento_detail_fragment.xml
+│     │     │  ├─ plan_entrenamiento_detail_fragment.xml
+│     │     │  └─ profile_fragment.xml
 │     │     ├─ layout-v28
 │     │     ├─ mipmap-anydpi-v26
 │     │     │  ├─ ic_launcher.xml
@@ -240,6 +246,7 @@ MISW-PF-Grupo1-Movil
 │           └─ com
 │              └─ sportapp_grupo1
 │                 ├─ CaloriesValidatorUnitTest.kt
+│                 ├─ DateValidatorUnitTest.kt
 │                 ├─ ExampleUnitTest.kt
 │                 ├─ PasswordValidatorUnitTest.kt
 │                 ├─ TimeValidatorUnitTest.kt
