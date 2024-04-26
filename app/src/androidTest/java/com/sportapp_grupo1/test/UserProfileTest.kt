@@ -111,55 +111,50 @@ class UserProfileTest {
         navigateToTestScreen()
         Espresso.onView(ViewMatchers.withId(R.id.nombre_text)).check(
             ViewAssertions.matches(
-                ViewMatchers.withText("Shiomar Salazar Castillo")
+                ViewMatchers.withText("Shiomar Salazar Castillo Normal")
             )
         )
-        //TODO: Descomentar despues de terminar implementacion
-        /*Espresso.onView(ViewMatchers.withId(R.id.edad_text)).check(
+
+        Espresso.onView(ViewMatchers.withId(R.id.edad_text)).check(
             ViewAssertions.matches(
-                ViewMatchers.withText("")
+                ViewMatchers.withText("25")
             )
         )
         Espresso.onView(ViewMatchers.withId(R.id.peso_text)).check(
             ViewAssertions.matches(
-                ViewMatchers.withText("")
+                ViewMatchers.withText("69.0")
             )
         )
         Espresso.onView(ViewMatchers.withId(R.id.altura_text)).check(
             ViewAssertions.matches(
-                ViewMatchers.withText("")
+                ViewMatchers.withText("168.0")
             )
         )
-        Espresso.onView(ViewMatchers.withId(R.id.Telefono_text)).check(
+        Espresso.onView(ViewMatchers.withId(R.id.plan_text)).check(
             ViewAssertions.matches(
-                ViewMatchers.withText("")
-            )
-        )
-        Espresso.onView(ViewMatchers.withId(R.id.correo_text)).check(
-            ViewAssertions.matches(
-                ViewMatchers.withText("")
+                ViewMatchers.withText("Premium")
             )
         )
         Espresso.onView(ViewMatchers.withId(R.id.sexo_text)).check(
             ViewAssertions.matches(
-                ViewMatchers.withText("")
+                ViewMatchers.withText("M")
+            )
+        )
+        Espresso.onView(ViewMatchers.withId(R.id.correo_text)).check(
+            ViewAssertions.matches(
+                ViewMatchers.withText("s.salazarc@uniandes.edu.co")
             )
         )
         Espresso.onView(ViewMatchers.withId(R.id.ciudad_text)).check(
             ViewAssertions.matches(
-                ViewMatchers.withText("")
+                ViewMatchers.withText("Bogota")
             )
         )
-        Espresso.onView(ViewMatchers.withId(R.id.vo2max_text)).check(
+        Espresso.onView(ViewMatchers.withId(R.id.pais_text)).check(
             ViewAssertions.matches(
-                ViewMatchers.withText("")
+                ViewMatchers.withText("Colombia")
             )
         )
-        Espresso.onView(ViewMatchers.withId(R.id.ftp_text)).check(
-            ViewAssertions.matches(
-                ViewMatchers.withText("")
-            )
-        )*/
     }
 
     /**
