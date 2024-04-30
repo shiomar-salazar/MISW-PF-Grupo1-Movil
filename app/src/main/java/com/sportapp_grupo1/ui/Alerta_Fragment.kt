@@ -2,8 +2,10 @@ package com.sportapp_grupo1.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -21,7 +23,6 @@ import com.sportapp_grupo1.databinding.AlertaFragmentBinding
 
 
 class Alerta_Fragment : Fragment() {
-
     private var _binding: AlertaFragmentBinding? = null
     private val binding get() = _binding !!
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -37,7 +38,6 @@ class Alerta_Fragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         getLocation()
         binding.regresarBtn.setOnClickListener {
             findNavController().navigate((R.id.action_alerta_Fragment_to_home2))
@@ -86,7 +86,8 @@ class Alerta_Fragment : Fragment() {
     }
 
     private fun isLocationEnabled(): Boolean {
-        return true
+        val mLocationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
 
     private fun getLocation(){
@@ -96,11 +97,14 @@ class Alerta_Fragment : Fragment() {
             showMessage("Porfavor encender los servicios de ubicacion")
             val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
             startActivity(intent)
+            binding.latitudText.text = "Reintente por favor"
+            binding.longitudText.text = "Reintente por favor"
         } else {
             requestPermissions()
+            binding.latitudText.text = "Reintente por favor"
+            binding.longitudText.text = "Reintente por favor"
         }
     }
-    
 
     private fun showMessage(s: String) {
         Toast.makeText(activity, s, Toast.LENGTH_LONG).show()
