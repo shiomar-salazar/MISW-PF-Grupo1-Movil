@@ -85,7 +85,6 @@
         <item>Muy Mal</item>
         <item>Pesimo</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="nombre">Nombre</string>
     <string name="edad">Edad</string>
     <string name="peso">Peso</string>
@@ -99,5 +98,14 @@
     <string name="cerrar_session">Cerrar Sesion</string>
     <string name="pais">Pais</string>
     <string name="plan">Plan</string>
+    <string name="empezar">Empezar</string>
+    <string name="monitoreo_de_actividad">Monitoreo de Actividad</string>
+    <string name="alerta">Alerta</string>
+    <string name="terminar">Terminar</string>
+    <string name="alerta_enviada">Alerta enviada</string>
+    <string name="longitud">Longitud</string>
+    <string name="latitud">Latitud</string>
+    <string name="informacion_sumistrada">Informacion Sumistrada</string>
+    <string name="regresar">Regresar</string>
 
 </resources>

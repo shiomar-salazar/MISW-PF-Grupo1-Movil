@@ -68,6 +68,9 @@
         <action
             android:id="@+id/action_entrenamiento_Menu_to_entrenamientoResultList"
             app:destination="@id/entrenamientoResultList" />
+        <action
+            android:id="@+id/action_entrenamiento_Menu_to_monitoreo_Fragment"
+            app:destination="@id/monitoreo_Fragment" />
     </fragment>
     <fragment
         android:id="@+id/entrenamientoResult"
@@ -115,5 +118,24 @@
         <action
             android:id="@+id/action_profileFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/monitoreo_Fragment"
+        android:name="com.sportapp_grupo1.ui.Monitoreo_Fragment"
+        tools:layout="@layout/monitoreo_fragment" >
+        <action
+            android:id="@+id/action_monitoreo_Fragment_to_entrenamientoResult"
+            app:destination="@id/entrenamientoResult" />
+        <action
+            android:id="@+id/action_monitoreo_Fragment_to_alerta_Fragment"
+            app:destination="@id/alerta_Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/alerta_Fragment"
+        android:name="com.sportapp_grupo1.ui.Alerta_Fragment"
+        tools:layout="@layout/alerta_fragment" >
+        <action
+            android:id="@+id/action_alerta_Fragment_to_home2"
+            app:destination="@id/home2" />
     </fragment>
 </navigation>
