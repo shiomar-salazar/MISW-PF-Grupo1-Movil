@@ -107,5 +107,6 @@
     <string name="latitud">Latitud</string>
     <string name="informacion_sumistrada">Informacion Sumistrada</string>
     <string name="regresar">Regresar</string>
+    <string name="reintentar">Reintentar</string>
 
 </resources>

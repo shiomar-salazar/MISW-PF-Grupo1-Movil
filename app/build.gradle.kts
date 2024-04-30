@@ -119,4 +119,5 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
     implementation ("androidx.test.espresso:espresso-core:3.5.1")
     implementation ("androidx.test.espresso:espresso-contrib:3.5.1")
+    implementation (libs.play.services.location)
 }
