@@ -98,6 +98,7 @@ dependencies {
     implementation(libs.androidx.junit.ktx)
     implementation(libs.androidx.media3.common)
     implementation(libs.androidx.uiautomator)
+    implementation(libs.androidx.rules)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -121,4 +122,5 @@ dependencies {
     implementation ("androidx.test.espresso:espresso-core:3.5.1")
     implementation ("androidx.test.espresso:espresso-contrib:3.5.1")
     implementation (libs.play.services.location)
+    androidTestImplementation(libs.androidx.rules)
 }

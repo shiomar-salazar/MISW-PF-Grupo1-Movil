@@ -1,17 +1,12 @@
 package com.sportapp_grupo1.test
 
-import android.os.Build
 import android.os.SystemClock
-import android.util.Log
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.uiautomator.UiDevice
-import androidx.test.uiautomator.UiObjectNotFoundException
-import androidx.test.uiautomator.UiSelector
+import androidx.test.rule.GrantPermissionRule
 import com.sportapp_grupo1.R
 import com.sportapp_grupo1.ui.MainActivity
 import org.hamcrest.CoreMatchers
@@ -25,6 +20,12 @@ class EntrenamientoMonitoreoTest {
     @JvmField
     var activityRule: ActivityScenarioRule<MainActivity> =
         ActivityScenarioRule(MainActivity::class.java)
+
+    @JvmField
+    @Rule
+    val location: GrantPermissionRule = GrantPermissionRule.grant(android.Manifest.permission.ACCESS_COARSE_LOCATION,
+        android.Manifest.permission.ACCESS_FINE_LOCATION,
+        android.Manifest.permission.ACCESS_BACKGROUND_LOCATION )
 
     //Constante que define el tiempo de espera para que se carguen los datos retornados por el adapter
     val delayService = Integer.toUnsignedLong(5000)
@@ -100,20 +101,6 @@ class EntrenamientoMonitoreoTest {
         SystemClock.sleep(delayService)
     }
 
-    fun grantPermissionsIfNecessary() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            val allowPermissions = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()).findObject(
-                UiSelector().text("ALLOW"))
-            if (allowPermissions.exists()) {
-                try {
-                    allowPermissions.click()
-                } catch (e: UiObjectNotFoundException) {
-                    Log.d(e.toString(), "No permission dialog found.")
-                }
-            }
-        }
-    }
-
     @Test
     fun Monitoreo_Test_Positive() {
         navigateToTestScreen()
@@ -186,7 +173,6 @@ class EntrenamientoMonitoreoTest {
                 ViewMatchers.isClickable()
             )
         )
-        grantPermissionsIfNecessary()
         SystemClock.sleep(delayService)
         clickIntoButtonById(R.id.reintentarBtn)
         Espresso.onView(
