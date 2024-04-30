@@ -1,25 +1,25 @@
 package com.sportapp_grupo1.test
 
+import android.os.Build
 import android.os.SystemClock
+import android.util.Log
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.LargeTest
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.UiObjectNotFoundException
+import androidx.test.uiautomator.UiSelector
 import com.sportapp_grupo1.R
 import com.sportapp_grupo1.ui.MainActivity
 import org.hamcrest.CoreMatchers
 import org.hamcrest.core.AllOf
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@LargeTest
-@RunWith(AndroidJUnit4::class)
-class UserProfileTest {
+class EntrenamientoMonitoreoTest {
 
     @Rule
     @JvmField
@@ -88,123 +88,121 @@ class UserProfileTest {
         SystemClock.sleep(delayService)
         Espresso.onView(
             AllOf.allOf(
-                ViewMatchers.withId(R.id.fab_profile),
+                ViewMatchers.withId(R.id.entrenamiento),
                 ViewMatchers.isDisplayed()
             )
         )
-        clickIntoButtonById(R.id.fab_profile)
+        /* Llegar a Entrenamiento Menu */
+        clickIntoButtonById(R.id.entrenamiento)
+        SystemClock.sleep(delayService)
+        /* Llegar a Entrenamiento Results */
+        clickIntoButtonById(R.id.monitoreoBtn)
+        SystemClock.sleep(delayService)
+    }
+
+    fun grantPermissionsIfNecessary() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            val allowPermissions = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()).findObject(
+                UiSelector().text("ALLOW"))
+            if (allowPermissions.exists()) {
+                try {
+                    allowPermissions.click()
+                } catch (e: UiObjectNotFoundException) {
+                    Log.d(e.toString(), "No permission dialog found.")
+                }
+            }
+        }
+    }
+
+    @Test
+    fun Monitoreo_Test_Positive() {
+        navigateToTestScreen()
+
+        /* Iniciamos el Monitoreo */
+        clickIntoButtonById(R.id.monitoreoBtn)
+        /* Validamos botones */
+        Espresso.onView(
+            AllOf.allOf(
+                ViewMatchers.withId(R.id.alertaBtn),
+                ViewMatchers.isClickable()
+            )
+        )
+        Espresso.onView(
+            AllOf.allOf(
+                ViewMatchers.withId(R.id.terminarBtn),
+                ViewMatchers.isClickable()
+            )
+        )
+        Espresso.onView(
+            AllOf.allOf(
+                ViewMatchers.withId(R.id.monitoreoBtn),
+                ViewMatchers.isNotClickable()
+            )
+        )
+        /* Esperamos que aumente el contador */
+        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService)
+        clickIntoButtonById(R.id.terminarBtn)
+        Espresso.onView(
+            AllOf.allOf(
+                ViewMatchers.withId(R.id.registrar),
+                ViewMatchers.isClickable()
+            )
+        )
+    }
+
+    @Test
+    fun Monitoreo_Test_Alerta() {
+        navigateToTestScreen()
+
+        /* Iniciamos el Monitoreo */
+        clickIntoButtonById(R.id.monitoreoBtn)
+        /* Validamos botones */
+        Espresso.onView(
+            AllOf.allOf(
+                ViewMatchers.withId(R.id.alertaBtn),
+                ViewMatchers.isClickable()
+            )
+        )
+        Espresso.onView(
+            AllOf.allOf(
+                ViewMatchers.withId(R.id.terminarBtn),
+                ViewMatchers.isClickable()
+            )
+        )
+        Espresso.onView(
+            AllOf.allOf(
+                ViewMatchers.withId(R.id.monitoreoBtn),
+                ViewMatchers.isNotClickable()
+            )
+        )
+        /* Esperamos que aumente el contador */
+        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService)
+        clickIntoButtonById(R.id.alertaBtn)
+        Espresso.onView(
+            AllOf.allOf(
+                ViewMatchers.withId(R.id.regresarBtn),
+                ViewMatchers.isClickable()
+            )
+        )
+        grantPermissionsIfNecessary()
+        SystemClock.sleep(delayService)
+        clickIntoButtonById(R.id.reintentarBtn)
+        Espresso.onView(
+            AllOf.allOf(
+                ViewMatchers.withId(R.id.regresarBtn),
+                ViewMatchers.isClickable()
+            )
+        )
+        SystemClock.sleep(delayService)
+        clickIntoButtonById(R.id.regresarBtn)
         SystemClock.sleep(delayService)
         Espresso.onView(
             AllOf.allOf(
-                ViewMatchers.withId(R.id.cerrar_sesion),
+                ViewMatchers.withId(R.id.entrenamiento),
                 ViewMatchers.isDisplayed()
             )
         )
     }
-
-    /**
-     * Esta prueba tiene la intencion de comprobar la informacion de Perfil
-     */
-    @Test
-    fun positiveTestSuccesfull(){
-        /* Primero navegamos a la pantalla correcta */
-        navigateToTestScreen()
-        Espresso.onView(ViewMatchers.withId(R.id.nombre_text)).check(
-            ViewAssertions.matches(
-                ViewMatchers.withText("Shiomar Alberto Salazar")
-            )
-        )
-
-        Espresso.onView(ViewMatchers.withId(R.id.edad_text)).check(
-            ViewAssertions.matches(
-                ViewMatchers.withText("25")
-            )
-        )
-        Espresso.onView(ViewMatchers.withId(R.id.peso_text)).check(
-            ViewAssertions.matches(
-                ViewMatchers.withText("69.0")
-            )
-        )
-        Espresso.onView(ViewMatchers.withId(R.id.altura_text)).check(
-            ViewAssertions.matches(
-                ViewMatchers.withText("168.0")
-            )
-        )
-        Espresso.onView(ViewMatchers.withId(R.id.plan_text)).check(
-            ViewAssertions.matches(
-                ViewMatchers.withText("Premium")
-            )
-        )
-        Espresso.onView(ViewMatchers.withId(R.id.sexo_text)).check(
-            ViewAssertions.matches(
-                ViewMatchers.withText("M")
-            )
-        )
-        Espresso.onView(ViewMatchers.withId(R.id.correo_text)).check(
-            ViewAssertions.matches(
-                ViewMatchers.withText("s.salazarc@uniandes.edu.co")
-            )
-        )
-        Espresso.onView(ViewMatchers.withId(R.id.ciudad_text)).check(
-            ViewAssertions.matches(
-                ViewMatchers.withText("Bogota")
-            )
-        )
-        Espresso.onView(ViewMatchers.withId(R.id.pais_text)).check(
-            ViewAssertions.matches(
-                ViewMatchers.withText("Colombia")
-            )
-        )
-    }
-
-    /**
-     * Esta prueba tiene la intencion de comprobar los botones no implementados
-     */
-    @Test
-    fun notImplementedButtons(){
-        /* Primero navegamos a la pantalla correcta */
-        navigateToTestScreen()
-        clickIntoButtonById(R.id.editar_perfil)
-        SystemClock.sleep(delayService2)
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(R.id.cerrar_sesion),
-                ViewMatchers.isDisplayed()
-            )
-        )
-        clickIntoButtonById(R.id.cambiar_contraseña)
-        SystemClock.sleep(delayService2)
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(R.id.cerrar_sesion),
-                ViewMatchers.isDisplayed()
-            )
-        )
-        clickIntoButtonById(R.id.mejorar_plan)
-        SystemClock.sleep(delayService2)
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(R.id.cerrar_sesion),
-                ViewMatchers.isDisplayed()
-            )
-        )
-    }
-    /**
-     * Esta prueba tiene la intencion de comprobar el cerrado de sesion
-     */
-    @Test
-    fun cerrarSesion(){
-        /* Primero navegamos a la pantalla correcta */
-        navigateToTestScreen()
-        clickIntoButtonById(R.id.cerrar_sesion)
-        SystemClock.sleep(delayService2)
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(R.id.login_button),
-                ViewMatchers.isDisplayed()
-            )
-        )
-
-    }
-
 }
