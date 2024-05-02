@@ -105,7 +105,7 @@ class Home : Fragment() {
             showMessage("Not implemented yet.")
         }
         binding.sugerencias.setOnClickListener {
-            showMessage("Not implemented yet.")
+            findNavController().navigate((R.id.action_home2_to_sugerenciasList))
         }
         binding.planAlimentacion.setOnClickListener {
             findNavController().navigate(R.id.action_home2_to_planAlimentacionDetail)
