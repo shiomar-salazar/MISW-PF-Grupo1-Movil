@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
@@ -32,7 +31,7 @@ class EntrenamientoMenu : Fragment() {
         binding.goal.text = sharedPref!!.getInt("entre_goal",0).toString().plus(" km")
 
         binding.monitoreoBtn.setOnClickListener {
-            showMessage("Not implemented yet.")
+            findNavController().navigate((R.id.action_entrenamiento_Menu_to_monitoreo_Fragment))
         }
         binding.entreResultBtn.setOnClickListener {
             findNavController().navigate((R.id.action_entrenamiento_Menu_to_entrenamientoResult))
@@ -40,10 +39,6 @@ class EntrenamientoMenu : Fragment() {
         binding.resultListBtn.setOnClickListener {
             findNavController().navigate((R.id.action_entrenamiento_Menu_to_entrenamientoResultList))
         }
-    }
-
-    private fun showMessage(s: String) {
-        Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

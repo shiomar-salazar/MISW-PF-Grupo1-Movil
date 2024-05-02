@@ -42,7 +42,7 @@ class MainFragment : Fragment() {
         volleyBroker = this.context?.let { LoginNetworkService(it) }!!
 
         binding.recuperar.setOnClickListener {
-            showMessage("Not implemented yet.")
+            showMessage("No es Parte del MVP.")
         }
 
         binding.registro.setOnClickListener {

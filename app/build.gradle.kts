@@ -96,6 +96,9 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.volley)
     implementation(libs.androidx.junit.ktx)
+    implementation(libs.androidx.media3.common)
+    implementation(libs.androidx.uiautomator)
+    implementation(libs.androidx.rules)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -118,4 +121,6 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
     implementation ("androidx.test.espresso:espresso-core:3.5.1")
     implementation ("androidx.test.espresso:espresso-contrib:3.5.1")
+    implementation (libs.play.services.location)
+    androidTestImplementation(libs.androidx.rules)
 }

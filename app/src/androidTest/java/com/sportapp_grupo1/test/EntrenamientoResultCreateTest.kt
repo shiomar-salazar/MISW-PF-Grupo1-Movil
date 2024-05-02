@@ -209,32 +209,4 @@ class EntrenamientoResultCreateTest {
             )
         )
     }
-
-    /*TODO: Remove this after Monitoring HU is implemented */
-    @Test
-    fun monitoring_Btn_Test() {
-        setTextViewByValue(R.id.input_username,"s.salazarc@uniandes.edu.co")
-        setTextViewByValue(R.id.input_password,"123456789156Aa-")
-        clickIntoButtonById(R.id.login_button)
-        SystemClock.sleep(delayService2)
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(R.id.entrenamiento),
-                ViewMatchers.isDisplayed()
-            )
-        )
-        /* Llegar a Entrenamiento Menu */
-        clickIntoButtonById(R.id.entrenamiento)
-        SystemClock.sleep(delayService2)
-        /* Llegar a Entrenamiento Results */
-        clickIntoButtonById(R.id.monitoreoBtn)
-        SystemClock.sleep(delayService2)
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(R.id.monitoreoBtn),
-                ViewMatchers.isDisplayed()
-            )
-        )
-    }
-
 }
