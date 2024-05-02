@@ -174,6 +174,8 @@ class EntrenamientoMonitoreoTest {
             )
         )
         SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService)
         clickIntoButtonById(R.id.reintentarBtn)
         Espresso.onView(
             AllOf.allOf(
@@ -181,6 +183,8 @@ class EntrenamientoMonitoreoTest {
                 ViewMatchers.isClickable()
             )
         )
+        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService)
         SystemClock.sleep(delayService)
         clickIntoButtonById(R.id.regresarBtn)
         SystemClock.sleep(delayService)

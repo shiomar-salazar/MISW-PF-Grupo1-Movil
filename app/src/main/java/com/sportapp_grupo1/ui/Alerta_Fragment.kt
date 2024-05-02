@@ -20,6 +20,9 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.sportapp_grupo1.R
 import com.sportapp_grupo1.databinding.AlertaFragmentBinding
+import com.sportapp_grupo1.network.CacheManager
+import com.sportapp_grupo1.network.EntrenamientoNetworkService
+import org.json.JSONObject
 
 
 class Alerta_Fragment : Fragment() {
@@ -27,6 +30,7 @@ class Alerta_Fragment : Fragment() {
     private val binding get() = _binding !!
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val permissionId = 2
+    private  lateinit var volleyBroker: EntrenamientoNetworkService
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +41,11 @@ class Alerta_Fragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("UseRequireInsteadOfGet")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        volleyBroker = this.context?.let { EntrenamientoNetworkService(it) }!!
+
         getLocation()
         binding.regresarBtn.setOnClickListener {
             findNavController().navigate((R.id.action_alerta_Fragment_to_home2))
@@ -52,14 +60,33 @@ class Alerta_Fragment : Fragment() {
     fun getLastKnownLocation() {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location->
-                showMessage("Ubicacion encontrada")
                 if (location != null) {
                     binding.latitudText.text = location.latitude.toString()
                     binding.longitudText.text = location.longitude.toString()
+
+                    val user = CacheManager.getInstance(this.requireContext()).getUsuario()
+                    val params = mapOf(
+                        "latitud" to location.latitude.toString(),
+                        "longitud" to location.longitude.toString(),
+                        "descripcion" to "Alerta de Emergencia durante Entrenamiento"
+                    )
+
+                    volleyBroker.instance.add(
+                        EntrenamientoNetworkService.postRequestAlerta(
+                            JSONObject(params),
+                            {
+                                /* Mostar Toast */
+                                showMessage("Envio Exitoso.")
+                            },
+                            {
+                                showMessage("Envio Fallido.Error:".plus(it.networkResponse.statusCode.toString()))
+                            },
+                            user.token
+                        ))
                 }
             }
         fusedLocationClient.lastLocation.addOnFailureListener {
-            Log.d("Error", it.toString())
+            Log.d("Error en Ubicacion", it.toString())
         }
     }
 

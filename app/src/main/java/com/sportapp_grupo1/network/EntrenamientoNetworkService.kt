@@ -16,6 +16,7 @@ class EntrenamientoNetworkService constructor(context: Context) {
     companion object {
         const val URL_E = "https://misw-pf-grupo1-backend-gestor-entrenamientos-klme3r4qta-uc.a.run.app/"
         const val URL_Consulta = "https://misw-pf-grupo1-backend-gestor-consultas-klme3r4qta-uc.a.run.app/consultas/"
+        const val URL_Alerta = "https://misw-pf-grupo1-backend-gestor-entrenamientos-klme3r4qta-uc.a.run.app/entrenamientos/alerta"
 
         fun postRequest(
             body: JSONObject, responseListener: Response.Listener<JSONObject>,
@@ -45,6 +46,27 @@ class EntrenamientoNetworkService constructor(context: Context) {
                 JsonArrayRequest {
             val jsonRequest: JsonArrayRequest = object : JsonArrayRequest(
                 Method.GET, URL_Consulta + path, null,
+                responseListener,
+                errorListener
+            ) {
+                //this is the part, that adds the header to the request
+                override fun getHeaders(): Map<String, String> {
+                    val params: MutableMap<String, String> = HashMap()
+                    params["Authorization"] = "Bearer $token"
+                    params["content-type"] = "application/json"
+                    return params
+                }
+            }
+            return jsonRequest
+        }
+
+        fun postRequestAlerta(
+            body: JSONObject, responseListener: Response.Listener<JSONObject>,
+            errorListener: Response.ErrorListener, token: String
+        ):
+                JsonObjectRequest {
+            val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(
+                Method.POST, URL_Alerta, body,
                 responseListener,
                 errorListener
             ) {
