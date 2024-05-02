@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.AlimentacionResultList">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/title"
@@ -40,4 +44,6 @@
         android:contentDescription="@string/registrar_nuevo_resultado"
         android:src="@drawable/baseline_add_circle_24" />
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</ScrollView>

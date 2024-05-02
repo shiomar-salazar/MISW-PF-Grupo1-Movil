@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_home2_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_home2_to_sugerenciasList"
+            app:destination="@id/sugerenciasList" />
     </fragment>
     <fragment
         android:id="@+id/planentrenamiento_crear_fragment"
@@ -136,6 +139,22 @@
         tools:layout="@layout/alerta_fragment" >
         <action
             android:id="@+id/action_alerta_Fragment_to_home2"
+            app:destination="@id/home2" />
+    </fragment>
+    <fragment
+        android:id="@+id/sugerenciasList"
+        android:name="com.sportapp_grupo1.ui.SugerenciasList"
+        tools:layout="@layout/sugerencias_list_fragment" >
+        <action
+            android:id="@+id/action_sugerenciasList_to_sugerenciasDetail"
+            app:destination="@id/sugerenciasDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/sugerenciasDetail"
+        android:name="com.sportapp_grupo1.ui.SugerenciasDetail"
+        tools:layout="@layout/sugerencias_detail_fragment" >
+        <action
+            android:id="@+id/action_sugerenciasDetail_to_home2"
             app:destination="@id/home2" />
     </fragment>
 </navigation>
