@@ -153,6 +153,9 @@
         android:id="@+id/sugerenciasDetail"
         android:name="com.sportapp_grupo1.ui.SugerenciasDetail"
         tools:layout="@layout/sugerencias_detail_fragment" >
+        <argument
+            android:name="sugerneciaId"
+            app:argType="string" />
         <action
             android:id="@+id/action_sugerenciasDetail_to_home2"
             app:destination="@id/home2" />

@@ -4,8 +4,10 @@ import android.content.Context
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONArray
+import org.json.JSONObject
 
 class SugerenciasNetworkService constructor(context: Context) {
 
@@ -22,6 +24,27 @@ class SugerenciasNetworkService constructor(context: Context) {
                 JsonArrayRequest {
             val jsonRequest: JsonArrayRequest = object : JsonArrayRequest(
                 Method.GET, URL, null,
+                responseListener,
+                errorListener
+            ) {
+                //this is the part, that adds the header to the request
+                override fun getHeaders(): Map<String, String> {
+                    val params: MutableMap<String, String> = HashMap()
+                    params["Authorization"] = "Bearer $token"
+                    params["content-type"] = "application/json"
+                    return params
+                }
+            }
+            return jsonRequest
+        }
+
+        fun getRequest_single(
+            responseListener: Response.Listener<JSONObject>,
+            errorListener: Response.ErrorListener,sugerenciaId: String, token: String
+        ):
+                JsonObjectRequest {
+            val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(
+                Method.GET, "$URL/$sugerenciaId", null,
                 responseListener,
                 errorListener
             ) {

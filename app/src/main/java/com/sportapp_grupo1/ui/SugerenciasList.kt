@@ -13,7 +13,7 @@ import com.sportapp_grupo1.databinding.SugerenciasListFragmentBinding
 import com.sportapp_grupo1.models.Sugerencia
 import com.sportapp_grupo1.network.CacheManager
 import com.sportapp_grupo1.network.SugerenciasNetworkService
-import com.sportapp_grupo1.ui.adapters.SugerenciaAdapter
+import com.sportapp_grupo1.ui.adapters.SugerenciasAdapter
 import org.json.JSONObject
 
 class SugerenciasList : Fragment() {
@@ -21,7 +21,7 @@ class SugerenciasList : Fragment() {
     private var _binding: SugerenciasListFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
-    private var viewAdapter: SugerenciaAdapter? = null
+    private var viewAdapter: SugerenciasAdapter? = null
     private  lateinit var volleyBroker: SugerenciasNetworkService
 
 
@@ -31,7 +31,7 @@ class SugerenciasList : Fragment() {
     ): View? {
         _binding = SugerenciasListFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewAdapter = SugerenciaAdapter()
+        viewAdapter = SugerenciasAdapter()
         return view
     }
 
@@ -59,11 +59,6 @@ class SugerenciasList : Fragment() {
                                 costo = item.getString("costo"),
                                 nombre = item.getString("nombre").take(18),
                                 lugar = item.getString("lugar"),
-                                fecha = "",
-                                descripcion = "",
-                                estado = "",
-                                frecuencia = "",
-                                horario = emptyList()
                             )
                         )
                     }

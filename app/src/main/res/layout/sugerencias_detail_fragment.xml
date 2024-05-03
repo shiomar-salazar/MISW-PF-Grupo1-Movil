@@ -3,12 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.SugerenciasDetail">
 
-    <data>
-        <variable
-            name="sugerencia"
-            type="com.sportapp_grupo1.models.Sugerencia" />
-    </data>
-
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -42,9 +36,9 @@
                 android:text="@string/nombre_title" />
 
             <TextView
+                android:id="@+id/nombre_text"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@{sugerencia.nombre}"
                 android:textSize="20sp"
                 android:textColor="@color/lightGrey"/>
         </LinearLayout>
@@ -66,9 +60,9 @@
                 android:text="@string/costo" />
 
             <TextView
+                android:id="@+id/costo_text"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@{sugerencia.costo}"
                 android:textSize="20sp"
                 android:textColor="@color/lightGrey"/>
         </LinearLayout>
@@ -90,9 +84,9 @@
                 android:text="@string/lugar" />
 
             <TextView
+                android:id="@+id/lugar_text"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@{sugerencia.lugar}"
                 android:textSize="20sp"
                 android:textColor="@color/lightGrey"/>
         </LinearLayout>
@@ -114,9 +108,9 @@
                 android:text="@string/fecha_label" />
 
             <TextView
+                android:id="@+id/fecha_text"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@{sugerencia.fecha}"
                 android:textSize="20sp"
                 android:textColor="@color/lightGrey"/>
         </LinearLayout>
@@ -137,12 +131,15 @@
                 android:textColor="@color/lightGrey"
                 android:text="@string/hora" />
 
-            <TextView
-                android:layout_width="fill_parent"
+            <Spinner
+                android:id="@+id/hora_spinner"
+                android:layout_marginTop="5dp"
+                style="?android:attr/spinnerItemStyle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{sugerencia.fecha}"
-                android:textSize="20sp"
-                android:textColor="@color/lightGrey"/>
+                android:background="@android:drawable/btn_dropdown"
+                android:overlapAnchor="false"
+                android:spinnerMode="dropdown" />
         </LinearLayout>
 
         <LinearLayout
@@ -162,16 +159,17 @@
                 android:text="@string/descripcion" />
 
             <TextView
+                android:id="@+id/descripcion_text"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@{sugerencia.descripcion}"
                 android:textSize="20sp"
                 android:textColor="@color/lightGrey"/>
         </LinearLayout>
 
         <Button
-            android:id="@+id/result_list_btn"
+            android:id="@+id/registrar_btn"
             android:paddingVertical="10dp"
+            android:layout_marginTop="25dp"
             android:paddingHorizontal="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -181,10 +179,5 @@
             android:backgroundTint="@color/ButtonBlue"
             android:textAllCaps="false"
             android:textSize="20sp"  />
-
-
-
-
     </RelativeLayout>
-
 </layout>

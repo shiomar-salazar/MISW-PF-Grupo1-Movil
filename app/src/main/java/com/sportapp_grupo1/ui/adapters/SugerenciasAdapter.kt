@@ -11,7 +11,7 @@ import com.sportapp_grupo1.databinding.SugerenciasItemBinding
 import com.sportapp_grupo1.models.Sugerencia
 import com.sportapp_grupo1.ui.SugerenciasListDirections
 
-class SugerenciasAdapter: RecyclerView.Adapter<SugerenciasAdapter.SugerenciaViewHolder>(){
+class SugerenciasAdapter: RecyclerView.Adapter<SugerenciasAdapter.SugerenciasViewHolder>(){
 
     var sugerencias:List<Sugerencia> = emptyList()
     set(value) {
@@ -19,21 +19,21 @@ class SugerenciasAdapter: RecyclerView.Adapter<SugerenciasAdapter.SugerenciaView
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SugerenciaViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SugerenciasViewHolder {
         val withDataBinding: SugerenciasItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            SugerenciaViewHolder.LAYOUT,
+            SugerenciasViewHolder.LAYOUT,
             parent,
             false
         )
-        return SugerenciaViewHolder(withDataBinding)
+        return SugerenciasViewHolder(withDataBinding)
     }
 
     override fun getItemCount(): Int {
         return sugerencias.size
     }
 
-    override fun onBindViewHolder(holder: SugerenciaViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SugerenciasViewHolder, position: Int) {
         holder.viewDataBinding.also {
             it.sugerencia = sugerencias[position]
             holder.viewDataBinding.root.setOnClickListener{
@@ -43,7 +43,7 @@ class SugerenciasAdapter: RecyclerView.Adapter<SugerenciasAdapter.SugerenciaView
         }
     }
 
-    class SugerenciaViewHolder (val viewDataBinding: SugerenciasItemBinding) :
+    class SugerenciasViewHolder (val viewDataBinding: SugerenciasItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
         companion object {
             @LayoutRes
