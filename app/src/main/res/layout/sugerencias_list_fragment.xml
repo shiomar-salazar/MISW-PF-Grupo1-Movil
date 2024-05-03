@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.EntrenamientoResultList">
+    tools:context=".ui.SugerenciasList">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/title"
@@ -18,18 +18,18 @@
             android:layout_marginBottom="25dp"
             android:textColor="@color/lightGrey"
             android:layout_marginEnd="10dp"
-            android:text="@string/resultados_de_entrenamiento"
+            android:text="@string/listado_de_sugerencias"
             android:textSize="30sp"
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/entre_result_fragment"
+            android:id="@+id/sugerencia_item_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/title"
-            tools:listitem="@layout/entrenamiento_item" />
+            tools:listitem="@layout/sugerencias_item" />
 
     </RelativeLayout>
 
 
-</ScrollView>
+</FrameLayout>

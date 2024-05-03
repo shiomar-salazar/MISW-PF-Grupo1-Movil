@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ui.SugerenciaList">
+
+    <data>
+        <variable
+            name="sugerencia"
+            type="com.sportapp_grupo1.models.Sugerencia" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/lightGrey"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:strokeWidth="2dp">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_row="0"
+                    android:layout_column="0">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nombre_title"
+                        android:textColor="@color/lightGrey"
+                        android:textSize="20sp" />
+                    <TextView
+                        android:id="@+id/suge_list_nombre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/lightGrey"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginStart="5dp"
+                        android:text="@{sugerencia.nombre}"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_row="1"
+                    android:layout_column="0">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/costo"
+                        android:textColor="@color/lightGrey"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/suge_list_costo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/lightGrey"
+                        android:layout_marginStart="5dp"
+                        android:text="@{sugerencia.costo}"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_row="2"
+                    android:layout_column="0">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lugar"
+                        android:textColor="@color/lightGrey"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/suge_list_lugar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/lightGrey"
+                        android:layout_marginStart="5dp"
+                        android:text="@{sugerencia.lugar}"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+            </GridLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

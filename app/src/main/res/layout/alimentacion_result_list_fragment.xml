@@ -18,12 +18,18 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ali_result_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/title"
+        android:layout_height="wrap_content"
         tools:listitem="@layout/alimentacion_item" />
+
+    </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_result"

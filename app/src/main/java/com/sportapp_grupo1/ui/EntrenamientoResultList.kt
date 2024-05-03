@@ -2,7 +2,6 @@ package com.sportapp_grupo1.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,10 +51,8 @@ class EntrenamientoResultList : Fragment() {
                 val list = mutableListOf<Entrenamiento>()
                 var item: JSONObject
                 var res:String = ""
-                Log.d("EntrenamientoList", response.length().toString())
                 if( response.length() == 0){
                     showMessage("Usuario no tiene datos cargados aun.")
-                    val list = mutableListOf<Entrenamiento>()
                     list.add(0,
                         Entrenamiento(
                             entrenamientoId = "",
