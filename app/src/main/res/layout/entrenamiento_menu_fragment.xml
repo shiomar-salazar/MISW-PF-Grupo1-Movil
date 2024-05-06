@@ -29,6 +29,7 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
+
     <Button
         android:id="@+id/monitoreoBtn"
         android:layout_width="300dp"
@@ -37,9 +38,26 @@
         android:layout_above="@id/entre_result_btn"
         android:layout_centerHorizontal="true"
         android:backgroundTint="@color/ButtonGrey"
+        android:visibility="visible"
         android:text="@string/monitoreo"
         android:textAllCaps="false"
         android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/not_premium_text"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="18dp"
+        android:textColor="@color/lightGrey"
+        android:text="@string/plan_intermedio"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:layout_above="@id/entre_result_btn"
+        />
 
     <Button
         android:id="@+id/entre_result_btn"

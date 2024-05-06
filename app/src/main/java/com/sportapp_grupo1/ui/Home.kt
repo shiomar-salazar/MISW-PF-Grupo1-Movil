@@ -48,6 +48,16 @@ class Home : Fragment() {
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
         binding.header.text = "Hola ".plus(user.nombres.substringBefore(" "))
 
+        if (user.plan != "Premium"){
+            binding.notPremiumText.visibility = View.VISIBLE
+            binding.tusEventos.isClickable = false
+            binding.tusEventos.visibility = View.INVISIBLE
+        }else{
+            binding.tusEventos.setOnClickListener {
+                showMessage("Not implemented yet.")
+            }
+        }
+
         volleyBroker.instance.add(
             PlanEntrenamientoNetworkService.getRequest(
                 { response ->
@@ -100,9 +110,6 @@ class Home : Fragment() {
                 apply()
             }
             findNavController().navigate((R.id.action_home2_to_entrenamiento_Menu))
-        }
-        binding.tusEventos.setOnClickListener {
-            showMessage("Not implemented yet.")
         }
         binding.sugerencias.setOnClickListener {
             findNavController().navigate((R.id.action_home2_to_sugerenciasList))

@@ -159,38 +159,19 @@
                 android:textStyle="bold"
                 android:text="@string/eventos_cerca_de_ti"/>
             <TextView
-                android:id="@+id/event_name_text"
+                android:id="@+id/sugerencia_subtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:textColor="@color/lightGrey"
-                android:text="Nombre del Evento"
+                android:text="@string/aqui_podras_ver_eventos_cerca_de_ti"
                 android:textSize="15sp"
                 android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+
                 android:layout_below="@+id/title_sugerencias"
                 />
-            <TextView
-                android:id="@+id/event_day_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:textColor="@color/lightGrey"
-                android:text="Fecha del Evento"
-                android:textSize="15sp"
-                android:layout_marginTop="5dp"
-                android:layout_below="@+id/event_name_text"
-                />
-            <TextView
-                android:id="@+id/event_cost_text"
-                android:layout_width="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_height="wrap_content"
-                android:textColor="@color/lightGrey"
-                android:text="Costo del Evento"
-                android:textSize="15sp"
-                android:layout_marginTop="5dp"
-                android:layout_below="@+id/event_day_text"
-                />
+
             <Button
                 android:id="@+id/sugerencias"
                 android:text="@string/ver_mas"
@@ -198,7 +179,7 @@
                 android:textSize="15sp"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_below="@+id/event_cost_text"/>
+                android:layout_below="@+id/sugerencia_subtitle"/>
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -226,48 +207,43 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginTop="5dp"
-                android:text="Tus proximos eventos"/>
+                android:text="@string/tus_proximos_eventos"/>
             <TextView
-                android:id="@+id/my_event_name_text"
+                android:id="@+id/event_subtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:textColor="@color/lightGrey"
-                android:text="Nombre del Evento"
+                android:text="@string/aqui_podras_ver_tus_eventos_registrados"
                 android:textSize="15sp"
                 android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+
                 android:layout_below="@+id/title_eventos"
                 />
             <TextView
-                android:id="@+id/my_event_day_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:textColor="@color/lightGrey"
-                android:text="Fecha del Evento"
-                android:textSize="15sp"
-                android:layout_marginTop="5dp"
-                android:layout_below="@+id/my_event_name_text"
-                />
-            <TextView
-                android:id="@+id/my_event_cost_text"
+                android:id="@+id/not_premium_text"
                 android:layout_width="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_height="wrap_content"
                 android:textColor="@color/lightGrey"
-                android:text="Costo del Evento"
+                android:text="@string/plan_premium_anual"
+                android:gravity="center_horizontal"
+                android:visibility="invisible"
                 android:textSize="15sp"
+                android:textStyle="bold"
                 android:layout_marginTop="5dp"
-                android:layout_below="@+id/my_event_day_text"
+                android:layout_below="@+id/event_subtitle"
                 />
             <Button
                 android:id="@+id/tus_eventos"
                 android:text="@string/ver_mas"
                 android:layout_width="wrap_content"
+                android:visibility="visible"
                 android:textSize="15sp"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_below="@+id/my_event_cost_text"/>
+                android:layout_below="@+id/event_subtitle"/>
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 

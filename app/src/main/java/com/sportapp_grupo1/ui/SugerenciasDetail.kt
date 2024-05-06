@@ -37,6 +37,19 @@ class SugerenciasDetail : Fragment() {
         volleyBroker = this.context?.let { SugerenciasNetworkService(it) }!!
 
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
+
+        if (user.plan != "Premium") {
+            binding.registrarBtn.visibility = View.INVISIBLE
+            binding.registrarBtn.isClickable = false
+
+        } else {
+            binding.registrarBtn.setOnClickListener {
+                showMessage("Not implemented Yet")
+                NavigateHome()
+            }
+        }
+
+
         volleyBroker.instance.add(
             SugerenciasNetworkService.getRequest_single(
             {response ->
@@ -79,10 +92,7 @@ class SugerenciasDetail : Fragment() {
             user.token
         ))
 
-        binding.registrarBtn.setOnClickListener {
-            showMessage("Not implemented Yet")
-            NavigateHome()
-        }
+
     }
 
 

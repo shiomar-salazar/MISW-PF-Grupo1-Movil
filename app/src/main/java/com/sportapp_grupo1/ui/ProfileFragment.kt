@@ -56,13 +56,13 @@ class ProfileFragment : Fragment() {
             findNavController().navigate((R.id.action_profileFragment_to_mainFragment))
         }
         binding.cambiarContraseA.setOnClickListener {
-            showMessage("Fuera del Alcance del MVP.")
+            showMessage("Fuera del alcance del MVP.")
         }
         binding.mejorarPlan.setOnClickListener {
-            showMessage("Fuera del Alcance del MVP.")
+            showMessage("Fuera del alcance del MVP.")
         }
         binding.editarPerfil.setOnClickListener {
-            showMessage("Fuera del Alcance del MVP.")
+            showMessage("Fuera del alcance del MVP.")
         }
 
     }
