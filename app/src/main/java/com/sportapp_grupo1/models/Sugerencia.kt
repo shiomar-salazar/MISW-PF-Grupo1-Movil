@@ -9,5 +9,6 @@ data class Sugerencia(
     val descripcion:String = "",
     val estado:String = "",
     val frecuencia: String =" ",
-    val horario:List<String> = emptyList()
+    val horario:List<String> = emptyList(),
+    val horario_final:String = ""
 )

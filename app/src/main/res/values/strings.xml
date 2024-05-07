@@ -112,7 +112,7 @@
     <string name="nombre_title">Nombre:</string>
     <string name="costo">Costo:</string>
     <string name="lugar">Lugar:</string>
-    <string name="detalle_de_evento">Detalle de Evento</string>
+    <string name="detalle_de_evento">Detalle del Evento</string>
     <string name="hora">Hora:</string>
     <string name="descripcion">Descripcion:</string>
     <string name="tus_proximos_eventos">Tus proximos eventos</string>
@@ -120,4 +120,5 @@
     <string name="plan_premium_anual">Esta funcionalidad solo esta disponible para planes Premium de pago anual</string>
     <string name="plan_intermedio">La funcionalidad de Monitoreo solo esta disponible para planes Intermedios de pago mensual</string>
     <string name="aqui_podras_ver_eventos_cerca_de_ti">Aqui podras ver eventos cerca de ti</string>
+    <string name="mis_eventos">Mis Eventos</string>
 </resources>

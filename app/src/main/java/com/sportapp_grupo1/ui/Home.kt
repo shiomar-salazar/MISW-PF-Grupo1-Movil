@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
@@ -54,7 +53,7 @@ class Home : Fragment() {
             binding.tusEventos.visibility = View.INVISIBLE
         }else{
             binding.tusEventos.setOnClickListener {
-                showMessage("Not implemented yet.")
+                findNavController().navigate((R.id.action_home2_to_eventosList))
             }
         }
 
@@ -125,10 +124,6 @@ class Home : Fragment() {
         binding.fabProfile.setOnClickListener{
             findNavController().navigate(R.id.action_home2_to_profileFragment)
         }
-    }
-
-    private fun showMessage(s: String) {
-        Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
