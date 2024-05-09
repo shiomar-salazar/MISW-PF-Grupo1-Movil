@@ -5,6 +5,7 @@ data class User(
     val token: String,
     val nombres:String,
     val rol: String,
-    val plan: String
+    val plan: String,
+    val correo: String = ""
 
 )

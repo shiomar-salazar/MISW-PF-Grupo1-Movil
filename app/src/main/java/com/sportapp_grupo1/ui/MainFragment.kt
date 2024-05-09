@@ -79,7 +79,8 @@ class MainFragment : Fragment() {
                             nombres = response.optString("nombres"),
                             rol = response.optString("tipo_usuario"),
                             plan = response.optString("tipo_plan"),
-                            token = response.optString("token")
+                            token = response.optString("token"),
+                            correo = username
                         )
                         CacheManager.getInstance(this.requireContext()).saveUsuario(user)
                         if( user.rol == "Usuario"){
