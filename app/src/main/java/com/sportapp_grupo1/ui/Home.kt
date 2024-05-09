@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.sportapp_grupo1.R
@@ -47,6 +46,16 @@ class Home : Fragment() {
 
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
         binding.header.text = "Hola ".plus(user.nombres.substringBefore(" "))
+
+        if (user.plan != "Premium"){
+            binding.notPremiumText.visibility = View.VISIBLE
+            binding.tusEventos.isClickable = false
+            binding.tusEventos.visibility = View.INVISIBLE
+        }else{
+            binding.tusEventos.setOnClickListener {
+                findNavController().navigate((R.id.action_home2_to_eventosList))
+            }
+        }
 
         volleyBroker.instance.add(
             PlanEntrenamientoNetworkService.getRequest(
@@ -101,9 +110,6 @@ class Home : Fragment() {
             }
             findNavController().navigate((R.id.action_home2_to_entrenamiento_Menu))
         }
-        binding.tusEventos.setOnClickListener {
-            showMessage("Not implemented yet.")
-        }
         binding.sugerencias.setOnClickListener {
             findNavController().navigate((R.id.action_home2_to_sugerenciasList))
         }
@@ -118,10 +124,6 @@ class Home : Fragment() {
         binding.fabProfile.setOnClickListener{
             findNavController().navigate(R.id.action_home2_to_profileFragment)
         }
-    }
-
-    private fun showMessage(s: String) {
-        Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

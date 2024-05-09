@@ -9,36 +9,35 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sportapp_grupo1.databinding.SugerenciasListFragmentBinding
+import com.sportapp_grupo1.databinding.EventosListFragmentBinding
 import com.sportapp_grupo1.models.Sugerencia
 import com.sportapp_grupo1.network.CacheManager
 import com.sportapp_grupo1.network.SugerenciasNetworkService
-import com.sportapp_grupo1.ui.adapters.SugerenciasAdapter
+import com.sportapp_grupo1.ui.adapters.EventosAdapter
 import org.json.JSONObject
 
-class SugerenciasList : Fragment() {
+class EventosList : Fragment() {
 
-    private var _binding: SugerenciasListFragmentBinding? = null
+    private var _binding: EventosListFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
-    private var viewAdapter: SugerenciasAdapter? = null
+    private var viewAdapter: EventosAdapter? = null
     private  lateinit var volleyBroker: SugerenciasNetworkService
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = SugerenciasListFragmentBinding.inflate(inflater, container, false)
+        _binding = EventosListFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewAdapter = SugerenciasAdapter()
+        viewAdapter = EventosAdapter()
         return view
     }
 
     @SuppressLint("UseRequireInsteadOfGet")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        recyclerView = binding.sugerenciaItemFragment
+        recyclerView = binding.eventosItemFragment
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = viewAdapter
         volleyBroker = this.context?.let { SugerenciasNetworkService(it) }!!
@@ -46,7 +45,7 @@ class SugerenciasList : Fragment() {
 
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
         volleyBroker.instance.add(
-            SugerenciasNetworkService.getRequest(
+            SugerenciasNetworkService.getRequest_registrados(
                 {response ->
                     val list = mutableListOf<Sugerencia>()
                     var item: JSONObject
@@ -59,10 +58,12 @@ class SugerenciasList : Fragment() {
                                 costo = item.getString("costo"),
                                 nombre = item.getString("nombre").take(25),
                                 lugar = item.getString("lugar"),
+                                horario_final = item.getString("hora"),
+                                fecha = item.getString("fecha")
                             )
                         )
                     }
-                    viewAdapter!!.sugerencias = list
+                    viewAdapter!!.eventos = list
                     showMessage("Carga Exitosa.")
                 },
                 {

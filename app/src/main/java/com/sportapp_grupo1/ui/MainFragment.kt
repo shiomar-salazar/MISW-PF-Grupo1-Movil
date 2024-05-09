@@ -42,7 +42,7 @@ class MainFragment : Fragment() {
         volleyBroker = this.context?.let { LoginNetworkService(it) }!!
 
         binding.recuperar.setOnClickListener {
-            showMessage("No es Parte del MVP.")
+            showMessage("No es parte del MVP.")
         }
 
         binding.registro.setOnClickListener {
@@ -77,15 +77,21 @@ class MainFragment : Fragment() {
                         val user = User (
                             userId = response.optString("id"),
                             nombres = response.optString("nombres"),
-                            rol = response.optString("rol"),
-                            plan = response.optString("plan"),
-                            token = response.optString("token")
+                            rol = response.optString("tipo_usuario"),
+                            plan = response.optString("tipo_plan"),
+                            token = response.optString("token"),
+                            correo = username
                         )
                         CacheManager.getInstance(this.requireContext()).saveUsuario(user)
-                        /* Mostar Toast */
-                        showMessage("Inicio de Sesion Exitoso.")
-                        // Navegar a Home
-                        findNavController().navigate(R.id.action_mainFragment_to_home2)
+                        if( user.rol == "Usuario"){
+                            /* Mostar Toast */
+                            showMessage("Inicio de Sesion Exitoso.")
+                            // Navegar a Home
+                            findNavController().navigate(R.id.action_mainFragment_to_home2)
+                        }else{
+                            /* Mostar Toast */
+                            showMessage("Usuario no es cliente, proveedores deben usar la Aplicacion Web.")
+                        }
                     },
                     {
                         showMessage("Inicio de Sesion Fallido. Error:".plus(it.networkResponse.statusCode.toString()))

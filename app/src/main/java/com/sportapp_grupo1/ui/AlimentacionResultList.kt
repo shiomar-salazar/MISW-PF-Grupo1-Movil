@@ -14,12 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sportapp_grupo1.R
 import com.sportapp_grupo1.databinding.AlimentacionResultListFragmentBinding
 import com.sportapp_grupo1.models.Alimentacion
-import com.sportapp_grupo1.models.PlanAlimentacion
 import com.sportapp_grupo1.network.AlimentacionNetworkService
 import com.sportapp_grupo1.network.CacheManager
-import com.sportapp_grupo1.network.PlanAlimentacionNetworkService
 import com.sportapp_grupo1.ui.adapters.AlimentacionAdapter
-import org.json.JSONArray
 import org.json.JSONObject
 
 class AlimentacionResultList : Fragment() {

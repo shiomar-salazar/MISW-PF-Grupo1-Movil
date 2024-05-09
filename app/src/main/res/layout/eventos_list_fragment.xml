@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.SugerenciasList">
+    tools:context=".ui.EventosList">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:layout_marginBottom="25dp"
             android:textColor="@color/lightGrey"
             android:layout_marginEnd="10dp"
-            android:text="@string/listado_de_sugerencias"
+            android:text="@string/mis_eventos"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -28,10 +28,12 @@
             android:layout_below="@id/title">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/sugerencia_item_fragment"
+                android:id="@+id/eventos_item_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/sugerencias_item" />
+                tools:listitem="@layout/eventos_item" />
         </ScrollView>
     </RelativeLayout>
+
+
 </FrameLayout>

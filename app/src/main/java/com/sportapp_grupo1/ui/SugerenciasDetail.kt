@@ -15,6 +15,7 @@ import com.sportapp_grupo1.databinding.SugerenciasDetailFragmentBinding
 import com.sportapp_grupo1.models.Sugerencia
 import com.sportapp_grupo1.network.CacheManager
 import com.sportapp_grupo1.network.SugerenciasNetworkService
+import org.json.JSONObject
 
 
 class SugerenciasDetail : Fragment() {
@@ -37,6 +38,52 @@ class SugerenciasDetail : Fragment() {
         volleyBroker = this.context?.let { SugerenciasNetworkService(it) }!!
 
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
+
+        if (user.plan != "Premium") {
+            binding.registrarBtn.visibility = View.INVISIBLE
+            binding.registrarBtn.isClickable = false
+
+        } else {
+            binding.registrarBtn.setOnClickListener {
+                var hora:String = (binding.horaSpinner.selectedItem.toString().dropLast(6))
+                val time:String =
+                    if(binding.horaSpinner.selectedItem.toString().contains("a", ignoreCase = true))
+                    {
+                        if (hora.length == 7)
+                            hora = "0$hora"
+                        hora
+                    }else {
+                            if (hora.length == 7){
+                                (binding.horaSpinner.selectedItem.toString().substring(0,1).toInt()+12).toString().plus(hora.substring(1))
+                            }else{
+                                (binding.horaSpinner.selectedItem.toString().substring(0,2).toInt()+12).toString().plus(hora.substring(2))
+                            }
+                    }
+
+                val params = mapOf(
+                    "id_servicio" to args.sugerneciaId,
+                    "id_usuario" to user.userId,
+                    "email" to user.correo,
+                    "fecha" to binding.fechaText.text.toString(),
+                    "hora" to time
+                )
+                volleyBroker.instance.add(
+                    SugerenciasNetworkService.postRequest_agendar(
+                        JSONObject(params),
+                        {
+                            showMessage("Registro Exitoso.")
+                            // Navegar a Home
+                            NavigateHome()
+
+                        },
+                        {
+                            showMessage("Registro Fallido.Error:".plus(it.networkResponse.statusCode.toString()))
+                        },
+                        user.token
+                    ))
+            }
+        }
+
         volleyBroker.instance.add(
             SugerenciasNetworkService.getRequest_single(
             {response ->
@@ -79,10 +126,7 @@ class SugerenciasDetail : Fragment() {
             user.token
         ))
 
-        binding.registrarBtn.setOnClickListener {
-            showMessage("Not implemented Yet")
-            NavigateHome()
-        }
+
     }
 
 

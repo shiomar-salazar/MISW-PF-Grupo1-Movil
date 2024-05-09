@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.EventosDetail">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/lightGrey"
+            android:layout_marginEnd="10dp"
+            android:text="@string/detalle_de_evento"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/nombre"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dip"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/lightGrey"
+                android:text="@string/nombre_title" />
+
+            <TextView
+                android:id="@+id/nombre_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/lightGrey"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/costo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nombre"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dip"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/lightGrey"
+                android:text="@string/costo" />
+
+            <TextView
+                android:id="@+id/costo_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/lightGrey"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lugar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/costo"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dip"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/lightGrey"
+                android:text="@string/lugar" />
+
+            <TextView
+                android:id="@+id/lugar_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/lightGrey"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fecha"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lugar"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dip"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/lightGrey"
+                android:text="@string/fecha_label" />
+
+            <TextView
+                android:id="@+id/fecha_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/lightGrey"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/hora"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fecha"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dip"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/lightGrey"
+                android:text="@string/hora" />
+
+            <TextView
+                android:id="@+id/hora_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/lightGrey"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/descripcion"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hora"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dip"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/lightGrey"
+                android:text="@string/descripcion" />
+
+            <TextView
+                android:id="@+id/descripcion_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/lightGrey"/>
+        </LinearLayout>
+    </RelativeLayout>
+</layout>
