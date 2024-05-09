@@ -45,7 +45,7 @@ class EventosList : Fragment() {
 
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
         volleyBroker.instance.add(
-            SugerenciasNetworkService.getRequest(
+            SugerenciasNetworkService.getRequest_registrados(
                 {response ->
                     val list = mutableListOf<Sugerencia>()
                     var item: JSONObject
@@ -56,9 +56,10 @@ class EventosList : Fragment() {
                             Sugerencia(
                                 sugerencia_id = item.getString("id"),
                                 costo = item.getString("costo"),
-                                nombre = item.getString("nombre").take(18),
+                                nombre = item.getString("nombre").take(25),
                                 lugar = item.getString("lugar"),
-                                horario_final = "10:00:00 AM"
+                                horario_final = item.getString("hora"),
+                                fecha = item.getString("fecha")
                             )
                         )
                     }
