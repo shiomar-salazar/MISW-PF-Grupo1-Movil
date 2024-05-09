@@ -57,7 +57,7 @@ class SugerenciasList : Fragment() {
                             Sugerencia(
                                 sugerencia_id = item.getString("id"),
                                 costo = item.getString("costo"),
-                                nombre = item.getString("nombre").take(18),
+                                nombre = item.getString("nombre").take(25),
                                 lugar = item.getString("lugar"),
                             )
                         )
