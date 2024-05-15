@@ -115,10 +115,10 @@ dependencies {
 
     implementation (libs.androidx.lifecycle.livedata.ktx)
     implementation (libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
     androidTestImplementation ("androidx.test:runner:1.5.2")
     androidTestUtil ("androidx.test:orchestrator:1.4.2")
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation ("androidx.test.espresso:espresso-core:3.5.1")
     implementation ("androidx.test.espresso:espresso-contrib:3.5.1")
     implementation (libs.play.services.location)
