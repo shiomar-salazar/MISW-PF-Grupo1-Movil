@@ -76,10 +76,10 @@ class Alerta_Fragment : Fragment() {
                             JSONObject(params),
                             {
                                 /* Mostar Toast */
-                                showMessage("Envio Exitoso.")
+                                showMessage(resources.getString(R.string.exito))
                             },
                             {
-                                showMessage("Envio Fallido.Error:".plus(it.networkResponse.statusCode.toString()))
+                                showMessage(resources.getString(R.string.failed_Error).plus(it.networkResponse.statusCode.toString()))
                             },
                             user.token
                         ))
@@ -121,7 +121,7 @@ class Alerta_Fragment : Fragment() {
         if (checkPermissions() && isLocationEnabled()) {
             getLastKnownLocation()
         } else if (!isLocationEnabled()) {
-            showMessage("Porfavor encender los servicios de ubicacion")
+            showMessage(resources.getString(R.string.location_services))
             val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
             startActivity(intent)
             binding.latitudText.text = R.string.reintentar_text.toString()

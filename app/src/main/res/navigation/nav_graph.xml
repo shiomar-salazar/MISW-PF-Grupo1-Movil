@@ -178,6 +178,9 @@
         <argument
             android:name="eventoId"
             app:argType="string" />
+        <argument
+            android:name="horario_final"
+            app:argType="string" />
         <action
             android:id="@+id/action_eventosDetail_to_home2"
             app:destination="@id/home2" />

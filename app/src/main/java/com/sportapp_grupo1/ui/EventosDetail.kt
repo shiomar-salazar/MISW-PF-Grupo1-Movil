@@ -39,11 +39,6 @@ class EventosDetail : Fragment() {
         volleyBroker.instance.add(
             SugerenciasNetworkService.getRequest_single(
                 {response ->
-                    val list_horarios = mutableListOf<String>()
-                    val elements = response.getJSONArray("horario")
-                    (0 until elements.length()).forEach {
-                        list_horarios.add(it, elements[it].toString())
-                    }
                     val sugerencia = Sugerencia (
                         sugerencia_id = response.optString("id"),
                         nombre = response.optString("nombre"),
@@ -53,7 +48,7 @@ class EventosDetail : Fragment() {
                         descripcion = response.optString("descripcion"),
                         estado = response.optString("estado"),
                         frecuencia = response.optString("frecuencia"),
-                        horario_final = response.optString("hora")
+                        horario_final = args.horarioFinal
                     )
 
                     binding.costoText.text = sugerencia.costo
@@ -63,11 +58,11 @@ class EventosDetail : Fragment() {
                     binding.lugarText.text = sugerencia.lugar
                     binding.horaText.text = sugerencia.horario_final
                     /* Mostar Toast */
-                    showMessage("Carga Exitosa.")
+                    showMessage(resources.getString(R.string.exito))
                 },
                 {
 
-                    showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
+                    showMessage(resources.getString(R.string.failed_Error).plus(it.networkResponse.statusCode.toString()))
                 },
                 args.eventoId,
                 user.token

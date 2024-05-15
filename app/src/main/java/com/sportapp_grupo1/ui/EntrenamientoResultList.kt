@@ -57,7 +57,7 @@ class EntrenamientoResultList : Fragment() {
                 var item: JSONObject
                 var res:String = ""
                 if( response.length() == 0){
-                    showMessage("Usuario no tiene datos cargados aun.")
+                    showMessage(resources.getString(R.string.user_no_data))
                     list.add(0,
                         Entrenamiento(
                             entrenamientoId = "",
@@ -94,13 +94,13 @@ class EntrenamientoResultList : Fragment() {
                         )
                     }
                     viewAdapter!!.results = list
-                    showMessage("Carga Exitosa.")
+                    showMessage(resources.getString(R.string.exito))
                 }
                 checkProgressBar()
             },
             {
                 req1 = true
-                showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
+                showMessage(resources.getString(R.string.failed_Error).plus(it.networkResponse.statusCode.toString()))
                 checkProgressBar()
             },
             "resultado-entrenamiento/usuario/"+user.userId,

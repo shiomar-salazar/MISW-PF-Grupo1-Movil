@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.sportapp_grupo1.R
 import com.sportapp_grupo1.databinding.SugerenciasListFragmentBinding
 import com.sportapp_grupo1.models.Sugerencia
 import com.sportapp_grupo1.network.CacheManager
@@ -55,7 +56,7 @@ class SugerenciasList : Fragment() {
                     req1 = true
                     if( response.length() == 0) {
                         binding.noSugerenciaText.visibility = View.VISIBLE
-                        showMessage("No hay eventos nuevos.")
+                        showMessage(resources.getString(R.string.location_services))
                     }else {
                         val list = mutableListOf<Sugerencia>()
                         var item: JSONObject
@@ -72,13 +73,13 @@ class SugerenciasList : Fragment() {
                             )
                         }
                         viewAdapter!!.sugerencias = list
-                        showMessage("Carga Exitosa.")
+                        showMessage(resources.getString(R.string.exito))
                         checkProgressBar()
                     }
                 },
                 {
                     req1 = true
-                    showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
+                    showMessage(resources.getString(R.string.failed_Error).plus(it.networkResponse.statusCode.toString()))
                     checkProgressBar()
                 },
                 user.token

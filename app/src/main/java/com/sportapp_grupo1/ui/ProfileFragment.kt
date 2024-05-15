@@ -54,7 +54,7 @@ class ProfileFragment : Fragment() {
             },
             {
                 req1 = true
-                showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
+                showMessage(resources.getString(R.string.failed_Error).plus(it.networkResponse.statusCode.toString()))
                 checkProgressBar()
             },user.token
         ))
@@ -64,13 +64,13 @@ class ProfileFragment : Fragment() {
             findNavController().navigate((R.id.action_profileFragment_to_mainFragment))
         }
         binding.cambiarContraseA.setOnClickListener {
-            showMessage("Fuera del alcance del MVP.")
+            showMessage(resources.getString(R.string.not_part_mvp))
         }
         binding.mejorarPlan.setOnClickListener {
-            showMessage("Fuera del alcance del MVP.")
+            showMessage(resources.getString(R.string.not_part_mvp))
         }
         binding.editarPerfil.setOnClickListener {
-            showMessage("Fuera del alcance del MVP.")
+            showMessage(resources.getString(R.string.not_part_mvp))
         }
 
     }

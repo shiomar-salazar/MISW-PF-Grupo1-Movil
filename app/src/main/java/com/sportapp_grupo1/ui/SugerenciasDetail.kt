@@ -71,13 +71,13 @@ class SugerenciasDetail : Fragment() {
                     SugerenciasNetworkService.postRequest_agendar(
                         JSONObject(params),
                         {
-                            showMessage("Registro Exitoso.")
+                            showMessage(resources.getString(R.string.exito))
                             // Navegar a Home
                             NavigateHome()
 
                         },
                         {
-                            showMessage("Registro Fallido.Error:".plus(it.networkResponse.statusCode.toString()))
+                            showMessage(resources.getString(R.string.failed_Error).plus(it.networkResponse.statusCode.toString()))
                         },
                         user.token
                     ))
@@ -116,11 +116,11 @@ class SugerenciasDetail : Fragment() {
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 binding.horaSpinner.adapter = adapter
                 /* Mostar Toast */
-                showMessage("Carga Exitosa.")
+                showMessage(resources.getString(R.string.exito))
             },
             {
 
-                showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
+                showMessage(resources.getString(R.string.failed_Error).plus(it.networkResponse.statusCode.toString()))
             },
             args.sugerneciaId,
             user.token

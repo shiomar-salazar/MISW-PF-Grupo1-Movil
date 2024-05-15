@@ -112,18 +112,18 @@ class PlanAlimentacionCreate : Fragment() {
                         )
                         CacheManager.getInstance(this.requireContext()).addPlanAlimentacion(plan)
                         /* Mostar Toast */
-                        showMessage("Registro Exitoso.")
+                        showMessage(resources.getString(R.string.exito))
                         // Navegar a Home
                         navigateToHome()
                     },
                     {
-                        showMessage("Registro Fallido. Error:".plus(it.networkResponse.statusCode.toString()))
+                        showMessage(resources.getString(R.string.failed_Error).plus(it.networkResponse.statusCode.toString()))
                     },
                     "nutricion/plan-nutricional",
                         user.token
                 ))
             } else {
-                showMessage("Todos los campos deben ser diligenciados, por favor corrija e intente de nuevo.")
+                showMessage(resources.getString(R.string.todos_los_campos))
             }
         }
 

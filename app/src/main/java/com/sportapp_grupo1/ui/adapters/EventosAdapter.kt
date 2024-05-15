@@ -38,7 +38,7 @@ class EventosAdapter : RecyclerView.Adapter<EventosAdapter.EventosViewHolder>(){
             holder.viewDataBinding.root.setOnClickListener{
                 if(eventos[position].nombre != "Sin Datos") {
                     val action =
-                        EventosListDirections.actionEventosListToEventosDetail(eventos[position].sugerencia_id)
+                        EventosListDirections.actionEventosListToEventosDetail(eventos[position].sugerencia_id, eventos[position].horario_final)
                     holder.viewDataBinding.root.findNavController().navigate(action)
                 }
             }

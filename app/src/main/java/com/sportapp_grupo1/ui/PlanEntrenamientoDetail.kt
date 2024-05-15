@@ -69,13 +69,13 @@ class PlanEntrenamientoDetail : Fragment() {
                 binding.sabadoDetail.text = plan.sabado.plus(resources.getString(R.string.sufix_entrenamiento))
                 binding.domingoDetail.text = plan.domingo.plus(resources.getString(R.string.sufix_entrenamiento))
                 binding.semanasDetail.text = plan.numero_semanas.toString()
-                showMessage("Carga Exitosa.")
+                showMessage(resources.getString(R.string.exito))
                 checkProgressBar()
             },
             {
                 req1 = true
                 if(it.networkResponse.statusCode == 404){
-                    showMessage("Usuario no tiene datos cargados aun.")
+                    showMessage(resources.getString(R.string.user_no_data))
                     binding.actividadDetail.text = getString(R.string.sin_datos)
                     binding.lunesDetail.text = getString(R.string.sin_datos)
                     binding.martesDetail.text = getString(R.string.sin_datos)
@@ -88,7 +88,7 @@ class PlanEntrenamientoDetail : Fragment() {
                 }
                 else
                 {
-                    showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
+                    showMessage(resources.getString(R.string.failed_Error).plus(it.networkResponse.statusCode.toString()))
                 }
                 checkProgressBar()
             },

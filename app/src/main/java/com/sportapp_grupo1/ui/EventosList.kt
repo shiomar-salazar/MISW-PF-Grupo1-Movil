@@ -69,13 +69,13 @@ class EventosList : Fragment() {
                         )
                     }
                     viewAdapter!!.eventos = list
-                    showMessage("Carga Exitosa.")
+                    showMessage(resources.getString(R.string.exito))
                     checkProgressBar()
                 },
                 {
                     req1 = true
                     if(it.networkResponse.statusCode == 404){
-                        showMessage("Usuario no tiene datos cargados aun.")
+                        showMessage(resources.getString(R.string.user_no_data))
                         val list = mutableListOf<Sugerencia>()
                         list.add(0,
                             Sugerencia(
@@ -93,7 +93,7 @@ class EventosList : Fragment() {
                     }
                     else
                     {
-                        showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
+                        showMessage(resources.getString(R.string.failed_Error).plus(it.networkResponse.statusCode.toString()))
                     }
                     checkProgressBar()
                 },
