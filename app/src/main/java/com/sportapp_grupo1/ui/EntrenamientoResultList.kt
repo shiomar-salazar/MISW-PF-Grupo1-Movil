@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.sportapp_grupo1.R
 import com.sportapp_grupo1.databinding.EntrenamientoResultListFragmentBinding
 import com.sportapp_grupo1.models.Entrenamiento
 import com.sportapp_grupo1.network.CacheManager
@@ -28,7 +29,7 @@ class EntrenamientoResultList : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = EntrenamientoResultListFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         viewAdapter = EntrenamientoAdapter()
@@ -56,11 +57,11 @@ class EntrenamientoResultList : Fragment() {
                     list.add(0,
                         Entrenamiento(
                             entrenamientoId = "",
-                            actividad = "Sin Datos",
-                            distancia = "Sin Datos",
-                            tiempo = "Sin Datos",
-                            date = "Sin Datos",
-                            resultado = "Sin Datos",
+                            actividad = R.string.Vacio.toString(),
+                            distancia = R.string.Vacio.toString(),
+                            tiempo = R.string.Vacio.toString(),
+                            date = R.string.Vacio.toString(),
+                            resultado = R.string.Vacio.toString(),
                             feedback = ""
                         )
                     )
@@ -80,7 +81,7 @@ class EntrenamientoResultList : Fragment() {
                             Entrenamiento(
                                 entrenamientoId = item.getString("id"),
                                 actividad = item.getString("actividad"),
-                                distancia = item.getString("distancia").plus(" km"),
+                                distancia = item.getString("distancia").plus(R.string.sufix_entrenamiento.toString()),
                                 tiempo = item.getString("tiempo"),
                                 date = item.getString("fecha"),
                                 resultado = res,

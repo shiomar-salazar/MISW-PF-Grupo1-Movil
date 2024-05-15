@@ -124,12 +124,12 @@ class Alerta_Fragment : Fragment() {
             showMessage("Porfavor encender los servicios de ubicacion")
             val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
             startActivity(intent)
-            binding.latitudText.text = "Reintente por favor"
-            binding.longitudText.text = "Reintente por favor"
+            binding.latitudText.text = R.string.reintentar_text.toString()
+            binding.longitudText.text = R.string.reintentar_text.toString()
         } else {
             requestPermissions()
-            binding.latitudText.text = "Reintente por favor"
-            binding.longitudText.text = "Reintente por favor"
+            binding.latitudText.text = R.string.reintentar_text.toString()
+            binding.longitudText.text = R.string.reintentar_text.toString()
         }
     }
 

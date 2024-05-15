@@ -38,11 +38,11 @@ class EntrenamientoResultCreateTest {
 
     fun clickIntoButtonById(idView: Int) {
         //Damos click en el boton idView
-        Espresso.onView(ViewMatchers.withId(idView)).perform(ViewActions.click())
+        onView(ViewMatchers.withId(idView)).perform(ViewActions.click())
     }
     fun clickIntoButtonByIdwithScroll(idView: Int) {
         //Damos click en el boton idView
-        Espresso.onView(ViewMatchers.withId(idView)).perform(ViewActions.scrollTo(), ViewActions.click())
+        onView(ViewMatchers.withId(idView)).perform(ViewActions.scrollTo(), ViewActions.click())
     }
 
     fun clickIntoButtonByText(idView: Int, valueToSearch: String) {
@@ -52,7 +52,7 @@ class EntrenamientoResultCreateTest {
 
     fun getTextViewByValue(idView: Int, valueToSearch: String): ViewInteraction? {
         //Validamos si existe un TextView de tipo idView con el texto valueToSearch
-        return Espresso.onView(
+        return onView(
             AllOf.allOf(
                 ViewMatchers.withId(idView),
                 ViewMatchers.withText(valueToSearch)
@@ -62,7 +62,7 @@ class EntrenamientoResultCreateTest {
 
     fun setTextLayoutViewByValue(idView: Int, valueToType:String) {
         //Validamos si existe un TextView de tipo idView con el texto valueToSearch
-        Espresso.onView(
+        onView(
             AllOf.allOf(
                 ViewMatchers.isDescendantOfA(ViewMatchers.withId(idView)),
                 ViewMatchers.withClassName(CoreMatchers.endsWith("EditText"))
@@ -74,7 +74,7 @@ class EntrenamientoResultCreateTest {
 
     fun setTextViewByValue(idView: Int, valueToType:String) {
         //Validamos si existe un TextView de tipo idView con el texto valueToSearch
-        Espresso.onView(
+        onView(
             AllOf.allOf(
                 ViewMatchers.withId(idView)
             )
@@ -92,7 +92,7 @@ class EntrenamientoResultCreateTest {
         setTextViewByValue(R.id.input_password,"123456789156Aa-")
         clickIntoButtonById(R.id.login_button)
         SystemClock.sleep(delayService2)
-        Espresso.onView(
+        onView(
             AllOf.allOf(
                 ViewMatchers.withId(R.id.entrenamiento),
                 ViewMatchers.isDisplayed()
@@ -117,7 +117,7 @@ class EntrenamientoResultCreateTest {
         /* Hacemos click en boton de cancelar */
         clickIntoButtonByIdwithScroll(R.id.cancelar)
         /* Validamos estar en pantalla de Home */
-        Espresso.onView(
+        onView(
             AllOf.allOf(
                 ViewMatchers.withId(R.id.entrenamiento),
                 ViewMatchers.isDisplayed()
@@ -137,7 +137,7 @@ class EntrenamientoResultCreateTest {
         setTextViewByValue(R.id.result_text,"30")
         clickIntoButtonByIdwithScroll(R.id.registrar)
         SystemClock.sleep(delayService)
-        Espresso.onView(
+        onView(
             AllOf.allOf(
                 ViewMatchers.withId(R.id.entrenamiento),
                 ViewMatchers.isDisplayed()
@@ -154,7 +154,7 @@ class EntrenamientoResultCreateTest {
         navigateToTestScreen()
         /* Ingresamos Datos a Campos */
 
-        onView(ViewMatchers.withId(R.id.actividad_spinner)).perform(ViewActions.click());
+        onView(ViewMatchers.withId(R.id.actividad_spinner)).perform(ViewActions.click())
         onData(AllOf.allOf(`is`(instanceOf(String::class.java)))).atPosition(1).perform(ViewActions.click())
 
         setTextViewByValue(R.id.date_text,"2024-04-15")
@@ -162,7 +162,7 @@ class EntrenamientoResultCreateTest {
         setTextViewByValue(R.id.result_text,"30")
         clickIntoButtonByIdwithScroll(R.id.registrar)
         SystemClock.sleep(delayService2)
-        Espresso.onView(
+        onView(
             AllOf.allOf(
                 ViewMatchers.withId(R.id.entrenamiento),
                 ViewMatchers.isDisplayed()
@@ -181,15 +181,15 @@ class EntrenamientoResultCreateTest {
         clickIntoButtonByIdwithScroll(R.id.registrar)
 
         /* Validamos respuestas negativas */
-        Espresso.onView(ViewMatchers.withId(R.id.tiempo)).check { view, _ ->
+        onView(ViewMatchers.withId(R.id.tiempo)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
             Assert.assertEquals(actualError, "El campo no debe estar vacio")
         }
-        Espresso.onView(ViewMatchers.withId(R.id.result)).check { view, _ ->
+        onView(ViewMatchers.withId(R.id.result)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
             Assert.assertEquals(actualError, "El campo no debe estar vacio")
         }
-        Espresso.onView(ViewMatchers.withId(R.id.date)).check { view, _ ->
+        onView(ViewMatchers.withId(R.id.date)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
             Assert.assertEquals(actualError, "El campo no debe estar vacio")
         }
@@ -197,12 +197,12 @@ class EntrenamientoResultCreateTest {
         /* Validamos mensaje de error del campo tiempo */
         setTextViewByValue(R.id.tiempo_text,"12:34.56")
         clickIntoButtonByIdwithScroll(R.id.registrar)
-        Espresso.onView(ViewMatchers.withId(R.id.tiempo)).check { view, _ ->
+        onView(ViewMatchers.withId(R.id.tiempo)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
             Assert.assertEquals(actualError, "El tiempo tiene que estar en formato XX:YY:ZZ")
         }
         /* Validamos seguir en la pantalla de Resultado de Entrenamiento */
-        Espresso.onView(
+        onView(
             AllOf.allOf(
                 ViewMatchers.withId(R.id.registrar),
                 ViewMatchers.isDisplayed()

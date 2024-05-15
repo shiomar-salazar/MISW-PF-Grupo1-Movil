@@ -87,7 +87,7 @@ class SugerenciasDetail : Fragment() {
         volleyBroker.instance.add(
             SugerenciasNetworkService.getRequest_single(
             {response ->
-                var list_horarios = mutableListOf<String>()
+                val list_horarios = mutableListOf<String>()
                 val elements = response.getJSONArray("horario")
                 (0 until elements.length()).forEach {
                     list_horarios.add(it, elements[it].toString())

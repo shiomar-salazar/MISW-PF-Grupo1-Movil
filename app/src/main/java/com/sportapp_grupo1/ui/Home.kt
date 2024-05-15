@@ -45,7 +45,7 @@ class Home : Fragment() {
         var calories_goal = 0
 
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
-        binding.header.text = "Hola ".plus(user.nombres.substringBefore(" "))
+        binding.header.text = R.string.hola.toString().plus(user.nombres.substringBefore(" "))
 
         if (user.plan != "Premium"){
             binding.notPremiumText.visibility = View.VISIBLE
@@ -62,14 +62,14 @@ class Home : Fragment() {
                 { response ->
                     distance =
                         response.getJSONObject("plan_entrenamiento").optString(day).toInt()
-                    val duration = response.optInt("numero_semanas").toString().plus(" semanas")
-                    binding.distanceDayText.text = distance.toString().plus(" km")
-                    binding.planEntreDurationText.text = "Quedan ".plus(duration)
+                    val duration = response.optInt("numero_semanas").toString().plus(R.string.semanas.toString())
+                    binding.distanceDayText.text = distance.toString().plus(R.string.sufix_entrenamiento.toString())
+                    binding.planEntreDurationText.text = R.string.quedan.toString().plus(duration)
                 },
                 {
                     distance = 0
-                    binding.distanceDayText.text = "Sin Datos"
-                    binding.planEntreDurationText.text = "Sin Datos"
+                    binding.distanceDayText.text = R.string.Vacio.toString()
+                    binding.planEntreDurationText.text = R.string.Vacio.toString()
                 },
                 "entrenamientos/plan-entrenamiento/usuario/" + user.userId,
                 user.token
@@ -80,14 +80,14 @@ class Home : Fragment() {
             PlanAlimentacionNetworkService.getRequest(
             {response ->
                 calories_goal = response.getJSONObject("plan_alimentacion").optInt(day)
-                val duration = response.optInt("numero_semanas").toString().plus(" semanas")
-                binding.caloriesDayText.text = calories_goal.toString().plus(" kcal")
-                binding.planAliDurationText.text = "Quedan ".plus(duration)
+                val duration = response.optInt("numero_semanas").toString().plus(R.string.semanas.toString())
+                binding.caloriesDayText.text = calories_goal.toString().plus(R.string.sufix_alimentacion.toString())
+                binding.planAliDurationText.text = R.string.quedan.toString().plus(duration)
             },
             {
                 calories_goal = 0
-                binding.caloriesDayText.text = "Sin Datos"
-                binding.planAliDurationText.text = "Sin Datos"
+                binding.caloriesDayText.text = R.string.Vacio.toString()
+                binding.planAliDurationText.text = R.string.Vacio.toString()
             },
             "nutricion/plan-nutricional/"+user.userId,
             user.token

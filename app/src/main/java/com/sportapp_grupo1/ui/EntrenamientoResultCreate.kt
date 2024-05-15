@@ -46,9 +46,9 @@ class EntrenamientoResultCreate : Fragment() {
         var result_vo2 = 0.0
 
         val distance = sharedPref!!.getInt("entre_goal",0)
-        binding.goal.text = distance.toString().plus(" km")
+        binding.goal.text = distance.toString().plus(R.string.sufix_entrenamiento.toString())
         binding.tiempoText.setText(sharedPref.getString("time_result",""))
-        sharedPref.edit().remove("time_result").apply();
+        sharedPref.edit().remove("time_result").apply()
 
         /* Valores por defecto */
         binding.result.hint = "Vo2Max"

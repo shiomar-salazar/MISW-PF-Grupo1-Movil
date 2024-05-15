@@ -101,7 +101,7 @@ class EntrenamientoResultListTest {
         SystemClock.sleep(delayService)
     }
 
-    fun validateTextView(idView: Int, valueToSearch: String) {
+    private fun validateTextView(idView: Int, valueToSearch: String) {
         //Validamos si es mostrado algun TextView de tipo idView
         Espresso.onView(AllOf.allOf(ViewMatchers.withId(idView), ViewMatchers.isDisplayed()))
         //Validamos que no venga vacio algun TextView de tipo idView

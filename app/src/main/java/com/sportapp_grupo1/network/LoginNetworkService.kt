@@ -8,12 +8,12 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONObject
 
-class LoginNetworkService constructor(context: Context) {
+class LoginNetworkService(context: Context) {
 
     val instance: RequestQueue = Volley.newRequestQueue(context.applicationContext)
 
     companion object {
-        const val URL_LOGIN = "https://misw-pf-grupo1-backend-gestor-usuarios-klme3r4qta-uc.a.run.app/usuarios/login"
+        private const val URL_LOGIN = "https://misw-pf-grupo1-backend-gestor-usuarios-klme3r4qta-uc.a.run.app/usuarios/login"
         const val URL_ME = "https://misw-pf-grupo1-backend-gestor-usuarios-klme3r4qta-uc.a.run.app/usuarios/me"
 
         fun postRequest(body: JSONObject,  responseListener: Response.Listener<JSONObject>, errorListener: Response.ErrorListener ):JsonObjectRequest{

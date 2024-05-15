@@ -4,7 +4,7 @@ import com.sportapp_grupo1.R
 import com.sportapp_grupo1.validator.base.BaseValidator
 import com.sportapp_grupo1.validator.base.ValidateResult
 
-class TimeValidator(val time: String) : BaseValidator() {
+class TimeValidator(private val time: String) : BaseValidator() {
 
     override fun validate(): ValidateResult {
         if (time.contains(":").not())

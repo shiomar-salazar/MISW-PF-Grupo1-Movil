@@ -121,4 +121,12 @@
     <string name="plan_intermedio">La funcionalidad de Monitoreo solo esta disponible para planes Intermedios de pago mensual</string>
     <string name="aqui_podras_ver_eventos_cerca_de_ti">Aqui podras ver eventos cerca de ti</string>
     <string name="mis_eventos">Mis Eventos</string>
+    <string name="Vacio">Sin Datos</string>
+    <string name="quedan">Quedan</string>
+    <string name="hola">Hola</string>
+    <string name="semanas"> semanas</string>
+    <string name="logo_de_aplicacion">Logo de Aplicacion</string>
+    <string name="reintentar_text">Reintente por favor</string>
+    <string name="ftp">FTP:</string>
+    <string name="VO2MAX">Vo2Max:</string>
 </resources>

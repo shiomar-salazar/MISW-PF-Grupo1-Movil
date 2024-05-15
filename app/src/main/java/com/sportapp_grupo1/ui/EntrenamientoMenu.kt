@@ -29,7 +29,7 @@ class EntrenamientoMenu : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val sharedPref = activity?.getSharedPreferences("myPref", Context.MODE_PRIVATE)
-        binding.goal.text = sharedPref!!.getInt("entre_goal",0).toString().plus(" km")
+        binding.goal.text = sharedPref!!.getInt("entre_goal",0).toString().plus(R.string.sufix_entrenamiento.toString())
 
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
         if (user.plan == "Basico") {

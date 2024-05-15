@@ -2,7 +2,6 @@ package com.sportapp_grupo1.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +30,7 @@ class AlimentacionResultList : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = AlimentacionResultListFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         viewAdapter = AlimentacionAdapter()
@@ -68,7 +67,7 @@ class AlimentacionResultList : Fragment() {
                             calorias3 = calorias3,
                             ml_agua = item.getInt("ml_agua").toString().plus(" ml"),
                             date = item.getString("fecha"),
-                            total_calories = (calorias1.toInt() + calorias2.toInt() + calorias3.toInt()).toString().plus(" kcal")
+                            total_calories = (calorias1.toInt() + calorias2.toInt() + calorias3.toInt()).toString().plus(R.string.sufix_alimentacion.toString())
                         )
                     )
                 }
@@ -85,9 +84,9 @@ class AlimentacionResultList : Fragment() {
                             calorias1 = "",
                             calorias2 = "",
                             calorias3 = "",
-                            ml_agua = "Sin Datos",
-                            date = "Sin Datos",
-                            total_calories = "Sin Datos"
+                            ml_agua = R.string.Vacio.toString(),
+                            date = R.string.Vacio.toString(),
+                            total_calories = R.string.Vacio.toString()
                         )
                     )
                     viewAdapter!!.results = list

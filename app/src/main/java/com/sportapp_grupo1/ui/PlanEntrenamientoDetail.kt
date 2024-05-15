@@ -56,13 +56,13 @@ class PlanEntrenamientoDetail : Fragment() {
                 )
                 /* Mostar Toast */
                 binding.actividadDetail.text = plan.entrenamiento
-                binding.lunesDetail.text = plan.lunes.plus(" km")
-                binding.martesDetail.text = plan.martes.plus(" km")
-                binding.miercolesDetail.text = plan.miercoles.plus(" km")
-                binding.juevesDetail.text = plan.jueves.plus(" km")
-                binding.viernesDetail.text = plan.viernes.plus(" km")
-                binding.sabadoDetail.text = plan.sabado.plus(" km")
-                binding.domingoDetail.text = plan.domingo.plus(" km")
+                binding.lunesDetail.text = plan.lunes.plus(R.string.sufix_entrenamiento.toString())
+                binding.martesDetail.text = plan.martes.plus(R.string.sufix_entrenamiento.toString())
+                binding.miercolesDetail.text = plan.miercoles.plus(R.string.sufix_entrenamiento.toString())
+                binding.juevesDetail.text = plan.jueves.plus(R.string.sufix_entrenamiento.toString())
+                binding.viernesDetail.text = plan.viernes.plus(R.string.sufix_entrenamiento.toString())
+                binding.sabadoDetail.text = plan.sabado.plus(R.string.sufix_entrenamiento.toString())
+                binding.domingoDetail.text = plan.domingo.plus(R.string.sufix_entrenamiento.toString())
                 binding.semanasDetail.text = plan.numero_semanas.toString()
                 showMessage("Carga Exitosa.")
             },

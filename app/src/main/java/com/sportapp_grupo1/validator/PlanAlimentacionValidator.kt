@@ -4,7 +4,7 @@ import com.sportapp_grupo1.R
 import com.sportapp_grupo1.validator.base.BaseValidator
 import com.sportapp_grupo1.validator.base.ValidateResult
 
-class PlanAlimentacionValidator(val calories: String) : BaseValidator() {
+class PlanAlimentacionValidator(private val calories: String) : BaseValidator() {
 
     private val minCalories = 500
 

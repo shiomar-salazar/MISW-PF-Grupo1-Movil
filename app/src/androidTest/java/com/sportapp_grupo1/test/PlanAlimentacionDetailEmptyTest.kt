@@ -51,7 +51,7 @@ class PlanAlimentacionDetailEmptyTest {
         return Espresso.onView(
             AllOf.allOf(
                 ViewMatchers.withId(idView),
-                ViewMatchers.withText(valueToSearch)
+                withText(valueToSearch)
             )
         )
     }
@@ -89,14 +89,14 @@ class PlanAlimentacionDetailEmptyTest {
         Espresso.onView(
             AllOf.allOf(
                 ViewMatchers.withId(idView),
-                Matchers.not(ViewMatchers.withText(""))
+                Matchers.not(withText(""))
             )
         )
         //Validamos si existe un TextView de tipo idView con el texto valueToSearch
         Espresso.onView(
             AllOf.allOf(
                 ViewMatchers.withId(idView),
-                ViewMatchers.withText(valueToSearch)
+                withText(valueToSearch)
             )
         )
     }

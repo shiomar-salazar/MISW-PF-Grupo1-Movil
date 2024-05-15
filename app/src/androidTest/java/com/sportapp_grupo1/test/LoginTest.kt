@@ -38,7 +38,7 @@ class LoginTest {
 
     fun clickIntoButtonById(idView: Int) {
         //Damos click en el boton idView
-        Espresso.onView(ViewMatchers.withId(idView)).perform(ViewActions.click())
+        onView(withId(idView)).perform(ViewActions.click())
     }
 
     fun clickIntoButtonByText(idView: Int, valueToSearch: String) {
@@ -48,9 +48,9 @@ class LoginTest {
 
     fun getTextViewByValue(idView: Int, valueToSearch: String): ViewInteraction? {
         //Validamos si existe un TextView de tipo idView con el texto valueToSearch
-        return Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(idView),
+        return onView(
+            allOf(
+                withId(idView),
                 ViewMatchers.withText(valueToSearch)
             )
         )
@@ -58,9 +58,9 @@ class LoginTest {
 
     fun setTextLayoutViewByValue(idView: Int, valueToType:String) {
         //Validamos si existe un TextView de tipo idView con el texto valueToSearch
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.isDescendantOfA(ViewMatchers.withId(idView)),
+        onView(
+            allOf(
+                ViewMatchers.isDescendantOfA(withId(idView)),
                 ViewMatchers.withClassName(CoreMatchers.endsWith("EditText"))
             )
         ).perform(
@@ -70,9 +70,9 @@ class LoginTest {
 
     fun setTextViewByValue(idView: Int, valueToType:String) {
         //Validamos si existe un TextView de tipo idView con el texto valueToSearch
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(idView)
+        onView(
+            allOf(
+                withId(idView)
             )
         ).perform(
             ViewActions.click(),

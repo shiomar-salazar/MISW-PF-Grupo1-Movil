@@ -39,7 +39,7 @@ class EventosDetail : Fragment() {
         volleyBroker.instance.add(
             SugerenciasNetworkService.getRequest_single(
                 {response ->
-                    var list_horarios = mutableListOf<String>()
+                    val list_horarios = mutableListOf<String>()
                     val elements = response.getJSONArray("horario")
                     (0 until elements.length()).forEach {
                         list_horarios.add(it, elements[it].toString())
@@ -52,7 +52,8 @@ class EventosDetail : Fragment() {
                         costo = response.optString("costo"),
                         descripcion = response.optString("descripcion"),
                         estado = response.optString("estado"),
-                        frecuencia = response.optString("frecuencia")
+                        frecuencia = response.optString("frecuencia"),
+                        horario_final = response.optString("hora")
                     )
 
                     binding.costoText.text = sugerencia.costo
@@ -60,7 +61,7 @@ class EventosDetail : Fragment() {
                     binding.fechaText.text = sugerencia.fecha.take(10)
                     binding.descripcionText.text = sugerencia.descripcion
                     binding.lugarText.text = sugerencia.lugar
-                    binding.horaText.text = "10:00:00 AM"
+                    binding.horaText.text = sugerencia.horario_final
                     /* Mostar Toast */
                     showMessage("Carga Exitosa.")
                 },

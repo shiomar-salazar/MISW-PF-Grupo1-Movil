@@ -7,7 +7,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONObject
 
-class PlanEntrenamientoNetworkService constructor(context: Context) {
+class PlanEntrenamientoNetworkService(context: Context) {
 
     val instance: RequestQueue = Volley.newRequestQueue(context.applicationContext)
 

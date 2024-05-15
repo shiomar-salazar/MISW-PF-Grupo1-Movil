@@ -2,7 +2,6 @@ package com.sportapp_grupo1.test
 
 import android.os.SystemClock
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions
@@ -38,11 +37,11 @@ class SugerenciasTest {
 
     fun clickIntoButtonById(idView: Int) {
         //Damos click en el boton idView
-        Espresso.onView(ViewMatchers.withId(idView)).perform(ViewActions.click())
+        onView(withId(idView)).perform(ViewActions.click())
     }
     fun clickIntoButtonByIdwithScroll(idView: Int) {
         //Damos click en el boton idView
-        Espresso.onView(ViewMatchers.withId(idView)).perform(ViewActions.scrollTo(), ViewActions.click())
+        onView(withId(idView)).perform(ViewActions.scrollTo(), ViewActions.click())
     }
 
     fun clickIntoButtonByText(idView: Int, valueToSearch: String) {
@@ -52,9 +51,9 @@ class SugerenciasTest {
 
     fun getTextViewByValue(idView: Int, valueToSearch: String): ViewInteraction? {
         //Validamos si existe un TextView de tipo idView con el texto valueToSearch
-        return Espresso.onView(
+        return onView(
             AllOf.allOf(
-                ViewMatchers.withId(idView),
+                withId(idView),
                 ViewMatchers.withText(valueToSearch)
             )
         )
@@ -62,9 +61,9 @@ class SugerenciasTest {
 
     fun setTextLayoutViewByValue(idView: Int, valueToType:String) {
         //Validamos si existe un TextView de tipo idView con el texto valueToSearch
-        Espresso.onView(
+        onView(
             AllOf.allOf(
-                ViewMatchers.isDescendantOfA(ViewMatchers.withId(idView)),
+                ViewMatchers.isDescendantOfA(withId(idView)),
                 ViewMatchers.withClassName(CoreMatchers.endsWith("EditText"))
             )
         ).perform(
@@ -74,9 +73,9 @@ class SugerenciasTest {
 
     fun setTextViewByValue(idView: Int, valueToType:String) {
         //Validamos si existe un TextView de tipo idView con el texto valueToSearch
-        Espresso.onView(
+        onView(
             AllOf.allOf(
-                ViewMatchers.withId(idView)
+                withId(idView)
             )
         ).perform(
             ViewActions.click(),
@@ -86,13 +85,13 @@ class SugerenciasTest {
         )
     }
 
-    fun validateTextView(idView: Int, valueToSearch: String) {
+    private fun validateTextView(idView: Int, valueToSearch: String) {
         //Validamos si es mostrado algun TextView de tipo idView
-        Espresso.onView(AllOf.allOf(withId(idView), ViewMatchers.isDisplayed()))
+        onView(AllOf.allOf(withId(idView), ViewMatchers.isDisplayed()))
         //Validamos que no venga vacio algun TextView de tipo idView
-        Espresso.onView(AllOf.allOf(withId(idView), Matchers.not(ViewMatchers.withText(""))))
+        onView(AllOf.allOf(withId(idView), Matchers.not(ViewMatchers.withText(""))))
         //Validamos si existe un TextView de tipo idView con el texto valueToSearch
-        Espresso.onView(AllOf.allOf(withId(idView), ViewMatchers.withText(valueToSearch)))
+        onView(AllOf.allOf(withId(idView), ViewMatchers.withText(valueToSearch)))
     }
 
 
@@ -101,17 +100,17 @@ class SugerenciasTest {
         setTextViewByValue(R.id.input_password,"123456789156Aa-")
         clickIntoButtonById(R.id.login_button)
         SystemClock.sleep(delayService)
-        Espresso.onView(
+        onView(
             AllOf.allOf(
-                ViewMatchers.withId(R.id.sugerencias),
+                withId(R.id.sugerencias),
                 ViewMatchers.isDisplayed()
             )
         )
         clickIntoButtonById(R.id.sugerencias)
         SystemClock.sleep(delayService)
-        Espresso.onView(
+        onView(
             AllOf.allOf(
-                ViewMatchers.withId(R.id.title),
+                withId(R.id.title),
                 ViewMatchers.isDisplayed()
             )
         )
@@ -125,7 +124,7 @@ class SugerenciasTest {
         SystemClock.sleep(delayService)
 
         //Validamos que el listado tenga un minimo de albumes
-        Espresso.onView(withId(R.id.sugerencia_item_fragment)).check(
+        onView(withId(R.id.sugerencia_item_fragment)).check(
             CustomAssertions.greaterItem(1)
         )
     }
@@ -139,7 +138,7 @@ class SugerenciasTest {
         navigateToTestScreen()
 
         //Validamos si el sugerencia_item_fragment es mostrado
-        Espresso.onView(withId(R.id.sugerencia_item_fragment))
+        onView(withId(R.id.sugerencia_item_fragment))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
 
         //Validamos el textView Title exista
@@ -156,7 +155,7 @@ class SugerenciasTest {
 
         /* Damos click en textView con la primera sugerencia */
         onView(withId(R.id.sugerencia_item_fragment)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()));
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
         SystemClock.sleep(delayService)
         onView(AllOf.allOf(withId(R.id.registrar_btn),ViewMatchers.isDisplayed() ) )
         clickIntoButtonById(R.id.registrar_btn)

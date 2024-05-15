@@ -33,7 +33,7 @@ class Monitoreo_Fragment : Fragment() {
         val sharedPref = activity?.getSharedPreferences("myPref", Context.MODE_PRIVATE)
         val editor = sharedPref?.edit()
 
-        binding.goal.text = sharedPref!!.getInt("entre_goal",0).toString().plus(" km")
+        binding.goal.text = sharedPref!!.getInt("entre_goal",0).toString().plus(R.string.sufix_entrenamiento.toString())
 
         binding.monitoreoBtn.setOnClickListener {
             binding.monitoreoBtn.visibility = View.INVISIBLE
