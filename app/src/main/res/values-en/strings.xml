@@ -36,7 +36,7 @@
     <string name="cancelar">Cancel</string>
     <string name="crear_plan_de_alimentacion">Create new Nutritional plan</string>
     <string name="actividad">Activity</string>
-    <string name="actividad_title">Activity</string>
+    <string name="actividad_title">Activity:</string>
     <string name="alimentacion_del_dia">Nutrition of the day</string>
     <string name="comida_1">Food 1</string>
     <string name="comida_2">Food 2</string>
@@ -55,7 +55,7 @@
     <string name="resultados_de_alimentacion">Nutritional results</string>
     <string name="registrar_nuevo_resultado">Register new result</string>
     <string name="calorias_totales">Calories total:</string>
-    <string name="ml_de_agua">Water Intake total:</string>
+    <string name="ml_de_agua">Total Water intake:</string>
     <string name="fecha">Date</string>
     <string name="fecha_label">Date:</string>
     <string name="listado_de_resultados_de_entrenamiento">Training Result List</string>
@@ -113,7 +113,7 @@
     <string name="semanas">\u0020 weeks</string>
     <string name="logo_de_aplicacion">App logo</string>
     <string name="reintentar_text">Retry please</string>
-    <string name="no_eventos">No more are available for now</string>
+    <string name="no_eventos">No new events available for now</string>
     <string name="not_part_mvp">Not cover by the MVP</string>
     <string name="exito">Successful operation.</string>
     <string name="failed_Error">Failed Operation. Error: \u0020</string>
