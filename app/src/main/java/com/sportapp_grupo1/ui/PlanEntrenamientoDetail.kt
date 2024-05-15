@@ -20,6 +20,7 @@ class PlanEntrenamientoDetail : Fragment() {
     private var _binding: PlanEntrenamientoDetailFragmentBinding? = null
     private val binding get() = _binding!!
     private  lateinit var volleyBroker: PlanEntrenamientoNetworkService
+    private var req1 = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +35,9 @@ class PlanEntrenamientoDetail : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         volleyBroker = this.context?.let { PlanEntrenamientoNetworkService(it) }!!
 
+        binding.container.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
+
         binding.crear.setOnClickListener {
             navigateToCreatePlan()
         }
@@ -41,6 +45,7 @@ class PlanEntrenamientoDetail : Fragment() {
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
         volleyBroker.instance.add(PlanEntrenamientoNetworkService.getRequest(
             {response ->
+                req1 = true
                 /* Guardar Plan en Cache */
                 val plan = PlanEntrenamiento (
                     planEntrenamientoID = response.optString("id"),
@@ -65,8 +70,10 @@ class PlanEntrenamientoDetail : Fragment() {
                 binding.domingoDetail.text = plan.domingo.plus(resources.getString(R.string.sufix_entrenamiento))
                 binding.semanasDetail.text = plan.numero_semanas.toString()
                 showMessage("Carga Exitosa.")
+                checkProgressBar()
             },
             {
+                req1 = true
                 if(it.networkResponse.statusCode == 404){
                     showMessage("Usuario no tiene datos cargados aun.")
                     binding.actividadDetail.text = getString(R.string.sin_datos)
@@ -83,11 +90,18 @@ class PlanEntrenamientoDetail : Fragment() {
                 {
                     showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
                 }
+                checkProgressBar()
             },
             "entrenamientos/plan-entrenamiento/usuario/"+user.userId,
             user.token
         ))
+    }
 
+    fun checkProgressBar(){
+        if(req1){
+            binding.progressBar.visibility = View.GONE
+            binding.container.visibility = View.VISIBLE
+        }
     }
 
     private fun navigateToCreatePlan() {

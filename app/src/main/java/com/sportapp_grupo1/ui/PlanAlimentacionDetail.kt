@@ -20,6 +20,7 @@ class PlanAlimentacionDetail : Fragment() {
     private var _binding: PlanAlimentacionDetailFragmentBinding? = null
     private val binding get() = _binding!!
     private  lateinit var volleyBroker: PlanAlimentacionNetworkService
+    private var req1 = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +35,9 @@ class PlanAlimentacionDetail : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         volleyBroker = this.context?.let { PlanAlimentacionNetworkService(it) }!!
 
+        binding.container.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
+
         binding.crear.setOnClickListener {
             navigateToCreatePlan()
         }
@@ -41,6 +45,7 @@ class PlanAlimentacionDetail : Fragment() {
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
         volleyBroker.instance.add(PlanAlimentacionNetworkService.getRequest(
             {response ->
+                req1 = true
                 /* Guardar Plan en Cache */
                 val plan = PlanAlimentacion (
                     planAlimentacionID = response.optString("id"),
@@ -62,8 +67,10 @@ class PlanAlimentacionDetail : Fragment() {
                 binding.domingoDetail.text = plan.domingo.plus(resources.getString(R.string.sufix_alimentacion))
                 binding.semanasDetail.text = plan.numero_semanas.toString()
                 showMessage("Carga Exitosa.")
+                checkProgressBar()
             },
             {
+                req1 = true
                 if(it.networkResponse.statusCode == 404){
                     showMessage("Usuario no tiene datos cargados aun.")
                     binding.lunesDetail.text = getString(R.string.sin_datos)
@@ -74,16 +81,25 @@ class PlanAlimentacionDetail : Fragment() {
                     binding.sabadoDetail.text = getString(R.string.sin_datos)
                     binding.domingoDetail.text = getString(R.string.sin_datos)
                     binding.semanasDetail.text = getString(R.string.sin_datos)
+
                 }
                 else
                 {
                     showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
                 }
+                checkProgressBar()
             },
             "nutricion/plan-nutricional/"+user.userId,
             user.token
         ))
 
+    }
+
+    fun checkProgressBar(){
+        if(req1){
+            binding.progressBar.visibility = View.GONE
+            binding.container.visibility = View.VISIBLE
+        }
     }
 
     private fun navigateToCreatePlan() {

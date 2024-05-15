@@ -25,6 +25,7 @@ class AlimentacionResultList : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private var viewAdapter: AlimentacionAdapter? = null
     private  lateinit var volleyBroker: AlimentacionNetworkService
+    private var req1 = false
 
 
     override fun onCreateView(
@@ -45,6 +46,9 @@ class AlimentacionResultList : Fragment() {
         recyclerView.adapter = viewAdapter
         volleyBroker = this.context?.let { AlimentacionNetworkService(it) }!!
 
+        binding.container.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
+
         binding.fabAddResult.setOnClickListener {
             navigateToCreateResult()
         }
@@ -52,6 +56,7 @@ class AlimentacionResultList : Fragment() {
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
         volleyBroker.instance.add(AlimentacionNetworkService.getRequest(
             {response ->
+                req1 = true
                 val list = mutableListOf<Alimentacion>()
                 var item: JSONObject
                 (0 until response.length()).forEach { it ->
@@ -73,8 +78,10 @@ class AlimentacionResultList : Fragment() {
                 }
                 viewAdapter!!.results = list
                 showMessage("Carga Exitosa.")
+                checkProgressBar()
             },
             {
+                req1 = true
                 if(it.networkResponse.statusCode == 404){
                     showMessage("Usuario no tiene datos cargados aun.")
                     val list = mutableListOf<Alimentacion>()
@@ -90,6 +97,7 @@ class AlimentacionResultList : Fragment() {
                         )
                     )
                     viewAdapter!!.results = list
+                    checkProgressBar()
                 }
                 else
                 {
@@ -113,6 +121,13 @@ class AlimentacionResultList : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
+        }
+    }
+
+    fun checkProgressBar(){
+        if(req1){
+            binding.progressBar.visibility = View.GONE
+            binding.container.visibility = View.VISIBLE
         }
     }
 

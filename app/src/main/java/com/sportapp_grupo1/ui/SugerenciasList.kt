@@ -23,6 +23,7 @@ class SugerenciasList : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private var viewAdapter: SugerenciasAdapter? = null
     private  lateinit var volleyBroker: SugerenciasNetworkService
+    private var req1 = false
 
 
     override fun onCreateView(
@@ -43,11 +44,15 @@ class SugerenciasList : Fragment() {
         recyclerView.adapter = viewAdapter
         volleyBroker = this.context?.let { SugerenciasNetworkService(it) }!!
 
+        binding.container.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
+
 
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
         volleyBroker.instance.add(
             SugerenciasNetworkService.getRequest(
                 {response ->
+                    req1 = true
                     if( response.length() == 0) {
                         binding.noSugerenciaText.visibility = View.VISIBLE
                         showMessage("No hay eventos nuevos.")
@@ -61,17 +66,20 @@ class SugerenciasList : Fragment() {
                                 Sugerencia(
                                     sugerencia_id = item.getString("id"),
                                     costo = item.getString("costo"),
-                                    nombre = item.getString("nombre").take(25),
+                                    nombre = item.getString("nombre").take(23),
                                     lugar = item.getString("lugar"),
                                 )
                             )
                         }
                         viewAdapter!!.sugerencias = list
                         showMessage("Carga Exitosa.")
+                        checkProgressBar()
                     }
                 },
                 {
+                    req1 = true
                     showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
+                    checkProgressBar()
                 },
                 user.token
             ))
@@ -79,6 +87,12 @@ class SugerenciasList : Fragment() {
 
     private fun showMessage(s: String) {
         Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
+    }
+    fun checkProgressBar(){
+        if(req1){
+            binding.progressBar.visibility = View.GONE
+            binding.container.visibility = View.VISIBLE
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

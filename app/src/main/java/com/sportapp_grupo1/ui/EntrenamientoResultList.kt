@@ -25,6 +25,7 @@ class EntrenamientoResultList : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private var viewAdapter: EntrenamientoAdapter? = null
     private  lateinit var volleyBroker: EntrenamientoNetworkService
+    private var req1 = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,11 +45,14 @@ class EntrenamientoResultList : Fragment() {
         recyclerView.adapter = viewAdapter
         volleyBroker = this.context?.let { EntrenamientoNetworkService(it) }!!
 
+        binding.container.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
 
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
         volleyBroker.instance.add(
             EntrenamientoNetworkService.getRequest(
             {response ->
+                req1 = true
                 val list = mutableListOf<Entrenamiento>()
                 var item: JSONObject
                 var res:String = ""
@@ -91,10 +95,13 @@ class EntrenamientoResultList : Fragment() {
                     }
                     viewAdapter!!.results = list
                     showMessage("Carga Exitosa.")
+                    checkProgressBar()
                 }
             },
             {
+                req1 = true
                 showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
+                checkProgressBar()
             },
             "resultado-entrenamiento/usuario/"+user.userId,
             user.token
@@ -103,6 +110,13 @@ class EntrenamientoResultList : Fragment() {
 
     private fun showMessage(s: String) {
         Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
+    }
+
+    fun checkProgressBar(){
+        if(req1){
+            binding.progressBar.visibility = View.GONE
+            binding.container.visibility = View.VISIBLE
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

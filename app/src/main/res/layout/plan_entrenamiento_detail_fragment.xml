@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".ui.PlanEntrenamientoDetail">
-<RelativeLayout
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/ProgressBar"
+        android:layout_centerInParent="true"
+        android:indeterminateDuration="@integer/material_motion_duration_short_2"
+        android:indeterminateOnly="true"
+        android:indeterminateBehavior="cycle"
+        android:progressBackgroundTint="@color/ProgressBar"
+        android:id="@+id/progressBar"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible"
+        android:indeterminate="true"
+        android:layout_gravity="center" />
+
+<ScrollView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:id="@+id/container">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/title"
@@ -250,6 +273,8 @@ tools:context=".ui.PlanEntrenamientoDetail">
         android:text="@string/crear_nuevo_plan"
         android:textSize="20sp" />
 
-</RelativeLayout>
+    </RelativeLayout>
 
 </ScrollView>
+
+</RelativeLayout>

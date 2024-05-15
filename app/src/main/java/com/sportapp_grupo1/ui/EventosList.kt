@@ -24,6 +24,7 @@ class EventosList : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private var viewAdapter: EventosAdapter? = null
     private  lateinit var volleyBroker: SugerenciasNetworkService
+    private var req1 = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,11 +44,14 @@ class EventosList : Fragment() {
         recyclerView.adapter = viewAdapter
         volleyBroker = this.context?.let { SugerenciasNetworkService(it) }!!
 
+        binding.container.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
 
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
         volleyBroker.instance.add(
             SugerenciasNetworkService.getRequest_registrados(
                 {response ->
+                    req1 = true
                     val list = mutableListOf<Sugerencia>()
                     var item: JSONObject
                     (0 until response.length()).forEach { it ->
@@ -57,7 +61,7 @@ class EventosList : Fragment() {
                             Sugerencia(
                                 sugerencia_id = item.getString("id"),
                                 costo = item.getString("costo"),
-                                nombre = item.getString("nombre").take(25),
+                                nombre = item.getString("nombre").take(23),
                                 lugar = item.getString("lugar"),
                                 horario_final = item.getString("hora"),
                                 fecha = item.getString("fecha")
@@ -66,8 +70,10 @@ class EventosList : Fragment() {
                     }
                     viewAdapter!!.eventos = list
                     showMessage("Carga Exitosa.")
+                    checkProgressBar()
                 },
                 {
+                    req1 = true
                     if(it.networkResponse.statusCode == 404){
                         showMessage("Usuario no tiene datos cargados aun.")
                         val list = mutableListOf<Sugerencia>()
@@ -83,11 +89,13 @@ class EventosList : Fragment() {
                             )
                         )
                         viewAdapter!!.eventos = list
+
                     }
                     else
                     {
                         showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
                     }
+                    checkProgressBar()
                 },
                 user.token
             ))
@@ -101,6 +109,13 @@ class EventosList : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
+        }
+    }
+
+    fun checkProgressBar(){
+        if(req1){
+            binding.progressBar.visibility = View.GONE
+            binding.container.visibility = View.VISIBLE
         }
     }
 
