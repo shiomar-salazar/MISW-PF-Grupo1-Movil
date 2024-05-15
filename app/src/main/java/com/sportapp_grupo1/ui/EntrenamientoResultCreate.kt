@@ -46,7 +46,7 @@ class EntrenamientoResultCreate : Fragment() {
         var result_vo2 = 0.0
 
         val distance = sharedPref!!.getInt("entre_goal",0)
-        binding.goal.text = distance.toString().plus(R.string.sufix_entrenamiento.toString())
+        binding.goal.text = distance.toString().plus(resources.getString(R.string.sufix_entrenamiento))
         binding.tiempoText.setText(sharedPref.getString("time_result",""))
         sharedPref.edit().remove("time_result").apply()
 

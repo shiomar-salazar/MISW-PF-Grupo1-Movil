@@ -56,13 +56,13 @@ class PlanEntrenamientoDetail : Fragment() {
                 )
                 /* Mostar Toast */
                 binding.actividadDetail.text = plan.entrenamiento
-                binding.lunesDetail.text = plan.lunes.plus(R.string.sufix_entrenamiento.toString())
-                binding.martesDetail.text = plan.martes.plus(R.string.sufix_entrenamiento.toString())
-                binding.miercolesDetail.text = plan.miercoles.plus(R.string.sufix_entrenamiento.toString())
-                binding.juevesDetail.text = plan.jueves.plus(R.string.sufix_entrenamiento.toString())
-                binding.viernesDetail.text = plan.viernes.plus(R.string.sufix_entrenamiento.toString())
-                binding.sabadoDetail.text = plan.sabado.plus(R.string.sufix_entrenamiento.toString())
-                binding.domingoDetail.text = plan.domingo.plus(R.string.sufix_entrenamiento.toString())
+                binding.lunesDetail.text = plan.lunes.plus(resources.getString(R.string.sufix_entrenamiento))
+                binding.martesDetail.text = plan.martes.plus(resources.getString(R.string.sufix_entrenamiento))
+                binding.miercolesDetail.text = plan.miercoles.plus(resources.getString(R.string.sufix_entrenamiento))
+                binding.juevesDetail.text = plan.jueves.plus(resources.getString(R.string.sufix_entrenamiento))
+                binding.viernesDetail.text = plan.viernes.plus(resources.getString(R.string.sufix_entrenamiento))
+                binding.sabadoDetail.text = plan.sabado.plus(resources.getString(R.string.sufix_entrenamiento))
+                binding.domingoDetail.text = plan.domingo.plus(resources.getString(R.string.sufix_entrenamiento))
                 binding.semanasDetail.text = plan.numero_semanas.toString()
                 showMessage("Carga Exitosa.")
             },

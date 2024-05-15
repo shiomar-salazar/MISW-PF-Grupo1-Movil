@@ -48,22 +48,27 @@ class SugerenciasList : Fragment() {
         volleyBroker.instance.add(
             SugerenciasNetworkService.getRequest(
                 {response ->
-                    val list = mutableListOf<Sugerencia>()
-                    var item: JSONObject
-                    (0 until response.length()).forEach { it ->
-                        item = response.getJSONObject(it)
-                        list.add(
-                            it,
-                            Sugerencia(
-                                sugerencia_id = item.getString("id"),
-                                costo = item.getString("costo"),
-                                nombre = item.getString("nombre").take(25),
-                                lugar = item.getString("lugar"),
+                    if( response.length() == 0) {
+                        binding.noSugerenciaText.visibility = View.VISIBLE
+                        showMessage("No hay eventos nuevos.")
+                    }else {
+                        val list = mutableListOf<Sugerencia>()
+                        var item: JSONObject
+                        (0 until response.length()).forEach { it ->
+                            item = response.getJSONObject(it)
+                            list.add(
+                                it,
+                                Sugerencia(
+                                    sugerencia_id = item.getString("id"),
+                                    costo = item.getString("costo"),
+                                    nombre = item.getString("nombre").take(25),
+                                    lugar = item.getString("lugar"),
+                                )
                             )
-                        )
+                        }
+                        viewAdapter!!.sugerencias = list
+                        showMessage("Carga Exitosa.")
                     }
-                    viewAdapter!!.sugerencias = list
-                    showMessage("Carga Exitosa.")
                 },
                 {
                     showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))

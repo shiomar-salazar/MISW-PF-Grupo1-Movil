@@ -57,11 +57,11 @@ class EntrenamientoResultList : Fragment() {
                     list.add(0,
                         Entrenamiento(
                             entrenamientoId = "",
-                            actividad = R.string.Vacio.toString(),
-                            distancia = R.string.Vacio.toString(),
-                            tiempo = R.string.Vacio.toString(),
-                            date = R.string.Vacio.toString(),
-                            resultado = R.string.Vacio.toString(),
+                            actividad = resources.getString(R.string.Vacio),
+                            distancia = resources.getString(R.string.Vacio),
+                            tiempo = resources.getString(R.string.Vacio),
+                            date = resources.getString(R.string.Vacio),
+                            resultado = resources.getString(R.string.Vacio),
                             feedback = ""
                         )
                     )
@@ -81,7 +81,7 @@ class EntrenamientoResultList : Fragment() {
                             Entrenamiento(
                                 entrenamientoId = item.getString("id"),
                                 actividad = item.getString("actividad"),
-                                distancia = item.getString("distancia").plus(R.string.sufix_entrenamiento.toString()),
+                                distancia = item.getString("distancia").plus(resources.getString(R.string.sufix_entrenamiento)),
                                 tiempo = item.getString("tiempo"),
                                 date = item.getString("fecha"),
                                 resultado = res,

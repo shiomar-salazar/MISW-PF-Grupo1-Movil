@@ -40,12 +40,12 @@ class Home : Fragment() {
 
         val calendar: Calendar = Calendar.getInstance()
         val date: Date = calendar.time
-        val day = SimpleDateFormat("EEEE", Locale("es","MX")).format(date.time)
+        val day = SimpleDateFormat("EEEE", Locale("es","MX")).format(date.time).replace("é","e").replace("á", "a")
         var distance = 0
         var calories_goal = 0
 
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
-        binding.header.text = R.string.hola.toString().plus(user.nombres.substringBefore(" "))
+        binding.header.text = resources.getString(R.string.hola).plus(user.nombres.substringBefore(" "))
 
         if (user.plan != "Premium"){
             binding.notPremiumText.visibility = View.VISIBLE
@@ -60,16 +60,15 @@ class Home : Fragment() {
         volleyBroker.instance.add(
             PlanEntrenamientoNetworkService.getRequest(
                 { response ->
-                    distance =
-                        response.getJSONObject("plan_entrenamiento").optString(day).toInt()
-                    val duration = response.optInt("numero_semanas").toString().plus(R.string.semanas.toString())
-                    binding.distanceDayText.text = distance.toString().plus(R.string.sufix_entrenamiento.toString())
-                    binding.planEntreDurationText.text = R.string.quedan.toString().plus(duration)
+                    distance = response.getJSONObject("plan_entrenamiento").optString(day).toInt()
+                    val duration = response.optInt("numero_semanas").toString().plus(resources.getString(R.string.semanas))
+                    binding.distanceDayText.text = distance.toString().plus(resources.getString(R.string.sufix_entrenamiento))
+                    binding.planEntreDurationText.text = resources.getString(R.string.quedan).plus(duration)
                 },
                 {
                     distance = 0
-                    binding.distanceDayText.text = R.string.Vacio.toString()
-                    binding.planEntreDurationText.text = R.string.Vacio.toString()
+                    binding.distanceDayText.text = resources.getString(R.string.Vacio)
+                    binding.planEntreDurationText.text = resources.getString(R.string.Vacio)
                 },
                 "entrenamientos/plan-entrenamiento/usuario/" + user.userId,
                 user.token
@@ -80,14 +79,14 @@ class Home : Fragment() {
             PlanAlimentacionNetworkService.getRequest(
             {response ->
                 calories_goal = response.getJSONObject("plan_alimentacion").optInt(day)
-                val duration = response.optInt("numero_semanas").toString().plus(R.string.semanas.toString())
-                binding.caloriesDayText.text = calories_goal.toString().plus(R.string.sufix_alimentacion.toString())
-                binding.planAliDurationText.text = R.string.quedan.toString().plus(duration)
+                val duration = response.optInt("numero_semanas").toString().plus(resources.getString(R.string.semanas))
+                binding.caloriesDayText.text = calories_goal.toString().plus(resources.getString(R.string.sufix_alimentacion))
+                binding.planAliDurationText.text = resources.getString(R.string.quedan).plus(duration)
             },
             {
                 calories_goal = 0
-                binding.caloriesDayText.text = R.string.Vacio.toString()
-                binding.planAliDurationText.text = R.string.Vacio.toString()
+                binding.caloriesDayText.text = resources.getString(R.string.Vacio)
+                binding.planAliDurationText.text = resources.getString(R.string.Vacio)
             },
             "nutricion/plan-nutricional/"+user.userId,
             user.token

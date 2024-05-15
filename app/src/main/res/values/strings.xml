@@ -33,9 +33,9 @@
     <string name="miercoles">Miercoles</string>
     <string name="martes">Martes</string>
     <string name="cancelar">Cancelar</string>
-    <string name="sufix_entrenamiento"> km</string>
+    <string name="sufix_entrenamiento">\u0020 km</string>
     <string name="crear_plan_de_alimentacion">Crear Plan de Alimentacion</string>
-    <string name="sufix_alimentacion"> kcal</string>
+    <string name="sufix_alimentacion">\u0020 kcal</string>
     <string name="actividad">Actividad</string>
     <string name="actividad_title">Actividad:</string>
     <string name="alimentacion_del_dia">Alimentacion del Dia</string>
@@ -122,11 +122,12 @@
     <string name="aqui_podras_ver_eventos_cerca_de_ti">Aqui podras ver eventos cerca de ti</string>
     <string name="mis_eventos">Mis Eventos</string>
     <string name="Vacio">Sin Datos</string>
-    <string name="quedan">Quedan</string>
-    <string name="hola">Hola</string>
-    <string name="semanas"> semanas</string>
+    <string name="quedan">Quedan \u0020</string>
+    <string name="hola">Hola \u0020</string>
+    <string name="semanas">\u0020 semanas</string>
     <string name="logo_de_aplicacion">Logo de Aplicacion</string>
     <string name="reintentar_text">Reintente por favor</string>
     <string name="ftp">FTP:</string>
     <string name="VO2MAX">Vo2Max:</string>
+    <string name="no_eventos">Por el momento no hay eventos nuevos en su zona</string>
 </resources>

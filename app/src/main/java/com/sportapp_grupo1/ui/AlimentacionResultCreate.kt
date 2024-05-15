@@ -43,7 +43,7 @@ class AlimentacionResultCreate : Fragment() {
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
 
 
-        binding.goal.text = sharedPref!!.getInt("alime_goal", 2000).toString().plus(R.string.sufix_alimentacion.toString())
+        binding.goal.text = sharedPref!!.getInt("alime_goal", 2000).toString().plus(resources.getString(R.string.sufix_alimentacion))
 
         binding.cancelar.setOnClickListener {
             navigateToHome()

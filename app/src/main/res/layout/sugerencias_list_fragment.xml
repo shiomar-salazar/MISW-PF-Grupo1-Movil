@@ -22,10 +22,23 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/no_sugerencia_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="100dp"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:textColor="@color/lightGrey"
+            android:text="@string/no_eventos"
+            android:visibility="invisible"/>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/title">
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/sugerencia_item_fragment"

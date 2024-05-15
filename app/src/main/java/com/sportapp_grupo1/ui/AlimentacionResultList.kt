@@ -67,7 +67,7 @@ class AlimentacionResultList : Fragment() {
                             calorias3 = calorias3,
                             ml_agua = item.getInt("ml_agua").toString().plus(" ml"),
                             date = item.getString("fecha"),
-                            total_calories = (calorias1.toInt() + calorias2.toInt() + calorias3.toInt()).toString().plus(R.string.sufix_alimentacion.toString())
+                            total_calories = (calorias1.toInt() + calorias2.toInt() + calorias3.toInt()).toString().plus(resources.getString(R.string.sufix_alimentacion))
                         )
                     )
                 }
@@ -84,9 +84,9 @@ class AlimentacionResultList : Fragment() {
                             calorias1 = "",
                             calorias2 = "",
                             calorias3 = "",
-                            ml_agua = R.string.Vacio.toString(),
-                            date = R.string.Vacio.toString(),
-                            total_calories = R.string.Vacio.toString()
+                            ml_agua = resources.getString(R.string.Vacio),
+                            date = resources.getString(R.string.Vacio),
+                            total_calories = resources.getString(R.string.Vacio)
                         )
                     )
                     viewAdapter!!.results = list
