@@ -95,8 +95,8 @@ class EntrenamientoResultList : Fragment() {
                     }
                     viewAdapter!!.results = list
                     showMessage("Carga Exitosa.")
-                    checkProgressBar()
                 }
+                checkProgressBar()
             },
             {
                 req1 = true
