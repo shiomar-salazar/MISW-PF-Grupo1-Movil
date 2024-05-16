@@ -29,8 +29,7 @@ class PlanAlimentacionCreateTest {
         ActivityScenarioRule(MainActivity::class.java)
 
     //Constante que define el tiempo de espera para que se carguen los datos retornados por el adapter
-    val delayService = Integer.toUnsignedLong(5000)
-    val delayService2 = Integer.toUnsignedLong(1000)
+    val delayService2 = Integer.toUnsignedLong(7000)
 
     fun clickIntoButtonById(idView: Int) {
         //Damos click en el boton idView
@@ -117,35 +116,35 @@ class PlanAlimentacionCreateTest {
 
         Espresso.onView(ViewMatchers.withId(R.id.lunes)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "El campo no debe estar vacio")
+            assertEquals(actualError, "The field cannot be empty")
         }
         Espresso.onView(ViewMatchers.withId(R.id.martes)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "El campo no debe estar vacio")
+            assertEquals(actualError, "The field cannot be empty")
         }
         Espresso.onView(ViewMatchers.withId(R.id.miercoles)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "El campo no debe estar vacio")
+            assertEquals(actualError, "The field cannot be empty")
         }
         Espresso.onView(ViewMatchers.withId(R.id.jueves)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "El campo no debe estar vacio")
+            assertEquals(actualError, "The field cannot be empty")
         }
         Espresso.onView(ViewMatchers.withId(R.id.viernes)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "El campo no debe estar vacio")
+            assertEquals(actualError, "The field cannot be empty")
         }
         Espresso.onView(ViewMatchers.withId(R.id.sabado)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "El campo no debe estar vacio")
+            assertEquals(actualError, "The field cannot be empty")
         }
         Espresso.onView(ViewMatchers.withId(R.id.domingo)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "El campo no debe estar vacio")
+            assertEquals(actualError, "The field cannot be empty")
         }
         Espresso.onView(ViewMatchers.withId(R.id.semanas)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "El campo no debe estar vacio")
+            assertEquals(actualError, "The field cannot be empty")
         }
 
         // Scroll Up
@@ -163,32 +162,32 @@ class PlanAlimentacionCreateTest {
 
         Espresso.onView(ViewMatchers.withId(R.id.lunes)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "Las calorias objetivo deben ser al menos 500")
+            assertEquals(actualError, "Target Calories shall be at least 500")
         }
         Espresso.onView(ViewMatchers.withId(R.id.martes)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "Las calorias objetivo deben ser al menos 500")
+            assertEquals(actualError, "Target Calories shall be at least 500")
         }
         Espresso.onView(ViewMatchers.withId(R.id.miercoles)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "Las calorias objetivo deben ser al menos 500")
+            assertEquals(actualError, "Target Calories shall be at least 500")
         }
         Espresso.onView(ViewMatchers.withId(R.id.jueves)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "Las calorias objetivo deben ser al menos 500")
+            assertEquals(actualError, "Target Calories shall be at least 500")
         }
         Espresso.onView(ViewMatchers.withId(R.id.viernes)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "Las calorias objetivo deben ser al menos 500")
+            assertEquals(actualError, "Target Calories shall be at least 500")
         }
         Espresso.onView(ViewMatchers.withId(R.id.sabado)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "Las calorias objetivo deben ser al menos 500")
+            assertEquals(actualError, "Target Calories shall be at least 500")
         }
         clickIntoButtonByIdwithScroll(R.id.crear)
         Espresso.onView(ViewMatchers.withId(R.id.domingo)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
-            assertEquals(actualError, "Las calorias objetivo deben ser al menos 500")
+            assertEquals(actualError, "Target Calories shall be at least 500")
         }
         SystemClock.sleep(delayService2)
         Espresso.onView(
@@ -215,7 +214,7 @@ class PlanAlimentacionCreateTest {
         setTextViewByValue(R.id.domingo_text,"2100")
         setTextViewByValue(R.id.semana_text,"6")
         clickIntoButtonByIdwithScroll(R.id.crear)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
                 ViewMatchers.withId(R.id.plan_alimentacion),

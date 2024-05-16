@@ -28,8 +28,7 @@ class EntrenamientoMonitoreoTest {
         android.Manifest.permission.ACCESS_BACKGROUND_LOCATION )
 
     //Constante que define el tiempo de espera para que se carguen los datos retornados por el adapter
-    val delayService = Integer.toUnsignedLong(5000)
-    val delayService2 = Integer.toUnsignedLong(1000)
+    val delayService2 = Integer.toUnsignedLong(7000)
 
     fun clickIntoButtonById(idView: Int) {
         //Damos click en el boton idView
@@ -86,7 +85,7 @@ class EntrenamientoMonitoreoTest {
         setTextViewByValue(R.id.input_username,"s.salazarc@uniandes.edu.co")
         setTextViewByValue(R.id.input_password,"123456789156Aa-")
         clickIntoButtonById(R.id.login_button)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
                 ViewMatchers.withId(R.id.entrenamiento),
@@ -95,10 +94,10 @@ class EntrenamientoMonitoreoTest {
         )
         /* Llegar a Entrenamiento Menu */
         clickIntoButtonById(R.id.entrenamiento)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         /* Llegar a Entrenamiento Results */
         clickIntoButtonById(R.id.monitoreoBtn)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
     }
 
     @Test
@@ -127,8 +126,7 @@ class EntrenamientoMonitoreoTest {
             )
         )
         /* Esperamos que aumente el contador */
-        SystemClock.sleep(delayService)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         clickIntoButtonById(R.id.terminarBtn)
         Espresso.onView(
             AllOf.allOf(
@@ -164,8 +162,7 @@ class EntrenamientoMonitoreoTest {
             )
         )
         /* Esperamos que aumente el contador */
-        SystemClock.sleep(delayService)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         clickIntoButtonById(R.id.alertaBtn)
         Espresso.onView(
             AllOf.allOf(
@@ -173,9 +170,7 @@ class EntrenamientoMonitoreoTest {
                 ViewMatchers.isClickable()
             )
         )
-        SystemClock.sleep(delayService)
-        SystemClock.sleep(delayService)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         clickIntoButtonById(R.id.reintentarBtn)
         Espresso.onView(
             AllOf.allOf(
@@ -183,11 +178,9 @@ class EntrenamientoMonitoreoTest {
                 ViewMatchers.isClickable()
             )
         )
-        SystemClock.sleep(delayService)
-        SystemClock.sleep(delayService)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         clickIntoButtonById(R.id.regresarBtn)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
                 ViewMatchers.withId(R.id.entrenamiento),

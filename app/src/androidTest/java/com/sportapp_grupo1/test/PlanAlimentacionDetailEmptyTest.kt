@@ -29,8 +29,7 @@ class PlanAlimentacionDetailEmptyTest {
         ActivityScenarioRule(MainActivity::class.java)
 
     //Constante que define el tiempo de espera para que se carguen los datos retornados por el adapter
-    val delayService = Integer.toUnsignedLong(5000)
-    val delayService2 = Integer.toUnsignedLong(1000)
+    val delayService2 = Integer.toUnsignedLong(7000)
 
     fun clickIntoButtonById(idView: Int) {
         //Damos click en el boton idView
@@ -121,7 +120,7 @@ class PlanAlimentacionDetailEmptyTest {
                 ViewMatchers.isDisplayed()
             )
         )
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
     }
 
     /**
@@ -132,13 +131,13 @@ class PlanAlimentacionDetailEmptyTest {
         /* Primero navegamos a la pantalla correcta */
         navigateToTestScreen()
 
-        Espresso.onView(ViewMatchers.withId(R.id.lunes_detail)).check(matches(withText("Sin Datos")))
-        Espresso.onView(ViewMatchers.withId(R.id.martes_detail)).check(matches(withText("Sin Datos")))
-        Espresso.onView(ViewMatchers.withId(R.id.miercoles_detail)).check(matches(withText("Sin Datos")))
-        Espresso.onView(ViewMatchers.withId(R.id.jueves_detail)).check(matches(withText("Sin Datos")))
-        Espresso.onView(ViewMatchers.withId(R.id.viernes_detail)).check(matches(withText("Sin Datos")))
-        Espresso.onView(ViewMatchers.withId(R.id.sabado_detail)).check(matches(withText("Sin Datos")))
-        Espresso.onView(ViewMatchers.withId(R.id.domingo_detail)).check(matches(withText("Sin Datos")))
-        Espresso.onView(ViewMatchers.withId(R.id.semanas_detail)).check(matches(withText("Sin Datos")))
+        Espresso.onView(ViewMatchers.withId(R.id.lunes_detail)).check(matches(withText("No Data")))
+        Espresso.onView(ViewMatchers.withId(R.id.martes_detail)).check(matches(withText("No Data")))
+        Espresso.onView(ViewMatchers.withId(R.id.miercoles_detail)).check(matches(withText("No Data")))
+        Espresso.onView(ViewMatchers.withId(R.id.jueves_detail)).check(matches(withText("No Data")))
+        Espresso.onView(ViewMatchers.withId(R.id.viernes_detail)).check(matches(withText("No Data")))
+        Espresso.onView(ViewMatchers.withId(R.id.sabado_detail)).check(matches(withText("No Data")))
+        Espresso.onView(ViewMatchers.withId(R.id.domingo_detail)).check(matches(withText("No Data")))
+        Espresso.onView(ViewMatchers.withId(R.id.semanas_detail)).check(matches(withText("No Data")))
     }
 }

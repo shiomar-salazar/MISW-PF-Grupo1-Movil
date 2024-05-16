@@ -27,8 +27,7 @@ class EntrenamientoResultListEmptyTest {
         ActivityScenarioRule(MainActivity::class.java)
 
     //Constante que define el tiempo de espera para que se carguen los datos retornados por el adapter
-    val delayService = Integer.toUnsignedLong(5000)
-    val delayService2 = Integer.toUnsignedLong(1000)
+    val delayService2 = Integer.toUnsignedLong(7000)
 
     fun clickIntoButtonById(idView: Int) {
         //Damos click en el boton idView
@@ -97,8 +96,7 @@ class EntrenamientoResultListEmptyTest {
         SystemClock.sleep(delayService2)
         /* Llegar a Entrenamiento Results */
         clickIntoButtonById(R.id.result_list_btn)
-        SystemClock.sleep(delayService)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
     }
 
     /**
@@ -111,27 +109,27 @@ class EntrenamientoResultListEmptyTest {
 
         Espresso.onView(ViewMatchers.withId(R.id.result_list_actividad)).check(
             ViewAssertions.matches(
-                ViewMatchers.withText("Sin Datos")
+                ViewMatchers.withText("No Data")
             )
         )
         Espresso.onView(ViewMatchers.withId(R.id.result_list_fecha)).check(
             ViewAssertions.matches(
-                ViewMatchers.withText("Sin Datos")
+                ViewMatchers.withText("No Data")
             )
         )
         Espresso.onView(ViewMatchers.withId(R.id.result_list_tiempo)).check(
             ViewAssertions.matches(
-                ViewMatchers.withText("Sin Datos")
+                ViewMatchers.withText("No Data")
             )
         )
         Espresso.onView(ViewMatchers.withId(R.id.result_list_distancia)).check(
             ViewAssertions.matches(
-                ViewMatchers.withText("Sin Datos")
+                ViewMatchers.withText("No Data")
             )
         )
         Espresso.onView(ViewMatchers.withId(R.id.result_list_resultado)).check(
             ViewAssertions.matches(
-                ViewMatchers.withText("Sin Datos")
+                ViewMatchers.withText("No Data")
             )
         )
     }

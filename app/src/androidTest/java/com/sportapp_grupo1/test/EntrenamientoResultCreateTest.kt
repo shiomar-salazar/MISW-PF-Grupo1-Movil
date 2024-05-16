@@ -1,7 +1,6 @@
 package com.sportapp_grupo1.test
 
 import android.os.SystemClock
-import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.ViewInteraction
@@ -33,8 +32,7 @@ class EntrenamientoResultCreateTest {
         ActivityScenarioRule(MainActivity::class.java)
 
     //Constante que define el tiempo de espera para que se carguen los datos retornados por el adapter
-    val delayService = Integer.toUnsignedLong(5000)
-    val delayService2 = Integer.toUnsignedLong(1000)
+    val delayService2 = Integer.toUnsignedLong(7000)
 
     fun clickIntoButtonById(idView: Int) {
         //Damos click en el boton idView
@@ -136,7 +134,7 @@ class EntrenamientoResultCreateTest {
         setTextViewByValue(R.id.tiempo_text,"12:34:56")
         setTextViewByValue(R.id.result_text,"30")
         clickIntoButtonByIdwithScroll(R.id.registrar)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         onView(
             AllOf.allOf(
                 ViewMatchers.withId(R.id.entrenamiento),
@@ -183,15 +181,15 @@ class EntrenamientoResultCreateTest {
         /* Validamos respuestas negativas */
         onView(ViewMatchers.withId(R.id.tiempo)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
-            Assert.assertEquals(actualError, "El campo no debe estar vacio")
+            Assert.assertEquals(actualError, "The field cannot be empty")
         }
         onView(ViewMatchers.withId(R.id.result)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
-            Assert.assertEquals(actualError, "El campo no debe estar vacio")
+            Assert.assertEquals(actualError, "The field cannot be empty")
         }
         onView(ViewMatchers.withId(R.id.date)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
-            Assert.assertEquals(actualError, "El campo no debe estar vacio")
+            Assert.assertEquals(actualError, "The field cannot be empty")
         }
 
         /* Validamos mensaje de error del campo tiempo */
@@ -199,7 +197,7 @@ class EntrenamientoResultCreateTest {
         clickIntoButtonByIdwithScroll(R.id.registrar)
         onView(ViewMatchers.withId(R.id.tiempo)).check { view, _ ->
             val actualError = (view as TextInputLayout).error
-            Assert.assertEquals(actualError, "El tiempo tiene que estar en formato XX:YY:ZZ")
+            Assert.assertEquals(actualError, "Time shall be in format XX:YY:ZZ")
         }
         /* Validamos seguir en la pantalla de Resultado de Entrenamiento */
         onView(

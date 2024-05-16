@@ -32,8 +32,7 @@ class SugerenciasTest {
         ActivityScenarioRule(MainActivity::class.java)
 
     //Constante que define el tiempo de espera para que se carguen los datos retornados por el adapter
-    val delayService = Integer.toUnsignedLong(5000)
-    val delayService2 = Integer.toUnsignedLong(1000)
+    val delayService2 = Integer.toUnsignedLong(7000)
 
     fun clickIntoButtonById(idView: Int) {
         //Damos click en el boton idView
@@ -99,7 +98,7 @@ class SugerenciasTest {
         setTextViewByValue(R.id.input_username,"s.salazarc@uniandes.edu.co")
         setTextViewByValue(R.id.input_password,"123456789156Aa-")
         clickIntoButtonById(R.id.login_button)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         onView(
             AllOf.allOf(
                 withId(R.id.sugerencias),
@@ -107,7 +106,7 @@ class SugerenciasTest {
             )
         )
         clickIntoButtonById(R.id.sugerencias)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         onView(
             AllOf.allOf(
                 withId(R.id.title),
@@ -121,7 +120,7 @@ class SugerenciasTest {
         navigateToTestScreen()
 
         //Agregamos un tiempo de espera de 5000
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
 
         //Validamos que el listado tenga un minimo de albumes
         onView(withId(R.id.sugerencia_item_fragment)).check(
@@ -156,10 +155,10 @@ class SugerenciasTest {
         /* Damos click en textView con la primera sugerencia */
         onView(withId(R.id.sugerencia_item_fragment)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         onView(AllOf.allOf(withId(R.id.registrar_btn),ViewMatchers.isDisplayed() ) )
         clickIntoButtonById(R.id.registrar_btn)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         onView(AllOf.allOf(withId(R.id.sugerencias),ViewMatchers.isDisplayed() ) )
     }
 
