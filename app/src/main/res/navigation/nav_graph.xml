@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.sportapp_grupo1.ui.MainFragment"
-        android:label="SportApp - Grupo 1"
+        android:label="@string/app_name"
         tools:layout="@layout/main_fragment" >
         <action
             android:id="@+id/action_mainFragment_to_home2"

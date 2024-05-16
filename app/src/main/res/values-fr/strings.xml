@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SportApp - Grupo 1</string>
     <string name="bienvenido">Bienvenue</string>
     <string name="username">Nom d\'utilisateur</string>
     <string name="iniciar_sesion">" Se connecter"</string>
@@ -123,4 +122,8 @@
     <string name="user_client_only">L\'utilisateur est un fournisseur de services, veuillez plutôt utiliser la plateforme Web.</string>
     <string name="location_services">Veuillez activer les services de localisation</string>
     <string name="no_new_events">Aucun nouvel événement disponible</string>
+    <string name="menu">Menu</string>
+    <string name="ver_mis_eventos">Voir mes événements</string>
+    <string name="detalle_del_plan">Détails du forfait</string>
+    <string name="ver_sugerencias">Voir les suggestions</string>
 </resources>

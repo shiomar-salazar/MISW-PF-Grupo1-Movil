@@ -103,7 +103,7 @@
                     />
                 <Button
                     android:id="@+id/entrenamiento"
-                    android:text="@string/registrar"
+                    android:text="@string/menu"
                     android:layout_width="wrap_content"
                     android:textSize="15sp"
                     android:layout_height="wrap_content"
@@ -197,7 +197,7 @@
 
             <Button
                 android:id="@+id/sugerencias"
-                android:text="@string/ver_mas"
+                android:text="@string/ver_sugerencias"
                 android:layout_width="wrap_content"
                 android:textSize="15sp"
                 android:layout_height="wrap_content"
@@ -260,7 +260,7 @@
                 />
             <Button
                 android:id="@+id/tus_eventos"
-                android:text="@string/ver_mas"
+                android:text="@string/ver_mis_eventos"
                 android:layout_width="wrap_content"
                 android:visibility="visible"
                 android:textSize="15sp"
@@ -312,7 +312,7 @@
                 />
             <Button
                 android:id="@+id/plan_entrenamiento"
-                android:text="@string/ver_mas"
+                android:text="@string/detalle_del_plan"
                 android:layout_width="wrap_content"
                 android:textSize="15sp"
                 android:layout_height="wrap_content"
@@ -356,7 +356,7 @@
                 />
             <Button
                 android:id="@+id/plan_alimentacion"
-                android:text="@string/ver_mas"
+                android:text="Ver mas"
                 android:layout_width="wrap_content"
                 android:textSize="15sp"
                 android:layout_height="wrap_content"

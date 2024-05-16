@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SportApp - Grupo 1</string>
+    <string name="app_name" translatable="false">SportApp - Grupo 1</string>
     <string name="bienvenido">Bienvenid@</string>
     <string name="username">Nombre de Usuario</string>
     <string name="iniciar_sesion">Iniciar Sesion</string>
@@ -139,4 +139,8 @@
     <string name="user_client_only">Usuario es proveedor, porfavor usar Plataforma Web</string>
     <string name="location_services">Por favor encender servicios de ubicacion</string>
     <string name="no_new_events">No hay eventos nuevos</string>
+    <string name="menu">Menu</string>
+    <string name="ver_mis_eventos">Ver mis eventos</string>
+    <string name="detalle_del_plan">Detalles del plan</string>
+    <string name="ver_sugerencias">Ver sugerencias</string>
 </resources>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SportApp - Group 1</string>
     <string name="bienvenido">Welcome</string>
     <string name="username">Username</string>
     <string name="iniciar_sesion">Log-in</string>
@@ -115,7 +114,7 @@
     <string name="reintentar_text">Retry please</string>
     <string name="no_eventos">No new events available for now</string>
     <string name="not_part_mvp">Not cover by the MVP</string>
-    <string name="exito">Successful operation.</string>
+    <string name="exito">Successfull operation.</string>
     <string name="failed_Error">Failed Operation. Error: \u0020</string>
     <string name="user_no_data">User has no data loaded yet</string>
     <string name="todos_los_campos">All the field need to be completed, please check and try again</string>
@@ -123,4 +122,8 @@
     <string name="user_client_only">User is a Service Provider, please use Web Platform instead</string>
     <string name="location_services">Please turn on Location Services</string>
     <string name="no_new_events">No new events available</string>
+    <string name="menu">Menu</string>
+    <string name="ver_mis_eventos">See my Events</string>
+    <string name="detalle_del_plan">Plan Details</string>
+    <string name="ver_sugerencias">See suggestions</string>
 </resources>
