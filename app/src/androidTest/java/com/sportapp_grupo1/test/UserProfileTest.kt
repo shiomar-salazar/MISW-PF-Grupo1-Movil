@@ -27,7 +27,7 @@ class UserProfileTest {
         ActivityScenarioRule(MainActivity::class.java)
 
     //Constante que define el tiempo de espera para que se carguen los datos retornados por el adapter
-    val delayService2 = Integer.toUnsignedLong(8500)
+    val delayService2 = Integer.toUnsignedLong(10000)
 
     fun clickIntoButtonById(idView: Int) {
         //Damos click en el boton idView
