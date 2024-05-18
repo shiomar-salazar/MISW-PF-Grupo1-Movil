@@ -164,7 +164,7 @@ class UserProfileTest {
     fun notImplementedButtons(){
         /* Primero navegamos a la pantalla correcta */
         navigateToTestScreen()
-        clickIntoButtonById(R.id.mejorar_plan)
+        clickIntoButtonByIdwithScroll(R.id.mejorar_plan)
         SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
@@ -173,7 +173,7 @@ class UserProfileTest {
             )
         )
 
-        clickIntoButtonById(R.id.editar_perfil)
+        clickIntoButtonByIdwithScroll(R.id.editar_perfil)
         SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
@@ -181,7 +181,7 @@ class UserProfileTest {
                 ViewMatchers.isDisplayed()
             )
         )
-        clickIntoButtonById(R.id.cambiar_contraseña)
+        clickIntoButtonByIdwithScroll(R.id.cambiar_contraseña)
         SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
@@ -197,7 +197,7 @@ class UserProfileTest {
     fun cerrarSesion(){
         /* Primero navegamos a la pantalla correcta */
         navigateToTestScreen()
-        clickIntoButtonById(R.id.cerrar_sesion)
+        clickIntoButtonByIdwithScroll(R.id.cerrar_sesion)
         SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
