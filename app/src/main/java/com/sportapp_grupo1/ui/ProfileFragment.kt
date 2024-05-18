@@ -19,6 +19,7 @@ class ProfileFragment : Fragment() {
     private var _binding: ProfileFragmentBinding? = null
     private val binding get() = _binding!!
     private  lateinit var volleyBroker: LoginNetworkService
+    private var req1 = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,9 +34,13 @@ class ProfileFragment : Fragment() {
         super.onCreate(savedInstanceState)
         volleyBroker = this.context?.let { LoginNetworkService(it) }!!
 
+        binding.container.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
+
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
         volleyBroker.instance.add(LoginNetworkService.getRequest(
             { response ->
+                req1 = true
                 binding.nombreText.text = response.optString("nombres").plus(" ").plus(response.optString("apellidos"))
                 binding.edadText.text = response.optInt("edad").toString()
                 binding.pesoText.text = response.optDouble("peso").toString()
@@ -45,9 +50,12 @@ class ProfileFragment : Fragment() {
                 binding.ciudadText.text = response.optString("ciudad_residencia")
                 binding.paisText.text = response.optString("pais_residencia")
                 binding.planText.text = response.optString("tipo_plan")
+                checkProgressBar()
             },
             {
-                showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
+                req1 = true
+                showMessage(resources.getString(R.string.failed_Error).plus(it.networkResponse.statusCode.toString()))
+                checkProgressBar()
             },user.token
         ))
 
@@ -56,19 +64,26 @@ class ProfileFragment : Fragment() {
             findNavController().navigate((R.id.action_profileFragment_to_mainFragment))
         }
         binding.cambiarContraseA.setOnClickListener {
-            showMessage("Fuera del alcance del MVP.")
+            showMessage(resources.getString(R.string.not_part_mvp))
         }
         binding.mejorarPlan.setOnClickListener {
-            showMessage("Fuera del alcance del MVP.")
+            showMessage(resources.getString(R.string.not_part_mvp))
         }
         binding.editarPerfil.setOnClickListener {
-            showMessage("Fuera del alcance del MVP.")
+            showMessage(resources.getString(R.string.not_part_mvp))
         }
 
     }
 
     private fun showMessage(s: String) {
         Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
+    }
+
+    fun checkProgressBar(){
+        if(req1){
+            binding.progressBar.visibility = View.GONE
+            binding.container.visibility = View.VISIBLE
+        }
     }
 
     override fun onDestroyView() {

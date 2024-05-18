@@ -27,8 +27,7 @@ class UserProfileTest {
         ActivityScenarioRule(MainActivity::class.java)
 
     //Constante que define el tiempo de espera para que se carguen los datos retornados por el adapter
-    val delayService = Integer.toUnsignedLong(5000)
-    val delayService2 = Integer.toUnsignedLong(1000)
+    val delayService2 = Integer.toUnsignedLong(8500)
 
     fun clickIntoButtonById(idView: Int) {
         //Damos click en el boton idView
@@ -85,7 +84,7 @@ class UserProfileTest {
         setTextViewByValue(R.id.input_username,"s.salazarc@uniandes.edu.co")
         setTextViewByValue(R.id.input_password,"123456789156Aa-")
         clickIntoButtonById(R.id.login_button)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
                 ViewMatchers.withId(R.id.fab_profile),
@@ -93,13 +92,14 @@ class UserProfileTest {
             )
         )
         clickIntoButtonById(R.id.fab_profile)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
                 ViewMatchers.withId(R.id.cerrar_sesion),
                 ViewMatchers.isDisplayed()
             )
         )
+        SystemClock.sleep(delayService2)
     }
 
     /**
@@ -164,7 +164,7 @@ class UserProfileTest {
     fun notImplementedButtons(){
         /* Primero navegamos a la pantalla correcta */
         navigateToTestScreen()
-        clickIntoButtonById(R.id.editar_perfil)
+        clickIntoButtonByIdwithScroll(R.id.mejorar_plan)
         SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
@@ -172,7 +172,8 @@ class UserProfileTest {
                 ViewMatchers.isDisplayed()
             )
         )
-        clickIntoButtonById(R.id.cambiar_contraseña)
+
+        clickIntoButtonByIdwithScroll(R.id.editar_perfil)
         SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
@@ -180,7 +181,7 @@ class UserProfileTest {
                 ViewMatchers.isDisplayed()
             )
         )
-        clickIntoButtonById(R.id.mejorar_plan)
+        clickIntoButtonByIdwithScroll(R.id.cambiar_contraseña)
         SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
@@ -196,7 +197,7 @@ class UserProfileTest {
     fun cerrarSesion(){
         /* Primero navegamos a la pantalla correcta */
         navigateToTestScreen()
-        clickIntoButtonById(R.id.cerrar_sesion)
+        clickIntoButtonByIdwithScroll(R.id.cerrar_sesion)
         SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(

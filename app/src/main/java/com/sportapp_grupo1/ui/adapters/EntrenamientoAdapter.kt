@@ -36,9 +36,9 @@ class EntrenamientoAdapter: RecyclerView.Adapter<EntrenamientoAdapter.Entrenamie
             it.results = results[position]
             if(results[position].actividad == "Ciclismo")
             {
-                it.resultadoLabel.text = "FTP:"
+                it.resultadoLabel.setText(R.string.ftp)
             }else{
-                it.resultadoLabel.text = "Vo2Max:"
+                it.resultadoLabel.setText(R.string.VO2MAX)
             }
         }
     }

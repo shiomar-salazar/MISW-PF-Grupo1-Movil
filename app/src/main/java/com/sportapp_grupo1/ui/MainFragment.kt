@@ -42,11 +42,11 @@ class MainFragment : Fragment() {
         volleyBroker = this.context?.let { LoginNetworkService(it) }!!
 
         binding.recuperar.setOnClickListener {
-            showMessage("No es parte del MVP.")
+            showMessage(resources.getString(R.string.not_part_mvp))
         }
 
         binding.registro.setOnClickListener {
-            showMessage("Registro solo posible en la Plataforma Web.")
+            showMessage(resources.getString(R.string.register_error))
         }
 
         binding.loginButton.setOnClickListener {
@@ -85,19 +85,19 @@ class MainFragment : Fragment() {
                         CacheManager.getInstance(this.requireContext()).saveUsuario(user)
                         if( user.rol == "Usuario"){
                             /* Mostar Toast */
-                            showMessage("Inicio de Sesion Exitoso.")
+                            showMessage(resources.getString(R.string.exito))
                             // Navegar a Home
                             findNavController().navigate(R.id.action_mainFragment_to_home2)
                         }else{
                             /* Mostar Toast */
-                            showMessage("Usuario no es cliente, proveedores deben usar la Aplicacion Web.")
+                            showMessage(resources.getString(R.string.user_client_only))
                         }
                     },
                     {
-                        showMessage("Inicio de Sesion Fallido. Error:".plus(it.networkResponse.statusCode.toString()))
+                        showMessage(resources.getString(R.string.failed_Error).plus(it.networkResponse.statusCode.toString()))
                     }))
             } else {
-                showMessage("Todos los campos deben ser diligenciados, por favor corrija e intente de nuevo.")
+                showMessage(resources.getString(R.string.todos_los_campos))
             }
 
         }

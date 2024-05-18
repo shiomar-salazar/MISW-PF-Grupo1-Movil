@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.sportapp_grupo1.R
 import com.sportapp_grupo1.databinding.EntrenamientoResultListFragmentBinding
 import com.sportapp_grupo1.models.Entrenamiento
 import com.sportapp_grupo1.network.CacheManager
@@ -24,11 +25,12 @@ class EntrenamientoResultList : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private var viewAdapter: EntrenamientoAdapter? = null
     private  lateinit var volleyBroker: EntrenamientoNetworkService
+    private var req1 = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = EntrenamientoResultListFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         viewAdapter = EntrenamientoAdapter()
@@ -43,24 +45,27 @@ class EntrenamientoResultList : Fragment() {
         recyclerView.adapter = viewAdapter
         volleyBroker = this.context?.let { EntrenamientoNetworkService(it) }!!
 
+        binding.container.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
 
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
         volleyBroker.instance.add(
             EntrenamientoNetworkService.getRequest(
             {response ->
+                req1 = true
                 val list = mutableListOf<Entrenamiento>()
                 var item: JSONObject
                 var res:String = ""
                 if( response.length() == 0){
-                    showMessage("Usuario no tiene datos cargados aun.")
+                    showMessage(resources.getString(R.string.user_no_data))
                     list.add(0,
                         Entrenamiento(
                             entrenamientoId = "",
-                            actividad = "Sin Datos",
-                            distancia = "Sin Datos",
-                            tiempo = "Sin Datos",
-                            date = "Sin Datos",
-                            resultado = "Sin Datos",
+                            actividad = resources.getString(R.string.Vacio),
+                            distancia = resources.getString(R.string.Vacio),
+                            tiempo = resources.getString(R.string.Vacio),
+                            date = resources.getString(R.string.Vacio),
+                            resultado = resources.getString(R.string.Vacio),
                             feedback = ""
                         )
                     )
@@ -80,7 +85,7 @@ class EntrenamientoResultList : Fragment() {
                             Entrenamiento(
                                 entrenamientoId = item.getString("id"),
                                 actividad = item.getString("actividad"),
-                                distancia = item.getString("distancia").plus(" km"),
+                                distancia = item.getString("distancia").plus(resources.getString(R.string.sufix_entrenamiento)),
                                 tiempo = item.getString("tiempo"),
                                 date = item.getString("fecha"),
                                 resultado = res,
@@ -89,11 +94,14 @@ class EntrenamientoResultList : Fragment() {
                         )
                     }
                     viewAdapter!!.results = list
-                    showMessage("Carga Exitosa.")
+                    showMessage(resources.getString(R.string.exito))
                 }
+                checkProgressBar()
             },
             {
-                showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
+                req1 = true
+                showMessage(resources.getString(R.string.failed_Error).plus(it.networkResponse.statusCode.toString()))
+                checkProgressBar()
             },
             "resultado-entrenamiento/usuario/"+user.userId,
             user.token
@@ -102,6 +110,13 @@ class EntrenamientoResultList : Fragment() {
 
     private fun showMessage(s: String) {
         Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
+    }
+
+    fun checkProgressBar(){
+        if(req1){
+            binding.progressBar.visibility = View.GONE
+            binding.container.visibility = View.VISIBLE
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

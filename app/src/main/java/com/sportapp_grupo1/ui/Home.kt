@@ -24,6 +24,8 @@ class Home : Fragment() {
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding!!
     private  lateinit var volleyBroker: PlanEntrenamientoNetworkService
+    private var req1 = false
+    private var req2 = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,12 +42,15 @@ class Home : Fragment() {
 
         val calendar: Calendar = Calendar.getInstance()
         val date: Date = calendar.time
-        val day = SimpleDateFormat("EEEE", Locale("es","MX")).format(date.time)
+        val day = SimpleDateFormat("EEEE", Locale("es","MX")).format(date.time).replace("é","e").replace("á", "a")
         var distance = 0
         var calories_goal = 0
 
+        binding.container.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
+
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
-        binding.header.text = "Hola ".plus(user.nombres.substringBefore(" "))
+        binding.header.text = resources.getString(R.string.hola).plus(user.nombres.substringBefore(" "))
 
         if (user.plan != "Premium"){
             binding.notPremiumText.visibility = View.VISIBLE
@@ -60,16 +65,19 @@ class Home : Fragment() {
         volleyBroker.instance.add(
             PlanEntrenamientoNetworkService.getRequest(
                 { response ->
-                    distance =
-                        response.getJSONObject("plan_entrenamiento").optString(day).toInt()
-                    val duration = response.optInt("numero_semanas").toString().plus(" semanas")
-                    binding.distanceDayText.text = distance.toString().plus(" km")
-                    binding.planEntreDurationText.text = "Quedan ".plus(duration)
+                    req1 = true
+                    distance = response.getJSONObject("plan_entrenamiento").optString(day).toInt()
+                    val duration = response.optInt("numero_semanas").toString().plus(resources.getString(R.string.semanas))
+                    binding.distanceDayText.text = distance.toString().plus(resources.getString(R.string.sufix_entrenamiento))
+                    binding.planEntreDurationText.text = resources.getString(R.string.quedan).plus(duration)
+                    checkProgressBar()
                 },
                 {
+                    req1 = true
                     distance = 0
-                    binding.distanceDayText.text = "Sin Datos"
-                    binding.planEntreDurationText.text = "Sin Datos"
+                    binding.distanceDayText.text = resources.getString(R.string.Vacio)
+                    binding.planEntreDurationText.text = resources.getString(R.string.Vacio)
+                    checkProgressBar()
                 },
                 "entrenamientos/plan-entrenamiento/usuario/" + user.userId,
                 user.token
@@ -79,15 +87,19 @@ class Home : Fragment() {
         volleyBroker.instance.add(
             PlanAlimentacionNetworkService.getRequest(
             {response ->
+                req2 = true
                 calories_goal = response.getJSONObject("plan_alimentacion").optInt(day)
-                val duration = response.optInt("numero_semanas").toString().plus(" semanas")
-                binding.caloriesDayText.text = calories_goal.toString().plus(" kcal")
-                binding.planAliDurationText.text = "Quedan ".plus(duration)
+                val duration = response.optInt("numero_semanas").toString().plus(resources.getString(R.string.semanas))
+                binding.caloriesDayText.text = calories_goal.toString().plus(resources.getString(R.string.sufix_alimentacion))
+                binding.planAliDurationText.text = resources.getString(R.string.quedan).plus(duration)
+                checkProgressBar()
             },
             {
+                req2 = true
                 calories_goal = 0
-                binding.caloriesDayText.text = "Sin Datos"
-                binding.planAliDurationText.text = "Sin Datos"
+                binding.caloriesDayText.text = resources.getString(R.string.Vacio)
+                binding.planAliDurationText.text = resources.getString(R.string.Vacio)
+                checkProgressBar()
             },
             "nutricion/plan-nutricional/"+user.userId,
             user.token
@@ -123,6 +135,13 @@ class Home : Fragment() {
 
         binding.fabProfile.setOnClickListener{
             findNavController().navigate(R.id.action_home2_to_profileFragment)
+        }
+    }
+
+    fun checkProgressBar(){
+        if(req1 && req2){
+            binding.progressBar.visibility = View.GONE
+            binding.container.visibility = View.VISIBLE
         }
     }
 

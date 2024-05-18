@@ -24,10 +24,12 @@
         android:layout_height="120dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/logo"
-        android:layout_above="@id/input_username" />
+        android:layout_above="@id/input_username"
+        android:contentDescription="@string/logo_de_aplicacion" />
 
 
     <EditText
+        android:inputType="textEmailAddress"
         android:id="@+id/input_username"
         android:layout_width = "match_parent"
         android:layout_height = "wrap_content"

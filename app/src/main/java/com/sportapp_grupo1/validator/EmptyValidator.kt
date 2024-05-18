@@ -4,7 +4,7 @@ import com.sportapp_grupo1.R
 import com.sportapp_grupo1.validator.base.BaseValidator
 import com.sportapp_grupo1.validator.base.ValidateResult
 
-class EmptyValidator(val input: String) : BaseValidator() {
+class EmptyValidator(private val input: String) : BaseValidator() {
     override fun validate(): ValidateResult {
         val isValid = input.isNotEmpty()
         return ValidateResult(

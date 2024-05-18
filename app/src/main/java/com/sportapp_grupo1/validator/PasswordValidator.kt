@@ -4,7 +4,7 @@ import com.sportapp_grupo1.R
 import com.sportapp_grupo1.validator.base.BaseValidator
 import com.sportapp_grupo1.validator.base.ValidateResult
 
-class PasswordValidator(val password: String) : BaseValidator() {
+class PasswordValidator(private val password: String) : BaseValidator() {
     private val minPasswordLength = 8
     private val maxPasswordLength = 64
 

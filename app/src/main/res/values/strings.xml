@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SportApp - Grupo 1</string>
+    <string name="app_name" translatable="false">SportApp - Grupo 1</string>
     <string name="bienvenido">Bienvenid@</string>
     <string name="username">Nombre de Usuario</string>
     <string name="iniciar_sesion">Iniciar Sesion</string>
@@ -15,7 +15,7 @@
     <string name="text_validation_error_lowercase">La contraseña necesita al menos una minuscula</string>
     <string name="text_validation_error_special_char">La contraseña necesita al menos un simbolo especial</string>
     <string name="text_validation_error_max_pass_length">La contraseña debe tener maximo 64 caracteres</string>
-    <string name="text_validation_date_format">La debe ser en formato AAAA-MM-DD</string>
+    <string name="text_validation_date_format">La  fecha debe ser en formato AAAA-MM-DD</string>
     <string name="text_validation_date_blank_space">La Fecha no debe tener espacios en blanco</string>
     <string name="text_validation_date_month">El mes debe ser un valor entre 01 y 12</string>
     <string name="text_validation_date_day">El dia debe ser un valor entre 01 y 31</string>
@@ -33,9 +33,9 @@
     <string name="miercoles">Miercoles</string>
     <string name="martes">Martes</string>
     <string name="cancelar">Cancelar</string>
-    <string name="sufix_entrenamiento"> km</string>
+    <string name="sufix_entrenamiento" translatable="false">\u0020 km</string>
     <string name="crear_plan_de_alimentacion">Crear Plan de Alimentacion</string>
-    <string name="sufix_alimentacion"> kcal</string>
+    <string name="sufix_alimentacion" translatable="false">\u0020 kcal</string>
     <string name="actividad">Actividad</string>
     <string name="actividad_title">Actividad:</string>
     <string name="alimentacion_del_dia">Alimentacion del Dia</string>
@@ -121,4 +121,26 @@
     <string name="plan_intermedio">La funcionalidad de Monitoreo solo esta disponible para planes Intermedios de pago mensual</string>
     <string name="aqui_podras_ver_eventos_cerca_de_ti">Aqui podras ver eventos cerca de ti</string>
     <string name="mis_eventos">Mis Eventos</string>
+    <string name="Vacio">Sin Datos</string>
+    <string name="quedan">Quedan \u0020</string>
+    <string name="hola">Hola \u0020</string>
+    <string name="semanas">\u0020 semanas</string>
+    <string name="logo_de_aplicacion">Logo de Aplicacion</string>
+    <string name="reintentar_text">Reintente por favor</string>
+    <string name="ftp" translatable="false">FTP:</string>
+    <string name="VO2MAX" translatable="false">Vo2Max:</string>
+    <string name="no_eventos">Por el momento no hay eventos nuevos en su zona</string>
+    <string name="not_part_mvp">No forma parte del MVP</string>
+    <string name="exito">Operacion Exitosa.</string>
+    <string name="failed_Error">Operacion Fallida. Error: \u0020</string>
+    <string name="user_no_data">Usuario no tiene datos cargados aun</string>
+    <string name="todos_los_campos">Todos los campos deben ser diligenciados, por favor corrija e intente de nuevo</string>
+    <string name="register_error">Registro solo disponible en plataforma Web</string>
+    <string name="user_client_only">Usuario es proveedor, porfavor usar Plataforma Web</string>
+    <string name="location_services">Por favor encender servicios de ubicacion</string>
+    <string name="no_new_events">No hay eventos nuevos</string>
+    <string name="menu">Menu</string>
+    <string name="ver_mis_eventos">Ver mis eventos</string>
+    <string name="detalle_del_plan">Detalles del plan</string>
+    <string name="ver_sugerencias">Ver sugerencias</string>
 </resources>

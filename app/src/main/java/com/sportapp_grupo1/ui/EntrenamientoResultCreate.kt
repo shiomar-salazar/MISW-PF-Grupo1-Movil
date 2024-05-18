@@ -46,9 +46,9 @@ class EntrenamientoResultCreate : Fragment() {
         var result_vo2 = 0.0
 
         val distance = sharedPref!!.getInt("entre_goal",0)
-        binding.goal.text = distance.toString().plus(" km")
+        binding.goal.text = distance.toString().plus(resources.getString(R.string.sufix_entrenamiento))
         binding.tiempoText.setText(sharedPref.getString("time_result",""))
-        sharedPref.edit().remove("time_result").apply();
+        sharedPref.edit().remove("time_result").apply()
 
         /* Valores por defecto */
         binding.result.hint = "Vo2Max"
@@ -130,18 +130,18 @@ class EntrenamientoResultCreate : Fragment() {
                             )
                             CacheManager.getInstance(this.requireContext()).addEntrenamiento(result)
                             /* Mostar Toast */
-                            showMessage("Registro Exitoso.")
+                            showMessage(resources.getString(R.string.exito))
                             // Navegar a Home
                             navigateToHome()
                         },
                         {
-                            showMessage("Registro Fallido.Error:".plus(it.networkResponse.statusCode.toString()))
+                            showMessage(resources.getString(R.string.failed_Error).plus(it.networkResponse.statusCode.toString()))
                         },
                         "entrenamientos/resultados-plan-entrenamiento",
                         user.token
                     ))
             } else {
-                showMessage("Todos los campos deben ser diligenciados, por favor corrija e intente de nuevo.")
+                showMessage(resources.getString(R.string.todos_los_campos))
             }
         }
 

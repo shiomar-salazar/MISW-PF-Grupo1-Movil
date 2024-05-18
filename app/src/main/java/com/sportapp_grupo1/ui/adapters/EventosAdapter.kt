@@ -36,8 +36,11 @@ class EventosAdapter : RecyclerView.Adapter<EventosAdapter.EventosViewHolder>(){
         holder.viewDataBinding.also {
             it.evento = eventos[position]
             holder.viewDataBinding.root.setOnClickListener{
-                val action = EventosListDirections.actionEventosListToEventosDetail(eventos[position].sugerencia_id)
-                holder.viewDataBinding.root.findNavController().navigate(action)
+                if(eventos[position].nombre != "Sin Datos") {
+                    val action =
+                        EventosListDirections.actionEventosListToEventosDetail(eventos[position].sugerencia_id, eventos[position].horario_final)
+                    holder.viewDataBinding.root.findNavController().navigate(action)
+                }
             }
         }
     }

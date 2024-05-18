@@ -9,7 +9,7 @@ import com.android.volley.toolbox.Volley
 import org.json.JSONArray
 import org.json.JSONObject
 
-class SugerenciasNetworkService constructor(context: Context) {
+class SugerenciasNetworkService(context: Context) {
 
     val instance: RequestQueue = Volley.newRequestQueue(context.applicationContext)
 

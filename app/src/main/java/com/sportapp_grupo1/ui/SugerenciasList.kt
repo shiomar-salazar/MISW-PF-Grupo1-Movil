@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.sportapp_grupo1.R
 import com.sportapp_grupo1.databinding.SugerenciasListFragmentBinding
 import com.sportapp_grupo1.models.Sugerencia
 import com.sportapp_grupo1.network.CacheManager
@@ -23,12 +24,13 @@ class SugerenciasList : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private var viewAdapter: SugerenciasAdapter? = null
     private  lateinit var volleyBroker: SugerenciasNetworkService
+    private var req1 = false
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = SugerenciasListFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         viewAdapter = SugerenciasAdapter()
@@ -43,30 +45,42 @@ class SugerenciasList : Fragment() {
         recyclerView.adapter = viewAdapter
         volleyBroker = this.context?.let { SugerenciasNetworkService(it) }!!
 
+        binding.container.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
+
 
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
         volleyBroker.instance.add(
             SugerenciasNetworkService.getRequest(
                 {response ->
-                    val list = mutableListOf<Sugerencia>()
-                    var item: JSONObject
-                    (0 until response.length()).forEach { it ->
-                        item = response.getJSONObject(it)
-                        list.add(
-                            it,
-                            Sugerencia(
-                                sugerencia_id = item.getString("id"),
-                                costo = item.getString("costo"),
-                                nombre = item.getString("nombre").take(25),
-                                lugar = item.getString("lugar"),
+                    req1 = true
+                    if( response.length() == 0) {
+                        binding.noSugerenciaText.visibility = View.VISIBLE
+                        showMessage(resources.getString(R.string.location_services))
+                    }else {
+                        val list = mutableListOf<Sugerencia>()
+                        var item: JSONObject
+                        (0 until response.length()).forEach { it ->
+                            item = response.getJSONObject(it)
+                            list.add(
+                                it,
+                                Sugerencia(
+                                    sugerencia_id = item.getString("id"),
+                                    costo = item.getString("costo"),
+                                    nombre = item.getString("nombre").take(23),
+                                    lugar = item.getString("lugar"),
+                                )
                             )
-                        )
+                        }
+                        viewAdapter!!.sugerencias = list
+                        showMessage(resources.getString(R.string.exito))
+                        checkProgressBar()
                     }
-                    viewAdapter!!.sugerencias = list
-                    showMessage("Carga Exitosa.")
                 },
                 {
-                    showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
+                    req1 = true
+                    showMessage(resources.getString(R.string.failed_Error).plus(it.networkResponse.statusCode.toString()))
+                    checkProgressBar()
                 },
                 user.token
             ))
@@ -74,6 +88,12 @@ class SugerenciasList : Fragment() {
 
     private fun showMessage(s: String) {
         Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
+    }
+    fun checkProgressBar(){
+        if(req1){
+            binding.progressBar.visibility = View.GONE
+            binding.container.visibility = View.VISIBLE
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

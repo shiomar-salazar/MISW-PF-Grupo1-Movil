@@ -117,23 +117,32 @@ MISW-PF-Grupo1-Movil
 │  ├─ .gitignore
 │  ├─ google-services.json
 │  ├─ proguard-rules.pro
+│  ├─ sampledata
 │  └─ src
 │     ├─ androidTest
 │     │  └─ java
 │     │     └─ com
 │     │        └─ sportapp_grupo1
 │     │           ├─ ExampleInstrumentedTest.kt
-│     │           └─ test
-│     │              ├─ AlimentacionResultCreateTest.kt
-│     │              ├─ AlimentacionResultListEmptyTest.kt
-│     │              ├─ EntrenamientoResultCreateTest.kt
-│     │              ├─ EntrenamientoResultListEmptyTest.kt
-│     │              ├─ LoginTest.kt
-│     │              ├─ PlanAlimentacionCreateTest.kt
-│     │              ├─ PlanAlimentacionDetailEmptyTest.kt
-│     │              ├─ PlanEntrenamientoCreateTest.kt
-│     │              ├─ PlanEntrenamientoDetailEmptyTest.kt
-│     │              └─ UserProfileTest.kt
+│     │           ├─ test
+│     │           │  ├─ AlimentacionResultCreateTest.kt
+│     │           │  ├─ AlimentacionResultListEmptyTest.kt
+│     │           │  ├─ EntrenamientoMonitoreoTest.kt
+│     │           │  ├─ EntrenamientoResultCreateTest.kt
+│     │           │  ├─ EntrenamientoResultListEmptyTest.kt
+│     │           │  ├─ EntrenamientoResultListTest.kt
+│     │           │  ├─ EventosTest.kt
+│     │           │  ├─ EventosTestEmpty.kt
+│     │           │  ├─ LoginTest.kt
+│     │           │  ├─ PlanAlimentacionCreateTest.kt
+│     │           │  ├─ PlanAlimentacionDetailEmptyTest.kt
+│     │           │  ├─ PlanEntrenamientoCreateTest.kt
+│     │           │  ├─ PlanEntrenamientoDetailEmptyTest.kt
+│     │           │  ├─ SugerenciasTest.kt
+│     │           │  ├─ SugerenciasTestEmpty.kt
+│     │           │  └─ UserProfileTest.kt
+│     │           └─ utils
+│     │              └─ CustomAssertions.kt
 │     ├─ main
 │     │  ├─ AndroidManifest.xml
 │     │  ├─ java
@@ -144,6 +153,7 @@ MISW-PF-Grupo1-Movil
 │     │  │        │  ├─ Entrenamiento.kt
 │     │  │        │  ├─ PlanAlimentacion.kt
 │     │  │        │  ├─ PlanEntrenamiento.kt
+│     │  │        │  ├─ Sugerencia.kt
 │     │  │        │  └─ User.kt
 │     │  │        ├─ network
 │     │  │        │  ├─ AlimentacionNetworkService.kt
@@ -151,24 +161,33 @@ MISW-PF-Grupo1-Movil
 │     │  │        │  ├─ EntrenamientoNetworkService.kt
 │     │  │        │  ├─ LoginNetworkService.kt
 │     │  │        │  ├─ PlanAlimentacionNetworkService.kt
-│     │  │        │  └─ PlanEntrenamientoNetworkService.kt
+│     │  │        │  ├─ PlanEntrenamientoNetworkService.kt
+│     │  │        │  └─ SugerenciasNetworkService.kt
 │     │  │        ├─ ui
 │     │  │        │  ├─ adapters
 │     │  │        │  │  ├─ AlimentacionAdapter.kt
-│     │  │        │  │  └─ EntrenamientoAdapter.kt
+│     │  │        │  │  ├─ EntrenamientoAdapter.kt
+│     │  │        │  │  ├─ EventosAdapter.kt
+│     │  │        │  │  └─ SugerenciasAdapter.kt
+│     │  │        │  ├─ Alerta_Fragment.kt
 │     │  │        │  ├─ AlimentacionResultCreate.kt
 │     │  │        │  ├─ AlimentacionResultList.kt
 │     │  │        │  ├─ EntrenamientoMenu.kt
 │     │  │        │  ├─ EntrenamientoResultCreate.kt
 │     │  │        │  ├─ EntrenamientoResultList.kt
+│     │  │        │  ├─ EventosDetail.kt
+│     │  │        │  ├─ EventosList.kt
 │     │  │        │  ├─ Home.kt
 │     │  │        │  ├─ MainActivity.kt
 │     │  │        │  ├─ MainFragment.kt
+│     │  │        │  ├─ Monitoreo_Fragment.kt
 │     │  │        │  ├─ PlanAlimentacionCreate.kt
 │     │  │        │  ├─ PlanAlimentacionDetail.kt
 │     │  │        │  ├─ PlanEntrenamientoCreate.kt
 │     │  │        │  ├─ PlanEntrenamientoDetail.kt
-│     │  │        │  └─ ProfileFragment.kt
+│     │  │        │  ├─ ProfileFragment.kt
+│     │  │        │  ├─ SugerenciasDetail.kt
+│     │  │        │  └─ SugerenciasList.kt
 │     │  │        └─ validator
 │     │  │           ├─ base
 │     │  │           │  ├─ BaseValidator.kt
@@ -191,6 +210,7 @@ MISW-PF-Grupo1-Movil
 │     │     │  ├─ ic_launcher_foreground.xml
 │     │     │  └─ logo.jpg
 │     │     ├─ layout
+│     │     │  ├─ alerta_fragment.xml
 │     │     │  ├─ alimentacion_item.xml
 │     │     │  ├─ alimentacion_result_create_fragment.xml
 │     │     │  ├─ alimentacion_result_list_fragment.xml
@@ -198,14 +218,21 @@ MISW-PF-Grupo1-Movil
 │     │     │  ├─ entrenamiento_menu_fragment.xml
 │     │     │  ├─ entrenamiento_result_fragment.xml
 │     │     │  ├─ entrenamiento_result_list_fragment.xml
+│     │     │  ├─ eventos_detail_fragment.xml
+│     │     │  ├─ eventos_item.xml
+│     │     │  ├─ eventos_list_fragment.xml
 │     │     │  ├─ home_fragment.xml
 │     │     │  ├─ main_activity.xml
 │     │     │  ├─ main_fragment.xml
+│     │     │  ├─ monitoreo_fragment.xml
 │     │     │  ├─ plan_alimentacion_create_fragment.xml
 │     │     │  ├─ plan_alimentacion_detail_fragment.xml
 │     │     │  ├─ plan_entrenamiento_create_fragment.xml
 │     │     │  ├─ plan_entrenamiento_detail_fragment.xml
-│     │     │  └─ profile_fragment.xml
+│     │     │  ├─ profile_fragment.xml
+│     │     │  ├─ sugerencias_detail_fragment.xml
+│     │     │  ├─ sugerencias_item.xml
+│     │     │  └─ sugerencias_list_fragment.xml
 │     │     ├─ layout-v28
 │     │     ├─ mipmap-anydpi-v26
 │     │     │  ├─ ic_launcher.xml
@@ -231,7 +258,13 @@ MISW-PF-Grupo1-Movil
 │     │     ├─ values
 │     │     │  ├─ colors.xml
 │     │     │  ├─ strings.xml
-│     │     │  └─ themes.xml
+│     │     │  ├─ themes.xml
+│     │     │  └─ values-en
+│     │     ├─ values-en
+│     │     │  └─ strings.xml
+│     │     ├─ values-fr
+│     │     │  └─ strings.xml
+│     │     ├─ values_en
 │     │     └─ xml
 │     │        ├─ backup_rules.xml
 │     │        ├─ data_extraction_rules.xml

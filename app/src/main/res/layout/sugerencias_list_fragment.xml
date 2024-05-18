@@ -9,6 +9,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/ProgressBar"
+            android:layout_centerInParent="true"
+            android:indeterminateDuration="@integer/material_motion_duration_short_2"
+            android:indeterminateOnly="true"
+            android:indeterminateBehavior="cycle"
+            android:progressBackgroundTint="@color/ProgressBar"
+            android:id="@+id/progressBar"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="visible"
+            android:indeterminate="true"
+            android:layout_gravity="center" />
+
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
@@ -22,10 +39,29 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:id="@+id/container">
+
+        <TextView
+            android:id="@+id/no_sugerencia_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="100dp"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:textColor="@color/lightGrey"
+            android:text="@string/no_eventos"
+            android:visibility="invisible"/>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title">
+            >
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/sugerencia_item_fragment"
@@ -33,5 +69,6 @@
                 android:layout_height="wrap_content"
                 tools:listitem="@layout/sugerencias_item" />
         </ScrollView>
+    </RelativeLayout>
     </RelativeLayout>
 </FrameLayout>

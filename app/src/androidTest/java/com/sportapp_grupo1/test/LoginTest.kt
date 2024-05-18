@@ -1,7 +1,6 @@
 package com.sportapp_grupo1.test
 
 import android.os.SystemClock
-import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions
@@ -16,7 +15,6 @@ import androidx.test.filters.LargeTest
 import com.sportapp_grupo1.R
 import com.sportapp_grupo1.ui.MainActivity
 import org.hamcrest.CoreMatchers
-import org.hamcrest.core.AllOf
 import org.hamcrest.core.AllOf.allOf
 import org.junit.Rule
 import org.junit.Test
@@ -33,12 +31,11 @@ class LoginTest {
         ActivityScenarioRule(MainActivity::class.java)
 
     //Constante que define el tiempo de espera para que se carguen los datos retornados por el adapter
-    val delayService = Integer.toUnsignedLong(5000)
-    val delayService2 = Integer.toUnsignedLong(1000)
+    val delayService2 = Integer.toUnsignedLong(7000)
 
     fun clickIntoButtonById(idView: Int) {
         //Damos click en el boton idView
-        Espresso.onView(ViewMatchers.withId(idView)).perform(ViewActions.click())
+        onView(withId(idView)).perform(ViewActions.click())
     }
 
     fun clickIntoButtonByText(idView: Int, valueToSearch: String) {
@@ -48,9 +45,9 @@ class LoginTest {
 
     fun getTextViewByValue(idView: Int, valueToSearch: String): ViewInteraction? {
         //Validamos si existe un TextView de tipo idView con el texto valueToSearch
-        return Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(idView),
+        return onView(
+            allOf(
+                withId(idView),
                 ViewMatchers.withText(valueToSearch)
             )
         )
@@ -58,9 +55,9 @@ class LoginTest {
 
     fun setTextLayoutViewByValue(idView: Int, valueToType:String) {
         //Validamos si existe un TextView de tipo idView con el texto valueToSearch
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.isDescendantOfA(ViewMatchers.withId(idView)),
+        onView(
+            allOf(
+                ViewMatchers.isDescendantOfA(withId(idView)),
                 ViewMatchers.withClassName(CoreMatchers.endsWith("EditText"))
             )
         ).perform(
@@ -70,9 +67,9 @@ class LoginTest {
 
     fun setTextViewByValue(idView: Int, valueToType:String) {
         //Validamos si existe un TextView de tipo idView con el texto valueToSearch
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(idView)
+        onView(
+            allOf(
+                withId(idView)
             )
         ).perform(
             ViewActions.click(),
@@ -91,38 +88,38 @@ class LoginTest {
         val editTextPass: ViewInteraction = onView(withId(R.id.input_password))
 
         clickIntoButtonById(R.id.login_button)
-        editTextUser.check(matches(hasErrorText("El campo no debe estar vacio")))
-        editTextPass.check(matches(hasErrorText("El campo no debe estar vacio")))
+        editTextUser.check(matches(hasErrorText("The field cannot be empty")))
+        editTextPass.check(matches(hasErrorText("The field cannot be empty")))
 
         setTextViewByValue(R.id.input_username,"shiomar")
         setTextViewByValue(R.id.input_password,"1234")
         clickIntoButtonById(R.id.login_button)
-        editTextUser.check(matches(hasErrorText("El usuario debe ser un correo valido")))
-        editTextPass.check(matches(hasErrorText("La contraseña debe tener al menos 8 caracteres")))
+        editTextUser.check(matches(hasErrorText("Username shall be a valid email")))
+        editTextPass.check(matches(hasErrorText("Password shall be at least 8 character long")))
 
         setTextViewByValue(R.id.input_username,"s.salazarc@uniandes.edu. co")
         setTextViewByValue(R.id.input_password,"QQZanuV8G8zJ66dPnDiYLicQ4B8Hr5NNXGpVCywJSV6UUHP7Wx4GXzj9ULAMc6g35")
         clickIntoButtonById(R.id.login_button)
-        editTextUser.check(matches(hasErrorText("El usuario debe ser un correo valido")))
-        editTextPass.check(matches(hasErrorText("La contraseña debe tener maximo 64 caracteres")))
+        editTextUser.check(matches(hasErrorText("Username shall be a valid email")))
+        editTextPass.check(matches(hasErrorText("Password shall have at most 64 characters")))
 
         setTextViewByValue(R.id.input_username,"s.salazarcuniandes.edu")
         setTextViewByValue(R.id.input_password,"123456 89")
         clickIntoButtonById(R.id.login_button)
-        editTextUser.check(matches(hasErrorText("El usuario debe ser un correo valido")))
-        editTextPass.check(matches(hasErrorText("La contraseña no debe tener espacios en blanco")))
+        editTextUser.check(matches(hasErrorText("Username shall be a valid email")))
+        editTextPass.check(matches(hasErrorText("Password field shall not have whitespaces")))
 
         setTextViewByValue(R.id.input_username,"s.salazarc@uniandesedu")
         setTextViewByValue(R.id.input_password,"12345689A")
         clickIntoButtonById(R.id.login_button)
-        editTextUser.check(matches(hasErrorText("El usuario debe ser un correo valido")))
-        editTextPass.check(matches(hasErrorText("La contraseña necesita al menos una minuscula")))
+        editTextUser.check(matches(hasErrorText("Username shall be a valid email")))
+        editTextPass.check(matches(hasErrorText("Password shall include at least one Lowercase Letter")))
 
         setTextViewByValue(R.id.input_password,"12345689Aa")
         clickIntoButtonById(R.id.login_button)
-        editTextPass.check(matches(hasErrorText("La contraseña necesita al menos un simbolo especial")))
+        editTextPass.check(matches(hasErrorText("Password shall include at least one Special Character")))
 
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         //Verificamos que sigamos en la pantalla de Inicio de Sesion
         onView(allOf(withId(R.id.login_button), isDisplayed()))
     }
@@ -135,7 +132,7 @@ class LoginTest {
         setTextViewByValue(R.id.input_username,"s.salazarc@uniandes.edu.co")
         setTextViewByValue(R.id.input_password,"123456789156Aa-")
         clickIntoButtonById(R.id.login_button)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         //Verificamos que ya no estemos en la pantalla de Inicio de Sesion
         onView(allOf(withId(R.id.login_button), CoreMatchers.not(isDisplayed())))
     }
@@ -146,7 +143,7 @@ class LoginTest {
     @Test
     fun Login_OtherBtns(){
         clickIntoButtonById(R.id.recuperar)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         clickIntoButtonById(R.id.registro)
         //Verificamos que sigamos en la pantalla de Inicio de Sesion
         onView(allOf(withId(R.id.login_button), isDisplayed()))
@@ -158,7 +155,7 @@ class LoginTest {
         setTextViewByValue(R.id.input_username,"s.salazarc@uniandes.edu.co")
         setTextViewByValue(R.id.input_password,"123456789156Aa-123")
         clickIntoButtonById(R.id.login_button)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         //Verificamos que ya no estemos en la pantalla de Inicio de Sesion
         onView(allOf(withId(R.id.login_button), isDisplayed()))
     }
@@ -168,7 +165,7 @@ class LoginTest {
         setTextViewByValue(R.id.input_username,"sh.salazarc@uniandes.edu.co")
         setTextViewByValue(R.id.input_password,"123456789156Aa-")
         clickIntoButtonById(R.id.login_button)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         //Verificamos que aun estemos en la pantalla de Inicio de Sesion
         onView(allOf(withId(R.id.login_button), isDisplayed()))
     }
@@ -178,7 +175,7 @@ class LoginTest {
         setTextViewByValue(R.id.input_username,"prestador2024@uniandes.edu.co")
         setTextViewByValue(R.id.input_password,"Prestador2*24")
         clickIntoButtonById(R.id.login_button)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         //Verificamos que aun estemos en la pantalla de Inicio de Sesion
         onView(allOf(withId(R.id.login_button), isDisplayed()))
     }

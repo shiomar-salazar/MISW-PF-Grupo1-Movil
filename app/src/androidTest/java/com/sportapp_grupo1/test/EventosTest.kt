@@ -31,8 +31,7 @@ class EventosTest {
         ActivityScenarioRule(MainActivity::class.java)
 
     //Constante que define el tiempo de espera para que se carguen los datos retornados por el adapter
-    val delayService = Integer.toUnsignedLong(5000)
-    val delayService2 = Integer.toUnsignedLong(1000)
+    val delayService2 = Integer.toUnsignedLong(7000)
 
     fun clickIntoButtonById(idView: Int) {
         //Damos click en el boton idView
@@ -84,7 +83,7 @@ class EventosTest {
         )
     }
 
-    fun validateTextView(idView: Int, valueToSearch: String) {
+    private fun validateTextView(idView: Int, valueToSearch: String) {
         //Validamos si es mostrado algun TextView de tipo idView
         Espresso.onView(AllOf.allOf(ViewMatchers.withId(idView), ViewMatchers.isDisplayed()))
         //Validamos que no venga vacio algun TextView de tipo idView
@@ -98,7 +97,7 @@ class EventosTest {
         setTextViewByValue(R.id.input_username,"s.salazarc@uniandes.edu.co")
         setTextViewByValue(R.id.input_password,"123456789156Aa-")
         clickIntoButtonById(R.id.login_button)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
                 ViewMatchers.withId(R.id.tus_eventos),
@@ -106,7 +105,7 @@ class EventosTest {
             )
         )
         clickIntoButtonById(R.id.tus_eventos)
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
                 ViewMatchers.withId(R.id.title),
@@ -120,7 +119,7 @@ class EventosTest {
         navigateToTestScreen()
 
         //Agregamos un tiempo de espera de 5000
-        SystemClock.sleep(delayService)
+        SystemClock.sleep(delayService2)
 
         //Validamos que el listado tenga un minimo de albumes
         Espresso.onView(ViewMatchers.withId(R.id.eventos_item_fragment)).check(
@@ -154,8 +153,8 @@ class EventosTest {
 
         /* Damos click en textView con la primera sugerencia */
         Espresso.onView(ViewMatchers.withId(R.id.eventos_item_fragment)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()));
-        SystemClock.sleep(delayService)
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
+        SystemClock.sleep(delayService2)
         //Validamos el textView Title exista
         validateTextView(R.id.title, "Detalle del Evento")
 

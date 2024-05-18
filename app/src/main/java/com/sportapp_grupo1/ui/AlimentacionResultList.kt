@@ -2,7 +2,6 @@ package com.sportapp_grupo1.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,12 +25,13 @@ class AlimentacionResultList : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private var viewAdapter: AlimentacionAdapter? = null
     private  lateinit var volleyBroker: AlimentacionNetworkService
+    private var req1 = false
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = AlimentacionResultListFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         viewAdapter = AlimentacionAdapter()
@@ -46,6 +46,9 @@ class AlimentacionResultList : Fragment() {
         recyclerView.adapter = viewAdapter
         volleyBroker = this.context?.let { AlimentacionNetworkService(it) }!!
 
+        binding.container.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
+
         binding.fabAddResult.setOnClickListener {
             navigateToCreateResult()
         }
@@ -53,6 +56,7 @@ class AlimentacionResultList : Fragment() {
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
         volleyBroker.instance.add(AlimentacionNetworkService.getRequest(
             {response ->
+                req1 = true
                 val list = mutableListOf<Alimentacion>()
                 var item: JSONObject
                 (0 until response.length()).forEach { it ->
@@ -68,16 +72,18 @@ class AlimentacionResultList : Fragment() {
                             calorias3 = calorias3,
                             ml_agua = item.getInt("ml_agua").toString().plus(" ml"),
                             date = item.getString("fecha"),
-                            total_calories = (calorias1.toInt() + calorias2.toInt() + calorias3.toInt()).toString().plus(" kcal")
+                            total_calories = (calorias1.toInt() + calorias2.toInt() + calorias3.toInt()).toString().plus(resources.getString(R.string.sufix_alimentacion))
                         )
                     )
                 }
                 viewAdapter!!.results = list
-                showMessage("Carga Exitosa.")
+                showMessage(resources.getString(R.string.exito))
+                checkProgressBar()
             },
             {
+                req1 = true
                 if(it.networkResponse.statusCode == 404){
-                    showMessage("Usuario no tiene datos cargados aun.")
+                    showMessage(resources.getString(R.string.user_no_data))
                     val list = mutableListOf<Alimentacion>()
                     list.add(0,
                         Alimentacion(
@@ -85,16 +91,17 @@ class AlimentacionResultList : Fragment() {
                             calorias1 = "",
                             calorias2 = "",
                             calorias3 = "",
-                            ml_agua = "Sin Datos",
-                            date = "Sin Datos",
-                            total_calories = "Sin Datos"
+                            ml_agua = resources.getString(R.string.Vacio),
+                            date = resources.getString(R.string.Vacio),
+                            total_calories = resources.getString(R.string.Vacio)
                         )
                     )
                     viewAdapter!!.results = list
+                    checkProgressBar()
                 }
                 else
                 {
-                    showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
+                    showMessage(resources.getString(R.string.failed_Error).plus(it.networkResponse.statusCode.toString()))
                 }
             },
             "nutricion/resultados-alimentacion/"+user.userId,
@@ -114,6 +121,13 @@ class AlimentacionResultList : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
+        }
+    }
+
+    fun checkProgressBar(){
+        if(req1){
+            binding.progressBar.visibility = View.GONE
+            binding.container.visibility = View.VISIBLE
         }
     }
 

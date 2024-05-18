@@ -4,14 +4,14 @@ import android.os.SystemClock
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.sportapp_grupo1.R
 import com.sportapp_grupo1.ui.MainActivity
+import com.sportapp_grupo1.utils.CustomAssertions
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers
 import org.hamcrest.core.AllOf
@@ -21,7 +21,7 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class PlanAlimentacionDetailEmptyTest {
+class EventosTestEmpty {
 
     @Rule
     @JvmField
@@ -50,7 +50,7 @@ class PlanAlimentacionDetailEmptyTest {
         return Espresso.onView(
             AllOf.allOf(
                 ViewMatchers.withId(idView),
-                withText(valueToSearch)
+                ViewMatchers.withText(valueToSearch)
             )
         )
     }
@@ -81,63 +81,64 @@ class PlanAlimentacionDetailEmptyTest {
         )
     }
 
-    fun validateTextView(idView: Int, valueToSearch: String) {
+    private fun validateTextView(idView: Int, valueToSearch: String) {
         //Validamos si es mostrado algun TextView de tipo idView
         Espresso.onView(AllOf.allOf(ViewMatchers.withId(idView), ViewMatchers.isDisplayed()))
         //Validamos que no venga vacio algun TextView de tipo idView
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(idView),
-                Matchers.not(withText(""))
-            )
-        )
+        Espresso.onView(AllOf.allOf(ViewMatchers.withId(idView), Matchers.not(ViewMatchers.withText(""))))
         //Validamos si existe un TextView de tipo idView con el texto valueToSearch
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(idView),
-                withText(valueToSearch)
-            )
-        )
+        Espresso.onView(AllOf.allOf(ViewMatchers.withId(idView), ViewMatchers.withText(valueToSearch)))
     }
 
 
     fun navigateToTestScreen(){
-        setTextViewByValue(R.id.input_username,"s.salazarc_vacio@uniandes.edu.co")
+        setTextViewByValue(R.id.input_username,"s.salazarc_test@uniandes.edu.co")
         setTextViewByValue(R.id.input_password,"123456789156Aa-")
         clickIntoButtonById(R.id.login_button)
         SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
-                ViewMatchers.withId(R.id.plan_alimentacion),
+                ViewMatchers.withId(R.id.tus_eventos),
                 ViewMatchers.isDisplayed()
             )
         )
-        clickIntoButtonByIdwithScroll(R.id.plan_alimentacion)
+        clickIntoButtonById(R.id.tus_eventos)
         SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
-                ViewMatchers.withId(R.id.crear),
+                ViewMatchers.withId(R.id.title),
                 ViewMatchers.isDisplayed()
             )
         )
+    }
+
+    @Test
+    fun CheckEventosListMinimumEmpty() {
+        navigateToTestScreen()
+
+        //Agregamos un tiempo de espera de 5000
         SystemClock.sleep(delayService2)
+
+        //Validamos que el listado tenga un minimo de albumes
+        Espresso.onView(ViewMatchers.withId(R.id.eventos_item_fragment)).check(
+            CustomAssertions.greaterItem(1)
+        )
     }
 
     /**
-     * Esta Prueba tiene la intencion de verificar el caso de error 404
+     * Esta prueba tiene la intencion de comprobar la visualizacion de listado de Eventos
      */
     @Test
-    fun PlanAlimentacionDetailEmpty(){
+    fun positiveTestEventosListEmpty() {
         /* Primero navegamos a la pantalla correcta */
         navigateToTestScreen()
 
-        Espresso.onView(ViewMatchers.withId(R.id.lunes_detail)).check(matches(withText("No Data")))
-        Espresso.onView(ViewMatchers.withId(R.id.martes_detail)).check(matches(withText("No Data")))
-        Espresso.onView(ViewMatchers.withId(R.id.miercoles_detail)).check(matches(withText("No Data")))
-        Espresso.onView(ViewMatchers.withId(R.id.jueves_detail)).check(matches(withText("No Data")))
-        Espresso.onView(ViewMatchers.withId(R.id.viernes_detail)).check(matches(withText("No Data")))
-        Espresso.onView(ViewMatchers.withId(R.id.sabado_detail)).check(matches(withText("No Data")))
-        Espresso.onView(ViewMatchers.withId(R.id.domingo_detail)).check(matches(withText("No Data")))
-        Espresso.onView(ViewMatchers.withId(R.id.semanas_detail)).check(matches(withText("No Data")))
+        //Validamos si el sugerencia_item_fragment es mostrado
+        Espresso.onView(ViewMatchers.withId(R.id.eventos_item_fragment))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        //Validamos el textView Title exista
+        validateTextView(R.id.title, "Mis Eventos")
     }
+
 }

@@ -5,6 +5,23 @@
     android:layout_height="match_parent"
     tools:context=".ui.AlimentacionResultList">
 
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/ProgressBar"
+        android:layout_centerInParent="true"
+        android:indeterminateDuration="@integer/material_motion_duration_short_2"
+        android:indeterminateOnly="true"
+        android:indeterminateBehavior="cycle"
+        android:progressBackgroundTint="@color/ProgressBar"
+        android:id="@+id/progressBar"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible"
+        android:indeterminate="true"
+        android:layout_gravity="center" />
+
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -21,7 +38,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title">
+        android:layout_below="@id/title"
+        android:id="@+id/container">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ali_result_fragment"

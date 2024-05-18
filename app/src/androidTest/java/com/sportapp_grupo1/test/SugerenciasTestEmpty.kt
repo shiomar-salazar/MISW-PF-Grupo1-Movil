@@ -1,17 +1,20 @@
 package com.sportapp_grupo1.test
 
 import android.os.SystemClock
-import androidx.test.espresso.Espresso
+import androidx.recyclerview.widget.RecyclerView
+import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.sportapp_grupo1.R
 import com.sportapp_grupo1.ui.MainActivity
+import com.sportapp_grupo1.utils.CustomAssertions
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers
 import org.hamcrest.core.AllOf
@@ -21,7 +24,7 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class PlanAlimentacionDetailEmptyTest {
+class SugerenciasTestEmpty {
 
     @Rule
     @JvmField
@@ -33,11 +36,11 @@ class PlanAlimentacionDetailEmptyTest {
 
     fun clickIntoButtonById(idView: Int) {
         //Damos click en el boton idView
-        Espresso.onView(ViewMatchers.withId(idView)).perform(ViewActions.click())
+        onView(withId(idView)).perform(ViewActions.click())
     }
     fun clickIntoButtonByIdwithScroll(idView: Int) {
         //Damos click en el boton idView
-        Espresso.onView(ViewMatchers.withId(idView)).perform(ViewActions.scrollTo(), ViewActions.click())
+        onView(withId(idView)).perform(ViewActions.scrollTo(), ViewActions.click())
     }
 
     fun clickIntoButtonByText(idView: Int, valueToSearch: String) {
@@ -47,19 +50,19 @@ class PlanAlimentacionDetailEmptyTest {
 
     fun getTextViewByValue(idView: Int, valueToSearch: String): ViewInteraction? {
         //Validamos si existe un TextView de tipo idView con el texto valueToSearch
-        return Espresso.onView(
+        return onView(
             AllOf.allOf(
-                ViewMatchers.withId(idView),
-                withText(valueToSearch)
+                withId(idView),
+                ViewMatchers.withText(valueToSearch)
             )
         )
     }
 
     fun setTextLayoutViewByValue(idView: Int, valueToType:String) {
         //Validamos si existe un TextView de tipo idView con el texto valueToSearch
-        Espresso.onView(
+        onView(
             AllOf.allOf(
-                ViewMatchers.isDescendantOfA(ViewMatchers.withId(idView)),
+                ViewMatchers.isDescendantOfA(withId(idView)),
                 ViewMatchers.withClassName(CoreMatchers.endsWith("EditText"))
             )
         ).perform(
@@ -69,9 +72,9 @@ class PlanAlimentacionDetailEmptyTest {
 
     fun setTextViewByValue(idView: Int, valueToType:String) {
         //Validamos si existe un TextView de tipo idView con el texto valueToSearch
-        Espresso.onView(
+        onView(
             AllOf.allOf(
-                ViewMatchers.withId(idView)
+                withId(idView)
             )
         ).perform(
             ViewActions.click(),
@@ -81,23 +84,13 @@ class PlanAlimentacionDetailEmptyTest {
         )
     }
 
-    fun validateTextView(idView: Int, valueToSearch: String) {
+    private fun validateTextView(idView: Int, valueToSearch: String) {
         //Validamos si es mostrado algun TextView de tipo idView
-        Espresso.onView(AllOf.allOf(ViewMatchers.withId(idView), ViewMatchers.isDisplayed()))
+        onView(AllOf.allOf(withId(idView), ViewMatchers.isDisplayed()))
         //Validamos que no venga vacio algun TextView de tipo idView
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(idView),
-                Matchers.not(withText(""))
-            )
-        )
+        onView(AllOf.allOf(withId(idView), Matchers.not(ViewMatchers.withText(""))))
         //Validamos si existe un TextView de tipo idView con el texto valueToSearch
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(idView),
-                withText(valueToSearch)
-            )
-        )
+        onView(AllOf.allOf(withId(idView), ViewMatchers.withText(valueToSearch)))
     }
 
 
@@ -106,38 +99,64 @@ class PlanAlimentacionDetailEmptyTest {
         setTextViewByValue(R.id.input_password,"123456789156Aa-")
         clickIntoButtonById(R.id.login_button)
         SystemClock.sleep(delayService2)
-        Espresso.onView(
+        onView(
             AllOf.allOf(
-                ViewMatchers.withId(R.id.plan_alimentacion),
+                withId(R.id.sugerencias),
                 ViewMatchers.isDisplayed()
             )
         )
-        clickIntoButtonByIdwithScroll(R.id.plan_alimentacion)
+        clickIntoButtonById(R.id.sugerencias)
         SystemClock.sleep(delayService2)
-        Espresso.onView(
+        onView(
             AllOf.allOf(
-                ViewMatchers.withId(R.id.crear),
+                withId(R.id.title),
                 ViewMatchers.isDisplayed()
             )
         )
+    }
+
+    @Test
+    fun CheckSugerenciaListMinimumEmpty() {
+        navigateToTestScreen()
+
+        //Agregamos un tiempo de espera de 5000
         SystemClock.sleep(delayService2)
+
+        //Validamos que el listado tenga un minimo de albumes
+        onView(withId(R.id.sugerencia_item_fragment)).check(
+            CustomAssertions.greaterItem(1)
+        )
     }
 
     /**
-     * Esta Prueba tiene la intencion de verificar el caso de error 404
+     * Esta prueba tiene la intencion de comprobar la visualizacion de listado de Sugerencias
      */
     @Test
-    fun PlanAlimentacionDetailEmpty(){
+    fun positiveTestSugerenciasLisEmpty() {
         /* Primero navegamos a la pantalla correcta */
         navigateToTestScreen()
 
-        Espresso.onView(ViewMatchers.withId(R.id.lunes_detail)).check(matches(withText("No Data")))
-        Espresso.onView(ViewMatchers.withId(R.id.martes_detail)).check(matches(withText("No Data")))
-        Espresso.onView(ViewMatchers.withId(R.id.miercoles_detail)).check(matches(withText("No Data")))
-        Espresso.onView(ViewMatchers.withId(R.id.jueves_detail)).check(matches(withText("No Data")))
-        Espresso.onView(ViewMatchers.withId(R.id.viernes_detail)).check(matches(withText("No Data")))
-        Espresso.onView(ViewMatchers.withId(R.id.sabado_detail)).check(matches(withText("No Data")))
-        Espresso.onView(ViewMatchers.withId(R.id.domingo_detail)).check(matches(withText("No Data")))
-        Espresso.onView(ViewMatchers.withId(R.id.semanas_detail)).check(matches(withText("No Data")))
+        //Validamos si el sugerencia_item_fragment es mostrado
+        onView(withId(R.id.sugerencia_item_fragment))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        //Validamos el textView Title exista
+        validateTextView(R.id.title, "Listado de Sugerencias")
     }
+
+    /**
+     * Esta prueba tiene la intencion de comprobar la visualizacion de listado de Sugerencias
+     */
+    @Test
+    fun positiveTestSugerenciaDetailEmpty() {
+        /* Primero navegamos a la pantalla correcta */
+        navigateToTestScreen()
+
+        /* Damos click en textView con la primera sugerencia */
+        onView(withId(R.id.sugerencia_item_fragment)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
+        SystemClock.sleep(delayService2)
+        onView(AllOf.allOf(withId(R.id.registrar_btn),Matchers.not(ViewMatchers.isDisplayed() ) ) )
+    }
+
 }

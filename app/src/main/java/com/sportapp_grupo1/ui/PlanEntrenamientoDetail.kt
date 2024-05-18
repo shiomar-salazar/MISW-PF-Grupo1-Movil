@@ -20,6 +20,7 @@ class PlanEntrenamientoDetail : Fragment() {
     private var _binding: PlanEntrenamientoDetailFragmentBinding? = null
     private val binding get() = _binding!!
     private  lateinit var volleyBroker: PlanEntrenamientoNetworkService
+    private var req1 = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +35,9 @@ class PlanEntrenamientoDetail : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         volleyBroker = this.context?.let { PlanEntrenamientoNetworkService(it) }!!
 
+        binding.container.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
+
         binding.crear.setOnClickListener {
             navigateToCreatePlan()
         }
@@ -41,6 +45,7 @@ class PlanEntrenamientoDetail : Fragment() {
         val user = CacheManager.getInstance(this.requireContext()).getUsuario()
         volleyBroker.instance.add(PlanEntrenamientoNetworkService.getRequest(
             {response ->
+                req1 = true
                 /* Guardar Plan en Cache */
                 val plan = PlanEntrenamiento (
                     planEntrenamientoID = response.optString("id"),
@@ -56,19 +61,21 @@ class PlanEntrenamientoDetail : Fragment() {
                 )
                 /* Mostar Toast */
                 binding.actividadDetail.text = plan.entrenamiento
-                binding.lunesDetail.text = plan.lunes.plus(" km")
-                binding.martesDetail.text = plan.martes.plus(" km")
-                binding.miercolesDetail.text = plan.miercoles.plus(" km")
-                binding.juevesDetail.text = plan.jueves.plus(" km")
-                binding.viernesDetail.text = plan.viernes.plus(" km")
-                binding.sabadoDetail.text = plan.sabado.plus(" km")
-                binding.domingoDetail.text = plan.domingo.plus(" km")
+                binding.lunesDetail.text = plan.lunes.plus(resources.getString(R.string.sufix_entrenamiento))
+                binding.martesDetail.text = plan.martes.plus(resources.getString(R.string.sufix_entrenamiento))
+                binding.miercolesDetail.text = plan.miercoles.plus(resources.getString(R.string.sufix_entrenamiento))
+                binding.juevesDetail.text = plan.jueves.plus(resources.getString(R.string.sufix_entrenamiento))
+                binding.viernesDetail.text = plan.viernes.plus(resources.getString(R.string.sufix_entrenamiento))
+                binding.sabadoDetail.text = plan.sabado.plus(resources.getString(R.string.sufix_entrenamiento))
+                binding.domingoDetail.text = plan.domingo.plus(resources.getString(R.string.sufix_entrenamiento))
                 binding.semanasDetail.text = plan.numero_semanas.toString()
-                showMessage("Carga Exitosa.")
+                showMessage(resources.getString(R.string.exito))
+                checkProgressBar()
             },
             {
+                req1 = true
                 if(it.networkResponse.statusCode == 404){
-                    showMessage("Usuario no tiene datos cargados aun.")
+                    showMessage(resources.getString(R.string.user_no_data))
                     binding.actividadDetail.text = getString(R.string.sin_datos)
                     binding.lunesDetail.text = getString(R.string.sin_datos)
                     binding.martesDetail.text = getString(R.string.sin_datos)
@@ -81,13 +88,20 @@ class PlanEntrenamientoDetail : Fragment() {
                 }
                 else
                 {
-                    showMessage("Carga Fallida. Error:".plus(it.networkResponse.statusCode.toString()))
+                    showMessage(resources.getString(R.string.failed_Error).plus(it.networkResponse.statusCode.toString()))
                 }
+                checkProgressBar()
             },
             "entrenamientos/plan-entrenamiento/usuario/"+user.userId,
             user.token
         ))
+    }
 
+    fun checkProgressBar(){
+        if(req1){
+            binding.progressBar.visibility = View.GONE
+            binding.container.visibility = View.VISIBLE
+        }
     }
 
     private fun navigateToCreatePlan() {
