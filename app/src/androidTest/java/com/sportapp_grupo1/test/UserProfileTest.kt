@@ -27,7 +27,7 @@ class UserProfileTest {
         ActivityScenarioRule(MainActivity::class.java)
 
     //Constante que define el tiempo de espera para que se carguen los datos retornados por el adapter
-    val delayService2 = Integer.toUnsignedLong(10000)
+    val delayService2 = Integer.toUnsignedLong(8500)
 
     fun clickIntoButtonById(idView: Int) {
         //Damos click en el boton idView
@@ -99,6 +99,7 @@ class UserProfileTest {
                 ViewMatchers.isDisplayed()
             )
         )
+        SystemClock.sleep(delayService2)
     }
 
     /**
@@ -163,6 +164,15 @@ class UserProfileTest {
     fun notImplementedButtons(){
         /* Primero navegamos a la pantalla correcta */
         navigateToTestScreen()
+        clickIntoButtonById(R.id.mejorar_plan)
+        SystemClock.sleep(delayService2)
+        Espresso.onView(
+            AllOf.allOf(
+                ViewMatchers.withId(R.id.cerrar_sesion),
+                ViewMatchers.isDisplayed()
+            )
+        )
+
         clickIntoButtonById(R.id.editar_perfil)
         SystemClock.sleep(delayService2)
         Espresso.onView(
@@ -172,14 +182,6 @@ class UserProfileTest {
             )
         )
         clickIntoButtonById(R.id.cambiar_contraseña)
-        SystemClock.sleep(delayService2)
-        Espresso.onView(
-            AllOf.allOf(
-                ViewMatchers.withId(R.id.cerrar_sesion),
-                ViewMatchers.isDisplayed()
-            )
-        )
-        clickIntoButtonById(R.id.mejorar_plan)
         SystemClock.sleep(delayService2)
         Espresso.onView(
             AllOf.allOf(
