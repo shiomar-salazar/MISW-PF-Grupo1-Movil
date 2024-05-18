@@ -64,13 +64,13 @@ class ProfileFragment : Fragment() {
             findNavController().navigate((R.id.action_profileFragment_to_mainFragment))
         }
         binding.cambiarContraseA.setOnClickListener {
-            showMessage(resources.getString(R.string.not_part_mvp))
+            //showMessage(resources.getString(R.string.not_part_mvp))
         }
         binding.mejorarPlan.setOnClickListener {
-            showMessage(resources.getString(R.string.not_part_mvp))
+            //showMessage(resources.getString(R.string.not_part_mvp))
         }
         binding.editarPerfil.setOnClickListener {
-            showMessage(resources.getString(R.string.not_part_mvp))
+            //showMessage(resources.getString(R.string.not_part_mvp))
         }
 
     }
