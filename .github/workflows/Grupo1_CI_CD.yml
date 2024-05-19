@@ -131,8 +131,8 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2.0.4
         with:
-          name: SportApp - Movil - Grupo 1 - Sprint2
-          tag_name: Sprint2
+          name: SportApp - Movil - Grupo 1 - Sprint3
+          tag_name: Sprint3
           files: |
             apks.zip
             coverage_results.zip
