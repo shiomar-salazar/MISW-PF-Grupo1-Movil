@@ -56,7 +56,8 @@ class SugerenciasList : Fragment() {
                     req1 = true
                     if( response.length() == 0) {
                         binding.noSugerenciaText.visibility = View.VISIBLE
-                        showMessage(resources.getString(R.string.location_services))
+                        showMessage(resources.getString(R.string.no_eventos))
+                        checkProgressBar()
                     }else {
                         val list = mutableListOf<Sugerencia>()
                         var item: JSONObject

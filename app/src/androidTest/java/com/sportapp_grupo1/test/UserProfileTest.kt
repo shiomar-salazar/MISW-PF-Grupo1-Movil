@@ -147,7 +147,7 @@ class UserProfileTest {
         )
         Espresso.onView(ViewMatchers.withId(R.id.ciudad_text)).check(
             ViewAssertions.matches(
-                ViewMatchers.withText("Bogota")
+                ViewMatchers.withText("Cali")
             )
         )
         Espresso.onView(ViewMatchers.withId(R.id.pais_text)).check(
